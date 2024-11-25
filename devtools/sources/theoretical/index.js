@@ -1,31 +1,56 @@
-window.addEventListener("load", function () {
+window.addEventListener("load", function foo() {
 
-  var noButton = document.getElementById("no-button");
-  noButton.addEventListener("mouseover", () => {
-    noButton.setAttribute("style", `position: absolute; left: ${Math.random() * 200}px; top: ${Math.random() * 200}px`);
+  function onClick() {
+    if (inputsAreEmpty()) {
+      label.textContent = "Error: one or both inputs are empty.";
+      return;
+    }
+
+    updateLabel();
+  }
+  function inputsAreEmpty() {
+    if (getNumber1() === "" || getNumber2() === "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function updateLabel() {
+    var addend1 = getNumber1();
+    var addend2 = getNumber2();
+    var sum = addend1 + addend2;
+    label.textContent = addend1 + " + " + addend2 + " = " + sum;
+  }
+  function getNumber1() {
+    return inputs[0].value;
+  }
+  function getNumber2() {
+    return inputs[1].value;
+  }
+  var inputs = document.querySelectorAll("input");
+  var label = document.querySelector("p");
+  var button = document.querySelector("button");
+  button.addEventListener("click", onClick);
+
+  document.querySelector('#gsbutton').addEventListener("click", () => {
+    fetch('./getstarted.json');
   });
 
-  // prints the text to the console as  a log message
-  console.log('This is a log message from Elements Theoretical');
+  document.querySelector('#coughtexbutton').addEventListener("click", () => {
+    try {
+      null[0];
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
-  // prints the text to the console as an informational message
-  console.info('This is some information from Elements Theoretical');
+  document.querySelector('#uncoughtexbutton').addEventListener("click", () => {
+    null[0];
+  });
 
-  // prints the text to the console as an error message
-  console.error('This is an error from Elements Theoretical');
-
-  // prints the text to the console as a warning
-  console.warn('This is a warning from Elements Theoretical');
-
-  // prints the geometry of the document body as an object
-  console.log(document.body.getBoundingClientRect(), 'from Elements Theoretical');
-
-  // prints the geometry of the document body as a table
-  console.table(document.body.getBoundingClientRect(), 'from Elements Theoretical');
-
-  // shows a list of techologies as a collapsed group
-  let technologies = ["HTML", "CSS", "SVG", "ECMAScript"];
-  console.groupCollapsed('Technolgies');
-  technologies.forEach(tech => { console.info(tech); })
-  console.groupEnd('Technolgies');
+  (function qux() {
+    document.querySelector('#cs').addEventListener("click", function baz() {
+      window.cs();
+    });
+  })();
 });
