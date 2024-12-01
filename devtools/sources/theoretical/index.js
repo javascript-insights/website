@@ -31,26 +31,26 @@ window.addEventListener("load", function foo() {
   var label = document.querySelector("p");
   var button = document.querySelector("button");
   button.addEventListener("click", onClick);
-
-  document.querySelector('#gsbutton').addEventListener("click", () => {
-    fetch('./getstarted.json');
-  });
-
-  document.querySelector('#coughtexbutton').addEventListener("click", () => {
-    try {
-      null[0];
-    } catch (error) {
-      console.error(error);
-    }
-  });
-
-  document.querySelector('#uncoughtexbutton').addEventListener("click", () => {
-    null[0];
-  });
-
-  (function qux() {
-    document.querySelector('#cs').addEventListener("click", function baz() {
-      window.cs();
-    });
-  })();
 });
+
+function gsbutton() {
+  fetch('./getstarted.json');
+};
+
+function coughtexbutton() {
+  try {
+    null[0];
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+function uncoughtexbutton() {
+  null[0];
+};
+
+function qux() {
+  (function baz() {
+    window.cs();
+  })();
+}

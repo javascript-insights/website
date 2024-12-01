@@ -48,9 +48,13 @@
     <li><strong>Line-of-code breakpoint</strong> - scope, watch, console, <strong>debugger;</strong></li>
     <li><strong>Conditional line-of-code breakpoint</strong></li>
     <li><strong>DOM breakpoint</strong></li>
-    <li><strong>XHR breakpoint</strong> <span id="gsbutton">Get Data</span></li>
-    <li><strong>Exception breakpoint</strong> <span id="coughtexbutton">Cought</span> <span
-        id="uncoughtexbutton">Uncought</span></li>
+    <li><strong>XHR breakpoint</strong>
+      <button onclick="gsbutton()">Get Data</button>
+    </li>
+    <li><strong>Exception breakpoint</strong>
+      <button onclick="coughtexbutton()">Cought</button>
+      <button onclick="uncoughtexbutton()">Uncought</button>
+    </li>
     <li><strong>Function breakpoint</strong> - debug()</li>
     <li><strong>Logpoints breakpoint</strong></li>
   </ul>
@@ -76,7 +80,9 @@
     <li><strong>Reformat a minified JavaScript file with pretty-print</strong></li>
     <li><strong>Add a script to the Ignore List</strong></li>
     <li><strong>Change the thread context</strong></li>
-    <li><strong>Call Stack</strong> <span id="cs">Call Stack</span></li>
+    <li><strong>Call Stack</strong>
+      <button onclick="qux()">Call Stack</button>
+    </li>
   </ul>
 
   <hr>
