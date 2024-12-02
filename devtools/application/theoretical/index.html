@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <script src="index.js"></script>
-  <script src="index2.js"></script>
-  <script src="index3.js"></script>
-  <script src="service-worker.js"></script>
 </head>
 
 <body>
@@ -20,20 +17,9 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <p>Use the Application tool to manage storage for web app pages, including manifest, service workers, local storage,
-    cookies, cache storage, and background services.</p>
-
-  <p>The <strong>Application</strong> tool has the following pages, listed on the left:</p>
+  <h1>Web Storage Demo</h1>
 
   <ul>
-    <li>
-      <p>Application</p>
-      <ul>
-        <li>Manifest</li>
-        <li>Service workers</li>
-        <li>Storage</li>
-      </ul>
-    </li>
     <li>
       <p>Storage</p>
       <ul>
@@ -49,10 +35,6 @@
           <button onclick="setIndexedDB()">Set Indexed DB</button>
           <button onclick="getIndexedDB()">Get Indexed DB</button>
         </li>
-        <li>Web SQL -
-          <button onclick="setWebSQL()">Set Web SQL</button>
-          <button onclick="getWebSQL()">Get Web SQL</button>
-        </li>
         <li>Cookies -
           <button onclick="setClientCookie()">Set Client Cookie</button>
           <button onclick="getClientCookie()">Get Client Cookie</button>
@@ -60,79 +42,23 @@
           <button onclick="getServerCookie()">Get Server Cookie</button>
         </li>
         <li>Private state tokens -
-          <button onclick="generatePrivateStateToken()">Generate Private State Token</button>
+          <button onclick="generatePrivateStateToken()" disabled>Generate Private State Token</button>
         </li>
         <li>Interest groups -
-          <button onclick="joinInterestGroup()">Join Interest Group</button>
+          <button onclick="joinInterestGroup()" disabled>Join Interest Group</button>
         </li>
         <li>Shared storage -
-          <button onclick="saveToSharedStorage()">Save to Shared Storage</button>
+          <button onclick="saveToSharedStorage()" disabled>Save to Shared Storage</button>
         </li>
         <li>Cache storage -
           <button onclick="cacheResource()">Cache Resource</button>
         </li>
-      </ul>
-    </li>
-    <li>
-      <p>Background services</p>
-      <ul>
-        <li>Back/forward cache</li>
-        <li>Background fetch</li>
-        <li>Background sync</li>
-        <li>Bounce tracking mitigations</li>
-        <li>Notifications</li>
-        <li>Payment handler</li>
-        <li>Periodic background sync</li>
-        <li>Push messaging</li>
-        <li>Reporting API</li>
-      </ul>
-    </li>
-    <li>
-      <p>Preloading</p>
-      <ul>
-        <li>Speculation rules</li>
-        <li>Preloads</li>
-        <li>This page</li>
-      </ul>
-    </li>
-    <li>
-      <p>Frames</p>
-      <ul>
-        <li>top</li>
+        <li>Storage Buckets -
+          <button onclick="createBucket()" disabled>Create Bucket</button>
+          <button onclick="storeDataInBucket()" disabled>Store Data</button>
+        </li>
       </ul>
     </li>
   </ul>
 
-
-  <h1>Web Storage Demo</h1>
-  <div>
-    <h2>Local Storage</h2>
-    <input type="text" id="localInput" placeholder="Enter something for local storage">
-    <button onclick="saveToLocal()">Save to Local Storage</button>
-    <p id="localOutput"></p>
-  </div>
-  <div>
-    <h2>Session Storage</h2>
-    <input type="text" id="sessionInput" placeholder="Enter something for session storage">
-    <button onclick="saveToSession()">Save to Session Storage</button>
-    <p id="sessionOutput"></p>
-  </div>
-  <div>
-    <h2>Cookies</h2>
-    <input type="text" id="cookieInput" placeholder="Enter something for cookies">
-    <button onclick="saveToCookie()">Save to Cookie</button>
-    <p id="cookieOutput"></p>
-  </div>
-  <div>
-    <h2>IndexedDB</h2>
-    <input type="text" id="indexedDBInput" placeholder="Enter something for IndexedDB">
-    <button onclick="saveToIndexedDB()">Save to IndexedDB</button>
-    <p id="indexedDBOutput"></p>
-  </div>
-  <div>
-    <h2>Web SQL</h2>
-    <input type="text" id="webSQLInput" placeholder="Enter something for Web SQL">
-    <button onclick="saveToWebSQL()">Save to Web SQL</button>
-    <p id="webSQLOutput"></p>
-  </div>
 </body>

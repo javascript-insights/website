@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Sync</title>
+</head>
+
+<body>
+    <h1>Background Sync</h1>
+    <p>This page demonstrates the Background Sync API.</p>
+    <button id="register-sync">Register Sync</button>
+
+    <script>
+        document.getElementById('register-sync').addEventListener('click', () => {
+            if ('serviceWorker' in navigator && 'SyncManager' in window) {
+                navigator.serviceWorker.ready.then(swRegistration => {
+                    return swRegistration.sync.register('myFirstSync');
+                }).then(() => {
+                    console.log('Sync registered');
+                }).catch(error => {
+                    console.error('Sync registration failed:', error);
+                });
+            } else {
+                console.log('Background Sync not supported.');
+            }
+        });
+    </script>
+</body>
+
+</html>

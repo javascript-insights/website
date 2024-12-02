@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Handler</title>
+</head>
+
+<body>
+    <h1>Payment Handler</h1>
+    <p>This page demonstrates the Payment Handler API.</p>
+    <button id="pay">Pay</button>
+
+    <script>
+        document.getElementById('pay').addEventListener('click', () => {
+            if ('PaymentRequest' in window) {
+                const paymentRequest = new PaymentRequest([{
+                    supportedMethods: 'basic-card',
+                    data: {
+                        supportedNetworks: ['visa', 'mastercard']
+                    }
+                }], {
+                    total: {
+                        label: 'Total',
+                        amount: { currency: 'USD', value: '10.00' }
+                    }
+                });
+
+                paymentRequest.show().then(paymentResponse => {
+                    return paymentResponse.complete('success');
+                }).catch(error => {
+                    console.error('Payment failed:', error);
+                });
+            } else {
+                console.log('Payment Request API not supported.');
+            }
+        });
+    </script>
+</body>
+
+</html>

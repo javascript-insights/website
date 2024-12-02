@@ -80,30 +80,6 @@ function getIndexedDB() {
   };
 }
 
-// Web SQL
-function setWebSQL() {
-  const db = openDatabase('storageDemo', '1.0', 'Demo DB', 2 * 1024 * 1024);
-
-  db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS data (id INTEGER PRIMARY KEY, value TEXT)');
-    tx.executeSql('INSERT INTO data (value) VALUES (?)', ['This is a Web SQL item']);
-  });
-}
-
-function getWebSQL() {
-  const db = openDatabase('storageDemo', '1.0', 'Demo DB', 2 * 1024 * 1024);
-
-  db.transaction(function (tx) {
-    tx.executeSql('SELECT * FROM data', [], function (tx, results) {
-      const output = [];
-      for (let i = 0; i < results.rows.length; i++) {
-        output.push(results.rows.item(i).value);
-      }
-      alert(output.length ? `Stored: ${output.join(', ')}` : 'No data stored');
-    });
-  });
-}
-
 // Private State Tokens
 async function generatePrivateStateToken() {
   // This is a placeholder as Private State Tokens are still experimental and not widely supported
@@ -134,5 +110,33 @@ async function cacheResource() {
     alert('Resource cached successfully');
   } else {
     alert('Cache Storage not supported');
+  }
+}
+
+// Storage Buckets
+let storageBuckets = {};
+
+function createBucket() {
+  const bucketName = 'bucketName';
+  if (bucketName) {
+    storageBuckets[bucketName] = {};
+    alert(`Bucket "${bucketName}" created.`);
+  } else {
+    alert('Please enter a bucket name.');
+  }
+}
+
+function storeDataInBucket() {
+  const bucketName = 'bucketName';
+  const data = 'bucketData';
+  if (bucketName && data) {
+    if (storageBuckets[bucketName]) {
+      storageBuckets[bucketName][Date.now()] = data;
+      alert(`Data stored in bucket "${bucketName}".`);
+    } else {
+      alert(`Bucket "${bucketName}" does not exist.`);
+    }
+  } else {
+    alert('Please enter both bucket name and data.');
   }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Fetch</title>
+</head>
+
+<body>
+    <h1>Background Fetch</h1>
+    <p>This page demonstrates the Background Fetch API.</p>
+    <button id="start-fetch">Start Background Fetch</button>
+
+    <script>
+        document.getElementById('start-fetch').addEventListener('click', () => {
+            if ('BackgroundFetchManager' in self) {
+                navigator.serviceWorker.ready.then(swRegistration => {
+                    swRegistration.backgroundFetch.fetch('my-fetch', ['/example-file.txt'], {
+                        title: 'Background Fetch Example',
+                        icons: [],
+                        downloadTotal: 1024,
+                    }).then(bgFetch => {
+                        console.log('Background Fetch started:', bgFetch);
+                    }).catch(error => {
+                        console.error('Background Fetch failed:', error);
+                    });
+                });
+            } else {
+                console.log('Background Fetch API not supported.');
+            }
+        });
+    </script>
+</body>
+
+</html>

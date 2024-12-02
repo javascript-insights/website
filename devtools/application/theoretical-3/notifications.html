@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+</head>
+
+<body>
+    <h1>Notifications</h1>
+    <p>This page demonstrates the Notifications API.</p>
+    <button id="show-notification">Show Notification</button>
+
+    <script>
+        document.getElementById('show-notification').addEventListener('click', () => {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        new Notification('Hello!', {
+                            body: 'This is a notification example.',
+                            icon: '/icon.png'
+                        });
+                    }
+                });
+            } else {
+                console.log('Notifications API not supported.');
+            }
+        });
+    </script>
+</body>
+
+</html>

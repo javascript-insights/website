@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting API</title>
+</head>
+
+<body>
+    <h1>Reporting API</h1>
+    <p>This page demonstrates the Reporting API.</p>
+    <p>Check the console for reports.</p>
+
+    <script>
+        if ('ReportingObserver' in window) {
+            const observer = new ReportingObserver((reports, observer) => {
+                reports.forEach(report => {
+                    console.log('Report:', report);
+                });
+            }, { buffered: true });
+
+            observer.observe();
+        } else {
+            console.log('Reporting API not supported.');
+        }
+    </script>
+</body>
+
+</html>
