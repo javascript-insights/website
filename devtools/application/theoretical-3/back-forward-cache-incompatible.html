@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back/Forward Cache Incompatible</title>
+</head>
+<body>
+    <h1>Back/Forward Cache Incompatible Example</h1>
+    <p>This page demonstrates a scenario where the Back/Forward Cache won't work.</p>
+    <p>Using the `beforeunload` event listener makes this page incompatible with the Back/Forward Cache.</p>
+    <a href="index.html">Go back to Home</a>
+
+    <script>
+        window.addEventListener('beforeunload', (event) => {
+            // This event listener makes the page incompatible with the Back/Forward Cache
+            event.returnValue = 'Are you sure you want to leave?';
+        });
+    </script>
+</body>
+</html>
