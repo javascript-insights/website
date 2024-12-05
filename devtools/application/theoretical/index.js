@@ -107,12 +107,16 @@ async function cacheResource() {
   if ('caches' in window) {
     const cache = await caches.open('demo-cache');
     //await cache.add('/static/favicon.png');
-    await cache.add('/styles.css');
+    await cache.add('./getstarted.json');
     alert('Resource cached successfully');
   } else {
     alert('Cache Storage not supported');
   }
 }
+
+function gsbutton() {
+  fetch('./getstarted.json');
+};
 
 // Storage Buckets
 let storageBuckets = {};
