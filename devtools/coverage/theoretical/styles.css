@@ -1,0 +1,12 @@
+main {
+  padding: 2em;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}
