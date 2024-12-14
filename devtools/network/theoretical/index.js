@@ -64,9 +64,11 @@ window.addEventListener("load", function foo() {
       .catch(error => console.error('Post error:', error));
   }
 
+  var controller;
+  
   function swFetchData() {
-    if (navigator.serviceWorker.controller) {
-      navigator.serviceWorker.controller.postMessage('fetchData');
+    if (controller) {
+      controller.postMessage('fetchData');
     }
   }
 
@@ -74,6 +76,7 @@ window.addEventListener("load", function foo() {
     navigator.serviceWorker.register('service-worker.js')
       .then(registration => {
         console.log('Service Worker registered with scope:', registration.scope);
+        controller = navigator.serviceWorker.controller;
       })
       .catch(error => {
         console.error('Service Worker registration failed:', error);
