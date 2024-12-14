@@ -1,8 +1,9 @@
 const CACHE_NAME = 'network-tool-demo-cache';
 const urlsToCache = [
-  '/styles.css',
-  '/index.js',
-  '/image.png'
+  'index.html',
+  'styles.css',
+  'index.js',
+  'image.png'
 ];
 
 self.addEventListener('install', event => {
