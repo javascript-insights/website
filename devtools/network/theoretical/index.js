@@ -1,56 +1,82 @@
 window.addEventListener("load", function foo() {
 
-  function onClick() {
-    if (inputsAreEmpty()) {
-      label.textContent = "Error: one or both inputs are empty.";
-      return;
-    }
+  document.getElementById('fetchData').addEventListener('click', fetchData);
+  document.getElementById('postData').addEventListener('click', postData);
+  document.getElementById('fetchError').addEventListener('click', fetchError);
+  document.getElementById('postError').addEventListener('click', postError);
+  document.getElementById('swFetchData').addEventListener('click', swFetchData);
 
-    updateLabel();
+  function fetchData() {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error fetching data:', error));
   }
-  function inputsAreEmpty() {
-    if (getNumber1() === "" || getNumber2() === "") {
-      return true;
-    } else {
-      return false;
+
+  function postData() {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1
+      })
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error posting data:', error));
+  }
+
+  function fetchError() {
+    fetch('https://jsonplaceholder.typicode.com/invalid-url')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('Fetch error:', error));
+  }
+
+  function postError() {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: 'bad json' + JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('Post error:', error));
+  }
+
+  function swFetchData() {
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage('fetchData');
     }
   }
-  function updateLabel() {
-    var addend1 = getNumber1();
-    var addend2 = getNumber2();
-    var sum = addend1 + addend2;
-    label.textContent = addend1 + " + " + addend2 + " = " + sum;
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(registration => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch(error => {
+        console.error('Service Worker registration failed:', error);
+      });
   }
-  function getNumber1() {
-    return inputs[0].value;
-  }
-  function getNumber2() {
-    return inputs[1].value;
-  }
-  var inputs = document.querySelectorAll("input");
-  var label = document.querySelector("p");
-  var button = document.querySelector("button");
-  button.addEventListener("click", onClick);
 });
-
-function gsbutton() {
-  fetch('./getstarted.json');
-};
-
-function coughtexbutton() {
-  try {
-    null[0];
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-function uncoughtexbutton() {
-  null[0];
-};
-
-function qux() {
-  (function baz() {
-    window.cs();
-  })();
-}

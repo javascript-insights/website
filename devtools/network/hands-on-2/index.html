@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Network Hands-On 2</h1>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>CORS Demo</h1>
+    <button id="fetchData1">Fetch Data from JSON Placeholder</button>
+    <button id="fetchData2">Fetch Data from CORS Anywhere</button>
+    <button id="fetchData3">Fetch Data from CORS Anywhere</button>
+</body>
+
+<div>
+  <h2>Cross-Origin Resource Sharing (CORS)</h2>
+  <p>CORS is a security feature implemented by web browsers to control how resources are requested from a different domain than the one that served the web page. Here's a detailed explanation:</p>
+
+  <h3>What is CORS?</h3>
+  <p>CORS is an HTTP-header based mechanism that allows a server to specify any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources. It helps in securely managing cross-origin requests and data transfers between browsers and servers.</p>
+
+  <h3>Why is CORS Needed?</h3>
+  <p>Browsers enforce a security policy called the <strong>Same-Origin Policy</strong>. This policy restricts web pages from making requests to a different domain than the one that served the web page. While this policy enhances security by preventing malicious websites from accessing sensitive data on other sites, it also limits legitimate cross-origin requests. CORS provides a way to relax these restrictions securely.</p>
+
+  <h3>How Does CORS Work?</h3>
+  <p>CORS works by adding specific HTTP headers to responses from the server. These headers inform the browser whether to allow the cross-origin request. Here are the key headers involved:</p>
+  <ul>
+    <li><strong>Access-Control-Allow-Origin</strong>: Specifies which origins are allowed to access the resource. It can be a specific origin (e.g., <code>https://example.com</code>) or a wildcard (<code>*</code>) to allow any origin.</li>
+    <li><strong>Access-Control-Allow-Methods</strong>: Lists the HTTP methods (e.g., GET, POST) that are allowed when accessing the resource.</li>
+    <li><strong>Access-Control-Allow-Headers</strong>: Lists the headers that can be used in the actual request.</li>
+    <li><strong>Access-Control-Allow-Credentials</strong>: Indicates whether the request can include user credentials (e.g., cookies, HTTP authentication).</li>
+  </ul>
+
+  <h3>Preflight Requests</h3>
+  <p>For certain types of requests, browsers send a <strong>preflight request</strong> using the HTTP OPTIONS method before the actual request. This preflight request checks if the server permits the actual request. The server responds with the allowed methods and headers, and if the preflight check passes, the browser proceeds with the actual request.</p>
+
+  <h3>Example Scenario</h3>
+  <p>Imagine a web page served from <code>https://domain-a.com</code> wants to fetch data from <code>https://domain-b.com/api/data</code>. Without CORS, the browser would block this request due to the Same-Origin Policy. With CORS, <code>https://domain-b.com</code> can include the following headers in its response to allow the request:</p>
+  <pre><code>Access-Control-Allow-Origin: https://domain-a.com
+Access-Control-Allow-Methods: GET, POST
+Access-Control-Allow-Headers: Content-Type
+</code></pre>
+
+  <h3>Handling CORS Errors</h3>
+  <p>If a CORS request fails, the browser will block the request, and the JavaScript code will receive a generic error. The specifics of the error can be found in the browser's console.</p>
+
+  <h3>Benefits of CORS</h3>
+  <ul>
+    <li><strong>Security</strong>: CORS allows servers to control who can access their resources, enhancing security.</li>
+    <li><strong>Flexibility</strong>: It provides a way to enable legitimate cross-origin requests while maintaining the security benefits of the Same-Origin Policy.</li>
+  </ul>
+</div>
+
+</html>
