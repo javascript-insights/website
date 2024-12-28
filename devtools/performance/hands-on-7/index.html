@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Hands-On 7</h1>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="content">
+    <h1>Performance Tool Hands-On</h1>
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <ol>
+        <li>Open the DevTools in your browser (F12 or right-click and select "Inspect").</li>
+        <li>Go to the "Performance" tab.</li>
+        <li>Click the "Record" button to start recording.</li>
+        <li>Click the "Perform Task" button below to generate some performance data.</li>
+        <li>Click the "Stop" button in DevTools to stop recording.</li>
+        <li>Analyze the Main section in the performance recording to see the task execution.</li>
+        <li>Click the "Animate" button to generate more performance data and analyze the animation frames.</li>
+      </ol>
+    </div>
+    <button class="button" onclick="performTask()">Perform Task</button>
+    <button class="button" onclick="startAnimate()">Animate</button>
+    <div id="animation" style="width: 100px; height: 100px; background-color: red; margin: 20px auto;"></div>
+  </div>
+
+</html>

@@ -1,0 +1,11 @@
+.hero-image {
+    width: 100%;
+    height: auto;
+    padding-top: 141.38%;
+    background: url('large-image.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.content {
+    margin-top: 20px;
+}

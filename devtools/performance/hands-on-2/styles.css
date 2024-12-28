@@ -1,0 +1,8 @@
+.large-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+    min-height: 1300px; /* Reserve space to prevent layout shift */
+    background-color: #f0f0f0; /* Placeholder color */
+}
