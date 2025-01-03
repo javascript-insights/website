@@ -1,0 +1,74 @@
+body {
+        font-family: Arial, sans-serif;
+}
+
+.container {
+        text-align: center;
+        margin-top: 50px;
+}
+
+.button {
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+}
+
+.animation1 {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        margin: 20px auto;
+        animation: move 2s infinite;
+        animation-play-state: paused;
+}
+
+@keyframes move {
+        0% {
+                transform: translateX(0);
+        }
+
+        50% {
+                transform: translateX(100px);
+        }
+
+        100% {
+                transform: translateX(0);
+        }
+}
+
+
+body {
+        font-family: Arial, sans-serif;
+}
+
+.container {
+        text-align: center;
+        margin-top: 50px;
+}
+
+.button {
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+}
+
+.animation2 {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        margin: 20px auto;
+        animation: bounce 2s infinite;
+        animation-play-state: paused;
+}
+
+@keyframes bounce {
+
+        0%,
+        100% {
+                transform: translateY(0);
+        }
+
+        50% {
+                transform: translateY(-100px);
+        }
+}
