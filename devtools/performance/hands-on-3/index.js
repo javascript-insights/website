@@ -15,3 +15,13 @@ window.addEventListener("load", function () {
         }, 1000); // Simulated delay
     });
 });
+
+/*
+Instructions for participants:
+1. Open the browser DevTools and navigate to the Performance tab.
+2. Start profiling and reload the page.
+3. Click the buttons and observe the performance metrics.
+4. Analyze the performance data to identify bottlenecks.
+5. Optimize the code to reduce the interaction delay.
+6. Document your findings and optimizations.
+*/

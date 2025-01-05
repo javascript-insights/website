@@ -27,13 +27,14 @@
         <li>Click the "Record" button to start recording.</li>
         <li>Click the "Perform Task" button below to generate some performance data.</li>
         <li>Click the "Stop" button in DevTools to stop recording.</li>
-        <li>Analyze the Main section in the performance recording to see the task execution.</li>
-        <li>Click the "Animate" button to generate more performance data and analyze the animation frames.</li>
+        <li>Analyze the performance data to identify any bottlenecks or areas for improvement.</li>
+        <li>Try modifying the code in <code>index.js</code> to optimize the performance and repeat the recording process to see the impact of your changes.</li>
       </ol>
     </div>
     <button class="button" onclick="performTask()">Perform Task</button>
-    <button class="button" onclick="startAnimate()">Animate</button>
-    <div id="animation" style="width: 100px; height: 100px; background-color: red; margin: 20px auto;"></div>
+    <div id="animation" style="width: 50px; height: 50px; background-color: red; position: absolute;"></div>
+    <button class="button" onclick="startAnimate()">Start Animation</button>
   </div>
+</body>
 
 </html>
