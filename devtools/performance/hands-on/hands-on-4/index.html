@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Hands-On 4 - CPU</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../../index.html">JavaScript Insights</a>
+    <a href="../../../../index.html">DevTools</a>
+    <a href="../../index.html">Performance</a>
+    <a href="../index.html">Hands-On</a>
+    <a href="./index.html">CPU</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="container">
+    <h1>Performance Tool Hands-On</h1>
+    <button onclick="cpuIntensiveTask()">Run CPU Intensive Task</button>
+    <button onclick="simpleTask()">Run Simple Task</button>
+    <div id="result"></div>
+    <div class="instructions">
+      <h2>Instructions:</h2>
+      <ol>
+        <li>Open the browser DevTools (F12 or right-click and select "Inspect").</li>
+        <li>Go to the "Performance" tab.</li>
+        <li>Click on the "Record" button to start recording the performance.</li>
+        <li>Click the "Run CPU Intensive Task" button and observe the performance recording.</li>
+        <li>Stop the recording by clicking the "Stop" button.</li>
+        <li>Analyze the recorded performance data:
+          <ul>
+            <li>Identify the CPU usage spikes.</li>
+            <li>Examine the call stack to understand which functions are consuming the most CPU time.</li>
+            <li>Look for any potential performance bottlenecks.</li>
+          </ul>
+        </li>
+        <li>Repeat the process with the "Run Simple Task" button and compare the results.</li>
+        <li>Document your findings and insights.</li>
+      </ol>
+      <h2>Tasks:</h2>
+      <ol>
+        <li>Identify the difference in CPU usage between the CPU Intensive Task and the Simple Task.</li>
+        <li>Explain why the CPU Intensive Task consumes more resources.</li>
+        <li>Suggest optimizations for the CPU Intensive Task to improve performance.</li>
+        <li>Explore other tabs in DevTools (e.g., Network, Memory) to gather more insights about the page's performance.</li>
+        <li>Share your findings with the class and discuss potential improvements.</li>
+      </ol>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Hands-On 10 - ?</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../../index.html">JavaScript Insights</a>
+    <a href="../../../../index.html">DevTools</a>
+    <a href="../../index.html">Performance</a>
+    <a href="../index.html">Hands-On</a>
+    <a href="./index.html">?</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="container">
+    <h1>Performance Tool Hands-On</h1>
+    <button class="button" onclick="fetchData()">Fetch Data</button>
+    <button class="button" onclick="startAnimation()">Start Animation</button>
+    <div class="animation1" id="animation1"></div>
+  </div>
+
+  <div class="instructions">
+    <h2>Performance Hands-On Instructions</h2>
+    <ol>
+      <li>Open DevTools and switch to the "Performance" or "Performance Insights" tab.</li>
+      <li>Click "Record" and then use the buttons to fetch data or trigger events.</li>
+      <li>Stop recording and review the main thread activity, CPU usage, and FPS.</li>
+      <li>Identify scripting, rendering, and painting events in the Timeline panel.</li>
+      <li>Experiment with color changes and animations to examine paint operations.</li>
+    </ol>
+  </div>
+
+  <div class="container">
+    <h1>Performance Tool Activity Types</h1>
+    <button class="button" onclick="triggerLoadingEvent()">Trigger Loading Event</button>
+    <button class="button" onclick="triggerScriptingEvent()">Trigger Scripting Event</button>
+    <button class="button" onclick="triggerRenderingEvent()">Trigger Rendering Event</button>
+    <button class="button" onclick="triggerPaintingEvent()">Trigger Painting Event</button>
+    <div class="animation2" id="animation2"></div>
+  </div>
+
+</html>

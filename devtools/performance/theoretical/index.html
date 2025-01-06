@@ -6,81 +6,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
-  <script src="index.js"></script>
 </head>
 
 <body>
-  <h1>Performance Theoretical - LCP</h1>
+  <h1>Performance Theoretical</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../index.html">Performance</a>
+    <a href="./index.html">Theoretical</a>
+  </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
+    <a href="./theoretical-1/index.html">LCP</a>
+    <a href="./theoretical-2/index.html">CLS</a>
+    <a href="./theoretical-3/index.html">INP</a>
+    <a href="./theoretical-4/index.html">CPU</a>
+    <a href="./theoretical-5/index.html">NET</a>
+    <a href="./theoretical-6/index.html">Frames</a>
+    <a href="./theoretical-7/index.html">Main</a>
+    <a href="./theoretical-8/index.html">ThreadPool</a>
+    <a href="./theoretical-9/index.html">Interactions</a>
+    <a href="./theoretical-10/index.html">Summary</a>
+    <a href="./theoretical-11/index.html">Counter</a>
+    <a href="./theoretical-12/index.html">Memory</a>
   </div>
 
-  <main>
-    <div class="hero-image"></div>
-    <div class="content">
+  <h1>Web Vitals</h1>
+  <p>Web Vitals is an initiative by Google to provide unified guidance for quality signals that are essential to
+    delivering a great user experience on the web.</p>
+  <p>The Web Vitals initiative aims to simplify the landscape, and help sites focus on the metrics that matter most, the
+    Core Web Vitals.</p>
+  <h2>Core Web Vitals</h2>
+  <p>Core Web Vitals are the subset of Web Vitals that apply to all web pages, should be measured by all site owners,
+    and will be surfaced across all devtools. Each of the Core Web Vitals represents a distinct facet of the user
+    experience, is measurable in the field, and reflects the real-world experience of a critical user-centric outcome.
+  </p>
+  <ul>
+    <li><strong>Largest Contentful Paint (LCP)</strong>: Measures loading performance. A good LCP should occur within
+      2.5 seconds of when the page starts loading.</li>
+    <li><strong>Interaction to Next Paint (INP)</strong>: Measures interactivity. A good INP should be 200 milliseconds
+      or less.</li>
+    <li><strong>Cumulative Layout Shift (CLS)</strong>: Measures visual stability. A good CLS should be 0.1 or less.
+    </li>
+  </ul>
+  <p>To ensure you're hitting the recommended target for these metrics for most of your users, a good threshold to
+    measure is the 75th percentile of page loads, segmented across mobile and desktop devices.</p>
 
-      <h3>Largest Contentful Paint (LCP)</h3>
-      <p>Largest Contentful Paint (LCP) is a performance metric that measures the time it takes for the largest visible
-        content element (such as an image, video, or block of text) to load and become visible within the viewport. It
-        is one of the Core Web Vitals, which are essential for providing a good user experience. LCP focuses on the main
-        content of the page and aims to ensure that this content loads quickly.</p>
+  <div class="cwv-metrics">
+    <img src="static/lcp.svg" alt="Largest Contentful Paint threshold recommendations" width="250" height="220">
+    <img src="static/inp.svg" alt="Interaction to Next Paint threshold recommendations" width="250" height="220">
+    <img src="static/cls.svg" alt="Cumulative Layout Shift threshold recommendations" width="250" height="220">
+  </div>
 
-      <h4>Key Points about LCP:</h4>
-      <ul>
-        <li><strong>Measurement:</strong> LCP measures the time from when the page starts loading to when the largest
-          content element is fully rendered.</li>
-        <li><strong>Elements Considered:</strong> Typical elements include images, video poster images, background
-          images, and block-level text elements.</li>
-        <li><strong>Good LCP Score:</strong> A good LCP score is 2.5 seconds or less. This means the largest content
-          element should load within this time frame for at least 75% of page visits.</li>
-      </ul>
+  <p><a href="https://web.dev/articles/vitals">Core Web Vitals</a></p>
 
-      <h4>Optimization Tips for LCP</h4>
-      <h5>Optimize Images:</h5>
-      <ul>
-        <li><strong>Compress and Resize:</strong> Use tools to compress and resize images without losing quality.</li>
-        <li><strong>Responsive Images:</strong> Use the <code>srcset</code> attribute to serve different image sizes
-          based on the user's device.</li>
-        <li><strong>Next-Gen Formats:</strong> Use modern image formats like WebP for better compression.</li>
-      </ul>
-
-      <h5>Preload Key Resources:</h5>
-      <ul>
-        <li><strong>Preload Critical Assets:</strong> Use <code>&lt;link rel="preload"&gt;</code> to load important
-          resources like fonts and hero images faster.</li>
-      </ul>
-
-      <h5>Lazy Load Offscreen Images:</h5>
-      <ul>
-        <li><strong>Lazy Loading:</strong> Use the <code>loading="lazy"</code> attribute for images that are not
-          immediately visible to the user.</li>
-      </ul>
-
-      <h5>Reduce Server Response Times:</h5>
-      <ul>
-        <li><strong>Optimize Server Performance:</strong> Improve server response times by optimizing database queries,
-          using a Content Delivery Network (CDN), and reducing server-side processing time.</li>
-      </ul>
-
-      <h5>Remove Render-Blocking Resources:</h5>
-      <ul>
-        <li><strong>Minimize CSS and JavaScript:</strong> Reduce the number of CSS and JavaScript files that block
-          rendering. Use asynchronous loading for non-critical scripts.</li>
-      </ul>
-
-      <h5>Use Efficient Caching:</h5>
-      <ul>
-        <li><strong>Browser Caching:</strong> Implement proper caching strategies to store frequently accessed resources
-          locally on the user's device.</li>
-      </ul>
-
-      <h5>Optimize Web Fonts:</h5>
-      <ul>
-        <li><strong>Font Loading:</strong> Use <code>font-display: swap</code> to ensure text is visible while web fonts
-          are loading.</li>
-      </ul>
-    </div>
-  </main>
+  <ul>
+    <li><a href="https://web.dev/articles/optimize-lcp">Optimize LCP</a></li>
+    <li><a href="https://web.dev/articles/optimize-inp">Optimize INP</a></li>
+    <li><a href="https://web.dev/articles/optimize-cls">Optimize CLS</a></li>
+  </ul>
 </body>
+
+</html>

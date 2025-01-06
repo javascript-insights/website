@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+  <script src="index2.js"></script>
+</head>
+
+<body>
+  <h1>Console Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Console</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Console demos: log, info, error, warn</h1>
+
+  <p>There is nothing to see here, you need to open the Developer Tools and check the console for the output.</p>
+
+  <p>Select <code>Control</code>+<code>Shift</code>+<code>J</code> (Windows, Linux) or
+    <code>Command</code>+<code>Option</code>+<code>J</code> (macOS).
+  </p>
+
+  <script>
+    // prints the text to the console as  a log message
+    console.log('This is a log message from script tag');
+
+    // prints the text to the console as an informational message
+    console.info('This is some information from script tag');
+
+    // prints the text to the console as an error message
+    console.error('This is an error from script tag');
+
+    // prints the text to the console as a warning
+    console.warn('This is a warning from script tag');
+
+    // prints the geometry of the document body as an object
+    console.log(document.body.getBoundingClientRect(), 'from script tag');
+
+    // prints the geometry of the document body as a table
+    console.table(document.body.getBoundingClientRect(), 'from script tag');
+
+    // shows a list of techologies as a collapsed group
+    let technologies = ["HTML", "CSS", "SVG", "ECMAScript"];
+    console.groupCollapsed('Technolgies');
+    technologies.forEach(tech => { console.info(tech); })
+    console.groupEnd('Technolgies');
+  </script>
+
+  <h1>Inspect Network Activity Demo</h1>
+
+  <button id="gsbutton">Get Data</button>
+
+  <hr />
+
+  <script>
+    document.querySelector('#gsbutton').addEventListener("click", () => {
+      fetch('./getstarted.json');
+    });
+  </script>
+
+  <hr />
+
+  <iframe src="https://javascript-insights.com/devtools/console/theoretical-3/index.html" frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+    style="width: 100%;height: 200px;"></iframe>
+  <hr />
+
+  <!-- <webview src="../../elements/elements-theoretical/index.html" style="width: 100%;height: 200px;"></webview> -->
+
+  <!-- <embed src="../../elements/elements-theoretical/index.html" style="width: 100%;height: 200px;"></embed> -->
+
+  <!-- <object data="../../elements/elements-theoretical/index.html" style="width: 100%;height: 200px;"></object> -->
+
+</body>
+
+</html>

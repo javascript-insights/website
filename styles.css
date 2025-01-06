@@ -24,7 +24,6 @@ body {
   color: black;
 }
 
-
 code {
   background: #ccc;
   color: #000;
@@ -46,4 +45,30 @@ body script {
 script::before {
   content: 'Source Code';
   color: lime;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #007bff;
+  margin-right: 0.5rem;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb a::after {
+  content: '>';
+  margin-left: 0.5rem;
+}
+
+.breadcrumb a:last-child::after {
+  content: '';
 }
