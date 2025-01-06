@@ -12,6 +12,8 @@
 </head>
 
 <body>
+  <h1>Network Hands-On 2</h1>
+
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -19,13 +21,13 @@
     <a href="./index.html">Hands-On 2</a>
   </nav>
 
-  <h1>Network Hands-On 2</h1>
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
 
   <h1>Network DevTools Hands-On</h1>
-  <p>Welcome to the Network DevTools hands-on exercise. Follow the instructions below to learn how to use the Network panel in browser DevTools.</p>
+  <p>Welcome to the Network DevTools hands-on exercise. Follow the instructions below to learn how to use the Network
+    panel in browser DevTools.</p>
 
   <h2>Instructions</h2>
   <ol>
@@ -38,9 +40,12 @@
 
   <h2>Tasks</h2>
   <ul>
-    <li><button id="fetchData1">Fetch Data 1</button>: Make a simple GET request to <code>https://jsonplaceholder.typicode.com/posts</code>.</li>
-    <li><button id="fetchData2">Fetch Data 2</button>: Make a GET request to <code>https://jsonplaceholder.typicode.com/posts</code> via a CORS proxy.</li>
-    <li><button id="fetchData3">Fetch Data 3</button>: Make a GET request to <code>https://api.publicapis.org/entries</code>.</li>
+    <li><button id="fetchData1">Fetch Data 1</button>: Make a simple GET request to
+      <code>https://jsonplaceholder.typicode.com/posts</code>.</li>
+    <li><button id="fetchData2">Fetch Data 2</button>: Make a GET request to
+      <code>https://jsonplaceholder.typicode.com/posts</code> via a CORS proxy.</li>
+    <li><button id="fetchData3">Fetch Data 3</button>: Make a GET request to
+      <code>https://api.publicapis.org/entries</code>.</li>
   </ul>
 
   <div>
@@ -83,7 +88,8 @@
     <p>Imagine a web page served from <code>https://domain-a.com</code> wants to fetch data from
       <code>https://domain-b.com/api/data</code>. Without CORS, the browser would block this request due to the
       Same-Origin Policy. With CORS, <code>https://domain-b.com</code> can include the following headers in its response
-      to allow the request:</p>
+      to allow the request:
+    </p>
     <pre><code>Access-Control-Allow-Origin: https://domain-a.com
 Access-Control-Allow-Methods: GET, POST
 Access-Control-Allow-Headers: Content-Type
