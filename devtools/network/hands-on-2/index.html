@@ -17,10 +17,24 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>CORS Demo</h1>
-  <button id="fetchData1">Fetch Data from JSON Placeholder</button>
-  <button id="fetchData2">Fetch Data from CORS Anywhere - 403</button>
-  <button id="fetchData3">Fetch Data from CORS Anywhere - 404</button>
+  <h1>Network DevTools Hands-On</h1>
+  <p>Welcome to the Network DevTools hands-on exercise. Follow the instructions below to learn how to use the Network panel in browser DevTools.</p>
+
+  <h2>Instructions</h2>
+  <ol>
+    <li>Open your browser's DevTools (usually by pressing <code>F12</code> or <code>Ctrl+Shift+I</code>).</li>
+    <li>Navigate to the Network panel.</li>
+    <li>Click on the buttons below to make network requests and observe the results in the Network panel.</li>
+    <li>Analyze the request and response headers, status codes, and payloads.</li>
+    <li>Identify any CORS-related headers and understand their purpose.</li>
+  </ol>
+
+  <h2>Tasks</h2>
+  <ul>
+    <li><button id="fetchData1">Fetch Data 1</button>: Make a simple GET request to <code>https://jsonplaceholder.typicode.com/posts</code>.</li>
+    <li><button id="fetchData2">Fetch Data 2</button>: Make a GET request to <code>https://jsonplaceholder.typicode.com/posts</code> via a CORS proxy.</li>
+    <li><button id="fetchData3">Fetch Data 3</button>: Make a GET request to <code>https://api.publicapis.org/entries</code>.</li>
+  </ul>
 
   <div>
     <h2>Cross-Origin Resource Sharing (CORS)</h2>
