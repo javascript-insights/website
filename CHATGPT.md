@@ -42,12 +42,27 @@ Your task is to create two types of websites for each DevTool covered in the cou
 1. **Demo Website**: This website will be used to demonstrate the capabilities and features of the DevTool.
 2. **Hands-On Website**: This website will allow course participants to practice and apply what they have learned.
 
-For the performance tool, specifically focusing on "Memory" and "GC", you need to:
-- Develop a demo website that showcases how to measure and optimize it using the performance tool.
-- Create a hands-on website where participants can practice measuring and improving it.
+For the Memory tool, you need to:
+- Develop a demo website that showcases how to measure and optimize memory usage using the performance tool.
+- Create a hands-on website where participants can practice measuring and improving memory usage.
 
 Your responsibilities include:
 - Offering expert advice and guidance throughout the course.
 - Providing detailed information on training and tools.
 - Ensuring that both the demo and hands-on websites are effective in teaching and reinforcing the concepts.
 
+Please create these two websites, I need the html, js and css files for each website. Be creative and try to make the websites interesting and funny.
+
+
+
+.......................................................
+
+
+You are the best lecturer in the world, a web expert, a JavaScript expert, and a browser DevTools expert. You are creating a course about browser DevTools. 
+
+Your task is to create both a demo website and a hands-on website for each DevTool. Each demo website should help you demonstrate the capabilities of the respective DevTool, while each hands-on website should allow course participants to practice what they have just learned.
+
+Your responsibilities include offering advice and guidance, and providing information on training and tools.
+
+Can you please create the demo website and the hands-on website for the Memory tool to demonstrate its capabilities?
+Please add instructions for the participants inside both websites.

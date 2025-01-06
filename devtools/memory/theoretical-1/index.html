@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Memory Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Memory</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="container">
+    <h1>Memory Tool Demo</h1>
+    <p>This demo will help you understand how to use the Memory tool in browser DevTools to track memory usage and
+      identify memory leaks.</p>
+    <button class="button" id="leakButton">Create Memory Leak</button>
+    <button class="button" id="clearButton">Clear Memory</button>
+    <button class="button" id="detachButton">Create Detached Elements</button>
+    <button class="button" id="duplicateStringsButton">Create Duplicated Strings</button>
+    <div class="instructions">
+      <h2>Instructions for Participants</h2>
+      <ol>
+        <li>Open the demo website in your browser.</li>
+        <li>Open the DevTools (F12 or right-click and select "Inspect").</li>
+        <li>Navigate to the "Memory" tab.</li>
+        <li>Click the "Create Memory Leak" button multiple times to simulate a memory leak.</li>
+        <li>Take a heap snapshot to observe the memory usage.</li>
+        <li>Click the "Clear Memory" button to clear the memory.</li>
+        <li>Take another heap snapshot to see the difference in memory usage.</li>
+        <li>Analyze the snapshots to understand how memory is allocated and identify any potential memory leaks.</li>
+        <li>Click the "Create Detached Elements" button to create detached elements.</li>
+        <li>Use the "Detached elements" option in the Memory tool to identify these elements.</li>
+        <li>Click the "Create Duplicated Strings" button to create duplicated strings.</li>
+        <li>Use the "Duplicated strings" option in the Memory tool to identify these strings.</li>
+        <li>Use "Allocations on timeline" and "Allocation sampling" to track memory allocations over time and sample
+          memory allocations.</li>
+        <li>Use the "Comparison" option to compare different heap snapshots.</li>
+        <li>Use the "Containment" option to view the containment hierarchy of objects.</li>
+        <li>Use the "Object retained by detached DOM nodes" option to identify objects retained by detached DOM nodes.
+        </li>
+        <li>Use the "Object retained by devtools console" option to identify objects retained by the DevTools console.
+        </li>
+      </ol>
+    </div>
+  </div>
+</body>
