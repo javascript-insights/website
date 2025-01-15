@@ -27,10 +27,16 @@
     <h1>Memory Tool Demo</h1>
     <p>This demo will help you understand how to use the Memory tool in browser DevTools to track memory usage and
       identify memory leaks.</p>
-    <button class="button" id="leakButton">Create Memory Leak</button>
-    <button class="button" id="clearButton">Clear Memory</button>
-    <button class="button" id="detachButton">Create Detached Elements</button>
-    <button class="button" id="duplicateStringsButton">Create Duplicated Strings</button>
+    <p><button class="button" id="leakButton">Create Memory Leak</button></p>
+    <p><button class="button" id="clearButton">Clear Memory Leak</button></p>
+    <p><button class="button" id="growButton">Memory Grow</button></p>
+    <p><button class="button" id="detachButton">Create Detached Elements</button></p>
+    <p><button class="button" id="duplicateStringsButton">Create Duplicated Strings</button></p>
+    <p><button class="button" id="shallowSizeButton">Show Shallow Size</button></p>
+    <p><button class="button" id="retainedSizeButton">Show Retained Size</button></p>
+    <p><button class="button" id="distanceButton">Show Distance</button></p>
+    <p><button class="button" id="createObjectsBtn">Create Objects and Delete Half</button></p>
+
     <div class="instructions">
       <h2>Instructions for Participants</h2>
       <ol>
@@ -46,6 +52,9 @@
         <li>Use the "Detached elements" option in the Memory tool to identify these elements.</li>
         <li>Click the "Create Duplicated Strings" button to create duplicated strings.</li>
         <li>Use the "Duplicated strings" option in the Memory tool to identify these strings.</li>
+        <li>Click the "Show Shallow Size" button to display the shallow size of objects.</li>
+        <li>Click the "Show Retained Size" button to display the retained size of objects.</li>
+        <li>Click the "Show Distance" button to display the distance of objects from the root.</li>
         <li>Use "Allocations on timeline" and "Allocation sampling" to track memory allocations over time and sample
           memory allocations.</li>
         <li>Use the "Comparison" option to compare different heap snapshots.</li>
