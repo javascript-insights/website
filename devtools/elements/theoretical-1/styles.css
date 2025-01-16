@@ -46,26 +46,28 @@
   grid-row: 3;
 }
 
-nav ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0.2em 0.5em;
-  flex-direction: column;
-  gap: 0.5em;
-}
+.body {
+  nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0.2em 0.5em;
+    flex-direction: column;
+    gap: 0.5em;
+  }
 
-nav ul li {
-  flex: 1;
-}
+  nav ul li {
+    flex: 1;
+  }
 
-nav a {
-  text-decoration: none;
-  color: #fff;
-  background: green;
-  display: block;
-  padding: 0.2em;
-  text-align: left;
+  nav a {
+    text-decoration: none;
+    color: #fff;
+    background: green;
+    display: block;
+    padding: 0.2em;
+    text-align: left;
+  }
 }
 
 .d .button {
@@ -293,10 +295,12 @@ hr {
   background: #00fa9a;
   grid-area: top
 }
+
 .navbar {
   overflow: hidden;
   background-color: #333;
 }
+
 .navbar a {
   float: left;
   display: block;
@@ -305,6 +309,7 @@ hr {
   padding: 14px 16px;
   text-decoration: none;
 }
+
 .navbar a:hover {
   background-color: #ddd;
   color: black;
@@ -331,7 +336,8 @@ hr {
   padding: 5px;
   position: absolute;
   z-index: 1;
-  bottom: 125%; /* Position the tooltip above the text */
+  bottom: 125%;
+  /* Position the tooltip above the text */
   left: 50%;
   margin-left: -60px;
   opacity: 0;
@@ -360,7 +366,8 @@ hr {
   padding: 5px;
   position: absolute;
   z-index: 1;
-  bottom: 125%; /* Position the tooltip above the text */
+  bottom: 125%;
+  /* Position the tooltip above the text */
   left: 50%;
   margin-left: -60px;
   opacity: 0;

@@ -1,0 +1,24 @@
+.carousel {
+  display: flex;
+  overflow: hidden;
+  width: 300px;
+}
+
+.carousel img {
+  width: 300px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.animated-box-1 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+}
+
+.animated-box-2 {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: relative;
+}
