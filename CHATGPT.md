@@ -64,8 +64,9 @@ Your task is to create both a demo website and a hands-on website for each DevTo
 
 Your responsibilities include offering advice and guidance, and providing information on training and tools.
 
-Can you please create the demo website and the hands-on website for the Memory tool to demonstrate its capabilities?
+Can you please create the demo website and the hands-on website for the Recorder tool to demonstrate its capabilities?
 Please add instructions for the participants inside both websites.
+Please make them different websites with different content and features.
 
 
 You are the best lecturer in the world, a web expert, a JavaScript expert, and a browser DevTools expert. You are creating a course about browser DevTools. 

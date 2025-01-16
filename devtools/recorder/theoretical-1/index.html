@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Recorder Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Recorder</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <header>
+    <h1>Recorder Tool Demo</h1>
+  </header>
+  <main>
+    <section id="instructions">
+      <h2>Instructions</h2>
+      <ol>
+        <li>Use the Recorder tool to record your interactions with the website.</li>
+        <li>Click the "Shift Layout" button to see the layout shift.</li>
+        <li>Fill out and submit the form to see the form submission in action.</li>
+        <li>Click the "Add to Cart" button to see the cart status update.</li>
+        <li>Interact with the new features added below.</li>
+        <li>Replay the recorded actions to see how the Recorder tool captures and replays your interactions.</li>
+      </ol>
+    </section>
+    <section id="layout-shift">
+      <h2>Layout Shift Example</h2>
+      <p>Watch this text move when you click the button below.</p>
+      <button onclick="shiftLayout()">Shift Layout</button>
+    </section>
+    <section id="form-example">
+      <h2>Form Example</h2>
+      <form id="demo-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+    <section id="cart-example">
+      <h2>Add to Cart Example</h2>
+      <button onclick="addToCart()">Add to Cart</button>
+      <p id="cart-status">Cart is empty.</p>
+    </section>
+    <section id="carousel-example">
+      <h2>Image Carousel Example</h2>
+      <div class="carousel">
+        <img src="favicon1.jpg" alt="Image 1">
+        <img src="favicon2.jpg" alt="Image 2">
+        <img src="favicon3.jpg" alt="Image 3">
+      </div>
+      <button onclick="nextImage()">Next Image</button>
+    </section>
+    <section id="animation-example-1">
+      <h2>Animation Example 1</h2>
+      <div class="animated-box-1"></div>
+      <button onclick="animateBox1()">Animate Box</button>
+    </section>
+    <section id="animation-example-2">
+      <h2>Animation Example 2</h2>
+      <div id="animated-box-2" class="animated-box-2"></div>
+    </section>
+  </main>
+
+  <!-- <header>
+    <h1>Recorder Tool Demonstration</h1>
+  </header>
+  <main>
+    <section id="intro">
+      <h2>Introduction</h2>
+      <p>Welcome to the Recorder Tool demonstration. This tool helps you record user interactions and analyze
+        performance.</p>
+    </section>
+    <section id="demo">
+      <h2>Demo Page</h2>
+      <p>Interact with the elements below and see how the Recorder tool captures your actions.</p>
+      <button onclick="alert('Button clicked!')">Click Me</button>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+    <section id="performance">
+      <h2>Performance Analysis</h2>
+      <p>Analyze the performance of your recorded sessions here.</p>
+    </section>
+  </main> -->
+
+</body>
