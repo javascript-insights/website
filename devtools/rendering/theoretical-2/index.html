@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Rendering Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Rendering</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Rendering Tool Hands-On</h1>
+  <p>Welcome to the Rendering Tool Hands-On website. This page provides practical exercises to help you apply what
+    you've learned about the Rendering tool in browser DevTools.</p>
+
+  <div class="exercise">
+    <h2>Exercise 1: Highlight repainted areas with paint flashing</h2>
+    <p>Enable the "Highlight repainted areas with paint flashing" option and interact with the page to see which areas
+      are being repainted.</p>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 2: Highlight layout shift regions</h2>
+    <p>Enable the "Highlight layout shift regions" option and refresh the page to see regions experiencing layout
+      shifts.</p>
+    <div class="container">
+      <div class="box-2">Box 1</div>
+      <div class="box-2">Box 2</div>
+      <div class="box-2">Box 3</div>
+      <div class="dynamic-content">Dynamic Content</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 3: View layers and tiles with layer borders</h2>
+    <p>Enable the "View layers and tiles with layer borders" option and inspect the borders of layers and tiles on the
+      page.</p>
+    <!-- Layer Compositing -->
+    <div class="composite">Composite Layer</div>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 4: View frames per second in real time with frame rendering stats</h2>
+    <p>Enable the "View frames per second in real time with frame rendering stats" option and observe the frame
+      rendering statistics.</p>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 5: Identify scrolling performance issues</h2>
+    <p>Enable the "Identify scrolling performance issues" option and scroll through the page to identify any performance
+      issues.</p>
+    <div class="content">
+      <div class="message">
+        Enable the "Identify scrolling performance issues" in Chrome DevTools
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 6: Highlight ad frames</h2>
+    <p>Enable the "Highlight ad frames" option and identify ad frames on the page.</p>
+
+    <div class="section">
+      <h2>Ad Frame 1</h2>
+      <iframe class="ad-frame" src="https://via.placeholder.com/300x250" title="Ad Frame 1"></iframe>
+    </div>
+    <div class="section">
+      <h2>Ad Frame 2</h2>
+      <iframe class="ad-frame" src="https://via.placeholder.com/300x250" title="Ad Frame 2"></iframe>
+    </div>
+    <div class="section">
+      <h2>Ad Frame 3</h2>
+      <iframe class="ad-frame" src="https://via.placeholder.com/300x250" title="Ad Frame 3"></iframe>
+    </div>
+
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 7: Disable local fonts</h2>
+    <p>Enable the "Disable local fonts" option and observe the changes in font rendering.</p>
+
+    <div class="header">
+      <h1>Custom Fonts with @font-face</h1>
+    </div>
+    <div class="section">
+      <h2>Introduction</h2>
+      <p>This page demonstrates the use of @font-face rules to define custom fonts. The text below uses a custom font
+        defined with @font-face.</p>
+    </div>
+    <div class="section custom-font">
+      <p>This text is using the custom font defined with @font-face.</p>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 8: Emulate a focused page</h2>
+    <p>Enable the "Emulate a focused page" option and observe the changes.</p>
+    <div>mark this</div>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 9: Enable automatic dark mode</h2>
+    <p>Enable the "Enable automatic dark mode" option and observe the page in dark mode.</p>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 10: Emulate CSS media features</h2>
+    <p>Use the dropdowns to emulate various CSS media features and observe the changes:</p>
+    <ul>
+      <li>prefers-color-scheme</li>
+      <li>CSS media type (Enable print preview)</li>
+      <li>forced-colors</li>
+      <li>prefers-reduced-motion</li>
+      <li>prefers-reduced-transparency</li>
+      <li>color-gamut</li>
+    </ul>
+
+    <h1>Contrast Preference Test</h1>
+    <p>This paragraph is visible in both normal and high contrast modes.</p>
+    <p class="normal-contrast">This paragraph is only visible in normal contrast mode.</p>
+    <p class="high-contrast">This paragraph is only visible in high contrast mode.</p>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 11: Analyze Paint Timing</h2>
+    <p>Enable the "Highlight repainted areas with paint flashing" option and use the Performance panel to analyze paint
+      timing. Identify which elements are causing the most repaints and optimize them.</p>
+    <div class="box" onclick="this.style.backgroundColor = 'lightgreen';">Click me to repaint</div>
+    <p><strong>Common Issue:</strong> Frequent repaints due to unnecessary style changes.</p>
+    <p><strong>Solution:</strong> Minimize style changes and batch DOM updates.</p>
+    <div class="box" onmouseover="this.style.backgroundColor = 'lightcoral';">Hover over me to repaint</div>
+    <p><strong>Common Issue:</strong> Repaints triggered by hover effects.</p>
+    <p><strong>Solution:</strong> Use CSS transitions to minimize repaints.</p>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 12: Monitor Frame Rendering Stats</h2>
+    <p>Enable the "View frames per second in real time with frame rendering stats" option and monitor the frame
+      rendering stats. Identify performance bottlenecks and optimize the rendering pipeline.</p>
+    <div class="box" onclick="this.style.transform = 'rotate(45deg)';">Click me to rotate</div>
+    <p><strong>Common Issue:</strong> Low frame rate due to complex animations.</p>
+    <p><strong>Solution:</strong> Optimize animations and use CSS transforms for better performance.</p>
+    <div class="box" onclick="this.style.width = '200px';">Click me to resize</div>
+    <p><strong>Common Issue:</strong> Low frame rate due to resizing elements.</p>
+    <p><strong>Solution:</strong> Avoid resizing elements during animations.</p>
+  </div>
+
+  <div class="exercise">
+    <h2>Exercise 13: Dark Mode Optimization</h2>
+    <p>Enable the "Enable automatic dark mode" option and optimize the page for dark mode. Ensure that all elements are
+      readable and visually appealing in dark mode.</p>
+    <div class="box" style="background-color: black; color: white;">Dark Mode Content</div>
+    <p><strong>Common Issue:</strong> Poor readability in dark mode.</p>
+    <p><strong>Solution:</strong> Adjust colors and contrast to ensure readability in dark mode.</p>
+    <div class="box" style="background-color: darkgray; color: lightgray;">Another Dark Mode Content</div>
+    <p><strong>Common Issue:</strong> Insufficient contrast in dark mode.</p>
+    <p><strong>Solution:</strong> Ensure sufficient contrast between text and background colors.</p>
+  </div>
+
+</body>

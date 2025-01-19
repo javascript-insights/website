@@ -23,31 +23,55 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <header>
-    <h1>Rendering Tool Hands-On Practice</h1>
-  </header>
-  <main>
-    <section id="intro">
-      <h2>Introduction</h2>
-      <p>Follow the tasks below to practice using the tool.</p>
-    </section>
-    <section id="tasks">
-      <h2>Tasks</h2>
-      <p>Complete the following tasks and record your interactions:</p>
-      <ul>
-        <li>Fill out the form below and submit it.</li>
-        <li>Navigate to different pages and record your navigation.</li>
-      </ul>
-      <form>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-    <section id="analysis">
-      <h2>Analysis</h2>
-      <p>Analyze your recorded tasks and optimize performance based on the tips provided.</p>
-    </section>
-  </main>
+  <h1>Rendering Tool Hands-On</h1>
+  <p>Welcome to the hands-on practice website for the Rendering tool. Follow the instructions below to practice using
+    each feature of the Rendering tool.</p>
+
+  <div class="section">
+    <h2>Paint Flashing</h2>
+    <p>Enable paint flashing in DevTools and click the box below to see the areas being repainted.</p>
+    <div style="width: 100px; height: 100px; background-color: red;" onclick="this.style.backgroundColor = 'blue';">
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Layout Shift Regions</h2>
+    <p>Enable layout shift regions in DevTools and click the box below to see the regions shifting during layout
+      changes.</p>
+    <div style="width: 100px; height: 100px; background-color: green;" onclick="this.style.width = '200px';"></div>
+  </div>
+
+  <div class="section">
+    <h2>Layer Borders</h2>
+    <p>Enable layer borders in DevTools to visualize layer boundaries around the box below.</p>
+    <div style="width: 100px; height: 100px; background-color: yellow; transform: translateZ(0);"></div>
+  </div>
+
+  <div class="section">
+    <h2>FPS Meter</h2>
+    <p>Enable the FPS meter in DevTools to monitor the rendering performance of the box below.</p>
+    <div style="width: 100px; height: 100px; background-color: purple;"></div>
+  </div>
+
+  <div class="section">
+    <h2>Scrolling Performance Issues</h2>
+    <p>Enable scrolling performance issues in DevTools and scroll the box below to see any performance issues
+      highlighted.</p>
+    <div style="width: 100px; height: 100px; background-color: orange; overflow: scroll;">
+      <div style="width: 200px; height: 200px; background-color: lightblue;"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Emulate CSS Media</h2>
+    <p>Use DevTools to emulate different CSS media types and features on the box below.</p>
+    <div style="width: 100px; height: 100px; background-color: pink;"></div>
+  </div>
+
+  <div class="section">
+    <h2>Dark Mode</h2>
+    <p>Toggle dark mode in DevTools to see how the box below looks with a dark theme.</p>
+    <div style="width: 100px; height: 100px; background-color: black; color: white;">Dark Mode</div>
+  </div>
 
 </body>
