@@ -23,26 +23,61 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <div class="content">
-    <p>This website is designed for you to practice using the Lighthouse tool. Follow the instructions below to perform
-      an audit and improve the website's scores.</p>
+  <h1>Lighthouse Tool Hands-On Practice</h1>
+  <p>Welcome to the Lighthouse hands-on practice website. Use this site to test and improve your skills with the
+    Lighthouse tool.</p>
 
-    <h2>Performance</h2>
-    <p>Optimize the following image to improve performance:</p>
-    <img src="large-image.jpg" alt="Large Image">
+  <div class="section">
+    <h2>Performance Test</h2>
+    <p>This section contains elements that can affect performance. Use Lighthouse to analyze and improve them.</p>
+    <img src="large-image.jpg" alt="Large Image" width="1000" height="1000">
+    <script>
+      for (let i = 0; i < 1000; i++) {
+        console.log('Performance test log ' + i);
+      }
+    </script>
+  </div>
 
-    <h2>Accessibility</h2>
-    <p>Add accessible text to the following button:</p>
-    <button></button>
+  <div class="section">
+    <h2>Accessibility Test</h2>
+    <p>This section contains elements to test accessibility. Use Lighthouse to identify and fix issues.</p>
+    <button>Click Me</button>
+    <div class="hidden" aria-hidden="true">Hidden content</div>
+  </div>
 
-    <h2>SEO</h2>
-    <p>Add a meta description to the head of this document:</p>
-    <!-- Add meta description here -->
+  <div class="section">
+    <h2>Best Practices Test</h2>
+    <p>This section contains elements to test best practices. Use Lighthouse to ensure compliance.</p>
+    <img src="image.jpg" alt="Image" width="500" height="300">
+    <script>
+      console.log('Best practices test');
+    </script>
+  </div>
 
+  <div class="section">
+    <h2>SEO Test</h2>
+    <p>This section contains elements to test SEO. Use Lighthouse to optimize your website for search engines.</p>
+    <h1>Heading 1</h1>
+    <p>Some content here.</p>
+    <a href="#">Link text</a>
+  </div>
+
+  <div class="section">
+    <h2>PWA Test</h2>
+    <p>This section contains elements to test PWA criteria. Use Lighthouse to check if your website meets the
+      requirements.</p>
+    <link rel="manifest" href="manifest.json">
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+      }
+    </script>
+  </div>
+
+  <div class="section">
     <h2>Instructions</h2>
-    <p>1. Open the Lighthouse tool in your browser's DevTools.</p>
-    <p>2. Run an audit on this page and note the scores for performance, accessibility, and SEO.</p>
-    <p>3. Make the necessary changes to improve the scores based on the audit results.</p>
-    <p>4. Re-run the audit to see how your changes have improved the scores.</p>
+    <p>To practice using the Lighthouse tool, open Chrome DevTools, go to the "Lighthouse" tab, and select the
+      categories you want to audit. Click "Generate report" to see the results and make improvements based on the
+      suggestions.</p>
   </div>
 </body>

@@ -93,3 +93,14 @@ Can you please create the hands-on website for the Memory tool to demonstrate it
 Please add instructions for the participants inside both websites.
 I want a button when you press it, it will create many objects, but then the GC will delete half of them
 
+
+
+
+You are the best lecturer in the world, a web expert, a JavaScript expert, and a browser DevTools expert. You are creating a course about browser DevTools.
+Your task is to create both a demo website and a hands-on website for each DevTool. 
+Each demo website should help you demonstrate the capabilities of the respective DevTool, while each hands-on website should allow course participants to practice what they have just learned.
+Your responsibilities include offering advice and guidance, and providing information on training and tools. Please add them inside the HTML content.
+Can you please create the demo website and the hands-on website for the LightHouse tool to demonstrate its capabilities?
+Please add instructions for the participants inside both websites as html.
+Please create demo for each of the LightHouse tool capabilities. I mean every check box, dropdown options or other features.
+Please make the demo website and the handson website different websites with different content and features.
