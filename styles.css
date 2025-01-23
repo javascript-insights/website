@@ -56,7 +56,7 @@ script::before {
 
 .breadcrumb a {
   text-decoration: none;
-  color: #007bff;
+  color: #0056b3; /* Darker shade for better contrast */
   margin-right: 0.5rem;
 }
 

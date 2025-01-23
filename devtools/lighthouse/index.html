@@ -20,6 +20,7 @@
     <a href="../index.html">Back</a>
     <a href="./theoretical-1/index.html">Theoretical 1</a>
     <a href="./hands-on-1/index.html">Hands-On 1</a>
+    <a href="./hands-on-2/index.html">Hands-On 2</a>
   </div>
   <p>This website is designed to help you understand and utilize the capabilities of the Lighthouse DevTool. Lighthouse
     is an open-source, automated tool for improving the quality of web pages. You can use it to audit performance,
@@ -27,6 +28,84 @@
   <p>Throughout this course, we will explore various features of Lighthouse and demonstrate how to use them to enhance
     your web development skills. Each section will provide theoretical insights and hands-on exercises to ensure you
     gain practical experience.</p>
+
+    <h2>User Flows in Lighthouse</h2>
+    <p>Historically, Lighthouse has analyzed the cold pageload of a page. Starting in 2022 (Lighthouse v10), it can analyze and report on the entire page lifecycle via "user flows".</p>
+    <p>You might be interested in flows if…</p>
+    <ul>
+      <li>… you want to run Lighthouse on your whole webapp, not just the landing page.</li>
+      <li>… you want to know if all parts of the web experience are accessible (e.g. a checkout process).</li>
+      <li>… you want to know the Cumulative Layout Shift of my SPA page transition</li>
+    </ul>
+    <p>In these cases, you want Lighthouse on a flow, not just a page load.</p>
+
+    <h3>The three modes: Navigation, Timespan, Snapshot</h3>
+    <p>Lighthouse can now run in three modes: navigations, timespans, and snapshots. Each mode has its own unique use cases, benefits, and limitations. Later, you'll create a flow by combining these three core report types.</p>
+    <ul>
+      <li><strong>Navigation mode</strong> analyzes a single page load. It should feel familiar as all Lighthouse runs prior to v9.6.0 were essentially in this mode. Even in v9.6.0 and onwards, it remains the default.</li>
+      <li><strong>Timespan mode</strong> analyzes an arbitrary period of time, typically containing user interactions.</li>
+      <li><strong>Snapshot mode</strong> analyzes the page in a particular state.</li>
+    </ul>
+
+    <table>
+      <thead></thead>
+      <tr>
+        <th>Mode</th>
+        <th>Use Cases</th>
+        <th>Limitations</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Navigation</td>
+        <td>
+        <ul>
+          <li>✅ Obtain a Lighthouse Performance score and all performance metrics.</li>
+          <li>✅ Assess Progressive Web App capabilities.</li>
+          <li>✅ Analyze accessibility immediately after page load.</li>
+        </ul>
+        </td>
+        <td>
+        <ul>
+          <li>🤔 Cannot analyze form submissions or single page app transitions.</li>
+          <li>🤔 Cannot analyze content that isn't available immediately on page load.</li>
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Timespan</td>
+        <td>
+        <ul>
+          <li>✅ Measure layout shifts and JavaScript execution time over a timerange including interactions.</li>
+          <li>✅ Discover performance opportunities to improve the experience for long-lived pages and SPAs.</li>
+        </ul>
+        </td>
+        <td>
+        <ul>
+          <li>🤔 Does not provide an overall performance score.</li>
+          <li>🤔 Cannot analyze moment-based performance metrics (e.g. Largest Contentful Paint).</li>
+          <li>🤔 Cannot analyze state-of-the-page issues (e.g. no Accessibility category)</li>
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Snapshot</td>
+        <td>
+        <ul>
+          <li>✅ Analyze the page in its current state.</li>
+          <li>✅ Find accessibility issues deep within SPAs or complex forms.</li>
+          <li>✅ Evaluate best practices of menus and UI elements hidden behind interaction.</li>
+        </ul>
+        </td>
+        <td>
+        <ul>
+          <li>🤔 Does not provide an overall performance score or metrics.</li>
+          <li>🤔 Cannot analyze any issues outside the current DOM (e.g. no network, main-thread, or performance analysis).</li>
+        </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 </body>
 
 </html>

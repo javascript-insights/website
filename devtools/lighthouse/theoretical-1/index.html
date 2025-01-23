@@ -42,7 +42,7 @@
         console.log('Performance test log ' + i);
       }
       // Long-running JavaScript task
-      setTimeout(() => {
+      setTimeout(function mineBitcoin() {
         for (let i = 0; i < 1000000000; i++) { }
       }, 1000);
     </script>
@@ -91,7 +91,8 @@
       <label for="name">Name:</label>
       <input type="text" id="name" name="name"><br><br>
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email"><br><br>
+      <input type="email" id="email" name="email" onpaste="return false;" ondrop="return false;"
+        autocomplete="off"><br><br>
       <input type="submit" value="Submit">
     </form>
     <video width="320" height="240" controls>
@@ -128,4 +129,5 @@
     }
   </script>
 </body>
+
 </html>

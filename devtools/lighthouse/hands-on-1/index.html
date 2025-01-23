@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <script src="index.js"></script>
+  <style>
+    body {
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 
 <body>
@@ -23,49 +28,54 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>Lighthouse Tool Hands-On Practice</h1>
-  <p>Welcome to the Lighthouse hands-on practice website. Use this site to test and improve your skills with the
-    Lighthouse tool.</p>
+  <p>This site will help you understand the capabilities of the Lighthouse tool with more elements and features.</p>
 
   <div class="section">
-    <h2>Performance Test</h2>
-    <p>This section contains elements that can affect performance. Use Lighthouse to analyze and improve them.</p>
-    <img src="large-image.jpg" alt="Large Image" width="1000" height="1000">
+    <h2 class="animate">Performance</h2>
+    <p>Analyze the performance of your website, including metrics like First Contentful Paint, Speed Index, and more.
+    </p>
+    <div class="image-container">
+      <img src="large-image.jpg">
+    </div>
     <script>
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 10000; i++) {
         console.log('Performance test log ' + i);
       }
+      // Long-running JavaScript task
+      setTimeout(() => {
+        for (let i = 0; i < 1000000000; i++) { }
+      }, 1000);
     </script>
   </div>
 
   <div class="section">
-    <h2>Accessibility Test</h2>
-    <p>This section contains elements to test accessibility. Use Lighthouse to identify and fix issues.</p>
-    <button>Click Me</button>
+    <h2>Accessibility</h2>
+    <p>Check the accessibility of your website to ensure it is usable by all users, including those with disabilities.
+    </p>
+    <button class="button">Click Me</button>
     <div class="hidden" aria-hidden="true">Hidden content</div>
   </div>
 
   <div class="section">
-    <h2>Best Practices Test</h2>
-    <p>This section contains elements to test best practices. Use Lighthouse to ensure compliance.</p>
-    <img src="image.jpg" alt="Image" width="500" height="300">
+    <h2>Best Practices</h2>
+    <p>Ensure your website follows best practices for web development, including security and performance.</p>
+    <img src="large-image.jpg">
     <script>
       console.log('Best practices test');
     </script>
   </div>
 
   <div class="section">
-    <h2>SEO Test</h2>
-    <p>This section contains elements to test SEO. Use Lighthouse to optimize your website for search engines.</p>
+    <h2>SEO</h2>
+    <p>Optimize your website for search engines to improve visibility and ranking.</p>
     <h1>Heading 1</h1>
     <p>Some content here.</p>
     <a href="#">Link text</a>
   </div>
 
   <div class="section">
-    <h2>PWA Test</h2>
-    <p>This section contains elements to test PWA criteria. Use Lighthouse to check if your website meets the
-      requirements.</p>
+    <h2>PWA</h2>
+    <p>Check if your website meets the criteria for a Progressive Web App (PWA).</p>
     <link rel="manifest" href="manifest.json">
     <script>
       if ('serviceWorker' in navigator) {
@@ -75,9 +85,49 @@
   </div>
 
   <div class="section">
-    <h2>Instructions</h2>
-    <p>To practice using the Lighthouse tool, open Chrome DevTools, go to the "Lighthouse" tab, and select the
-      categories you want to audit. Click "Generate report" to see the results and make improvements based on the
-      suggestions.</p>
+    <h2>Additional Elements</h2>
+    <p>Here are some additional elements to further test the capabilities of the Lighthouse tool.</p>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" onpaste="return false;" ondrop="return false;"
+        autocomplete="off"><br><br>
+      <input type="submit" value="Submit">
+    </form>
+    <video width="320" height="240" controls>
+      <source src="movie.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <audio controls>
+      <source src="audio.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
   </div>
+
+  <div class="section">
+    <h2>Layout Shift Test</h2>
+    <p>This section contains elements that cause layout shifts.</p>
+    <div class="delayed-image"></div>
+    <script>
+      setTimeout(() => {
+        document.querySelector('.delayed-image').style.display = 'block';
+      }, 2000);
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>Instructions</h2>
+    <p>To use the Lighthouse tool, open Chrome DevTools, go to the "Lighthouse" tab, and select the categories you want
+      to audit. Click "Generate report" to see the results.</p>
+  </div>
+
+  <script src="index.js" rel="preload"></script>
+  <script>
+    for (let i = 0; i < 10000; i++) {
+      console.log('Additional log ' + i);
+    }
+  </script>
 </body>
+
+</html>

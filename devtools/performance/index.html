@@ -33,6 +33,68 @@
     <li>Analyze a performance report.</li>
   </ul>
 
+  <p>Monitoring performance in JavaScript can be crucial for optimizing your web applications.
+    Here are three different ways to log performance metrics using the console:</p>
+
+  <ol>
+    <h3>Work...</h3>
+    <script>
+      function mineBitcoin() {
+        let result = 0;
+        for (let i = 0; i < 100000000; i++) {
+          result += i;
+        }
+        return result;
+      }
+    </script>
+    <li>
+
+
+      <strong>Using console.time and console.timeEnd</strong>
+      <p>This method is straightforward and useful for measuring the time taken by a specific block of code.</p>
+      <script>
+        console.time('MyFunction1');
+        // Your code block
+        mineBitcoin();
+        console.timeEnd('MyFunction1');
+      </script>
+    </li>
+    <li>
+      <strong>Using the Performance API</strong>
+      <p>The Performance API provides more detailed and precise measurements.</p>
+      <script>
+        // Start measuring
+        performance.mark('start');
+
+        // Your code block
+        mineBitcoin();
+
+        // End measuring
+        performance.mark('end');
+
+        // Measure the duration
+        performance.measure('MyFunction2', 'start', 'end');
+
+        // Log the result
+        const measure = performance.getEntriesByName('MyFunction2')[0];
+        console.log(`MyFunction2 took ${measure.duration} milliseconds`);
+      </script>
+    </li>
+    <li>
+      <strong>Using performance.now</strong>
+      <p>For high-resolution time stamps, performance.now is a great option.</p>
+      <script>
+        const start = performance.now();
+
+        // Your code block
+        mineBitcoin();
+
+        const end = performance.now();
+        console.log(`MyFunction3 took ${end - start} milliseconds`);
+      </script>
+    </li>
+  </ol>
+
 </body>
 
 </html>
