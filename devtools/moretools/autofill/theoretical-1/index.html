@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Autofill - Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Autofill</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="container">
+    <h1>Autofill Tool Demo</h1>
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <p>Welcome to the Autofill Tool Demo! This page demonstrates the capabilities of the Autofill tool in browser
+        DevTools. Follow the steps below to explore each feature:</p>
+      <ol>
+        <li>Open your browser's DevTools (usually by pressing <strong>F12</strong> or <strong>Ctrl+Shift+I</strong>).
+        </li>
+        <li>Navigate to the "Application" tab.</li>
+        <li>Expand the "Storage" section and select "Autofill" to inspect saved addresses.</li>
+        <li>Use the checkboxes and dropdown options to filter and debug saved addresses.</li>
+      </ol>
+    </div>
+    <div class="feature">
+      <h2>Sample Form</h2>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address"><br><br>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="feature">
+      <h2>Additional Features</h2>
+      <p>Try interacting with the following elements to see how the Autofill tool handles different types of inputs:</p>
+      <form>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone"><br><br>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob"><br><br>
+        <label for="country">Country:</label>
+        <select id="country" name="country">
+          <option value="us">United States</option>
+          <option value="ca">Canada</option>
+          <option value="uk">United Kingdom</option>
+        </select><br><br>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+</body>

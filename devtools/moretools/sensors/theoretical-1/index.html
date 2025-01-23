@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Sensors - Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Sensors</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Sensors Tool Demo</h1>
+  <p>Welcome to the demo website for the Sensors tool in browser DevTools. This page will help you understand the
+    various capabilities of the Sensors tool.</p>
+
+  <div class="section">
+    <h2>Geolocation</h2>
+    <p>Use the Sensors tool to simulate different geolocations. Open DevTools, go to the Sensors tab, and change the
+      location to see the effect on the map below.</p>
+    <iframe src="https://www.google.com/maps" width="600" height="450"></iframe>
+  </div>
+
+  <div class="section">
+    <h2>Device Orientation</h2>
+    <p>Simulate different device orientations using the Sensors tool. Open DevTools, go to the Sensors tab, and change
+      the orientation to see the effect on the box below.</p>
+    <div id="orientation-box" style="width: 100px; height: 100px; background-color: lightblue;"></div>
+    <script>
+      window.addEventListener('deviceorientation', function (event) {
+        const box = document.getElementById('orientation-box');
+        box.style.transform = `rotate(${event.alpha}deg)`;
+      });
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>Touch Simulation</h2>
+    <p>Simulate touch events using the Sensors tool. Open DevTools, go to the Sensors tab, and enable touch simulation
+      to interact with the button below.</p>
+    <button onclick="alert('Button clicked!')">Click Me</button>
+  </div>
+
+  <div class="section">
+    <h2>Light Sensor Simulation</h2>
+    <p>Simulate different light conditions using the Sensors tool. Open DevTools, go to the Sensors tab, and change the
+      light sensor values to see the effect on the box below.</p>
+    <div id="light-box" style="width: 100px; height: 100px; background-color: yellow;"></div>
+    <script>
+      window.addEventListener('devicelight', function (event) {
+        const box = document.getElementById('light-box');
+        const brightness = event.value / 1000;
+        box.style.backgroundColor = `rgba(255, 255, 0, ${brightness})`;
+      });
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>User Agent Spoofing</h2>
+    <p>Simulate different user agents using the Sensors tool. Open DevTools, go to the Sensors tab, and change the user
+      agent to see the effect on the message below.</p>
+    <p id="user-agent-message"></p>
+    <script>
+      document.getElementById('user-agent-message').innerText = `Current User Agent: ${navigator.userAgent}`;
+    </script>
+  </div>
+
+  <footer>
+    <p>For more information and guidance, refer to the course materials and resources provided.</p>
+  </footer>
+
+</body>

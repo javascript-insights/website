@@ -1,0 +1,15 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.instructions {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.feature {
+  margin-bottom: 20px;
+}

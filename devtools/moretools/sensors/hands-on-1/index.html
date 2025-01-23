@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Sensors Hands-On 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Sensors</a>
+    <a href="./index.html">Hands-On 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Sensors Tool Hands-On</h1>
+  <p>Welcome to the hands-on website for practicing with the Sensors tool in browser DevTools. Follow the instructions
+    below to practice each feature.</p>
+
+  <div class="section">
+    <h2>Geolocation Practice</h2>
+    <p>Open DevTools, go to the Sensors tab, and change the location to see the effect on the map below. Try different
+      locations and observe the changes.</p>
+    <iframe src="https://www.openstreetmap.org" width="600" height="450"></iframe>
+  </div>
+
+  <div class="section">
+    <h2>Device Orientation Practice</h2>
+    >Simulate different device orientations using the Sensors tool. Open DevTools, go to the Sensors tab, and change the
+    orientation to see the effect on the box below.</p>
+    <div id="practice-orientation-box" style="width: 100px; height: 100px; background-color: lightgreen;"></div>
+    <script>
+      window.addEventListener('deviceorientation', function (event) {
+        const box = document.getElementById('practice-orientation-box');
+        box.style.transform = `rotate(${event.beta}deg)`;
+      });
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>Touch Simulation Practice</h2>
+    <p>Enable touch simulation in the Sensors tool and interact with the button below. Try different touch gestures and
+      observe the behavior.</p>
+    <button onclick="alert('Touch event simulated!')">Touch Me</button>
+  </div>
+
+  <div class="section">
+    <h2>Light Sensor Simulation Practice</h2>
+    <p>Simulate different light conditions using the Sensors tool. Open DevTools, go to the Sensors tab, and change the
+      light sensor values to see the effect on the box below.</p>
+    <div id="practice-light-box" style="width: 100px; height: 100px; background-color: orange;"></div>
+    <script>
+      window.addEventListener('devicelight', function (event) {
+        const box = document.getElementById('practice-light-box');
+        const brightness = event.value / 1000;
+        box.style.backgroundColor = `rgba(255, 165, 0, ${brightness})`;
+      });
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>User Agent Spoofing Practice</h2>
+    <p>Simulate different user agents using the Sensors tool. Open DevTools, go to the Sensors tab, and change the user
+      agent to see the effect on the message below.</p>
+    <p id="practice-user-agent-message"></p>
+    <script>
+      document.getElementById('practice-user-agent-message').innerText = `Current User Agent: ${navigator.userAgent}`;
+    </script>
+  </div>
+
+  <footer>
+    <p>For more practice exercises and detailed instructions, refer to the course materials and resources provided.</p>
+  </footer>
+</body>
