@@ -1,0 +1,104 @@
+.box {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    background-color: lightblue;
+    border: 1px solid #000;
+    position: absolute;
+}
+
+.box1 {
+    z-index: 1;
+    top: 650px;
+    left: 450px;
+}
+
+.box2 {
+    z-index: 2;
+    top: 670px;
+    left: 470px;
+}
+
+.box3 {
+    z-index: 3;
+    top: 690px;
+    left: 490px;
+}
+
+.box4 {
+    z-index: 4;
+    top: 710px;
+    left: 510px;
+}
+
+.box5 {
+    z-index: 5;
+    top: 730px;
+    left: 530px;
+}
+
+.instructions {
+    margin-bottom: 20px;
+}
+
+.layer {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    background-color: rgb(230, 173, 218);
+    border: 1px solid #000;
+}
+
+.layer1 {
+    transform: translateZ(0px);
+}
+
+.layer2 {
+    transform: translateZ(20px);
+}
+
+.layer3 {
+    transform: translateZ(40px);
+}
+
+.layer4 {
+    transform: translateZ(60px);
+}
+
+.layer5 {
+    transform: translateZ(80px);
+}
+
+.webview-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+.webview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.webview1 {
+    z-index: 1;
+    opacity: 0.8;
+    top: 10px;
+    left: 10px;
+}
+
+.webview2 {
+    z-index: 2;
+    opacity: 0.6;
+    top: 20px;
+    left: 20px;
+}
+
+.webview3 {
+    z-index: 3;
+    opacity: 0.4;
+    top: 30px;
+    left: 30px;
+}

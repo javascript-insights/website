@@ -29,6 +29,53 @@
     <button class="button" onclick="startAnimate()">Animate</button>
     <div id="animation" style="width: 100px; height: 100px; background-color: red; margin: 20px auto;"></div>
   </div>
+
+  <p>Common advice for keeping JavaScript apps fast includes:</p>
+  <ul>
+    <li>Don't block the main thread.</li>
+    <li>Break up long tasks.</li>
+  </ul>
+  <p>Shipping less JavaScript can help, but it's not always enough. To optimize tasks, you need to understand what tasks
+    are and how the browser handles them.</p>
+  <p>A task is any piece of work the browser does, such as rendering, parsing HTML/CSS, and running JavaScript.
+    JavaScript tasks impact performance by queuing tasks during startup and responding to interactions.</p>
+  <p>The main thread processes one task at a time. Tasks longer than 50ms are long tasks, and their blocking period
+    affects user interactions. Breaking up long tasks into smaller ones allows the browser to respond to higher-priority
+    work sooner.</p>
+  <img src="./static/a-depiction-how-breaking-999bc2dd02872_960.png"
+    alt="A depiction of how breaking up long tasks can improve performance" style="width: 600px;" />
+  <p>By breaking up tasks, the browser can handle user interactions more efficiently, making the interface feel more
+    responsive.</p>
+
+  <p>My code:</p>
+
+  <script>
+    function saveSettings() {
+      validateForm();
+      showSpinner();
+      saveToDatabase();
+      updateUI();
+      sendAnalytics();
+    }
+  </script>
+
+  <p>My better code:</p>
+
+  <script>
+    function saveSettings() {
+      // Do critical work that is user-visible:
+      validateForm();
+      showSpinner();
+      updateUI();
+
+      // Defer work that isn't user-visible to a separate task:
+      setTimeout(() => {
+        saveToDatabase();
+        sendAnalytics();
+      }, 0);
+    }
+  </script>
+
 </body>
 
 </html>
