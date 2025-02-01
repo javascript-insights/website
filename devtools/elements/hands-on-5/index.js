@@ -30,16 +30,29 @@ function displayCards(cards) {
 }
 
 function magicTrick() {
-    let newCards;
-    do {
-        newCards = getRandomCards();
-    } while (newCards.some(card => initialCards.includes(card)));
-    displayCards(newCards);
+
+    const magicBall = document.createElement('div');
+    magicBall.className = 'magic-ball';
+    document.body.appendChild(magicBall);
+
+    const smoke = document.createElement('div');
+    smoke.className = 'smoke';
+    document.body.appendChild(smoke);
+
+    setTimeout(() => {
+        magicBall.remove();
+        smoke.remove();
+
+        let newCards;
+        do {
+            newCards = getRandomCards();
+        } while (newCards.some(card => initialCards.includes(card)));
+        displayCards(newCards);
+    }, 2000);
 
     // Change button text to "Play Again"
     const magicButton = document.getElementById('magicButton');
     magicButton.disabled = true;
-    
 }
 
 // Display initial set of random cards on page load
