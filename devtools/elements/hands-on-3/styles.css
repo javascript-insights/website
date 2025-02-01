@@ -1,0 +1,29 @@
+.window {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    border: 2px solid #000;
+    resize: both;
+    overflow: auto;
+    cursor: move;
+}
+
+.window1 {
+    background-color: #ffcccc;
+    /* Light Red */
+}
+
+.window2 {
+    background-color: #ccffcc;
+    /* Light Green */
+}
+
+.window3 {
+    background-color: #ccccff;
+    /* Light Blue */
+}
+
+.window4 {
+    background-color: #ffffcc;
+    /* Light Yellow */
+}
