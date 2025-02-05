@@ -26,7 +26,10 @@
   <section>
     <p>Here is the answer to each one, in graphical format so you can better visualize it:</p>
 
-    <h3>Puzzle #1</h3>
+    <div style="display: flex; align-items: center;">
+      <h3 style="margin-right: 10px;">Puzzle #1</h3>
+      <button id="puzzle1">Run</button>
+    </div>
     <pre><code>doSomething().then(function () {
   return doSomethingElse();
 }).then(finalHandler);
@@ -41,7 +44,10 @@ doSomething
                                      |------------------|
     </code></pre>
 
-    <h3>Puzzle #2</h3>
+    <div style="display: flex; align-items: center;">
+      <h3 style="margin-right: 10px;">Puzzle #2</h3>
+      <button id="puzzle2">Run</button>
+    </div>
     <pre><code>doSomething().then(function () {
   doSomethingElse();
 }).then(finalHandler);
@@ -56,7 +62,10 @@ doSomething
                   |------------------|
     </code></pre>
 
-    <h3>Puzzle #3</h3>
+    <div style="display: flex; align-items: center;">
+      <h3 style="margin-right: 10px;">Puzzle #3</h3>
+      <button id="puzzle3">Run</button>
+    </div>
     <pre><code>doSomething().then(doSomethingElse())
   .then(finalHandler);
 
@@ -70,7 +79,10 @@ doSomethingElse(undefined)
                   |------------------|
     </code></pre>
 
-    <h3>Puzzle #4</h3>
+    <div style="display: flex; align-items: center;">
+      <h3 style="margin-right: 10px;">Puzzle #4</h3>
+      <button id="puzzle4">Run</button>
+    </div>
     <pre><code>doSomething().then(doSomethingElse)
   .then(finalHandler);
 

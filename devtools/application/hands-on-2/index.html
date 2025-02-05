@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Application Hands-On 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Application</a>
+    <a href="./index.html">Hands-On 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="body">
+    <div class="minesweeper"></div>
+    <div class="minesweeper-inner">
+      <header class="header">
+        <img alt="Mine" src="./img/minesweeper-icon.png" class="icon" />Minesweeper
+      </header>
+      <div class="game">
+        <section class="scoring" oncontextmenu="return false;">
+          <div class="scoreboard" oncontextmenu="return false;">
+            <div class="panel left" oncontextmenu="return false;">
+              <img src="./img/display-digit-0.png" />
+              <img src="./img/display-digit-0.png" />
+              <img class="digit" src="./img/display-digit-1.png" />
+            </div>
+            <button class="face-button" oncontextmenu="return false;"></button>
+            <div class="panel right" oncontextmenu="return false;">
+              <img class="timer-0" src="./img/display-digit-0.png" />
+              <img class="timer-1" src="./img/display-digit-0.png" />
+              <img class="timer-2" src="./img/display-digit-0.png" />
+            </div>
+          </div>
+        </section>
+        <section class="board" oncontextmenu="return false;">
+          <div class="board-items" oncontextmenu="return false;">
+            <div class="one-square" oncontextmenu="return false;"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="preload">
+    <img src="./img/face-clicking.png" />
+    <img src="./img/face-lost.png" />
+    <img src="./img/face-won.png" />
+    <img src="./img/face-active.png" />
+    <img src="./img/cell-0.png" />
+    <img src="./img/mine-exploded.png" />
+    <img src="./img/cell-flagged.png" />
+  </div>
+
+
+  </div>
+
+  <a href="https://onesquareminesweeper.com/">Play One Square Minesweeper</a>
+</body>
+
+</html>
