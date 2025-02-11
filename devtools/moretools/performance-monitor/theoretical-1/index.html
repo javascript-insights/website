@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Monitor - Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Performance Monitor</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Performance Monitor Tool Demo</h1>
+  <div class="instructions">
+    <p>Welcome to the Performance Monitor Tool demo! Use the buttons below to simulate different performance trends.
+      Open your browser's DevTools and navigate to the Performance Monitor tab to observe the changes.</p>
+    <p>Instructions:</p>
+    <ul>
+      <li>Click on the buttons to simulate different trends.</li>
+      <li>Observe the changes in the Performance Monitor tab in DevTools.</li>
+      <li>Analyze how each trend affects the performance metrics.</li>
+    </ul>
+  </div>
+  <button onclick="simulateCPUUsage()">Simulate High CPU Usage</button>
+  <button onclick="simulateJSHeapSize()">Simulate Large JS Heap Size</button>
+  <button onclick="simulateDOMNodes()">Simulate Many DOM Nodes</button>
+  <button onclick="simulateJSEventListeners()">Simulate Many JS Event Listeners</button>
+  <button onclick="simulateDocuments()">Simulate Multiple Documents</button>
+  <button onclick="simulateDocumentFrames()">Simulate Multiple Document Frames</button>
+  <button onclick="simulateLayoutsPerSec()">Simulate High Layouts/sec</button>
+  <button onclick="simulateStyleRecalcPerSec()">Simulate High Style Recalc/sec</button>
+
+  <div class="explanation"></div>
+  <h2>Explanation:</h2>
+  <ul>
+    <li><strong>Simulate High CPU Usage:</strong> A busy-wait loop for 1 second to simulate high CPU usage.</li>
+    <li><strong>Simulate Large JS Heap Size:</strong> Creates a large array to consume memory.</li>
+    <li><strong>Simulate Many DOM Nodes:</strong> Adds 1000 new div elements to the DOM.</li>
+    <li><strong>Simulate Many JS Event Listeners:</strong> Adds 1000 click event listeners to the body.</li>
+    <li><strong>Simulate Multiple Documents:</strong> Adds 10 iframes to simulate multiple documents.</li>
+    <li><strong>Simulate Multiple Document Frames:</strong> Adds 10 iframes to simulate multiple document frames.</li>
+    <li><strong>Simulate High Layouts/sec:</strong> Adds 1000 absolutely positioned div elements to trigger layout
+      calculations.</li>
+    <li><strong>Simulate High Style Recalc/sec:</strong> Adds 1000 div elements with different colors to trigger style
+      recalculations.</li>
+  </ul>
+  </div>
+
+</body>

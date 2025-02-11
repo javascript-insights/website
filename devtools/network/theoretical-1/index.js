@@ -65,7 +65,7 @@ window.addEventListener("load", function foo() {
   }
 
   var controller;
-  
+
   function swFetchData() {
     if (controller) {
       controller.postMessage('fetchData');
@@ -82,4 +82,74 @@ window.addEventListener("load", function foo() {
         console.error('Service Worker registration failed:', error);
       });
   }
+
+  document.getElementById('fetchDataUrl').addEventListener('click', () => {
+    fetch('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==')
+      .then(response => response.text())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error fetching data URL:', error));
+  });
+
+  // websocket
+
+  let socket;
+
+  document.getElementById('connectWebSocket').addEventListener('click', () => {
+    socket = new WebSocket('wss://echo.websocket.org');
+    socket.onopen = () => {
+      document.getElementById('webSocketStatus').innerText = 'Status: Connected';
+    };
+    socket.onmessage = (event) => {
+      const messagesDiv = document.getElementById('messages');
+      const message = document.createElement('div');
+      message.innerText = `Received: ${event.data}`;
+      messagesDiv.appendChild(message);
+    };
+    socket.onclose = () => {
+      document.getElementById('webSocketStatus').innerText = 'Status: Disconnected';
+    };
+  });
+
+  document.getElementById('sendMessage').addEventListener('click', () => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+      const message = 'Hello WebSocket!';
+      socket.send(message);
+      const messagesDiv = document.getElementById('messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.innerText = `Sent: ${message}`;
+      messagesDiv.appendChild(messageDiv);
+    }
+  });
+
+  document.getElementById('closeWebSocket').addEventListener('click', () => {
+    if (socket) {
+      socket.close();
+    }
+  });
+
+  // Event Stream
+
+  let eventSource;
+
+  document.getElementById('startEventStream').addEventListener('click', () => {
+    eventSource = new EventSource('https://stream.wikimedia.org/v2/stream/recentchange');
+    eventSource.onopen = () => {
+      document.getElementById('eventStreamStatus').innerText = 'Status: Connected';
+    };
+    eventSource.onmessage = (event) => {
+      const message = document.createElement('div');
+      // message.innerText = `Message: ${event.data}`;
+      // document.getElementById('eventMessages').appendChild(message);
+    };
+    eventSource.onerror = () => {
+      document.getElementById('eventStreamStatus').innerText = 'Status: Error';
+    };
+  });
+
+  document.getElementById('stopEventStream').addEventListener('click', () => {
+    if (eventSource) {
+      eventSource.close();
+      document.getElementById('eventStreamStatus').innerText = 'Status: Disconnected';
+    }
+  });
 });
