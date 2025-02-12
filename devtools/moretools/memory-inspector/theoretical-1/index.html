@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Memory Inspector - Theoretical 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Memory Inspector</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Memory Inspector Tool Demo</h1>
+  <p>Welcome to the Memory Inspector tool demo. Use the buttons below to allocate different types of memory and inspect
+    them using the Memory Inspector in DevTools.</p>
+
+  <button onclick="allocateArrayBuffer()">Allocate ArrayBuffer</button>
+  <button onclick="allocateTypedArray()">Allocate TypedArray</button>
+  <button onclick="allocateObject()">Allocate Object</button>
+  <button onclick="allocateString()">Allocate String</button>
+  <button onclick="allocateMap()">Allocate Map</button>
+  <button onclick="allocateSet()">Allocate Set</button>
+  <button onclick="allocateWeakMap()">Allocate WeakMap</button>
+  <button onclick="allocateWeakSet()">Allocate WeakSet</button>
+
+  <div class="instructions">
+    <h2>Instructions</h2>
+    <p>1. Open the DevTools in your browser (F12 or right-click and select "Inspect").</p>
+    <p>2. Navigate to the "Memory" tab.</p>
+    <p>3. Click on the "Take snapshot" button to capture the current memory state.</p>
+    <p>4. Use the buttons above to allocate different types of memory.</p>
+    <p>5. Take another snapshot after each allocation to see the changes in memory usage.</p>
+    <p>6. Analyze the memory snapshots to understand how different types of memory are allocated and managed.</p>
+  </div>
+</body>

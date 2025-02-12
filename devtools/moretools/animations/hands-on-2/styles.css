@@ -1,0 +1,223 @@
+.body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.animation-box {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.rotate {
+    background-color: lightcoral;
+    animation: rotate 4s infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.scale {
+    background-color: lightblue;
+    animation: scale 3s infinite;
+}
+
+@keyframes scale {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.5);
+    }
+}
+
+.move {
+    background-color: lightgreen;
+    animation: move 5s infinite;
+}
+
+@keyframes move {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(200px);
+    }
+}
+
+.fade {
+    background-color: lightpink;
+    animation: fade 2s infinite;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.color-change {
+    background-color: lightyellow;
+    animation: colorChange 4s infinite;
+}
+
+@keyframes colorChange {
+    0% {
+        background-color: lightyellow;
+    }
+
+    50% {
+        background-color: orange;
+    }
+
+    100% {
+        background-color: lightyellow;
+    }
+}
+
+.bounce {
+    background-color: lightgray;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-50px);
+    }
+}
+
+.skew {
+    background-color: lightseagreen;
+    animation: skew 3s infinite;
+}
+
+@keyframes skew {
+    from {
+        transform: skew(0deg);
+    }
+
+    to {
+        transform: skew(20deg);
+    }
+}
+
+.flip {
+    background-color: lightgoldenrodyellow;
+    animation: flip 4s infinite;
+}
+
+@keyframes flip {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.bounce-horizontal {
+    background-color: lightcoral;
+    animation: bounceHorizontal 3s infinite;
+}
+
+@keyframes bounceHorizontal {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(200px);
+    }
+}
+
+.zigzag {
+    background-color: lightblue;
+    animation: zigzag 4s infinite;
+}
+
+@keyframes zigzag {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(50px, 50px);
+    }
+
+    50% {
+        transform: translate(100px, 0);
+    }
+
+    75% {
+        transform: translate(150px, 50px);
+    }
+
+    100% {
+        transform: translate(200px, 0);
+    }
+}
+
+.spin-move {
+    background-color: lightgreen;
+    animation: spinMove 5s infinite;
+}
+
+@keyframes spinMove {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(200px) rotate(720deg);
+    }
+}
+
+.random-walk {
+    background-color: lightpink;
+    animation: randomWalk 6s infinite;
+}
+
+@keyframes randomWalk {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(50px, -50px);
+    }
+
+    50% {
+        transform: translate(100px, 50px);
+    }
+
+    75% {
+        transform: translate(150px, -50px);
+    }
+
+    100% {
+        transform: translate(200px, 0);
+    }
+}

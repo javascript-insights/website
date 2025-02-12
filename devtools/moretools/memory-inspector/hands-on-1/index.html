@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Memory Inspector Hands-On 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Memory Inspector</a>
+    <a href="./index.html">Hands-On 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Inspect ArrayBuffers in JS</h1>
+  <p>
+    This demos that we can inspect the ArrayBuffers in JS.
+  </p>
+  <h2>Steps</h2>
+  <p>
+  <ol>
+    <li>Open DevTools, and open Sources Panel</li>
+    <li>Open <code>index.js</code></li>
+    <li>Set a breakpoint in line 18 in the loop body</li>
+    <li>Reload the page</li>
+    <li>Inspect the Scope View and open the <i>Module Scope</i></li>
+    <li>Open up the memory inspector for the</li>
+    <ul>
+      <li><code>buffer</code> by clicking on the memory icon (or through the context menu of <code>buffer</code> by
+        right clicking, then "Reveal in Memory Inspector panel")</li>
+      <li>Uint8Array <code>b2</code> by expanding to see the buffer, and select the memory icon (or through the context
+        menu of <code>b2</code></li>
+      <li>Uint8Array <code>b1</code> by expanding to see the buffer, and select the memory icon (or through the context
+        menu of <code>b1</code> (refocuses on the memory tab of the first buffer)</li>
+    </ul>
+    <li>Step and see updates to buffers in the memory inspector</li>
+  </ol>
+  </p>
+</body>
