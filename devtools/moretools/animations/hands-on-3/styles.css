@@ -1,0 +1,87 @@
+.multicolor-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    border-radius: 50%;
+    background: conic-gradient(red, orange, yellow, green, blue, purple, red);
+    overflow: hidden;
+    animation: spinAndScale 5s infinite;
+}
+
+.multicolor-circle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.01);
+    animation: revealCircle 4s step-start forwards;
+    opacity: 0;
+}
+
+.multicolor-circle img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    animation: fadeInImage 1s 1s forwards;
+}
+
+@keyframes revealCircle {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInImage {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spinAndScale {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.5) rotate(180deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+/* Introduced small bugs */
+.multicolor-circle {
+    animation: spinAndScale 5s infinite linear;
+    /* Added linear timing function */
+}
+
+.multicolor-circle img {
+    width: 600px;
+    /* Changed width to 600px */
+    height: 600px;
+    /* Changed height to 600px */
+    animation: fadeInImage 10s 1s forwards;
+    /* Changed animation duration to 10s */
+}
