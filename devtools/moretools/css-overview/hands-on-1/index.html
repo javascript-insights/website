@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>CSS Overview Hands-On 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">CSS Overview</a>
+    <a href="./index.html">Hands-On 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <main>
+    <h1 class="line1">very</h1>
+    <h1 class="line2">inaccessible</h1>
+    <h1 class="line3">low-contrast</h1>
+    <h1 class="line4">text</h1>
+  </main>
+
+  <p>Low contrast text reduces readability, especially for users with vision impairments. DevTools can help identify
+    and fix these issues.</p>
+
+  <p>Use DevTools to:</p>
+  <ul>
+    <li>Find contrast issues using the CSS Overview panel, Issues tab, or Lighthouse report.</li>
+    <li>Fix issues with the Color Picker's suggested colors.</li>
+    <li>Emulate vision deficiencies to see how users experience your site.</li>
+  </ul>
+
+  <h2>Discover low contrast text</h2>
+  <p>To find low contrast text:</p>
+  <ol>
+    <li>Open DevTools on your page.</li>
+    <li>Use one of these panels to get a list of issues:
+      <ul>
+        <li>CSS Overview</li>
+        <li>Issues</li>
+        <li>Lighthouse</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>CSS Overview panel</h3>
+  <p>To get an overview:</p>
+  <ol>
+    <li>Open CSS Overview and capture an overview.</li>
+    <li>Check the Colors section for contrast issues and click an issue.</li>
+  </ol>
+
+  <h3>Issues tab</h3>
+  <p><strong>Note:</strong> This is a preview feature.</p>
+  <p>To enable and use:</p>
+  <ol>
+    <li>Enable contrast issues reporting in Settings > Experimental.</li>
+    <li>Open the Issues tab and expand the contrast issues.</li>
+  </ol>
+
+  <h3>Lighthouse report</h3>
+  <p>To run a report:</p>
+  <ol>
+    <li>Open Lighthouse in DevTools.</li>
+    <li>Generate a report with Accessibility category selected.</li>
+    <li>Check the Contrast section for issues.</li>
+  </ol>
+
+  <h2>Fix low contrast text</h2>
+  <p>To fix an issue:</p>
+  <ol>
+    <li>Click a link to an affected element in the CSS Overview, Issues tab, or Lighthouse report.</li>
+    <li>Open the Color Picker and use the suggested color to meet contrast guidelines.</li>
+  </ol>
+
+  <h2>Emulate vision deficiencies</h2>
+  <p>To emulate vision deficiencies:</p>
+  <ol>
+    <li>Open DevTools.</li>
+    <li>Go to the Rendering tab.</li>
+    <li>Use the Emulate vision deficiencies dropdown to select a deficiency.</li>
+  </ol>
+
+  <a href="https://jec.fish/demo/cds-quest-cvd" target="_blank">jec.fish - dark mode</a>
+
+
+  </ul>
+</body>

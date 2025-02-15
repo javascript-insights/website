@@ -1,0 +1,156 @@
+.container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+    /* Low contrast with text */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    /* Unused border */
+}
+
+.header {
+    text-align: center;
+    color: #333;
+    /* Redundant color */
+}
+
+.game {
+    margin-top: 20px;
+}
+
+.game p {
+    font-size: 1.2em;
+}
+
+.game .task {
+    : bold;
+}
+
+.highlight {
+    color: red;
+}
+
+.unused-class {
+    color: blue;
+    /* Unused CSS rule */
+}
+
+.redundant {
+    font-size: 16px;
+    font-size: 1em;
+    /* Redundant property */
+}
+
+.inconsistent-font {
+    font-size: 18px;
+    /* Inconsistent font size */
+}
+
+.low-contrast {
+    background-color: #e0e0e0;
+    /* Low contrast background */
+    color: #a0a0a0;
+    /* Low contrast text */
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.low-contrast-button {
+    background-color: #d0d0d0;
+    /* Low contrast background */
+    color: #b0b0b0;
+    /* Low contrast text */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.low-contrast-link {
+    color: #c0c0c0;
+    /* Low contrast link */
+}
+
+.low-contrast-header {
+    background-color: #f5f5f5;
+    /* Low contrast background */
+    color: #d5d5d5;
+    /* Low contrast text */
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.low-contrast-footer {
+    background-color: #fafafa;
+    /* Low contrast background */
+    color: #e5e5e5;
+    /* Low contrast text */
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.low-contrast-sidebar {
+    background-color: #f8f8f8;
+    /* Low contrast background */
+    color: #e0e0e0;
+    /* Low contrast text */
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.low-contrast-input {
+    background-color: #f0f0f0;
+    /* Low contrast background */
+    color: #d0d0d0;
+    /* Low contrast text */
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.low-contrast-select {
+    background-color: #f0f0f0;
+    /* Low contrast background */
+    color: #d0d0d0;
+    /* Low contrast text */
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.low-contrast-textarea {
+    background-color: #f0f0f0;
+    /* Low contrast background */
+    color: #d0d0d0;
+    /* Low contrast text */
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    width: 200px;
+    height: 120px;
+}
+
+/* Unused declarations */
+.unused-declaration {
+    border: 2px solid green;
+}
+
+.abc {
+    color: red;
+}
+
+/* Media queries */
+@media screen and (max-width: 600px) {
+    .container {
+        background-color: #ffcccc;
+        /* Low contrast background */
+    }
+}
+
+@media print {
+    .container {
+        background-color: #ccccff;
+        /* Low contrast background */
+    }
+}

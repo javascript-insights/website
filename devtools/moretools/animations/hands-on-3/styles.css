@@ -2,7 +2,7 @@
     position: relative;
     width: 200px;
     height: 200px;
-    margin: 20px auto;
+    margin: 120px auto;
     border-radius: 50%;
     background: conic-gradient(red, orange, yellow, green, blue, purple, red);
     overflow: hidden;

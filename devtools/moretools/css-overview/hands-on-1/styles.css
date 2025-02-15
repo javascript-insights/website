@@ -1,0 +1,32 @@
+@layer base, component, page;
+
+@layer base {
+    main a {
+        color: #194f86;
+        text-decoration: none;
+        border-bottom: 1px solid;
+    }
+}
+
+main {
+    display: grid;
+    justify-items: center;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
+.line1 {
+    color: #a9a9a9;
+    background: pink
+}
+
+.line2,
+.line4 {
+    color: #0f0;
+    background: #ff0
+}
+
+.line3 {
+    color: #e6e6fa;
+    background: coral
+}
