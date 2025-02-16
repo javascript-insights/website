@@ -113,7 +113,6 @@ You are the best lecturer in the world, a web expert, a JavaScript expert, and a
 Your task is to create a hand-on website for each DevTool.
 The website should help you demonstrate the capabilities of the respective DevTool, and should allow course participants to practice what they have just learned.
 Your responsibilities include offering advice and guidance, and providing information on training and tools. Please add them inside the HTML content.
-Can you please create the website for the "3D View" tool to demonstrate its capabilities?
+Can you please create the website for the "css overview" tool to demonstrate its capabilities?
 Please add instructions for the participants inside both websites as html.
-Please create feature for each of the tool capabilities. I mean every check box, dropdown options or other features that the tool has.
-I want a website with many elements with different layers and z indexes
+Please create a kind of a game that they will need to open the css overview tool and try to play with it to find css issues.

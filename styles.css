@@ -9,7 +9,7 @@ body {
 
 .navbar {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0 20px;
   position: sticky;
   top: 0;
@@ -45,7 +45,8 @@ body script {
   background: #ffffff;
   border: 1px solid #e8eaed;
   border-radius: 8px;
-  color: #303942;
+  color: #24292e;
+  /* default text color */
   padding: 12px;
   margin: 16px 0;
   font-family: 'SF Mono', Menlo, Consolas, monospace;
@@ -73,11 +74,102 @@ body script::before {
 }
 
 /* DevTools-like syntax colors */
-body script .keyword { color: #881280; }
-body script .string { color: #1a1aa6; }
-body script .number { color: #1c00cf; }
-body script .comment { color: #008000; }
-body script .operator { color: #808080; }
+body script .keyword {
+  color: #881280;
+}
+
+body script .string {
+  color: #1a1aa6;
+}
+
+body script .number {
+  color: #1c00cf;
+}
+
+body script .comment {
+  color: #008000;
+}
+
+body script .operator {
+  color: #808080;
+}
+
+/* JavaScript syntax highlighting */
+body script .keyword {
+  color: #881280;
+}
+
+/* let, const, function */
+body script .string {
+  color: #1a1aa6;
+}
+
+/* "strings" */
+body script .number {
+  color: #1c00cf;
+}
+
+/* numbers */
+body script .boolean {
+  color: #0000ff;
+}
+
+/* true, false */
+body script .comment {
+  color: #008000;
+}
+
+/* comments */
+body script .function {
+  color: #795e26;
+}
+
+/* function names */
+body script .method {
+  color: #614ed9;
+}
+
+/* method calls */
+body script .property {
+  color: #5c6773;
+}
+
+/* object properties */
+body script .operator {
+  color: #000000;
+}
+
+/* =, +, -, etc */
+body script .punctuation {
+  color: #24292e;
+}
+
+/* (), {}, [] */
+body script .variable {
+  color: #36464e;
+}
+
+/* variable names */
+body script .class-name {
+  color: #267f99;
+}
+
+/* class names */
+body script .builtin {
+  color: #0000ff;
+}
+
+/* console, Math */
+body script .parameter {
+  color: #953800;
+}
+
+/* function parameters */
+
+/* Selection highlight */
+body script ::selection {
+  background-color: #b3d4fc;
+}
 
 .breadcrumb {
   color: #5f6368;
@@ -104,7 +196,7 @@ body script .operator { color: #808080; }
   background-color: #ffffff;
   padding: 16px;
   border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   margin: 16px 0;
 }
 
@@ -119,7 +211,7 @@ body script .operator { color: #808080; }
 }
 
 .toggle-button:hover {
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .toggle-button img {
@@ -128,4 +220,129 @@ body script .operator { color: #808080; }
 
 .toggle-button:hover img {
   opacity: 1;
+}
+
+.toggle-theme {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e8eaed;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark-mode .navbar {
+  background-color: #2d2d2d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .navbar a {
+  color: #e8eaed;
+}
+
+.dark-mode .navbar a:hover {
+  background-color: #3d3d3d;
+  color: #ffffff;
+}
+
+.dark-mode code {
+  background: #2d2d2d;
+  border-color: #3d3d3d;
+  color: #e8eaed;
+}
+
+.dark-mode body script {
+  background: #2d2d2d;
+  border-color: #3d3d3d;
+  color: #e8eaed;
+}
+
+.dark-mode body script::before {
+  background: #3d3d3d;
+  border-color: #4d4d4d;
+  color: #e8eaed;
+}
+
+.dark-mode .instructions {
+  background-color: #2d2d2d;
+  border-color: #3d3d3d;
+}
+
+.dark-mode .toggle-theme {
+  background: #3d3d3d;
+  border-color: #4d4d4d;
+}
+
+/* Dark mode syntax highlighting */
+.dark-mode body script .keyword {
+  color: #c586c0;
+}
+
+.dark-mode body script .string {
+  color: #ce9178;
+}
+
+.dark-mode body script .number {
+  color: #b5cea8;
+}
+
+.dark-mode body script .boolean {
+  color: #569cd6;
+}
+
+.dark-mode body script .comment {
+  color: #6a9955;
+}
+
+.dark-mode body script .function {
+  color: #dcdcaa;
+}
+
+.dark-mode body script .method {
+  color: #dcdcaa;
+}
+
+.dark-mode body script .property {
+  color: #9cdcfe;
+}
+
+.dark-mode body script .operator {
+  color: #d4d4d4;
+}
+
+.dark-mode body script .punctuation {
+  color: #d4d4d4;
+}
+
+.dark-mode body script .variable {
+  color: #9cdcfe;
+}
+
+.dark-mode body script .class-name {
+  color: #4ec9b0;
+}
+
+.dark-mode body script .builtin {
+  color: #569cd6;
+}
+
+.dark-mode body script .parameter {
+  color: #9cdcfe;
+}
+
+.dark-mode body script ::selection {
+  background-color: #264f78;
 }
