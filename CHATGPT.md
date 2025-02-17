@@ -79,7 +79,7 @@ Your responsibilities include offering advice and guidance, and providing inform
 Can you please create the hands-on website for the Memory tool to demonstrate its capabilities?
 Please add instructions for the participants inside both websites.
 
-Please use this page as reference: https://developer.chrome.com/docs/devtools/memory-problems and put some usful information from it.
+Please use this page as reference: https://developer.chrome.com/docs/devtools/memory-problems/ and put some useful information from it.
 
 
 
@@ -116,3 +116,17 @@ Your responsibilities include offering advice and guidance, and providing inform
 Can you please create the website for the "css overview" tool to demonstrate its capabilities?
 Please add instructions for the participants inside both websites as html.
 Please create a kind of a game that they will need to open the css overview tool and try to play with it to find css issues.
+
+
+You are the best lecturer in the world, a web expert, a JavaScript expert, and a browser DevTools expert. You are creating a course about browser DevTools.
+Your task is to create a hand-on website for each DevTool.
+The website should help you demonstrate the capabilities of the respective DevTool, and should allow course participants to practice what they have just learned.
+Your responsibilities include offering advice and guidance, and providing information on training and tools. Please add them inside the HTML content.
+Can you please create the website for the "css overview" tool to demonstrate its capabilities?
+
+
+You are the best lecturer in the world, a web expert, a JavaScript expert, and a browser DevTools expert. You are creating a course about browser DevTools.
+Your task is to create both a demo websites and a hands-on websites for each DevTool.
+Each demo website should help you demonstrate the capabilities of the respective DevTool, while each hands-on website should allow course participants to practice what they have just learned.
+Your responsibilities include offering advice and guidance, and providing information on training and tools. Please add them inside the HTML content.
+Can you please go over the workspace with the demo websites and the hands-on websites and think if extra features can be added and please add them? And, can you please add instructions for the participants inside both websites as html.
