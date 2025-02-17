@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>Console Hands-On 1 - JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Console Hands-On 1</h1>
+  <h1>Hands-On Exercise 1: Basic Console Operations</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -23,23 +23,73 @@
     <a href="../index.html">Back</a>
   </div>
 
+  <div class="content">
+    <h2>Exercises</h2>
+    <p>Complete these exercises using your browser's Console (F12):</p>
 
-  <center>
-    <br>
-    <div style="width: 100%"><span
-        style="font-family:Arial Black, Gadget, sans-serif ;font-size: 1.5em; color:black;">PIXELS FIGHTING
+    <div class="exercise">
+      <h3>Exercise 1: Basic Logging</h3>
+      <p>Tasks:</p>
+      <ol>
+        <li>Log your name using console.log()</li>
+        <li>Log a warning message about battery level</li>
+        <li>Log an error message about connection failure</li>
+      </ol>
+      <button onclick="checkExercise1()">Check Exercise 1</button>
     </div>
-    <br>
-    <br>
 
-    <canvas id="scrawl" width="500" height="500"></canvas>
-    <br>
-
-    <div style="width: 100%"><span style="font-family:Arial, Helvetica, sans-serif;font-size: 1em;"> <a
-          href="https://pixelsfighting.com/" target="_blank">&#9758 pixelsfighting.com &#9756</a></span>
+    <div class="exercise">
+      <h3>Exercise 2: Styled Output</h3>
+      <p>Create a console message that:</p>
+      <ol>
+        <li>Uses a blue color</li>
+        <li>Has a font size of 20px</li>
+        <li>Is bold</li>
+      </ol>
+      <button onclick="checkExercise2()">Check Exercise 2</button>
     </div>
 
-  </center>
+    <div class="exercise">
+      <h3>Exercise 3: Grouping</h3>
+      <p>Create a grouped console output for a car object with:</p>
+      <ol>
+        <li>Main group named "Car Details"</li>
+        <li>Basic info (model, year)</li>
+        <li>Nested group for "Technical Specs"</li>
+      </ol>
+      <button onclick="checkExercise3()">Check Exercise 3</button>
+    </div>
+  </div>
+
+  <script>
+    // Exercise checking functions
+    function checkExercise1() {
+      console.clear();
+      console.info('Exercise 1 Template:');
+      console.log('Your name here');
+      console.warn('Warning: Battery at 10%');
+      console.error('Error: Connection failed');
+    }
+
+    function checkExercise2() {
+      console.clear();
+      console.info('Exercise 2 Template:');
+      console.log('%cYour styled message here', 'color: blue; font-size: 20px; font-weight: bold');
+    }
+
+    function checkExercise3() {
+      console.clear();
+      console.info('Exercise 3 Template:');
+      console.group('Car Details');
+      console.log('Model: [Your car model]');
+      console.log('Year: [Year]');
+      console.group('Technical Specs');
+      console.log('Engine: [Engine details]');
+      console.log('Power: [Power details]');
+      console.groupEnd();
+      console.groupEnd();
+    }
+  </script>
 
 </body>
 

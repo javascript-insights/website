@@ -265,6 +265,57 @@
     }
   </script>
 
+  <h1>Advanced Console Features</h1>
+  <div class="content">
+    <div class="demo-section">
+      <h3>1. Console Assertions</h3>
+      <button onclick="demonstrateAssertions()">Run Assertions Demo</button>
+      <pre>
+console.assert(condition, 'Error message');
+      </pre>
+    </div>
+
+    <div class="demo-section">
+      <h3>2. Performance Timing</h3>
+      <button onclick="demonstrateTiming()">Run Timing Demo</button>
+      <pre>
+console.time('Operation');
+// ... operations ...
+console.timeEnd('Operation');
+      </pre>
+    </div>
+
+    <div class="demo-section">
+      <h3>3. Memory Usage</h3>
+      <button onclick="demonstrateMemory()">Run Memory Demo</button>
+    </div>
+  </div>
+
+  <script>
+    function demonstrateAssertions() {
+      console.clear();
+      const user = { age: 15 };
+      console.assert(user.age >= 18, 'User is not an adult!');
+      
+      const numbers = [1, 2, 3];
+      console.assert(numbers.length > 0, 'Array is empty!');
+    }
+
+    function demonstrateTiming() {
+      console.clear();
+      console.time('Loop timing');
+      for(let i = 0; i < 1000000; i++) {}
+      console.timeEnd('Loop timing');
+    }
+
+    function demonstrateMemory() {
+      console.clear();
+      console.log('Memory Usage:', performance.memory);
+      const arr = new Array(1000000);
+      console.log('Memory after allocation:', performance.memory);
+    }
+  </script>
+
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>Debugging Techniques - JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Console Theoretical 3</h1>
+  <h1>Debugging Techniques</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -22,6 +22,54 @@
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
+
+  <div class="content">
+    <div class="demo-section">
+      <h3>1. Stack Trace Analysis</h3>
+      <button onclick="startStackTrace()">Run Stack Trace Demo</button>
+    </div>
+
+    <div class="demo-section">
+      <h3>2. Async Debugging</h3>
+      <button onclick="demonstrateAsync()">Run Async Demo</button>
+    </div>
+
+    <div class="demo-section">
+      <h3>3. Error Handling</h3>
+      <button onclick="demonstrateErrorHandling()">Run Error Demo</button>
+    </div>
+  </div>
+
+  <script>
+    function startStackTrace() {
+      console.clear();
+      function function1() { function2(); }
+      function function2() { function3(); }
+      function function3() { console.trace('Trace Demo'); }
+      function1();
+    }
+
+    async function demonstrateAsync() {
+      console.clear();
+      console.log('Starting async operation...');
+      try {
+        const result = await fetch('https://api.example.com/data');
+        console.log('Result:', result);
+      } catch (error) {
+        console.error('Async Error:', error);
+      }
+    }
+
+    function demonstrateErrorHandling() {
+      console.clear();
+      try {
+        throw new Error('Custom Error Demo');
+      } catch (error) {
+        console.error('Caught:', error);
+        console.dir(error);
+      }
+    }
+  </script>
 
   <script>
     // $('script');
@@ -51,7 +99,6 @@
     // monitorEvents(window, "key");
 
     // copy($$('*').map(element => element.tagName).join(','));
-
   </script>
 
 </body>

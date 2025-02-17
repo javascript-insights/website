@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>Debugging Challenges - JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Console Hands-On 2</h1>
+  <h1>Hands-On Exercise 2: Debugging Challenges</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -23,27 +23,64 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <div class="container">
-    <div class="card-home">
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
-      <span class="boring-text">Boring</span>
+  <div class="content">
+    <div class="exercise">
+      <h3>Exercise 1: Find the Bug</h3>
+      <p>Debug this code and fix the calculation:</p>
+      <button onclick="runBuggyCalculation()">Run Calculation</button>
+    </div>
+
+    <div class="exercise">
+      <h3>Exercise 2: Performance Debug</h3>
+      <p>Optimize this slow function:</p>
+      <button onclick="runSlowFunction()">Run Slow Function</button>
+    </div>
+
+    <div class="exercise">
+      <h3>Exercise 3: Async Debug</h3>
+      <p>Explore async error handling and debugging:</p>
+      <button onclick="runAsyncChain()">Run Async Chain</button>
     </div>
   </div>
 
+  <script>
+    function runBuggyCalculation() {
+      let total = 0;
+      for(let i = 1; i <= 5; i++) {
+        total =+ i; // Bug: should be +=
+      }
+      console.log('Total:', total);
+    }
+
+    function runSlowFunction() {
+      console.time('SlowFunction');
+      let result = [];
+      for(let i = 0; i < 10000; i++) {
+        result.push(i);
+        result = result.sort(() => Math.random() - 0.5);
+      }
+      console.timeEnd('SlowFunction');
+    }
+
+    async function runAsyncChain() {
+      try {
+        // This is a simple Promise chain that demonstrates error handling
+        // The chain starts successfully with Step 1
+        const data = await Promise.resolve('Step 1');
+        console.log(data);
+
+        // Deliberately throwing an error to demonstrate error handling
+        // In real applications, this could be a failed API call or data processing error
+        // Debug tip: Set a breakpoint here to inspect the execution flow
+        throw new Error('Step 2 failed');
+      } catch (error) {
+        // The error is caught and logged to console.error
+        // Debug tip: You can examine the error object in DevTools
+        // to see the full stack trace and error details
+        console.error('Chain Error:', error);
+      }
+    }
+  </script>
 </body>
 
 </html>
