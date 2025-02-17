@@ -19,3 +19,4 @@ function startAnimate() {
         }
     }, 10);
 }
+

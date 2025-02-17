@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Insights</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+</head>
+
+<body>
+    <b>iframe:</b>
+    <button style="display: block; margin-top: 1.5em ;">Send message to main frame</button>
+    <p id="iframe-result-text">Received 0 messages</p>
+
+    <script>
+        const btn = document.querySelector('button');
+        const p = document.querySelector('#iframe-result-text');
+        let count = 0;
+
+        btn.addEventListener('click', () => {
+            if (window.parent) {
+                window.parent.postMessage('my-message-2', '*');
+            }
+        });
+
+        window.addEventListener(
+            'message',
+            (event) => {
+                if (event.data === 'my-message-1') {
+                    count++;
+                    p.textContent = `Received ${count} messages`;
+                }
+            },
+            false
+        );
+    </script>
+</body>
+
+</html>

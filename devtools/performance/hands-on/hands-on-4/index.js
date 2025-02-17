@@ -9,3 +9,31 @@ function cpuIntensiveTask() {
 function simpleTask() {
     document.getElementById('result').innerText = 'Simple Task Completed';
 }
+
+function wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
+}
+
+function a() {
+    wait(500);
+}
+
+function b() {
+    wait(500);
+}
+
+function c() {
+    wait(500);
+}
+
+function go() {
+    document.querySelector("#atgo").disabled = true;
+    a();
+    b();
+    c();
+    document.querySelector("#atgo").disabled = false;
+}
