@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Hands-On 7 - Iframe</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../../index.html">JavaScript Insights</a>
+    <a href="../../../../index.html">DevTools</a>
+    <a href="../../index.html">Performance</a>
+    <a href="../index.html">Hands-On</a>
+    <a href="./index.html">Iframe</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="content">
+    <h1>Performance Tool Hands-On</h1>
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <ol>
+        <li>Open the DevTools in your browser (F12 or right-click and select "Inspect").</li>
+        <li>Go to the "Performance" tab.</li>
+        <li>Click the "Record" button to start recording.</li>
+        <li>Click the "Perform Task" button below to generate some performance data.</li>
+        <li>Click the "Stop" button in DevTools to stop recording.</li>
+        <li>Analyze the performance data to identify any bottlenecks or areas for improvement.</li>
+        <li>Try modifying the code in <code>index.js</code> to optimize the performance and repeat the recording process
+          to see the impact of your changes.</li>
+      </ol>
+    </div>
+  </div>
+
+  
+
+  <h1>postMessage Trace Events demo</h1>
+  <p>
+    This demo page provides an interface to send messages between the main frame and an embedded iframe.
+  </p>
+  <p>
+    This is part of a tutorial that demonstrates a feature in the timeline of a performance trace that allows
+    you to easily investigate when a <code>postMessage</code> call occurred,
+    and how long the message was queued before the <code>postMessage</code> handler started.
+  </p>
+  Used by <a
+    href="https://learn.microsoft.com/microsoft-edge/devtools-guide-chromium/evaluate-performance/reference#view-messages-between-windows-iframes-and-dedicated-workers">View
+    messages between windows, iframes, and dedicated workers</a> in <em>Performance features reference</em>.
+  </p>
+  <b>Main frame:</b>
+  <button id="sendMessage" style="display: block; margin-top: 1.5em ;">Send message to iframe</button>
+  <p id="main-frame-result-text">Received 0 messages</p>
+  <iframe src="./iframe.html" style="width: 100%; height: 640px; border: 1px solid #ccc;"></iframe>
+
+  <script>
+    const btn = document.querySelector('#sendMessage');
+    const p = document.querySelector('#main-frame-result-text');
+    const iframe = document.querySelector('iframe')
+    let count = 0;
+
+    btn.addEventListener('click', () => {
+      if (iframe.contentWindow) {
+        iframe.contentWindow.postMessage('my-message-1', '*');
+      }
+    });
+
+    window.addEventListener(
+      'message',
+      (event) => {
+        if (event.data === 'my-message-2') {
+          count++;
+          p.textContent = `Received ${count} messages`;
+        }
+      },
+      false
+    );
+  </script>
+
+</body>
+
+</html>

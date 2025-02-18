@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Hands-On 16 - Tree</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../../index.html">JavaScript Insights</a>
+    <a href="../../../../index.html">DevTools</a>
+    <a href="../../index.html">Performance</a>
+    <a href="../index.html">Hands-On</a>
+    <a href="./index.html">Tree</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="content">
+    <h1>Performance Tool Hands-On</h1>
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <ol>
+        <li>Open the DevTools in your browser (F12 or right-click and select "Inspect").</li>
+        <li>Go to the "Performance" tab.</li>
+        <li>Click the "Record" button to start recording.</li>
+        <li>Click the "Perform Task" button below to generate some performance data.</li>
+        <li>Click the "Stop" button in DevTools to stop recording.</li>
+        <li>Analyze the performance data to identify any bottlenecks or areas for improvement.</li>
+        <li>Try modifying the code in <code>index.js</code> to optimize the performance and repeat the recording process
+          to see the impact of your changes.</li>
+      </ol>
+    </div>
+  </div>
+
+
+
+  <div class="tree-demo">
+    <h1>Tree Traversal Demo</h1>
+    <div id="tree"></div>
+    <button onclick="runBFS()">Run BFS</button>
+    <button onclick="runDFS()">Run DFS</button>
+    <script>
+      class TreeNode {
+        constructor(value) {
+          this.value = value;
+          this.children = [];
+          this.isLeaf = false;
+        }
+      }
+
+      function createTree(depth, value = 1) {
+        if (depth === 0) return null;
+        const node = new TreeNode(value);
+        if (depth === 1) {
+          node.isLeaf = true;
+        } else {
+          for (let i = 0; i < 2; i++) {
+            const child = createTree(depth - 1, value * 2 + i);
+            if (child) node.children.push(child);
+          }
+        }
+        return node;
+      }
+
+      const tree = createTree(5);
+
+      function wait(ms, blocking = false) {
+        if (blocking) {
+          const start = Date.now();
+          while (Date.now() - start < ms) { }
+          return Promise.resolve();
+        }
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function processNode(node) {
+        console.log(`Processing node: ${node.value}`);
+        node.element.style.backgroundColor = 'yellow';
+        wait(1000).then(() => {
+          node.element.style.backgroundColor = '';
+        });
+      }
+
+      function processLeaf(node) {
+        if (!node.isLeaf) return;
+        console.log(`Processing leaf: ${node.value}`);
+        node.element.style.backgroundColor = 'green';
+        wait(1000).then(() => {
+          node.element.style.backgroundColor = '';
+        });
+      }
+
+      function runBFS() {
+        const queue = [tree];
+        let delay = 0;
+        while (queue.length > 0) {
+          const node = queue.shift();
+          wait(delay).then(() => {
+            processNode(node);
+            processLeaf(node);
+          });
+          delay += 1000;
+          queue.push(...node.children);
+        }
+      }
+
+      function runDFS() {
+        let delay = 0;
+        function dfs(node) {
+          wait(delay).then(() => {
+            processNode(node);
+            processLeaf(node);
+          });
+          delay += 1000;
+          for (const child of node.children) {
+            dfs(child);
+          }
+        }
+        dfs(tree);
+      }
+
+      // Render tree vertically
+      function renderTree(node, container) {
+        const treeContainer = document.createElement('div');
+        treeContainer.style.display = 'flex';
+        treeContainer.style.flexDirection = 'column';
+        treeContainer.style.alignItems = 'center';
+        container.appendChild(treeContainer);
+
+        const div = document.createElement('div');
+        div.textContent = node.value;
+        div.className = 'tree-node';
+        if (node.isLeaf) div.classList.add('leaf');
+        node.element = div;
+        treeContainer.appendChild(div);
+
+        if (node.children.length > 0) {
+          const childContainer = document.createElement('div');
+          childContainer.className = 'children';
+          treeContainer.appendChild(childContainer);
+
+          for (const child of node.children) {
+            renderTree(child, childContainer);
+          }
+        }
+      }
+
+      renderTree(tree, document.getElementById('tree'));
+    </script>
+    <style>
+      .tree-demo {
+        margin: 20px;
+      }
+
+      .tree-node {
+        display: inline-block;
+        padding: 5px;
+        margin: 5px;
+        border: 1px solid rgb(148, 144, 144);
+        border-radius: 50%;
+        transition: background-color 0.3s;
+      }
+
+      .leaf {
+        border-color: green;
+      }
+
+      .children {
+        margin-left: 2px;
+        padding-left: 2px;
+        display: flex;
+      }
+    </style>
+  </div>
+
+
+
+</body>
+
+</html>

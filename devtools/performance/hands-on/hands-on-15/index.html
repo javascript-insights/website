@@ -12,13 +12,13 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 7 - Main</h1>
+  <h1>Performance Hands-On 15 - Call Tree</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
     <a href="../../index.html">Performance</a>
     <a href="../index.html">Hands-On</a>
-    <a href="./index.html">Main</a>
+    <a href="./index.html">Call Tree</a>
   </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
@@ -39,12 +39,48 @@
           to see the impact of your changes.</li>
       </ol>
     </div>
-    <button class="button" onclick="performTask()">Perform Task</button>
-    <div id="animation" style="width: 50px; height: 50px; background-color: red; position: absolute;"></div>
-    <button class="button" onclick="startAnimate()">Start Animation</button>
   </div>
 
-  
+  <br />
+
+  <div class="function-tree-demo">
+    <h2>Function Call Tree Demo</h2>
+    <button onclick="executeComplexFunction()">Run Complex Function Tree</button>
+    <script>
+      function level3A() { for (let i = 0; i < 1000000; i++) { } }
+      function level3B() { for (let i = 0; i < 800000; i++) { } }
+      function level3C() { for (let i = 0; i < 600000; i++) { } }
+      function level3D() { for (let i = 0; i < 700000; i++) { } }
+
+      function level2A() {
+        level3A();
+        level3B();
+      }
+
+      function level2B() {
+        level3C();
+        level3D();
+      }
+
+      function level1A() {
+        level2A();
+        new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      function level1B() {
+        level2B();
+        Array(10000).fill(0).map(x => Math.random());
+      }
+
+      function executeComplexFunction() {
+        level1A();
+        level1B();
+        console.log("Complex function tree executed");
+      }
+    </script>
+  </div>
+
+
 
 </body>
 
