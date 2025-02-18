@@ -45,10 +45,138 @@
   </div>
 
   <br />
-  <br />
-  <br />
-  <br />
-  <br />
+
+  <div class="tree-demo">
+    <h1>Tree Traversal Demo</h1>
+    <div id="tree"></div>
+    <button onclick="runBFS()">Run BFS</button>
+    <button onclick="runDFS()">Run DFS</button>
+    <script>
+      class TreeNode {
+        constructor(value) {
+          this.value = value;
+          this.children = [];
+          this.isLeaf = false;
+        }
+      }
+
+      function createTree(depth, value = 1) {
+        if (depth === 0) return null;
+        const node = new TreeNode(value);
+        if (depth === 1) {
+          node.isLeaf = true;
+        } else {
+          for (let i = 0; i < 2; i++) {
+            const child = createTree(depth - 1, value * 2 + i);
+            if (child) node.children.push(child);
+          }
+        }
+        return node;
+      }
+
+      const tree = createTree(5);
+
+      function wait(ms, blocking = false) {
+        if (blocking) {
+          const start = Date.now();
+          while (Date.now() - start < ms) { }
+          return Promise.resolve();
+        }
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function processNode(node) {
+        console.log(`Processing node: ${node.value}`);
+        node.element.style.backgroundColor = 'yellow';
+        wait(1000).then(() => {
+          node.element.style.backgroundColor = '';
+        });
+      }
+
+      function processLeaf(node) {
+        if (!node.isLeaf) return;
+        console.log(`Processing leaf: ${node.value}`);
+        node.element.style.backgroundColor = 'green';
+        wait(1000).then(() => {
+          node.element.style.backgroundColor = '';
+        });
+      }
+
+      function runBFS() {
+        const queue = [tree];
+        let delay = 0;
+        while (queue.length > 0) {
+          const node = queue.shift();
+          wait(delay).then(() => {
+            processNode(node);
+            processLeaf(node);
+          });
+          delay += 1000;
+          queue.push(...node.children);
+        }
+      }
+
+      function runDFS() {
+        let delay = 0;
+        function dfs(node) {
+          wait(delay).then(() => {
+            processNode(node);
+            processLeaf(node);
+          });
+          delay += 1000;
+          for (const child of node.children) {
+            dfs(child);
+          }
+        }
+        dfs(tree);
+      }
+
+      // Render tree
+      function renderTree(node, container) {
+        const div = document.createElement('div');
+        div.textContent = node.value;
+        div.className = 'tree-node';
+        if (node.isLeaf) div.classList.add('leaf');
+        node.element = div;
+        container.appendChild(div);
+
+        const childContainer = document.createElement('div');
+        childContainer.className = 'children';
+        container.appendChild(childContainer);
+
+        for (const child of node.children) {
+          renderTree(child, childContainer);
+        }
+      }
+
+      renderTree(tree, document.getElementById('tree'));
+    </script>
+    <style>
+      .tree-demo {
+        margin: 20px;
+      }
+
+      .tree-node {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid black;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+      }
+
+      .leaf {
+        border-color: green;
+      }
+
+      .children {
+        margin-left: 20px;
+        border-left: 1px solid gray;
+        padding-left: 20px;
+      }
+    </style>
+  </div>
+
   <br />
 
   <h1>postMessage Trace Events demo</h1>
