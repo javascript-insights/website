@@ -25,9 +25,38 @@
   </div>
 
   <div class="container">
+    <img id="shiftingImage" src="./static/Einstein.jpg" alt="Sample Image"
+      style="display: none; width: 300px; height: 200px; margin-left: 148px;" />
     <button id="testButton">Click Me</button>
+    <button id="testButton2">Click Me 2</button>
+
     <p id="result"></p>
   </div>
+
+  <script>
+    setTimeout(() => {
+      const img = document.getElementById('shiftingImage');
+      img.style.display = img.style.display === 'none' ? 'block' : 'none';
+    }, 2000);
+  </script>
+
+  <script>
+    document.getElementById('testButton2').addEventListener('click', () => {
+      // Simulate heavy computation
+      const startTime = Date.now();
+      while (Date.now() - startTime < 300) {
+        // Blocking operation for 300ms
+      }
+
+      // Update UI after delay
+      document.getElementById('result').textContent = 'Button clicked!';
+
+      // Force layout recalculation
+      document.body.style.backgroundColor = '#fff';
+      document.body.offsetHeight;
+      document.body.style.backgroundColor = '#f0f0f0';
+    });
+  </script>
 
 </body>
 

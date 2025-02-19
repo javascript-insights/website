@@ -153,6 +153,59 @@
     <li>Reset trace (T)</li>
     <li>Add script to ignore list (I)</li>
   </ul>
+
+  <h1>Web Vitals</h1>
+  <p>Web Vitals is an initiative by Google to provide unified guidance for quality signals that are essential to
+    delivering a great user experience on the web.</p>
+  <p>The Web Vitals initiative aims to simplify the landscape, and help sites focus on the metrics that matter most, the
+    Core Web Vitals.</p>
+  <h2>Core Web Vitals</h2>
+  <p>Core Web Vitals are the subset of Web Vitals that apply to all web pages, should be measured by all site owners,
+    and will be surfaced across all devtools. Each of the Core Web Vitals represents a distinct facet of the user
+    experience, is measurable in the field, and reflects the real-world experience of a critical user-centric outcome.
+  </p>
+  <ul>
+    <li><strong>Largest Contentful Paint (LCP)</strong>: Measures loading performance. A good LCP should occur within
+      2.5 seconds of when the page starts loading.</li>
+    <li><strong>Interaction to Next Paint (INP)</strong>: Measures interactivity. A good INP should be 200 milliseconds
+      or less.</li>
+    <li><strong>Cumulative Layout Shift (CLS)</strong>: Measures visual stability. A good CLS should be 0.1 or less.
+    </li>
+  </ul>
+  <p>To ensure you're hitting the recommended target for these metrics for most of your users, a good threshold to
+    measure is the 75th percentile of page loads, segmented across mobile and desktop devices.</p>
+
+  <div class="cwv-metrics">
+    <img src="static/lcp.svg" alt="Largest Contentful Paint threshold recommendations" width="250" height="220">
+    <img src="static/inp.svg" alt="Interaction to Next Paint threshold recommendations" width="250" height="220">
+    <img src="static/cls.svg" alt="Cumulative Layout Shift threshold recommendations" width="250" height="220">
+  </div>
+
+  <p><a href="https://web.dev/articles/vitals">Core Web Vitals</a></p>
+
+  <ul>
+    <li><a href="https://web.dev/articles/optimize-lcp">Optimize LCP</a></li>
+    <li><a href="https://web.dev/articles/optimize-inp">Optimize INP</a></li>
+    <li><a href="https://web.dev/articles/optimize-cls">Optimize CLS</a></li>
+  </ul>
+
+  <h2>View Timings</h2>
+  <p>On the Timings track, view important markers such as:</p>
+
+  <ul>
+    <li>First Paint (FP)</li>
+    <li>First Contentful Paint (FCP)</li>
+    <li>Largest Contentful Paint (LCP)</li>
+    <li>DOMContentLoaded Event (DCL)</li>
+    <li>Onload Event (L)</li>
+    <li>Your custom performance.mark() calls. An individual mark with tooltip is shown labelled
+      "Last JavaScript code".</li>
+    <li>Your custom performance.measure() calls. A yellow span is shown and labelled.</li>
+  </ul>
+
+  <script>
+    performance.mark("Last JavaScript code");
+  </script>
 </body>
 
 </html>
