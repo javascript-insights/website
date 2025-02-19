@@ -203,6 +203,22 @@
     <li>Your custom performance.measure() calls. A yellow span is shown and labelled.</li>
   </ul>
 
+  <h2>Flame Chart Colors</h2>
+  <p>The flame chart in the Performance panel uses different colors to represent different types of activities:</p>
+
+  <ul>
+    <li><strong style="color: #CCCCCC">Grey</strong> - Script parsing and compilation</li>
+    <li><strong style="color: #FDB882">Orange</strong> - JavaScript execution</li>
+    <li><strong style="color: #63BA4C">Green</strong> - Painting and compositing</li>
+    <li><strong style="color: #4DB6E3">Blue</strong> - HTML parsing and DOM activities</li>
+    <li><strong style="color: #B866CC">Purple</strong> - Style recalculation and layout</li>
+    <li><strong style="color: #F1C232">Yellow</strong> - System events and garbage collection</li>
+    <li><strong style="color: #E61E27">Red</strong> - Long tasks (over 50ms)</li>
+  </ul>
+
+  <p>The height of each bar in the flame chart represents call stack depth, while the width shows how long that
+    particular function took to execute.</p>
+
   <script>
     performance.mark("Last JavaScript code");
   </script>

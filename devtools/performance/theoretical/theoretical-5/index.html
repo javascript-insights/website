@@ -41,6 +41,48 @@
     <script src="script.js"></script>
   </main>
 
+  <section>
+    <h3>Network Track Analysis</h3>
+    <div class="network-info">
+      <p>Next to the Network track name, there's a legend with color-coded request types.</p>
+
+      <p>Render blocking requests are marked with a red triangle in the upper right corner.</p>
+
+      <h4>Request Tooltip Information</h4>
+      <ul>
+        <li>Request's URL and total execution time</li>
+        <li>Priority or priority changes (e.g., Medium -> High)</li>
+        <li>Render blocking status</li>
+        <li>Request timing breakdown</li>
+      </ul>
+
+      <p>Clicking a request draws an arrow from its initiator to the request.</p>
+
+      <div class="summary-info">
+        <h4>Summary Tab Details</h4>
+        <p>The Performance panel's Summary tab shows:</p>
+        <ul>
+          <li>Initial Priority and final Priority fields</li>
+          <li>Detailed request timing breakdown</li>
+        </ul>
+        <p>For more information, see <a href="#">Optimizing resource loading with the Fetch Priority API</a>.</p>
+      </div>
+
+      <div class="timing-breakdown">
+        <h4>Request Timing Components</h4>
+        <ul>
+          <li>Left line (|–): Events up to Connection start</li>
+          <li>Light bar portion: Request sent and Waiting for server response</li>
+          <li>Dark bar portion: Content download</li>
+          <li>Right line (–|): Main thread waiting time</li>
+        </ul>
+      </div>
+
+      <p>Additional timing details can be found in the Network panel's Timing tab (Right-click request and select
+        "Reveal in Network panel").</p>
+    </div>
+  </section>
+
 </body>
 
 </html>
