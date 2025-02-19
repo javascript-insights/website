@@ -1,0 +1,25 @@
+.puzzle-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.solution {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+}
+
+.show-solution {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

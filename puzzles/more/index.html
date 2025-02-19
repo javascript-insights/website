@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Puzzles</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+</head>
+
+<body>
+    <h1>Advanced JavaScript Puzzles</h1>
+    <nav class="breadcrumb">
+        <a href="../../index.html">JavaScript Insights</a>
+        <a href="../index.html">Puzzles</a>
+        <a href="./index.html">More</a>
+    </nav>
+    <div class="navbar">
+        <a href="../index.html">Back</a>
+    </div>
+    <h3>Welcome to the JavaScript Puzzles!</h3>
+
+    <div class="puzzle-container">
+        <h2>Puzzle #1: Async Race Condition</h2>
+        <p>The caching mechanism in asyncPuzzle fails under concurrent requests. Why?</p>
+        <pre><code>
+const asyncPuzzle = {
+    cache: new Map(),
+    async getData(key) {
+        if (this.cache.has(key)) return this.cache.get(key);
+        const result = await fetch(`/api/${key}`);
+        this.cache.set(key, result);
+        return result;
+    },
+    async challenge() {
+        const results = await Promise.all([
+            this.getData('x'),
+            this.getData('x'),
+            this.getData('x')
+        ]);
+    }
+};</code></pre>
+        <p>Challenge: Fix the implementation to ensure only one API call is made regardless of concurrent requests.</p>
+        <button class="show-solution" onclick="toggleSolution('solution1')">Show Solution</button>
+        <div id="solution1" class="solution">
+            <p>The race condition occurs because the cache check and set aren't atomic operations.</p>
+            <pre><code>
+// Fixed implementation
+const asyncPuzzle = {
+    cache: new Map(),
+    pendingRequests: new Map(),
+    async getData(key) {
+        if (this.cache.has(key)) return this.cache.get(key);
+        if (this.pendingRequests.has(key)) {
+            return this.pendingRequests.get(key);
+        }
+        const promise = fetch(`/api/${key}`);
+        this.pendingRequests.set(key, promise);
+        try {
+            const result = await promise;
+            this.cache.set(key, result);
+            return result;
+        } finally {
+            this.pendingRequests.delete(key);
+        }
+    }
+};
+      </code></pre>
+        </div>
+    </div>
+
+    <div class="puzzle-container">
+        <h2>Puzzle #2: Memory Leak Detective</h2>
+        <pre><code>
+class EventManager {
+    constructor() {
+        this.handlers = new WeakMap();
+        this.element = document.getElementById('memory-test');
+    }
+    
+    attach() {
+        const handler = () => {
+            this.handlers.set(this, {
+                data: new Array(1000000).fill('test'),
+                cleanup: () => this.detach()
+            });
+        };
+        this.element.addEventListener('click', handler);
+    }
+    
+    detach() {
+        this.handlers.delete(this);
+    }
+}</code></pre>
+        <p>The EventManager class has a subtle memory leak. Find and fix it.</p>
+        <button id="memory-test">Test Memory</button>
+        <button class="show-solution" onclick="toggleSolution('solution2')">Show Solution</button>
+        <div id="solution2" class="solution">
+            <p>The memory leak occurs due to improper event listener cleanup and WeakMap usage.</p>
+            <pre><code>
+class EventManager {
+    constructor() {
+        this.handlers = new WeakMap();
+        this.element = document.getElementById('memory-test');
+    }
+    
+    attach() {
+        const handler = () => {
+            console.log('handled');
+        };
+        this.element.addEventListener('click', handler);
+        // Store handler reference for cleanup
+        this.handlers.set(this.element, handler);
+    }
+    
+    detach() {
+        const handler = this.handlers.get(this.element);
+        if (handler) {
+            this.element.removeEventListener('click', handler);
+            this.handlers.delete(this.element);
+        }
+    }
+}
+      </code></pre>
+        </div>
+    </div>
+
+    <div class="puzzle-container">
+        <h2>Puzzle #3: Proxy Trap Challenge</h2>
+        <pre><code>
+const target = {
+    name: 'test',
+    _private: 'secret'
+};
+
+const handler = {
+    get(target, prop) {
+        if (prop.startsWith('_')) return undefined;
+        return target[prop];
+    },
+    set(target, prop, value) {
+        if (prop.startsWith('_')) return false;
+        target[prop] = value;
+        return true;
+    },
+    deleteProperty(target, prop) {
+        if (prop.startsWith('_')) return false;
+        return delete target[prop];
+    }
+};
+
+const proxy = new Proxy(target, handler);</code></pre>
+        <p>Challenge: Bypass the Proxy protection to access and modify private properties.</p>
+        <button class="show-solution" onclick="toggleSolution('solution3')">Show Solution</button>
+        <div id="solution3" class="solution">
+            <p>Several ways to bypass the Proxy protection:</p>
+            <pre><code>
+// Method 1: Using Object.getOwnPropertyDescriptor
+const value = Object.getOwnPropertyDescriptor(target, '_private').value;
+
+// Method 2: Using Reflect
+const value = Reflect.get(target, '_private');
+
+// Method 3: Getting the target through proxy's constructor
+const originalTarget = proxy.constructor.prototype.constructor.target;
+const value = originalTarget._private;
+      </code></pre>
+        </div>
+    </div>
+
+    <div class="puzzle-container">
+        <h2>Puzzle #4: Generator Deadlock</h2>
+        <pre><code>
+function* infiniteGenerator() {
+    let current = 0;
+    while (true) {
+        const reset = yield current++;
+        if (reset) current = 0;
+    }
+}
+
+async function* asyncWrapper(generator) {
+    const gen = generator();
+    while (true) {
+        const next = gen.next();
+        yield await next;
+    }
+}</code></pre>
+        <p>The asyncWrapper function causes a deadlock when used with infiniteGenerator. Why?</p>
+        <p>Challenge: Fix the implementation to properly handle both sync and async generators.</p>
+        <button class="show-solution" onclick="toggleSolution('solution4')">Show Solution</button>
+        <div id="solution4" class="solution">
+            <p>The deadlock occurs because we're awaiting a non-Promise value.</p>
+            <pre><code>
+async function* fixedAsyncWrapper(generator) {
+    const gen = generator();
+    while (true) {
+        const next = gen.next();
+        // Only await if it's actually a Promise
+        yield next instanceof Promise ? await next : next.value;
+    }
+}
+
+// Usage example:
+const gen = fixedAsyncWrapper(infiniteGenerator);
+for await (const value of gen) {
+    console.log(value); // Works correctly now
+    if (value > 10) break;
+}
+      </code></pre>
+        </div>
+    </div>
+
+    <div class="puzzle-container">
+        <h2>Puzzle #5: Prototype Chain Mutation</h2>
+        <pre><code>
+class Base {
+    constructor() {
+        this.value = 42;
+    }
+    getValue() {
+        return this.value;
+    }
+}
+
+class Derived extends Base {
+    constructor() {
+        super();
+        Object.setPrototypeOf(this, {
+            getValue: function() {
+                return this.value * 2;
+            }
+        });
+    }
+}</code></pre>
+        <p>What are the implications of mutating the prototype chain in the constructor?</p>
+        <p>Challenge: Predict and explain the behavior of instanceof and inheritance.</p>
+        <button class="show-solution" onclick="toggleSolution('solution5')">Show Solution</button>
+        <div id="solution5" class="solution">
+            <p>Prototype chain mutation causes several issues:</p>
+            <pre><code>
+// Correct way to modify behavior while maintaining prototype chain
+class Base {
+    constructor() {
+        this.value = 42;
+    }
+    getValue() {
+        return this.value;
+    }
+}
+
+class Derived extends Base {
+    getValue() {
+        // Properly override method while maintaining inheritance
+        return super.getValue() * 2;
+    }
+}
+
+// Test:
+const derived = new Derived();
+console.log(derived instanceof Derived); // true
+console.log(derived instanceof Base);    // true
+console.log(derived.getValue());         // 84
+      </code></pre>
+        </div>
+    </div>
+
+    <script src="puzzles.js"></script>
+</body>
+
+</html>

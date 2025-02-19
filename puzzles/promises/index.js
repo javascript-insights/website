@@ -1,3 +1,8 @@
+function toggleSolution(solutionId) {
+    const solution = document.getElementById(solutionId);
+    solution.style.display = solution.style.display === 'none' || !solution.style.display ? 'block' : 'none';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('puzzle1').addEventListener('click', () => {
         console.log("\n\npuzzle1 clicked");

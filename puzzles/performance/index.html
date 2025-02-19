@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
 </head>
 
 <body>
@@ -18,14 +20,34 @@
   </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
-    <a href="./problem-1/index.html">Problem 1</a>
-    <a href="./solution-1/index.html">Solution 1</a>
   </div>
   <p></p>
 </body>
 
-</html>
+<div class="puzzle-container">
+  <h2>Puzzle #1: Performmence</h2>
+  <p>Question: Find the 2 prime numbers that were multiplied together to get this number: 992474117</p>
+  <pre><code>
+    function find() {
+      // your code here ...
+    }
 
-</html>
+    find();
+</code></pre>
+  <p>Challenge: It can take time...</p>
+  <button class="show-solution" onclick="toggleSolution('solution1')">Show Solution</button>
+  <div id="solution1" class="solution">
+    <pre><code>
+      function find() {
+        const num = 992474117;
+        let i = 1;
+        while (num % ++i != 0);
+        console.log(`${i}, ${num / i}`);
+      }
+  
+      find();
+</code></pre>
+  </div>
+</div>
 
 </html>
