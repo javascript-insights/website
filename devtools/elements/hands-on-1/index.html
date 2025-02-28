@@ -17,49 +17,138 @@
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
     <a href="../index.html">Elements</a>
-    <a href="./index.html">Hands-On 1</a>
+    <a href="./index.html">Hands-On 5</a>
   </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
 
-  <section class="body">
-    <h1>CSS Only Carnival: Target Practice</h1>
-    <h2>This game uses no JS at all (isn't CSS awesome?). You have 8 seconds to hit as many targets as you can!</h2>
+  <main class="content">
+    <h2>Elements Panel Practice - Let's Have Some Fun! 🎨</h2>
+    
+    <section class="exercise">
+      <h3>Exercise 1: Style Detective 🕵️</h3>
+      <div id="box1" class="box" style="background-color: pink; padding: 20px; border-radius: 10px;">
+        <p>I'm feeling a bit too pink today! Use the Styles pane to give me a makeover.</p>
+        <p>Hint: Try changing my background-color, add some box-shadow, or make me dance with transform!</p>
+      </div>
+    </section>
 
-    <ul class="game-area">
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-      <li><input type="checkbox">
-        <div class="shield"></div>
-      </li>
-    </ul>
+    <section class="exercise">
+      <h3>Exercise 2: The Hide and Seek Champion 🙈</h3>
+      <div id="box2" class="box hidden">
+        <p>Find me! I'm playing hide and seek. Toggle my 'hidden' class to make me appear!</p>
+      </div>
+    </section>
 
-    <h3 class="total-count">Targets Hit: &nbsp;</h3>
+    <section class="exercise">
+      <h3>Exercise 3: DOM Tree Surgeon 🌳</h3>
+      <div class="nested">
+        <div>
+          <ul>
+            <li>I heard you're good at surgery</li>
+            <li>Try moving these list items around</li>
+            <li>Or maybe add a new sibling?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <a href="https://codepen.io/una/pen/NxZaNr" target="_blank" rel="noopener">Open in CodePen</a>
-  </section>
+    <section class="exercise"></section>
+      <h3>Exercise 4: Event Listener Explorer 🎯</h3>
+      <button id="clickMe" onclick="alert('Found me!')">I have a secret event listener</button>
+      <p>Find all my event listeners in the Elements panel!</p>
+    </section>
 
+    <section class="exercise"></section>
+      <h3>Exercise 5: Layout Detective 📏</h3>
+      <div class="box" style="margin: 20px; padding: 15px; border: 5px solid purple;">
+        <p>Check my box model! Am I following the CSS box model rules?</p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 6: Computed Styles Challenge 🧮</h3>
+      <div class="computed-test" style="font-size: 1.2em; color: inherit;">
+        <p>What's my real color? Check the Computed styles to find out!</p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 7: Accessibility Inspector ♿</h3>
+      <button aria-label="Submit form" style="background: red; color: red;">
+        Can you spot the accessibility issues here?
+      </button>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 8: DOM Breakpoints 🛑</h3>
+      <div id="breakpoint-me">
+        <p>Right-click and set a subtree modification breakpoint on me!</p>
+        <button onclick="document.getElementById('breakpoint-me').innerHTML += '<p>Surprise!</p>'">
+          Click to modify
+        </button>
+      </div>
+    </section>
+
+    <!-- New Exercises -->
+    <section class="exercise">
+      <h3>Exercise 9: CSS Grid Inspector 🏁</h3>
+      <div class="grid-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div style="background: #ffd700; padding: 10px;">Grid 1</div>
+        <div style="background: #ff8c00; padding: 10px;">Grid 2</div>
+        <div style="background: #ff4500; padding: 10px;">Grid 3</div>
+      </div>
+      <p>Use the Grid inspector to understand the layout!</p>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 10: Shadow DOM Explorer 👻</h3>
+      <custom-element>
+        <p>Can you find my shadow root?</p>
+      </custom-element>
+      <p>Hint: Look for the #shadow-root in the Elements panel</p>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 11: Animation Inspector 🎬</h3>
+      <div class="bouncing-box" style="animation: bounce 1s infinite;">
+        <p>Watch me bounce! Check my animation details!</p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 12: Pseudo-Element Detective 🔍</h3>
+      <div class="pseudo-test" data-content="Find me!">
+        <p>I have a ::before and ::after. Can you find and modify them?</p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 13: Flexbox Navigator 🚀</h3>
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div style="background: #b8e994; padding: 10px;">Flex 1</div>
+        <div style="background: #78e08f; padding: 10px;">Flex 2</div>
+        <div style="background: #38ada9; padding: 10px;">Flex 3</div>
+      </div>
+      <p>Explore the Flexbox layout using the Elements panel!</p>
+    </section>
+
+    <section class="tips">
+      <h3>Pro Tips & Tricks 🎓</h3>
+      <ul>
+        <li>💡 Use Ctrl+Shift+C (Cmd+Shift+C on Mac) to inspect elements quickly</li>
+        <li>🎨 Try the color picker in the Styles pane for precise colors</li>
+        <li>🌳 Use H to hide elements</li>
+        <li>⌨️ Press Up/Down in the Styles pane to increment/decrement values</li>
+        <li>🔍 Use Ctrl+F to search within the Elements panel</li>
+        <li>📏 Hold Shift while hovering over elements to see their dimensions</li>
+        <li>🎯 Right-click an element to set DOM breakpoints</li>
+        <li>🎨 Use the Animations tab to control CSS animations</li>
+        <li>📱 Toggle device mode to test responsive designs</li>
+        <li>🔎 Use the Computed tab to see final computed values</li>
+      </ul>
+    </section>
+  </main></section></custom-element>
+  
 </body>

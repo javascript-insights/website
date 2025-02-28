@@ -91,6 +91,75 @@
     }
   </script>
 
+  <div class="exercise">
+    <h3>Exercise 4: Table of Superhero Bugs</h3>
+    <p>Create a table of debugging superheroes:</p>
+    <ol>
+      <li>Use console.table() to show bug-fighting heroes</li>
+      <li>Include: name, superpower, bugsSquashed</li>
+      <li>Add at least 3 debugging champions</li>
+    </ol>
+    <button onclick="checkExercise4()">Check Exercise 4</button>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 5: Debug Olympics</h3>
+    <p>Create console timers for a Debug Olympics:</p>
+    <ol>
+      <li>Start timer "BugHunting"</li>
+      <li>Find bugs for 2 seconds</li>
+      <li>Start timer "CodeSprinting"</li>
+      <li>Sprint for 1 second</li>
+      <li>End both timers</li>
+    </ol>
+    <button onclick="checkExercise5()">Check Exercise 5</button>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise 6: Console Comedy Club</h3>
+    <p>Create funny console messages:</p>
+    <ol>
+      <li>Use different console styles</li>
+      <li>Make at least one dad joke</li>
+      <li>Include emoji 🐛</li>
+    </ol>
+    <button onclick="checkExercise6()">Check Exercise 6</button>
+  </div>
+
+  <script>
+    function checkExercise4() {
+      console.clear();
+      console.info('Exercise 4 Template:');
+      const debugHeroes = [
+        { name: 'Captain Console', superpower: 'Log Vision', bugsSquashed: 9001 },
+        { name: 'The Debuginator', superpower: 'Breakpoint Mastery', bugsSquashed: 8000 },
+        { name: 'Stack Trace Girl', superpower: 'Error Whispering', bugsSquashed: 7500 }
+      ];
+      console.table(debugHeroes);
+    }
+
+    function checkExercise5() {
+      console.clear();
+      console.info('Exercise 5 Template:');
+      console.time('BugHunting');
+      setTimeout(() => {
+        console.time('CodeSprinting');
+        setTimeout(() => {
+          console.timeEnd('CodeSprinting');
+          console.timeEnd('BugHunting');
+        }, 1000);
+      }, 2000);
+    }
+
+    function checkExercise6() {
+      console.clear();
+      console.info('Exercise 6 Template:');
+      console.log('%cWhy do programmers prefer dark mode?', 'color: #FF69B4; font-size: 16px');
+      console.log('%cBecause light attracts bugs! 🐛', 'color: #4CAF50; font-size: 20px; font-weight: bold');
+      console.warn('Warning: Dad joke overload detected! 😄');
+    }
+  </script>
+
 </body>
 
 </html>

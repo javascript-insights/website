@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Network Hands-On 4</h1>
+
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Network</a>
+    <a href="./index.html">Hands-On 4</a>
+  </nav>
+
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+
+  <main>
+    <section>
+      <h2>🌐 Network Detective Training Ground</h2>
+      <p>Welcome, aspiring Network Inspector! Let's investigate some mysterious network activities.</p>
+
+      <div class="exercise">
+        <h3>🕵️ Exercise 1: The Slow Loading Mystery</h3>
+        <button onclick="loadSlowResource()">Load Really Slow Resource</button>
+        <p>Use the Network panel to find out why this request takes forever!</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🎭 Exercise 2: The Status Code Theater</h3>
+        <button onclick="generateRandomStatus()">Generate Random Status Code</button>
+        <p>Can you catch all the different HTTP status codes? Collect them like Pokémon!</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🎪 Exercise 3: The Header Circus</h3>
+        <button onclick="sendWeirdHeaders()">Send Bizarre Headers</button>
+        <p>Find the silly custom header I've hidden in this request. Hint: It involves pizza 🍕</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🎢 Exercise 4: The Payload Rollercoaster</h3>
+        <button onclick="sendRandomData()">Send Random JSON</button>
+        <p>How big was that payload? Was it minified? Time to investigate!</p>
+      </div>
+    </section>
+
+    <div class="exercise">
+      <h3>🎮 Exercise 5: The Cache Quest</h3>
+      <button onclick="testCaching()">Toggle Cache Test</button>
+      <p>Can you spot which requests are served from cache? Find the treasure in the Size column!</p>
+    </div>
+
+    <div class="exercise">
+      <h3>🌊 Exercise 6: The Waterfall Challenge</h3>
+      <button onclick="loadManyResources()">Trigger Resource Cascade</button>
+      <p>Watch these requests race! Who's blocking whom? Time to become a waterfall expert!</p>
+    </div>
+
+    <div class="exercise">
+      <h3>🎭 Exercise 7: The MIME Type Masquerade</h3>
+      <button onclick="sendMixedContent()">Mix Content Types</button>
+      <p>Something's not what it seems... Can you spot the impostor content type?</p>
+    </div>
+
+    <div class="exercise">
+      <h3>🎪 Exercise 8: The Redirect Circus</h3>
+      <button onclick="startRedirectChain()">Start Redirect Chain</button>
+      <p>Follow the bouncing request! How many redirects can you count?</p>
+    </div>
+
+    <div class="exercise">
+      <h3>🔍 Exercise 9: The Cookie Monster</h3>
+      <button onclick="playCookieGame()">Feed the Cookie Monster</button>
+      <p>Help! The cookie monster is hungry! Check those request headers for tasty cookies!</p>
+    </div>
+    <aside>
+      <h3>🎯 Pro Tips:</h3>
+      <ul>
+        <li>Use the Filter box to find specific requests</li>
+        <li>Right-click column headers to customize your view</li>
+        <li>Press Ctrl+R (Cmd+R) to clear and reload</li>
+        <li>Look for the red entries - they're usually the fun ones!</li>
+      </ul>
+    </aside>
+  </main>
+</body>
+
+</html>

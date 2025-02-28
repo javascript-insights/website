@@ -25,17 +25,20 @@
 
   <div class="content">
     <div class="demo-section">
-      <h3>1. Stack Trace Analysis</h3>
+      <h3>1. Stack Trace Analysis 🔍</h3>
+      <img src="https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif" alt="Sherlock Holmes gif" width="100">
       <button onclick="startStackTrace()">Run Stack Trace Demo</button>
     </div>
 
     <div class="demo-section">
-      <h3>2. Async Debugging</h3>
+      <h3>2. Async Debugging 🕐</h3>
+      <img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif" alt="Waiting gif" width="100">
       <button onclick="demonstrateAsync()">Run Async Demo</button>
     </div>
 
     <div class="demo-section">
-      <h3>3. Error Handling</h3>
+      <h3>3. Error Handling 💥</h3>
+      <img src="https://media.giphy.com/media/YrBRYRDN4M5ryrNOND/giphy.gif" alt="Error gif" width="100">
       <button onclick="demonstrateErrorHandling()">Run Error Demo</button>
     </div>
   </div>
@@ -43,29 +46,30 @@
   <script>
     function startStackTrace() {
       console.clear();
+      console.log("🕵️ Detective mode activated!");
       function function1() { function2(); }
       function function2() { function3(); }
-      function function3() { console.trace('Trace Demo'); }
+      function function3() { console.trace('🔍 Elementary, my dear Watson!'); }
       function1();
     }
 
     async function demonstrateAsync() {
       console.clear();
-      console.log('Starting async operation...');
+      console.log('🚀 Houston, we have liftoff...');
       try {
         const result = await fetch('https://api.example.com/data');
-        console.log('Result:', result);
+        console.log('🎯 Mission accomplished:', result);
       } catch (error) {
-        console.error('Async Error:', error);
+        console.error('🔥 Houston, we have a problem:', error);
       }
     }
 
     function demonstrateErrorHandling() {
       console.clear();
       try {
-        throw new Error('Custom Error Demo');
+        throw new Error('🎭 Drama queen error incoming!');
       } catch (error) {
-        console.error('Caught:', error);
+        console.error('🎪 Caught the troublemaker:', error);
         console.dir(error);
       }
     }
@@ -76,18 +80,16 @@
 
     // $$('script');
 
-    // dir(document.head)
+    // dir(document.head)    
+    var player1 = { "name": "Captain Awesome 🦸‍♂️", "level": 9001 }
 
-    var player1 = { "name": "Ted", "level": 42 }
-    
     // keys(player1);
 
     // values(player1);
-
     function sum(x, y) {
-      return x + y;
+      return x + y; // Math magic ✨
     }
-    
+
     // monitor(sum);
     
     // sum(2, 3);

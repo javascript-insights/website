@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="styles1.css">
+  <link rel="stylesheet" href="styles2.css">
+  <script src="script1.js" defer></script>
+  <script src="script2.js" defer></script>
+</head>
+
+<body>
+  <h1>Coverage Hands-On 2</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Coverage</a>
+    <a href="./index.html">Hands-On 2</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <main>
+    <section>
+      <h2>🎯 Coverage Tool Exercises</h2>
+      <p>Open DevTools (F12), go to Coverage tab, and start recording!</p>
+      
+      <div class="exercise">
+        <h3>Exercise 1: CSS Detective 🕵️</h3>
+        <button class="fancy-button" onclick="alert('Clicked!')">Click me!</button>
+        <button class="never-used-button">Never clicked</button>
+        <p class="hint">Hint: Which button styles are actually being used?</p>
+      </div>
+
+      <div class="exercise">
+        <h3>Exercise 2: JavaScript Journey 🚀</h3>
+        <button onclick="doSomething()">Run unused function</button>
+        <button onclick="showMessage()">Show secret message</button>
+        <p class="hint">Hint: Check which JavaScript functions were executed!</p>
+      </div>
+
+      <div class="exercise">
+        <h3>Exercise 3: Style Safari 🦁</h3>
+        <div class="color-box">
+          <p>Hover over me!</p>
+          <p class="never-shown">You'll never see this text</p>
+        </div>
+        <p class="hint">Hint: Look for unused hover states and hidden elements</p>
+      </div>
+    </section>
+
+    <section class="tips">
+      <h2>💡 Pro Tips</h2>
+      <ul>
+        <li>Start recording before interacting with elements</li>
+        <li>Look for red (unused) vs green (used) code</li>
+        <li>Try to achieve higher coverage by using more features</li>
+      </ul>
+    </section>
+  </main>
+
+</body>

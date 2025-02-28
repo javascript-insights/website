@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Hands-On 19 - Over all</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../../index.html">JavaScript Insights</a>
+    <a href="../../../../index.html">DevTools</a>
+    <a href="../../index.html">Performance</a>
+    <a href="../index.html">Hands-On</a>
+    <a href="./index.html">Over All</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <main>
+    <section>
+      <h2>🏃‍♂️ Welcome to the Performance Olympics! 🏃‍♀️</h2>
+      <p>Let's test your Performance profiling skills with these fun challenges:</p>
+
+      <div class="exercise">
+        <h3>🐌 Exercise 1: The Slow Motion Button</h3>
+        <button onclick="createManyDivs()">Click me (if you dare)</button>
+        <p>This button creates 10,000 divs. Profile it and find out why it's so slow!</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🎡 Exercise 2: The Infinite Spinner</h3>
+        <div id="spinner">🌀</div>
+        <button onclick="startHeavyAnimation()">Start Spinning</button>
+        <p>Watch the spinner struggle. Can you identify the performance bottleneck?</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🖼️ Exercise 3: Image Loading Marathon</h3>
+        <button onclick="loadManyImages()">Load HD Images</button>
+        <div id="imageContainer"></div>
+        <p>Profile the network performance. How can we optimize these image loads?</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🔄 Exercise 4: The Memory Leak Factory</h3>
+        <button onclick="startMemoryLeak()">Leak Some Memory</button>
+        <p>Take a heap snapshot and find where the memory is going!</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🎨 Exercise 5: The Rainbow Rain</h3>
+        <button onclick="startColorCascade()">Make It Rain Colors</button>
+        <div id="rainbowContainer"></div>
+        <p>Watch your CPU melt with this colorful animation! Find out why continuous DOM updates hurt performance.</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🧮 Exercise 6: The Fibonacci Freezer</h3>
+        <button onclick="calculateHugeFibonacci()">Calculate Fibonacci(1000000)</button>
+        <p>Want to freeze your browser? This calculation will do it! Profile the main thread blocking.</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🎵 Exercise 7: The DOM Party</h3>
+        <button onclick="startDOMParty()">Start DOM Party</button>
+        <div id="partyZone"></div>
+        <p>Watch elements dance around! Learn about layout thrashing and forced reflows.</p>
+      </div>
+
+      <div class="exercise">
+        <h3>🔄 Exercise 8: The Event Loop Carnival</h3>
+        <button onclick="startEventLoopChaos()">Start Event Madness</button>
+        <div id="eventDisplay"></div>
+        <p>Hundreds of events fighting for attention! Profile the event loop and task queuing.</p>
+      </div>
+
+      <div class="tips">
+        <h3>🎯 Pro Tips:</h3>
+        <ul>
+          <li>Use the Performance panel to record each exercise</li>
+          <li>Look for red triangles in the flame chart</li>
+          <li>Check the Summary tab for execution time breakdown</li>
+          <li>Don't forget to check the Memory tab when needed</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+</body>
+
+</html>

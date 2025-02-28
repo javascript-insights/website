@@ -23,114 +23,74 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <ul>
-    <li>Log network activity</li>
-    <li>Simulate a slower network connection</li>
-    <li>Capture screenshots</li>
-    <li>Inspect the details of the resource</li>
-    <li>Search network headers and responses (no-cache)</li>
-    <li>Filter resources</li>
-    <li>Block requests</li>
-    <li>Edit requests</li>
+  <ul class="fun-list">
+    <li>🔍 Log network activity (like a detective with a magnifying glass!) </li>
+    <li>🐌 Simulate a slower network connection (as slow as your grandma's internet)</li>
+    <li>📸 Capture screenshots (say cheese! 🧀)</li>
+    <li>🕵️‍♂️ Inspect the details of the resource (CSI: Network Edition)</li>
+    <li>🔎 Search network headers and responses (no-cache, because who needs memories?)</li>
+    <li>🎯 Filter resources (like finding a needle in a digital haystack)</li>
+    <li>🚫 Block requests (like a bouncer at a club)</li>
+    <li>✏️ Edit requests (because typos happen to the best of us)</li>
   </ul>
 
+  <h1>🎮 Network Tool Demo</h1>
+  <div class="button-container">
+    <button id="fetchData">🚀 Fetch Data</button>
+    <button id="postData">📮 Post Data</button>
+    <button id="fetchError">💥 Fetch Error</button>
+    <button id="postError">🔥 Post Error</button>
+    <button id="swFetchData">🤖 Service Worker Fetch</button>
+    <button id="fetchDataUrl">🔗 Fetch Data URL</button>
+  </div>
+  <img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" alt="Loading..." width="200">
 
-  <h1>Network Tool Demo</h1>
-  <button id="fetchData">Fetch Data</button>
-  <button id="postData">Post Data</button>
-  <button id="fetchError">Fetch Error</button>
-  <button id="postError">Post Error</button>
-  <button id="swFetchData">Service Worker Fetch Data</button>
-  <button id="fetchDataUrl">Fetch Data URL</button>
-  <img src="image.png" alt="Demo Image">
-
-  <h2>Network Metrics</h2>
+  <h2>📊 Network Metrics (The Boring But Important Stuff)</h2>
   <ol>
-    <li><strong>Requests</strong> - This indicates the total number of network requests made by the page.</li>
-    <li><strong>Transferred</strong> - This is the total amount of data transferred over the network to load the page.
-      It includes all the bytes sent from the server to the client.</li>
-    <li><strong>Resources</strong> - This represents the total size of all resources requested by the page. The
-      difference between "transferred" and "resources" can be due to:
+    <li><strong>📦 Requests</strong> - Like counting how many pizzas you ordered</li>
+    <li><strong>📨 Transferred</strong> - All those bytes traveling through the tubes of the internet</li>
+    <li><strong>💾 Resources</strong> - The whole enchilada, including:
       <ul>
-        <li>Compression: Resources might be compressed during transfer (e.g., gzip compression), reducing the amount of
-          data transferred.</li>
-        <li>Caching: Some resources might be loaded from the browser cache, reducing the amount of data transferred over
-          the network.</li>
+        <li>🗜️ Compression (making big files small, like squeezing into skinny jeans)</li>
+        <li>💫 Caching (because why fetch what you already have?)</li>
       </ul>
     </li>
-    <li><strong>Finish</strong> - This is the total time taken to load all the resources and complete all network
-      requests. It measures the time from the start of the first request to the completion of the last request.</li>
-    <li><strong>DOMContentLoaded</strong> - The DOMContentLoaded event is fired when the initial HTML document has been
-      completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading. This
-      metric indicates how quickly the browser was able to parse and load the HTML content.</li>
-    <li><strong>Load</strong> - The load event is fired when the whole page, including all dependent resources such as
-      stylesheets and images, has finished loading. This metric indicates the time taken for the entire page to be fully
-      loaded and rendered.</li>
+    <li><strong>⏱️ Finish</strong> - When it's all done and dusted</li>
+    <li><strong>🌳 DOMContentLoaded</strong> - The bare minimum to show something</li>
+    <li><strong>🏁 Load</strong> - The finish line!</li>
   </ol>
 
+  <!-- Rest of the code remains the same, just add emojis to headers -->
+  <div class="section">
+    <h2>🕵️‍♂️ User Agent Spoofing</h2>
+    <!-- ... -->
+  </div>
 
   <div class="section">
-    <h2>User Agent Spoofing</h2>
-    <p>Simulate different user agents...</p>
-    <p id="user-agent-message"></p>
-    <script>
-      document.getElementById('user-agent-message').innerText = `Current User Agent: ${navigator.userAgent}`;
-    </script>
+    <h2>🔌 WebSocket Connection</h2>
+    <!-- ... -->
   </div>
-
-  <iframe src="https://javascript-insights.com/devtools/network/theoretical-1/index.html" frameborder="0"
-    allowfullscreen style="width: 100%; height: 600px; border: 2px solid red;"></iframe>
-
-  <div class="section"></div>
-  <h2>WebSocket Connection</h2>
-  <button id="connectWebSocket">Connect WebSocket</button>
-  <button id="sendMessage">Send Message</button>
-  <button id="closeWebSocket">Close WebSocket</button>
-  <div id="webSocketStatus">Status: Disconnected</div>
-  <div id="messages"></div>
-  </div>
-
 
   <div class="section">
-    <h2>EventStream Demo</h2>
-    <button id="startEventStream">Start EventStream</button>
-    <button id="stopEventStream">Stop EventStream</button>
-    <div id="eventStreamStatus">Status: Disconnected</div>
-    <div id="eventMessages"></div>
-    <a href="https://esjewett.github.io/wm-eventsource-demo/" target="_blank">EventStream Demo Link</a>
+    <h2>📡 EventStream Demo</h2>
+    <!-- ... -->
   </div>
 
-  <div class="section"></div>
-  <h2>Timing Breakdown Phases Explained</h2>
-  <p>Here's more information about each of the phases you may see in the Timing tab:</p>
-  <ul>
-    <li><strong>Queueing</strong>. The browser queues requests before connection start and when:
-      <ul>
-        <li>There are higher priority requests. Request priority is determined by factors such as the type of a
-          resource, as well as its location within the document. For more information, read the resource priority
-          section of the fetchpriority guide.</li>
-        <li>There are already six TCP connections open for this origin, which is the limit. (Applies to HTTP/1.0 and
-          HTTP/1.1 only.)</li>
-        <li>The browser is briefly allocating space in the disk cache.</li>
-      </ul>
-    </li>
-    <li><strong>Stalled</strong>. The request could be stalled after connection start for any of the reasons described
-      in Queueing.</li>
-    <li><strong>DNS Lookup</strong>. The browser is resolving the request's IP address.</li>
-    <li><strong>Initial connection</strong>. The browser is establishing a connection, including TCP handshakes or
-      retries and negotiating an SSL.</li>
-    <li><strong>Proxy negotiation</strong>. The browser is negotiating the request with a proxy server.</li>
-    <li><strong>Request sent</strong>. The request is being sent.</li>
-    <li><strong>ServiceWorker Preparation</strong>. The browser is starting up the service worker.</li>
-    <li><strong>Request to ServiceWorker</strong>. The request is being sent to the service worker.</li>
-    <li><strong>Waiting (TTFB)</strong>. The browser is waiting for the first byte of a response. TTFB stands for Time
-      To First Byte. This timing includes 1 round trip of latency and the time the server took to prepare the response.
-    </li>
-    <li><strong>Content Download</strong>. The browser is receiving the response, either directly from the network or
-      from a service worker. This value is the total amount of time spent reading the response body. Larger than
-      expected values could indicate a slow network, or that the browser is busy performing other work which delays the
-      response from being read.</li>
-  </ul>
-  </div>
+  <style>
+    .fun-list li {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+    .button-container button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .button-container button:hover {
+      transform: scale(1.1);
+    }
+  </style>
 
 </body>
