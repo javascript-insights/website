@@ -34,4 +34,10 @@ window.addEventListener("load", function () {
     tooltipText.style.visibility = 'hidden';
     tooltipText.style.opacity = '0';
   });
+
+  const mouseover = document.getElementById('mouseover');
+
+  mouseover.addEventListener('click', () => {
+    console.log('Something was done');
+  });
 });

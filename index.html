@@ -19,7 +19,26 @@
     <a href="./puzzles/index.html">Puzzles</a>
   </div>
   <main>
-    <h2>Welcome to the Fun Side of JavaScript! 🎪</h2>
+    <h2>Welcome to the Fun Side of JavaScript! 
+      <span class="animated-icon">🎪</span>
+    </h2>
+    <style>
+      .animated-icon {
+        display: inline-block;
+        animation: bounce 1s infinite;
+        cursor: pointer;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .animated-icon:hover {
+        animation: spin 0.5s infinite linear;
+      }
+      @keyframes spin {
+        100% { transform: rotate(360deg); }
+      }
+    </style>
 </body>
 
 </html>
