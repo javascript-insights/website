@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
         draggableElement.style.left = `${dropX}px`;
         draggableElement.style.top = `${dropY}px`;
     });
-
-
 });
+
+function getRandomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+function resetStyles() {
+    document.querySelectorAll('.window').forEach(w => {
+        w.removeAttribute('style');
+        w.querySelector('p').removeAttribute('style');
+    });
+}

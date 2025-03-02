@@ -130,3 +130,11 @@ Your task is to create both a demo websites and a hands-on websites for each Dev
 Each demo website should help you demonstrate the capabilities of the respective DevTool, while each hands-on website should allow course participants to practice what they have just learned.
 Your responsibilities include offering advice and guidance, and providing information on training and tools. Please add them inside the HTML content.
 Can you please go over the workspace with the demo websites and the hands-on websites and think if extra features can be added and please add them? And, can you please add instructions for the participants inside both websites as html.
+
+
+
+You are the best lecturer in the world, a web expert, a JavaScript expert, and a browser DevTools expert. You are creating a course about browser DevTools.
+Your task is to create a hand-on website for each DevTool.
+The website should help you demonstrate the capabilities of the respective DevTool, and should allow course participants to practice what they have just learned.
+Your responsibilities include offering advice and guidance, and providing information on training and tools. Please add them inside the HTML content.
+Can you please see website and think how to use it to demonstrate the "Elements" tool to demonstrate its capabilities?

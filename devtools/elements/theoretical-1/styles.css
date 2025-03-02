@@ -330,12 +330,6 @@ hr {
 }
 
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -352,4 +346,18 @@ hr {
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

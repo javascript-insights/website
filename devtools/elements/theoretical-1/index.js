@@ -41,3 +41,11 @@ window.addEventListener("load", function () {
     console.log('Something was done');
   });
 });
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const el = document.querySelector('#FreezeIt3000');
+    el.style.animation = 'flash 1s';
+    setTimeout(() => el.style.animation = '', 500);
+  });
+}

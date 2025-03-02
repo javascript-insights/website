@@ -23,8 +23,88 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <div class="window window1" id="window1" draggable="true"></div>
-  <div class="window window2" id="window2" draggable="true"></div>
-  <div class="window window3" id="window3" draggable="true"></div>
-  <div class="window window4" id="window4" draggable="true"></div>
+  <h2>Elements Panel Practice Exercise 🎨</h2>
+  <p>Welcome! Use this interactive playground to practice with the Elements panel: 🎮</p>
+  <ol>
+    <li>Right-click any colored window below and select "Inspect" to open DevTools 🔍</li>
+    <li>Try these basic exercises in the Elements panel: (Press the buttons to see the solutions) ⚡
+      <ul>
+        <li>Edit the background colors using the Styles pane 🎨
+          <button
+            onclick="document.querySelectorAll('.window').forEach(w => w.style.backgroundColor = getRandomColor())">Apply
+            Random Colors 🌈</button>
+        </li>
+        <li>Modify the dimensions by changing width/height properties 📏
+          <button
+            onclick="document.querySelectorAll('.window').forEach(w => {w.style.width = '200px'; w.style.height = '150px'})">Resize
+            Windows 🔄</button>
+        </li>
+        <li>Add new CSS properties like border-radius or box-shadow ✨
+          <button
+            onclick="document.querySelectorAll('.window').forEach(w => {w.style.borderRadius = '50% 20% 50% 20%'; w.style.boxShadow = '8px 8px 0px #ff69b4, 16px 16px 0px #87ceeb'})">Make
+            Windows Silly 🤪</button>
+        </li>
+        <li>Toggle the draggable attribute using element properties 🔄
+          <button onclick="document.querySelectorAll('.window').forEach(w => w.draggable = !w.draggable)">Toggle
+            Draggable 🎯</button>
+        </li>
+      </ul>
+    </li>
+    <li>Advanced exercises to try: 🚀
+      <ul>
+        <li>Add transforms like rotate() or scale() 🔄
+          <button
+            onclick="document.querySelectorAll('.window').forEach(w => w.style.transform = 'rotate(10deg) scale(1.1)')">Apply
+            Transform 🌀</button>
+        </li>
+        <li>Create CSS animations ⭐
+          <button
+            onclick="document.querySelectorAll('.window').forEach(w => w.style.animation = 'pulse 2s infinite')">Add
+            Animation ✨</button>
+        </li>
+        <li>Experiment with filter properties 🎭
+          <button
+            onclick="document.querySelectorAll('.window').forEach(w => w.style.filter = 'blur(1px) opacity(0.8)')">Add
+            Filters 🌫️</button>
+        </li>
+        <li>Try adding gradient backgrounds 🎨
+          <button
+            onclick="document.querySelectorAll('.window').forEach(w => w.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)')">Add
+            Gradient 🌈</button>
+        </li>
+        <li>Add text-shadow effects 📝
+          <button
+            onclick="document.querySelectorAll('.window p').forEach(p => p.style.textShadow = '2px 2px 4px rgba(0,0,0,0.3)')">Add
+            Text Shadow 💫</button>
+        </li>
+        <li>Create 3D transforms 🎲
+          <button onclick="document.querySelectorAll('.window').forEach(w => {
+              w.style.transform = 'perspective(1000px) rotateX(45deg) rotateY(45deg) translateZ(50px)';
+              w.style.transformStyle = 'preserve-3d';
+              w.style.backfaceVisibility = 'visible';
+            })">Apply 3D Cube 🎲</button>
+        </li>
+      </ul>
+    </li>
+  </ol>
+  <button onclick="resetStyles()">Reset All Styles 🔄</button>
+  </div>
+
+  <div class="playground">
+    <h3>Interactive Windows</h3>
+    <p>Drag these windows around and inspect their properties:</p>
+
+    <div class="window window1" id="window1" draggable="true">
+      <p>Inspect me!</p>
+    </div>
+    <div class="window window2" id="window2" draggable="true">
+      <p>Edit my styles!</p>
+    </div>
+    <div class="window window3" id="window3" draggable="true">
+      <p>Change my properties!</p>
+    </div>
+    <div class="window window4" id="window4" draggable="true">
+      <p>Modify me!</p>
+    </div>
+  </div>
 </body>
