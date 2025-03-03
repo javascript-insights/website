@@ -1,6 +1,8 @@
 {
     "name": "PWA Demo",
     "short_name": "PWADemo",
+    "description": "A Progressive Web App Demo",
+    "orientation": "any",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#ffffff",

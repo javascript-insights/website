@@ -26,29 +26,87 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>PWA Demo 🚀</h1>
-  <p>This is a simple Progressive Web App (but with extra fun!) 🎉</p>
-  <button id="notifyButton">Enable Notifications 🔔</button>
+  <main class="content">
+    <section class="pwa-demo">
+      <h2>Progressive Web App Features 🚀</h2>
 
-  <img src="https://media.giphy.com/media/13GIgrGdslD9oQ/giphy.gif" alt="Funny coding gif" style="width: 200px;">
+      <div class="info-block">
+        <p>A PWA (Progressive Web App) combines web and native app features:</p>
+        <ul>
+          <li>📱 Works like a native app</li>
+          <li>🌐 Runs on multiple platforms</li>
+          <li>💾 Can be installed and work offline</li>
+        </ul>
+      </div>
 
-  <ul>
-    <li>
-      <p>Application 🎯</p>
+      <div class="info-block">
+        <p>Useful resources to learn more about PWA capabilities:</p>
+        <ul>
+          <li>
+            <a href="https://whatpwacando.today/" target="_blank">What PWA Can Do Today</a>
+            - Explore Progressive Web App features and capabilities in modern browsers
+          </li>
+          <li>
+            <a href="https://whatwebcando.today/" target="_blank">What Web Can Do Today</a>
+            - Comprehensive guide to modern web platform features and APIs
+          </li>
+        </ul>
+      </div>
+
+      <!-- Installation -->
+      <div class="feature-block">
+        <h3>App Installation</h3>
+        <button id="installButton" class="hidden">Install App 📱</button>
+        <p id="installStatus">Check if app is installable... here <strong>chrome://apps</strong> or
+          <strong>edge://apps</strong>
+        </p>
+        </p>
+
+      </div>
+
+      <!-- Notifications -->
+      <div class="feature-block">
+        <h3>Push Notifications</h3>
+        <button id="notifyButton">Enable Notifications 🔔</button>
+        <button id="sendNotification" disabled>Send Test Notification 📬</button>
+        <p>note: Operating system notification settings v.s. browser notification settings.</p>
+
+
+      </div>
+
+      <!-- Offline Support -->
+      <div class="feature-block">
+        <h3>Offline Capability</h3>
+        <div id="connectionStatus">
+          <span id="onlineIndicator">●</span>
+          <span id="connectionText">Checking connection...</span>
+        </div>
+        <button id="cacheButton">Cache Current Page 💾</button>
+      </div>
+
+      <!-- Background Sync -->
+      <div class="feature-block">
+        <h3>Background Sync</h3>
+        <button id="syncButton">Schedule Background Sync 🔄</button>
+        <div id="syncStatus">No pending syncs</div>
+      </div>
+    </section>
+
+    <section class="debug-info">
+      <h3>DevTools Debug Info</h3>
       <ul>
-        <li>Manifest 📜</li>
-        <li>Service workers (chrome://serviceworker-internals/) 🤖</li>
-        <li>Storage 💾</li>
+        <li>👉 Open Chrome DevTools (F12)</li>
+        <li>👉 Go to Application tab</li>
+        <li>👉 Check these sections:
+          <ul>
+            <li>Manifest (see app installation info)</li>
+            <li>Service Workers (see registration status)</li>
+            <li>Cache Storage (see cached assets)</li>
+            <li>Background Services > Background Sync</li>
+          </ul>
+        </li>
       </ul>
-    </li>
-    <li>
-      <p>Frames 🖼️</p>
-      <ul>
-        <li>top ⬆️</li>
-      </ul>
-    </li>
-  </ul>
-
-  <img src="https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif" alt="Happy developer gif" style="width: 200px;">
+    </section>
+  </main>
 
 </body>

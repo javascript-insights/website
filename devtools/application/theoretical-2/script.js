@@ -9,13 +9,4 @@ window.addEventListener("load", function () {
                 console.log('Service Worker registration failed:', error);
             });
     }
-
-    // Notification feature
-    document.getElementById('notifyButton').addEventListener('click', () => {
-        Notification.requestPermission().then(permission => {
-            if (permission === 'granted') {
-                new Notification('Hello! This is a notification.');
-            }
-        });
-    });
 });
