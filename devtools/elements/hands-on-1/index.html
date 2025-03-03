@@ -11,6 +11,12 @@
   <script src="index.js"></script>
 </head>
 
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
+
 <body>
   <h1>Elements Hands-On 1</h1>
   <nav class="breadcrumb">
@@ -85,7 +91,7 @@
       <h3>Exercise 8: DOM Breakpoints 🛑</h3>
       <div id="breakpoint-me">
         <p>Right-click and set a subtree modification breakpoint on me!</p>
-        <button onclick="document.getElementById('breakpoint-me').innerHTML += '<p>Surprise!</p>'">
+        <button onclick="document.getElementById('breakpoint-me').innerHTML += '<p>Surprise!🎉</p>'">
           Click to modify
         </button>
       </div>
@@ -94,7 +100,8 @@
     <!-- New Exercises -->
     <section class="exercise">
       <h3>Exercise 9: CSS Grid Inspector 🏁</h3>
-      <div class="grid-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+      <div class="grid-container"
+        style="display: grid; grid-template-columns: [left] 1fr [middle] 1fr [right] 1fr; gap: 10px; grid-template-areas: 'left middle right';">
         <div style="background: #ffd700; padding: 10px;">Grid 1</div>
         <div style="background: #ff8c00; padding: 10px;">Grid 2</div>
         <div style="background: #ff4500; padding: 10px;">Grid 3</div>
@@ -108,13 +115,33 @@
         <p>Can you find my shadow root?</p>
       </custom-element>
       <p>Hint: Look for the #shadow-root in the Elements panel</p>
+      <script>
+        class CustomElement extends HTMLElement {
+          constructor() {
+            super();
+            const shadow = this.attachShadow({ mode: 'open' });
+            shadow.innerHTML = '<div style="border: 2px dashed #666; padding: 10px;"><slot></slot></div>';
+          }
+        }
+        customElements.define('custom-element', CustomElement);
+      </script>
     </section>
 
     <section class="exercise">
       <h3>Exercise 11: Animation Inspector 🎬</h3>
-      <div class="bouncing-box" style="animation: bounce 1s infinite;">
-        <p>Watch me bounce! Check my animation details!</p>
-      </div>
+      <p>Watch me spin! Try to change my direction!</p>
+      <div style="animation: spin 2s linear infinite; width: 60px; height: 60px; font-size: 40px;">🤪</div>
+      <style>
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      </style>
     </section>
 
     <section class="exercise">
@@ -122,6 +149,27 @@
       <div class="pseudo-test" data-content="Find me!">
         <p>I have a ::before and ::after. Can you find and modify them?</p>
       </div>
+      <style>
+        .pseudo-test::before {
+          content: "👻";
+          font-size: 2em;
+          position: absolute;
+          left: 0px;
+          top: 78px;
+        }
+
+        .pseudo-test::after {
+          content: "🕵️";
+          font-size: 2em;
+          margin-left: 20px;
+        }
+
+        .pseudo-test {
+          position: relative;
+          padding: 20px;
+          border: 2px dashed #666;
+        }
+      </style>
     </section>
 
     <section class="exercise">
@@ -150,6 +198,6 @@
       </ul>
     </section>
   </main>
-  </section></custom-element>
+  </section>
 
 </body>

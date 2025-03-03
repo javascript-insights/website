@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Hands-On Exercise 2: Debugging Challenges</h1>
+  <h1>Console Hands-On 2</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -46,8 +46,8 @@
   <script>
     function runBuggyCalculation() {
       let total = 0;
-      for(let i = 1; i <= 5; i++) {
-        total =+ i; // Bug: should be +=
+      for (let i = 1; i <= 5; i++) {
+        total = + i; // Bug: should be +=
       }
       console.log('Total:', total);
     }
@@ -55,7 +55,7 @@
     function runSlowFunction() {
       console.time('SlowFunction');
       let result = [];
-      for(let i = 0; i < 10000; i++) {
+      for (let i = 0; i < 10000; i++) {
         result.push(i);
         result = result.sort(() => Math.random() - 0.5);
       }

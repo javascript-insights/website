@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Console Adventures: Debug Like a Pro! 🚀</h1>
+  <h1>Console Hands-On 5</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -70,7 +70,7 @@
     }
 
     // Click counter game
-    document.getElementById('clickCounter').addEventListener('click', function() {
+    document.getElementById('clickCounter').addEventListener('click', function () {
       console.count('Clicks');
       console.time('clickSpeed');
     });
@@ -78,10 +78,10 @@
     function runSlowCalculator() {
       console.time('calculationTime');
       let result = 0;
-      for(let i = 0; i < 1000000; i++) {
+      for (let i = 0; i < 1000000; i++) {
         result += Math.random() * i;
-        if(i % 100000 === 0) {
-          console.log(`${(i/1000000*100).toFixed(0)}% complete...`);
+        if (i % 100000 === 0) {
+          console.log(`${(i / 1000000 * 100).toFixed(0)}% complete...`);
         }
       }
       console.timeEnd('calculationTime');
@@ -90,7 +90,7 @@
 
     // Mystery box with hidden properties
     const mysteryBox = document.getElementById('mysteryBox');
-    mysteryBox.addEventListener('mouseover', function() {
+    mysteryBox.addEventListener('mouseover', function () {
       console.dir(this);
       console.log('🕵️ Tip: Check the console.dir output!');
     });
@@ -105,7 +105,7 @@
             if (i === 2) throw new Error('Oh no! Someone tripped! 🤕');
           }, i * 1000);
         });
-      } catch(e) {
+      } catch (e) {
         console.error('Dance party crashed!', e);
       }
       console.groupEnd();

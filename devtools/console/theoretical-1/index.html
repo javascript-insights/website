@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <h1>Basic Console Methods</h1>
+  <h1>Console Theoretical 1</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -32,10 +32,11 @@
       <h3>1. Standard Logging 📝</h3>
       <button onclick="demonstrateBasicLogs()">Click for Fun! 🎈</button>
       <pre>
-console.log('Regular message');
-console.info('Information message');
-console.warn('Warning message');
-console.error('Error message');
+        console.clear();
+        console.log('🌟 Regular message');
+        console.info('🔍 Information message');
+        console.warn('⚠️ Warning message');
+        console.error('💥 Error message');
       </pre>
     </div>
 
@@ -43,7 +44,11 @@ console.error('Error message');
       <h3>2. Fancy Styled Output ✨</h3>
       <button onclick="demonstrateStyledLogs()">Make it Pretty! 🎨</button>
       <pre>
-console.log('%cStyled text', 'color: blue; font-size: 20px; font-weight: bold');
+        console.clear();
+        console.log('%cMagical Text ✨', 'color: blue; font-size: 20px; font-weight: bold');
+        console.log('%cParty %cTime 🎉',
+          'color: red; font-size: 20px',
+          'color: green; font-size: 16px');
       </pre>
     </div>
 
@@ -51,48 +56,24 @@ console.log('%cStyled text', 'color: blue; font-size: 20px; font-weight: bold');
       <h3>3. Console Groups 📦</h3>
       <button onclick="demonstrateGroups()">Open the Box! 🎁</button>
       <pre>
-console.group('Group Name');
-console.log('Nested message');
-console.groupEnd();
+        console.clear();
+        console.group('🧙‍♂️ Wizard Data');
+        console.log('Name: Merlin');
+        console.log('Age: 500');
+        console.group('🏰 Magic Castle');
+        console.log('Location: Cloud Nine');
+        console.log('Spell Count: Over 9000! ⚡');
+        console.groupEnd();
+        console.groupEnd();
       </pre>
     </div>
   </div>
 
-  <script>
-    function demonstrateBasicLogs() {
-      console.clear();
-      console.log('🌟 Regular message');
-      console.info('🔍 Information message');
-      console.warn('⚠️ Warning message');
-      console.error('💥 Error message');
-    }
-
-    function demonstrateStyledLogs() {
-      console.clear();
-      console.log('%cMagical Text ✨', 'color: blue; font-size: 20px; font-weight: bold');
-      console.log('%cParty %cTime 🎉',
-        'color: red; font-size: 20px',
-        'color: green; font-size: 16px');
-    }
-
-    function demonstrateGroups() {
-      console.clear();
-      console.group('🧙‍♂️ Wizard Data');
-      console.log('Name: Merlin');
-      console.log('Age: 500');
-      console.group('🏰 Magic Castle');
-      console.log('Location: Cloud Nine');
-      console.log('Spell Count: Over 9000! ⚡');
-      console.groupEnd();
-      console.groupEnd();
-    }
-  </script>
+  <hr />
 
   <h1>🌐 Network Magic Show!</h1>
 
   <button id="gsbutton">🚀 Fetch Some Data</button>
-
-  <hr />
 
   <script>
     document.querySelector('#gsbutton').addEventListener("click", () => {
@@ -112,6 +93,12 @@ console.groupEnd();
   <!-- <embed src="../../elements/elements-theoretical/index.html" style="width: 100%;height: 200px;"></embed> -->
 
   <!-- <object data="../../elements/elements-theoretical/index.html" style="width: 100%;height: 200px;"></object> -->
+
+  <!-- See it in Issues Tool -->
+  <img src="http://evil.com/steal-data"
+    onerror="console.error('Security Issue: Cross-Origin Resource Loading Attempt')" />
+  <link rel="stylesheet" href="http://malicious-site.com/style.css"
+    onerror="console.error('Security Warning: Potential CSS Injection Vector')" />
 
 </body>
 

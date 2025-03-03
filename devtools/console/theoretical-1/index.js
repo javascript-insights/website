@@ -23,3 +23,31 @@ window.addEventListener("load", function () {
   technologies.forEach(tech => { console.info(tech); })
   console.groupEnd('Technolgies');
 });
+
+function demonstrateBasicLogs() {
+  console.clear();
+  console.log('🌟 Regular message');
+  console.info('🔍 Information message');
+  console.warn('⚠️ Warning message');
+  console.error('💥 Error message');
+}
+
+function demonstrateStyledLogs() {
+  console.clear();
+  console.log('%cMagical Text ✨', 'color: blue; font-size: 20px; font-weight: bold');
+  console.log('%cParty %cTime 🎉',
+    'color: red; font-size: 20px',
+    'color: green; font-size: 16px');
+}
+
+function demonstrateGroups() {
+  console.clear();
+  console.group('🧙‍♂️ Wizard Data');
+  console.log('Name: Merlin');
+  console.log('Age: 500');
+  console.group('🏰 Magic Castle');
+  console.log('Location: Cloud Nine');
+  console.log('Spell Count: Over 9000! ⚡');
+  console.groupEnd();
+  console.groupEnd();
+}
