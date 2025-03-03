@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <script src="index.js"></script>
-  <script src="complex-operations.min.js"></script>
 </head>
 
 <body>
@@ -24,30 +23,42 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>Source Map Demo for Performance Profiling</h1>
-
-  <div class="instructions">
-    <h2>Instructions:</h2>
+  <section>
+    <h2>Instructions</h2>
+    <p>To complete this hands-on exercise, please follow these steps:</p>
     <ol>
-      <li>Open DevTools (F12)</li>
-      <li>Go to the Sources tool</li>
-      <li>See the min file and its source file - this is due to the comment "//#
-        sourceMappingURL=complex-operations.js.map"</li>
-      <li>You can see the source map file in the "Developer Recources" tool</li>
-      <li>Override the min file and delete this comment</li>
-      <li>You will no longer see the source file, just the min file</li>
-      <li>Make sure to enable source maps in the devtools settings</li>
-      <li>Click the button below to download the source file</li>
-      <li>Click the button below to download the source map file</li>
-      <li>Host the source maps locally. You can put it in the override folder with the min file you override and copy
-        its URL</li>
-      <li>Load the downloaded source file to see unminified function names by opening the deployed (processed) file in
-        Sources, right-click it in the Editor, and select Add source map from the menu.</li>
+      <li>Open your browser's Developer Tools by pressing <strong>F12</strong> or <strong>Ctrl+Shift+I</strong>
+        (Windows/Linux) or <strong>Cmd+Option+I</strong> (Mac).</li>
+      <li>Navigate to the <strong>Sources</strong> tab.</li>
+      <li>Locate the <strong>index.js</strong> file in the file navigator.</li>
+      <li>Examine the code that is currently running.</li>
+      <li>Try to use the {} button to see the code Pretty</li>
+      <li>How is this code called?
+        <button onclick="document.getElementById('answer').style.display='block'">Show Answer</button>
+        <div id="answer" style="display:none">
+          💩💩💩💩💩💩💩💩
+        </div>
+      </li>
     </ol>
-  </div>
+  </section>
 
-  <button id="downloadSource">Download Source File</button>
-  <button id="downloadSourceMap">Download Source Map File</button>
+  <pre>
+    <code>
+      setTimeout(() => {
+        let x = 0;
+        const intervalId = setInterval(() => {
+            console.log(x);
+            x++;
+            if (x >= 60) {
+                clearInterval(intervalId);
+            }
+        }, 1000);
+      }, 2000);
+    </code>
+  </pre>
 
-
+  <footer>
+    <p>For more JavaScript fun, visit <a href="https://jsfuck.com/" target="_blank">JS
+      </a></p>
+  </footer>
 </body>

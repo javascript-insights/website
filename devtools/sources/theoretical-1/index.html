@@ -10,8 +10,6 @@
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <script src="index.js"></script>
   <script src="index2.js"></script>
-  <script src="index3.js"></script>
-  <script src="service-worker.js"></script>
 </head>
 
 <body>
@@ -26,12 +24,14 @@
     <a href="../index.html">Back</a>
   </div>
 
+  <h2>🔍 Sources Panel Overview</h2>
   <ul>
     <li>🧭 Navigator pane (where your code gets lost)</li>
-    <li>📝 Editor pane (where the magic happens... or bugs breed)</li>
+    <li>📝 Editor pane (where the magic happens... or bugs multiply)</li>
     <li>🐛 Debugger pane (your best friend at 3 AM)</li>
   </ul>
 
+  <h2>Icons in the Navigator Pane:</h2>
   <ul>
     <li>🪟 The <strong>window</strong> icon, with label <code>top</code>, is like the boss of all frames</li>
     <li>☁️ The <strong>cloud</strong> icon represents an origin (where code dreams come from)</li>
@@ -50,9 +50,25 @@
 
   <ul>
     <li>👂 <strong>Event listener breakpoints</strong> (catch those sneaky events)</li>
-    <li>🛑 <strong>Line-of-code breakpoint</strong> - scope, watch, console, <strong>debugger;</strong></li>
-    <li>🤔 <strong>Conditional breakpoint</strong> (for when you're feeling fancy)</li>
-    <li>🎯 <strong>DOM breakpoint</strong> (because who doesn't love DOM drama)</li>
+    <li>🛑 <strong>Line-of-code breakpoint</strong> - scope, watch, console, <strong
+        onclick="debugger;">debugger;</strong>
+      <button onclick="qux()">qux what?</button>
+    </li>
+
+    <li>🤔 <strong>Conditional breakpoint</strong> (for when you're feeling fancy)
+      <pre>
+      // Right-click line number -> Add conditional breakpoint
+      // Example condition: i === 5 || user.name === "Alice"
+      for (let i = 0; i < 10; i++) {
+        console.log('Loop iteration:', i); // Add conditional breakpoint here
+        processData(i);
+      }
+      </pre>
+    </li>
+    <li>🎯 <strong>DOM breakpoint</strong> (because who doesn't love DOM drama)
+      <div id="targetElement">Right click me in DevTools to set a DOM breakpoint! <button onclick="modifyDOM()">Modify
+          DOM</button></div>
+    </li>
     <li>🌐 <strong>XHR breakpoint</strong>
       <button onclick="gsbutton()">Get Data (Maybe)</button>
     </li>
@@ -60,9 +76,58 @@
       <button onclick="coughtexbutton()">Catch Me</button>
       <button onclick="uncoughtexbutton()">Can't Catch Me!</button>
     </li>
-    <li>🎮 <strong>Function breakpoint</strong> - debug() (your last resort)</li>
-    <li>📝 <strong>Logpoints</strong> (for when console.log is too mainstream)</li>
+    <li>🎮 <strong>Function breakpoint</strong> - debug() (your last resort)
+      <pre>
+        function calculateSum(a, b) {
+          return a + b;
+        }
+
+        debug(calculateSum); // Set breakpoint on calculateSum function
+        calculateSum(5, 10);
+      </pre>
+    </li>
+    <li>📝 <strong>Logpoints</strong> (for when console.log is too mainstream)
+      <pre>
+      // Add a logpoint by right-clicking the line number and selecting 'Add logpoint'
+      // Instead of using console.log, you can add a message like:
+      // "Value of x is: {x}" or "User clicked button at {new Date()}"
+      function calculateTotal(price, quantity) {
+        let total = price * quantity;  // Add logpoint here
+        return total;
+      }
+      </pre>
+    </li>
   </ul>
+
+  <h2>Now lets fix the calculator...</h2>
+  <ul>
+    <li><strong>Overrides</strong>
+      <ul>
+        <li>🔄 In the Sources tab, select the JS file you want to override</li>
+        <li>✅ Allow DevTools to modify local files when prompted</li>
+        <li>📁 Select the folder you want to work with in the Sources panel</li>
+        <li>✏️ Make your changes in the editor pane</li>
+        <li>💾 Save changes (Ctrl+S) - a purple dot will appear next to overridden files</li>
+        <li>🔄 Reload the page - your changes will persist</li>
+        <li>⚠️ To remove override, right-click the file and select "Remove override"</li>
+      </ul>
+    </li>
+    <li><strong>Workspace</strong>
+      <ul>
+        <li>⬇️ Download all files and put them in a folder called "theoretical-1" <button onclick="downloadFiles()">⬇️
+            Download Files</button></li>
+        <li>📁 In Browser DevTools Sources panel, right click the left pane and select "Add folder to workspace"</li>
+        <li>📎 Select the "theoretical-1" folder you created</li>
+        <li>✅ Allow Browser to access the folder when prompted</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>BTW - <strong>Content scripts</strong> are for Browser extensions. They are injected into web pages and can
+    interact with the
+    page's DOM and JavaScript context. <strong>Background scripts</strong> are for the extension itself and run in a
+    separate context.
+  </p>
 
   <hr>
   <h1>🚶‍♂️ Step through code (One Painful Step at a Time)</h1>

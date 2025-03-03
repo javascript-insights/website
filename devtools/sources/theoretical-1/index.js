@@ -33,9 +33,13 @@ window.addEventListener("load", function foo() {
   button.addEventListener("click", onClick);
 });
 
+//////////////////////////////
+
 function gsbutton() {
   fetch('./getstarted.json');
 };
+
+/////////////////////////////
 
 function coughtexbutton() {
   try {
@@ -49,8 +53,37 @@ function uncoughtexbutton() {
   null[0];
 };
 
+///////////////////////
+
 function qux() {
   (function baz() {
     window.cs();
   })();
+}
+
+function modifyDOM() {
+  const element = document.getElementById('targetElement');
+  element.textContent = 'DOM Modified!';
+  element.style.backgroundColor = '#ffeb3b';
+}
+
+
+/////////////////////
+
+
+
+function downloadFiles() {
+  const files = ['index.html', 'index.js', 'index2.js', 'styles.css'];
+  files.forEach(file => {
+    fetch(file)
+      .then(response => response.text())
+      .then(content => {
+        const blob = new Blob([content], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = file;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+  });
 }

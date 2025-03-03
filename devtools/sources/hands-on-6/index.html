@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+  <script src="complex-operations.min.js"></script>
+</head>
+
+<body>
+  <h1>Sources Hands-On 6</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Sources</a>
+    <a href="./index.html">Hands-On 6</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <h1>Source Map Demo for Performance Profiling</h1>
+
+  <div class="instructions">
+    <h2>Instructions:</h2>
+    <ol>
+      <li>Open DevTools (F12)</li>
+      <li>Go to the Sources tool</li>
+      <li>See the min file and its source file - this is due to the comment "//#
+        sourceMappingURL=complex-operations.js.map"</li>
+      <li>You can see the source map file in the "Developer Recources" tool</li>
+      <li>Override the min file and delete this comment</li>
+      <li>You will no longer see the source file, just the min file</li>
+      <li>Make sure to enable source maps in the devtools settings</li>
+      <li>Click the button below to download the source file</li>
+      <li>Click the button below to download the source map file</li>
+      <li>Host the source maps locally. You can put it in the override folder with the min file you override and copy
+        its URL</li>
+      <li>Load the downloaded source file to see unminified function names by opening the deployed (processed) file in
+        Sources, right-click it in the Editor, and select Add source map from the menu.</li>
+    </ol>
+  </div>
+
+  <button id="downloadSource">Download Source File</button>
+  <button id="downloadSourceMap">Download Source Map File</button>
+
+
+</body>

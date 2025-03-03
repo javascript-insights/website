@@ -28,29 +28,60 @@
   </div>
 
   <main class="container">
+    <h1>Try to achieve 100% coverage <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="50"
+        alt="thumbs up">
+    </h1>
+    <div class="hints-container">
+      <button id="showNextHint" class="btn" onclick="showNextHint()">Show Hints 💡</button>
+      <ol id="hintsList">
+        <li class="hint hidden">⌛ Wait for page to fully load (covers index.js and DOMContentLoaded events)</li>
+        <li class="hint hidden">🖱️ Click the "Click Me" button (covers click handler in script1.js)</li>
+        <li class="hint hidden">🐁 Hover your mouse over the "Hover Over Me" button (covers mouseover handler)</li>
+        <li class="hint hidden">⌨️ Type some text in the input field (covers input event listener)</li>
+        <li class="hint hidden">🎭 Click "Show Hidden Div" to show hidden content (covers visibility logic)</li>
+        <li class="hint hidden">👻 Click "Toggle Visibility" button twice to show/hide content (covers toggle
+          functionality)</li>
+        <li class="hint hidden">🎨 Click "Change Color" button twice to test both color states</li>
+        <li class="hint hidden">🔧 Use Console to run unused functions</li>
+        <li class="hint hidden">🎨 Use Elements tools to apply unused CSS classes</li>
+      </ol>
+    </div>
+
     <section>
-      <h2>Interactive Elements</h2>
-      <button id="clickButton" class="btn">Click Me</button>
-      <button id="hoverButton" class="btn">Hover Over Me</button>
-      <div id="hiddenDiv" class="hidden">You found me!</div>
+      <h2>Interactive Elements 🎯</h2>
+      <button id="clickButton" class="btn">🎪 Click Me</button>
+      <button id="hoverButton" class="btn">🎪 Hover Over Me</button>
+      <div id="hiddenDiv" class="hidden">🎉 You found me!</div>
     </section>
     <section>
-      <h2>More Activities</h2>
-      <input type="text" id="textInput" placeholder="Type something...">
-      <button id="showHidden" class="btn">Show Hidden Div</button>
+      <h2>More Activities 🎪</h2>
+      <input type="text" id="textInput" placeholder="✨ Type something...">
+      <button id="showHidden" class="btn">🔍 Show Hidden Div</button>
     </section>
     <section>
-      <h2>Advanced Activities</h2>
-      <button id="toggleButton" class="btn">Toggle Visibility</button>
-      <div id="toggleDiv" class="hidden">Toggle me!</div>
+      <h2>Advanced Activities 🚀</h2>
+      <button id="toggleButton" class="btn">🔄 Toggle Visibility</button>
+      <div id="toggleDiv" class="hidden">🌟 Toggle me!</div>
     </section>
     <section>
-      <h2>Expert Activities</h2>
-      <button id="changeColorButton" class="btn">Change Color</button>
-      <div id="colorDiv">Change my color!</div>
+      <h2>Expert Activities 🏆</h2>
+      <button id="changeColorButton" class="btn">🎨 Change Color</button>
+      <div id="colorDiv">🌈 Change my color!</div>
     </section>
   </main>
 
   <hr />
+
+  <section class="tips">
+    <h2>💡 Pro Tips</h2>
+    <ul>
+      <li>Start recording before interacting with elements</li>
+      <li>Look for red (unused) vs green (used) code</li>
+      <li>Try to achieve higher coverage by using more features</li>
+      <li>Check the Sources panel to see which lines are covered</li>
+      <li>Use the Coverage tab filters to focus on specific file types</li>
+      <li>Reload the page to reset coverage data</li>
+    </ul>
+  </section>
 
 </body>

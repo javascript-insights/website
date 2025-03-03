@@ -23,33 +23,42 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <section>
-    <h2>Instructions</h2>
-    <p>To complete this hands-on exercise, please follow these steps:</p>
-    <ol>
-      <li>Open your browser's Developer Tools by pressing <strong>F12</strong> or <strong>Ctrl+Shift+I</strong>
-        (Windows/Linux) or <strong>Cmd+Option+I</strong> (Mac).</li>
-      <li>Navigate to the <strong>Sources</strong> tab.</li>
-      <li>Locate the <strong>index.js</strong> file in the file navigator.</li>
-      <li>Examine the code that is currently running.</li>
-    </ol>
-  </section>
+  <main>
+    <section>
+      <h2>🛠️ Exercise 1: Workspaces</h2>
+      <p>Let's become a DevTools wizard with Workspaces! 🧙‍♂️</p>
+      <ol>
+        <li>Open Chrome DevTools (F12) - your gateway to web sorcery ✨</li>
+        <li>Navigate to Sources panel (where the magic happens 🎩)</li>
+        <li>Download these 3 magical files and store them in your secret folder 📂 (right-click on the file and copy
+          as... much as you can 🕺)</li>
+        <li>Right-click the sidebar "workspace" like you're opening a treasure chest 🗝️</li>
+        <li>Choose "Add folder to workspace" (your new coding lair)</li>
+        <li>When Chrome asks for permission, say "Yes!" (trust issues much? 😅)</li>
+        <li>Hunt down this file in your workspace like a code detective 🔍</li>
+        <li>Edit this text through DevTools - watch it save automagically! ✨</li>
+      </ol>
+    </section>
 
-  <pre>
-    <code>
-      setTimeout(() => {
-        let x = 0;
-        const intervalId = setInterval(() => {
-            console.log(x);
-            x++;
-            if (x >= 60) {
-                clearInterval(intervalId);
-            }
-        }, 1000);
-      }, 2000);
-    </code>
-  </pre>
+    <section>
+      <h2>🎯 Exercise 2: Local Overrides</h2>
+      <p>Time for some override shenanigans! 🎨</p>
+      <ol>
+        <li>Find the "Overrides" tab (it's hiding in Sources)</li>
+        <li>Pick a file to override (choose wisely! 🧠) - (right-click on the file and override...)</li>
+        <li>Refresh the page (F5 for the win! 🔄)</li>
+        <li>Give this page a funky background color (go wild! 🌈)</li>
+        <li>Refresh again - your masterpiece lives on! 🎉</li>
+      </ol>
+    </section>
 
-  <footer>
-    <p>For more JavaScript fun, visit <a href="https://jsfuck.com/" target="_blank">JS
+    <div class="demo-box">
+      <p>Practice Area: Try modifying this box's styles!</p>
+      <button onclick="alert('Edit me in Sources!')">Test Button</button>
+      <button onclick="changeBackgroundColor()">Change Color</button>
+      <button onclick="addAnimation()">Toggle Animation</button>
+    </div>
+
+  </main>
+
 </body>

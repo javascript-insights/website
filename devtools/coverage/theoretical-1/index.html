@@ -40,10 +40,27 @@
     </section>
     <section>
       <h2>Bootstrap Buttons of Doom 🎮</h2>
-      <button type="button" class="btn btn-success">Yay! 🎉</button>
-      <button type="button" class="btn btn-danger">Kaboom! 💥</button>
-      <button type="button" class="btn btn-warning">Oopsie! ⚠️</button>
-      <button type="button" class="btn btn-info">Fun Fact! 🤓</button>
+      <button type="button" class="btn btn-success" onclick="handleSuccess()">Yay! 🎉</button>
+      <button type="button" class="btn btn-danger" onclick="handleDanger()">Kaboom! 💥</button>
+      <button type="button" class="btn btn-warning" onclick="handleWarning()">Oopsie! ⚠️</button>
+      <button type="button" class="btn btn-info" onclick="handleInfo()">Fun Fact! 🤓</button>
     </section>
+    <script>
+      function handleSuccess() {
+        alert('Success! Everything is awesome! 🌈');
+      }
+
+      function handleDanger() {
+        alert('Danger! Run for your life! 🏃‍♂️');
+      }
+
+      function handleWarning() {
+        alert('Warning! Your code needs more coffee ☕');
+      }
+
+      function handleInfo() {
+        alert('Did you know? JavaScript was created in 10 days! 🤯');
+      }
+    </script>
   </main>
 </body>
