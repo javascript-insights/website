@@ -23,16 +23,25 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <br>
+  <div class="instructions">
+    <p>Modify index.js to persist the spin count so it remains between page reloads. <button
+        onclick="document.getElementById('hint').style.display = document.getElementById('hint').style.display === 'none' ? 'block' : 'none'">Toggle
+        Hint</button></p>
+
+    <div id="hint" style="display:none" class="hint">
+      <p>Use localStorage.getItem() to read the saved spins - like checking your browser's diary 📖</p>
+      <p>Use localStorage.setItem() to save the spins - because even spinning chihuahuas deserve persistence! 🌪️🐕</p>
+      <p><small>Warning: Excessive spinning may cause dizziness in both chihuahuas and developers</small></p>
+    </div>
+  </div>
   <section>
     <center>
-      <div>
+      <div style="margin: 20px;">
         <img src="./static/spin.gif">
       </div>
     </center>
-    <br>
     <center>
-      <div>You have sat through <span id="spin">0 spins</span>!</div>
+      <div style="margin: 20px;">You have sat through <span id="spin">0 spins</span>!</div>
     </center>
   </section>
 
