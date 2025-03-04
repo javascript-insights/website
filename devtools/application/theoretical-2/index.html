@@ -53,25 +53,25 @@
         </ul>
       </div>
 
+      <div class="info-block">
+        <h3>Caching Strategies in PWAs</h3>
+        <ul>
+          <li>📦 <strong>App Shell Caching</strong> - Stores core UI and functionality for instant loading</li>
+          <li>💾 <strong>Dynamic Content Cache</strong> - Caches API responses and dynamic resources on-demand</li>
+          <li>🔄 <strong>Service Worker Cache</strong> - Intercepts network requests and serves cached responses</li>
+        </ul>
+        <p class="note">These strategies work together to provide reliable offline functionality and faster load times.
+        </p>
+      </div>
+
       <!-- Installation -->
       <div class="feature-block">
         <h3>App Installation</h3>
         <button id="installButton" class="hidden">Install App 📱</button>
+        <button id="installButtonWithCache" class="hidden">Install App with cache 📱</button>
         <p id="installStatus">Check if app is installable... here <strong>chrome://apps</strong> or
           <strong>edge://apps</strong>
         </p>
-        </p>
-
-      </div>
-
-      <!-- Notifications -->
-      <div class="feature-block">
-        <h3>Push Notifications</h3>
-        <button id="notifyButton">Enable Notifications 🔔</button>
-        <button id="sendNotification" disabled>Send Test Notification 📬</button>
-        <p>note: Operating system notification settings v.s. browser notification settings.</p>
-
-
       </div>
 
       <!-- Offline Support -->
@@ -82,6 +82,20 @@
           <span id="connectionText">Checking connection...</span>
         </div>
         <button id="cacheButton">Cache Current Page 💾</button>
+      </div>
+
+      <!-- Notifications -->
+      <div class="feature-block">
+        <h3>Push Notifications</h3>
+        <button id="notifyButton">Enable Notifications 🔔</button>
+        <button id="sendNotification" disabled>Send Test Notification 📬</button>
+        <p>Note: Operating system notification settings v.s. browser notification settings.</p>
+      </div>
+
+      <!-- Fetch window.location.href-->
+      <div class="feature-block">
+        <h3>Background Fetch</h3>
+        <button id="fetchButton">Fetch 📥</button>
       </div>
 
       <!-- Background Sync -->

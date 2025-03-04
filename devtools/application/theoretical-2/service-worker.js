@@ -1,10 +1,10 @@
-const CACHE_NAME = 'pwa-demo-cache-v1';
+const CACHE_NAME = 'service-worker-cache';
 const urlsToCache = [
-    './',
-    './index.html',
+    //'./',
+    //'./index.html',
     './styles.css',
     './script.js',
-    './manifest.json'
+    //'./manifest.json'
 ];
 
 self.addEventListener('install', event => {
@@ -23,4 +23,20 @@ self.addEventListener('fetch', event => {
                 return response || fetch(event.request);
             })
     );
+});
+
+self.addEventListener('sync', event => {
+    if (event.tag === 'sync-demo') {
+        event.waitUntil(
+            // Perform your background sync operation here
+            fetch(window.location.href)
+                .then(response => {
+                    if (!response.ok) throw Error('Sync failed');
+                    console.log('Background sync successful');
+                })
+                .catch(err => {
+                    console.error('Background sync failed:', err);
+                })
+        );
+    }
 });

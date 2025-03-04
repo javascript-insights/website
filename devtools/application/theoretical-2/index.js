@@ -1,6 +1,7 @@
 window.addEventListener("load", function () {
 
-    // installation
+    // installation - with and without cache
+    ///////////////////////////////////////////////////////////////////////////
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -23,7 +24,53 @@ window.addEventListener("load", function () {
         deferredPrompt = null;
     });
 
+    document.getElementById('installButtonWithCache').addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const result = await deferredPrompt.userChoice;
+        if (result.outcome === 'accepted') {
+            try {
+                const cache = await caches.open('app-install-cache-with-install-button-with-cache');
+                await cache.add('/index.html');
+                document.getElementById('installStatus').textContent = 'App installed and cached successfully!';
+            } catch (error) {
+                console.error('Error caching page:', error);
+                document.getElementById('installStatus').textContent = 'App installed but caching failed';
+            }
+        } else {
+            document.getElementById('installStatus').textContent = 'App installation declined';
+        }
+        deferredPrompt = null;
+    });
+
+    // offline support - caching window.location.href
+    ///////////////////////////////////////////////////////////////////////////
+    document.getElementById('cacheButton').addEventListener('click', async () => {
+        try {
+            const cache = await caches.open('app-cache-with-cache-button');
+            await cache.add(window.location.href);
+            alert('Page cached successfully!');
+        } catch (error) {
+            console.error('Error caching page:', error);
+            alert('Failed to cache page');
+        }
+    });
+
+    // fetch window.location.href button
+    ///////////////////////////////////////////////////////////////////////////
+    document.getElementById('fetchButton').addEventListener('click', async () => {
+        fetch(window.location.href)
+            .then(response => {
+                if (!response.ok) throw Error('Fetch failed');
+                console.log('Fetch successfully');
+            })
+            .catch(err => {
+                console.error('Fetch failed:', err);
+            })
+    });
+
     // notification
+    ///////////////////////////////////////////////////////////////////////////
     document.getElementById('notifyButton').addEventListener('click', async () => {
         try {
             const permission = await Notification.requestPermission();
@@ -47,19 +94,8 @@ window.addEventListener("load", function () {
         }
     });
 
-    // offline support
-    document.getElementById('cacheButton').addEventListener('click', async () => {
-        try {
-            const cache = await caches.open('app-cache-v1');
-            await cache.add(window.location.href);
-            alert('Page cached successfully!');
-        } catch (error) {
-            console.error('Error caching page:', error);
-            alert('Failed to cache page');
-        }
-    });
-
     // background sync
+    ///////////////////////////////////////////////////////////////////////////
     document.getElementById('syncButton').addEventListener('click', async () => {
         try {
             // Check if service worker and background sync are supported
@@ -77,6 +113,7 @@ window.addEventListener("load", function () {
     });
 
     // Update online/offline status
+    ///////////////////////////////////////////////////////////////////////////
     function updateOnlineStatus() {
         const indicator = document.getElementById('onlineIndicator');
         const text = document.getElementById('connectionText');
@@ -94,9 +131,24 @@ window.addEventListener("load", function () {
     updateOnlineStatus();
 });
 
-// Check if the page is served from cache
 window.addEventListener('load', async () => {
-    const cache = await caches.open('app-cache-v1');
+    const cacheName = 'app-cache-with-cache-button';
+    // offline support - caching window.location.href on button click
+    ///////////////////////////////////////////////////////////////////////////
+    document.getElementById('cacheButton').addEventListener('click', async () => {
+        try {
+            const cache = await caches.open(cacheName);
+            await cache.add(window.location.href);
+            alert('Page cached successfully!');
+        } catch (error) {
+            console.error('Error caching page:', error);
+            alert('Failed to cache page');
+        }
+    });
+
+    // Check if the page is served from cache
+    ///////////////////////////////////////////////////////////////////////////
+    const cache = await caches.open(cacheName);
     const cachedResponse = await cache.match(window.location.href);
     if (cachedResponse) {
         console.log('Page served from cache');
