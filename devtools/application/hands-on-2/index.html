@@ -12,61 +12,42 @@
 </head>
 
 <body>
-  <h1>Application Hands-On 1</h1>
+  <h1>Application Hands-On 2</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
     <a href="../index.html">Application</a>
-    <a href="./index.html">Hands-On 1</a>
+    <a href="./index.html">Hands-On 2</a>
   </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
 
-  
+  <div class="instructions">
+    <p>Modify index.js to persist the spin count so it remains between page reloads. <button
+        onclick="document.getElementById('hint').style.display = document.getElementById('hint').style.display === 'none' ? 'block' : 'none'">Toggle
+        Hint</button></p>
 
-  <div class="body">
-    <div class="minesweeper"></div>
-    <div class="minesweeper-inner">
-      <header class="header">
-        <img alt="Mine" src="./img/minesweeper-icon.png" class="icon" />Minesweeper
-      </header>
-      <div class="game">
-        <section class="scoring" oncontextmenu="return false;">
-          <div class="scoreboard" oncontextmenu="return false;">
-            <div class="panel left" oncontextmenu="return false;">
-              <img src="./img/display-digit-0.png" />
-              <img src="./img/display-digit-0.png" />
-              <img class="digit" src="./img/display-digit-1.png" />
-            </div>
-            <button class="face-button" oncontextmenu="return false;"></button>
-            <div class="panel right" oncontextmenu="return false;">
-              <img class="timer-0" src="./img/display-digit-0.png" />
-              <img class="timer-1" src="./img/display-digit-0.png" />
-              <img class="timer-2" src="./img/display-digit-0.png" />
-            </div>
-          </div>
-        </section>
-        <section class="board" oncontextmenu="return false;">
-          <div class="board-items" oncontextmenu="return false;">
-            <div class="one-square" oncontextmenu="return false;"></div>
-          </div>
-        </section>
-      </div>
+    <div id="hint" style="display:none" class="hint">
+      <p>Use localStorage.getItem() to read the saved spins - like checking your browser's diary 📖</p>
+      <p>Use localStorage.setItem() to save the spins - because even spinning chihuahuas deserve persistence! 🌪️🐕</p>
+      <p><small>Warning: Excessive spinning may cause dizziness in both chihuahuas and developers</small></p>
     </div>
   </div>
+  <section>
+    <center>
+      <div style="margin: 20px;">
+        <img src="./static/spin.gif">
+      </div>
+    </center>
+    <center>
+      <div style="margin: 20px;">You have sat through <span id="spin">0 spins</span>!</div>
+    </center>
+  </section>
 
-  <div class="preload">
-    <img src="./img/face-clicking.png" />
-    <img src="./img/face-lost.png" />
-    <img src="./img/face-won.png" />
-    <img src="./img/face-active.png" />
-    <img src="./img/cell-0.png" />
-    <img src="./img/mine-exploded.png" />
-    <img src="./img/cell-flagged.png" />
-  </div>
-
-  <a href="https://onesquareminesweeper.com/">Play One Square Minesweeper</a>
+  <center>
+    <a href="http://chihuahuaspin.com/">http://chihuahuaspin.com/</a>
+  </center>
 </body>
 
 </html>

@@ -17,46 +17,4 @@ window.addEventListener("load", function () {
             document.getElementById('syncStatus').textContent = 'Failed to schedule sync';
         }
     });
-
-    // Update online/offline status
-    ///////////////////////////////////////////////////////////////////////////
-    function updateOnlineStatus() {
-        const indicator = document.getElementById('onlineIndicator');
-        const text = document.getElementById('connectionText');
-        if (navigator.onLine) {
-            indicator.style.color = 'green';
-            text.textContent = 'Online';
-        } else {
-            indicator.style.color = 'red';
-            text.textContent = 'Offline';
-        }
-    }
-
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
-    updateOnlineStatus();
-});
-
-window.addEventListener('load', async () => {
-    const cacheName = 'app-cache-with-cache-button';
-    // offline support - caching window.location.href on button click
-    ///////////////////////////////////////////////////////////////////////////
-    document.getElementById('cacheButton').addEventListener('click', async () => {
-        try {
-            const cache = await caches.open(cacheName);
-            await cache.add(window.location.href);
-            alert('Page cached successfully!');
-        } catch (error) {
-            console.error('Error caching page:', error);
-            alert('Failed to cache page');
-        }
-    });
-
-    // Check if the page is served from cache
-    ///////////////////////////////////////////////////////////////////////////
-    const cache = await caches.open(cacheName);
-    const cachedResponse = await cache.match(window.location.href);
-    if (cachedResponse) {
-        console.log('Page served from cache');
-    }
 });

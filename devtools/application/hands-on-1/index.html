@@ -7,8 +7,12 @@
   <title>JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <script src="index.js"></script>
+  <script src="background-sync.js"></script>
+  <script src="service-worker.js"></script>
+  <script src="load-service-worker.js"></script>
 </head>
 
 <body>
@@ -23,31 +27,75 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <div class="instructions">
-    <p>Modify index.js to persist the spin count so it remains between page reloads. <button
-        onclick="document.getElementById('hint').style.display = document.getElementById('hint').style.display === 'none' ? 'block' : 'none'">Toggle
-        Hint</button></p>
+  <main>
+    <h2>Application Tab Playground</h2>
 
-    <div id="hint" style="display:none" class="hint">
-      <p>Use localStorage.getItem() to read the saved spins - like checking your browser's diary 📖</p>
-      <p>Use localStorage.setItem() to save the spins - because even spinning chihuahuas deserve persistence! 🌪️🐕</p>
-      <p><small>Warning: Excessive spinning may cause dizziness in both chihuahuas and developers</small></p>
-    </div>
-  </div>
-  <section>
-    <center>
-      <div style="margin: 20px;">
-        <img src="./static/spin.gif">
+    <section class="exercise">
+      <h3>Exercise 1: Cookie Monster's Bakery 🍪</h3>
+      <p>Open DevTools (F12) and navigate to the Application tab. Help Cookie Monster manage his cookies:</p>
+      <button onclick="document.cookie='favorite=chocolate_chip; max-age=3600'">Add Cookie</button>
+      <button onclick="document.cookie='secret_recipe=nom_nom_nom; max-age=3600'">Add Secret Recipe</button>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 2: Local Storage Treasure Hunt 💎</h3>
+      <p>Find the hidden treasure in Local Storage:</p>
+      <button onclick="localStorage.setItem('treasure_map', '🗺️ X marks the spot!')">Hide Treasure Map</button>
+      <button onclick="localStorage.setItem('pirate_gold', '💰 1000 coins')">Store Gold</button>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 3: Session Storage Time Machine ⏰</h3>
+      <p>Store temporary data that disappears when you close the tab:</p>
+      <button onclick="sessionStorage.setItem('time_travel', 'You visited the year 3000!')">Time Travel</button>
+      <button onclick="sessionStorage.setItem('future_message', 'Flying cars everywhere!')">Send Future Message</button>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 4: IndexedDB Zoo 🦁</h3>
+      <p>Check the Application tab to see if you can find any animals in IndexedDB!</p>
+      <div id="indexeddb-demo">
+        <button onclick="addAnimal('Lion', '🦁')">Add Lion</button>
+        <button onclick="addAnimal('Elephant', '🐘')">Add Elephant</button>
+        <button onclick="addAnimal('Giraffe', '🦒')">Add Giraffe</button>
       </div>
-    </center>
-    <center>
-      <div style="margin: 20px;">You have sat through <span id="spin">0 spins</span>!</div>
-    </center>
-  </section>
+    </section>
 
-  <center>
-    <a href="http://chihuahuaspin.com/">http://chihuahuaspin.com/</a>
-  </center>
+    <section class="exercise">
+      <h3>Exercise 5: Cache Storage Superhero 🦸‍♂️</h3>
+      <p>Explore the Cache Storage to find cached superhero assets:</p>
+      <button onclick="caches.open('superhero-cache').then(cache => cache.add('./static/chuck-norris.png'))">Cache Hero
+        Icon</button>
+      <button onclick="caches.open('superhero-cache').then(cache => cache.add('/styles.css'))">Cache Styles</button>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 6: Background Sync Quest 🔄</h3>
+      <p>Register a background sync and find it in the Application tab:</p>
+      <button onclick="registerBackgroundSync()">Register Sync</button>
+      <div id="syncStatus">No pending syncs</div>
+    </section>
+
+    <section class="exercise">
+      <h3>Exercise 7: Manifest Mystery 📱</h3>
+      <p>Find the web app manifest and explore its contents:</p>
+      <button onclick="window.location.href = './manifest.json'">View Manifest</button>
+    </section>
+
+    <div class="tips">
+      <h3>💡 Pro Tips:</h3>
+      <ul>
+        <li>Use Application tab to view and modify cookies</li>
+        <li>Clear site data to start fresh</li>
+        <li>Check storage quotas in Storage section</li>
+        <li>Inspect Service Workers for offline capabilities</li>
+        <li>Use Clear Site Data to reset all storage</li>
+        <li>Check Frame-wise storage usage</li>
+        <li>Monitor Background Services</li>
+      </ul>
+    </div>
+  </main>
+
 </body>
 
 </html>
