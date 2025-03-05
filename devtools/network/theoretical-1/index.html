@@ -23,29 +23,16 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <ul class="fun-list">
-    <li>🔍 Log network activity (like a detective with a magnifying glass!) </li>
-    <li>🐌 Simulate a slower network connection (as slow as your grandma's internet)</li>
-    <li>📸 Capture screenshots (say cheese! 🧀)</li>
-    <li>🕵️‍♂️ Inspect the details of the resource (CSI: Network Edition)</li>
-    <li>🔎 Search network headers and responses (no-cache, because who needs memories?)</li>
-    <li>🎯 Filter resources (like finding a needle in a digital haystack)</li>
-    <li>🚫 Block requests (like a bouncer at a club)</li>
-    <li>✏️ Edit requests (because typos happen to the best of us)</li>
-  </ul>
-
   <h1>🎮 Network Tool Demo</h1>
   <div class="button-container">
     <button id="fetchData">🚀 Fetch Data</button>
     <button id="postData">📮 Post Data</button>
     <button id="fetchError">💥 Fetch Error</button>
     <button id="postError">🔥 Post Error</button>
-    <button id="swFetchData">🤖 Service Worker Fetch</button>
     <button id="fetchDataUrl">🔗 Fetch Data URL</button>
   </div>
-  <img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" alt="Loading..." width="200">
 
-  <h2>📊 Network Metrics (The Boring But Important Stuff)</h2>
+  <h2>📊 Network Metrics (The Boring But Important Stuff at the bottom)</h2>
   <ol>
     <li><strong>📦 Requests</strong> - Like counting how many pizzas you ordered</li>
     <li><strong>📨 Transferred</strong> - All those bytes traveling through the tubes of the internet</li>
@@ -60,37 +47,45 @@
     <li><strong>🏁 Load</strong> - The finish line!</li>
   </ol>
 
-  <!-- Rest of the code remains the same, just add emojis to headers -->
   <div class="section">
-    <h2>🕵️‍♂️ User Agent Spoofing</h2>
-    <!-- ... -->
+    <h2>⏱️ Timing Breakdown Phases</h2>
+    <ul>
+      <li><strong>🔄 Queueing</strong> - Browser queues requests when:
+        <ul>
+          <li>Higher priority requests exist</li>
+          <li>Six TCP connections limit reached (HTTP/1.0/1.1)</li>
+          <li>Allocating disk cache space</li>
+        </ul>
+      </li>
+      <li><strong>⏸️ Stalled</strong> - Request halted for queueing reasons</li>
+      <li><strong>🔍 DNS Lookup</strong> - Resolving IP address</li>
+      <li><strong>🔌 Initial connection</strong> - TCP handshakes and SSL negotiation</li>
+      <li><strong>🔀 Proxy negotiation</strong> - Communicating with proxy server</li>
+      <li><strong>📤 Request sent</strong> - Sending the request</li>
+      <li><strong>🛠️ ServiceWorker Preparation</strong> - Starting service worker</li>
+      <li><strong>🤖 Request to ServiceWorker</strong> - Request handling by service worker</li>
+      <li><strong>⏳ Waiting (TTFB)</strong> - Time to First Byte, includes latency and server processing</li>
+      <li><strong>📥 Content Download</strong> - Receiving response from network/service worker</li>
+    </ul>
   </div>
 
   <div class="section">
-    <h2>🔌 WebSocket Connection</h2>
-    <!-- ... -->
+    <h2>🔧 More Network Configuration...</h2>
+    <ul>
+      <li><strong>🕵️‍♂️ User Agent Spoofing</strong> - Modify browser identification</li>
+      <div class="section">
+        <p id="user-agent-message"></p>
+      </div>
+      <li><strong>📝 Accept Headers</strong>
+        <ul>
+          <li>Content-Type preferences</li>
+          <li>Encoding preferences</li>
+        </ul>
+      </li>
+    </ul>
   </div>
 
-  <div class="section">
-    <h2>📡 EventStream Demo</h2>
-    <!-- ... -->
-  </div>
-
-  <style>
-    .fun-list li {
-      margin: 10px 0;
-      font-size: 1.1em;
-    }
-    .button-container button {
-      margin: 5px;
-      padding: 10px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .button-container button:hover {
-      transform: scale(1.1);
-    }
-  </style>
+  <img src="image.png" alt="Demo Image">
+  <img src="https://media.giphy.com/media/C7olQswvzSwAE/giphy.gif" alt="Mind blown" style="width:520px">
 
 </body>

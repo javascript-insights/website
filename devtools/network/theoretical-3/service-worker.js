@@ -1,4 +1,4 @@
-const CACHE_NAME = 'network-tool-demo-cache';
+const CACHE_NAME = 'network-tool-cache-theoretical-3';
 const urlsToCache = [
   'index.html',
   'styles.css',
@@ -41,7 +41,7 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('message', event => {
-  if (event.data === 'fetchData') {
+  if (event.data === 'fetchDataMessage') {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
       .then(data => console.log('Service Worker fetched data:', data))

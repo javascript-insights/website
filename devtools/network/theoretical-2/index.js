@@ -1,5 +1,6 @@
 window.addEventListener("load", function foo() {
 
+  // Register the service worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
       .then(registration => {
@@ -10,6 +11,7 @@ window.addEventListener("load", function foo() {
       });
   }
 
+  // Fetch data from an API
   document.getElementById('fetch-data').addEventListener('click', () => {
     fetch('https://jsonplaceholder.typicode.com/posts/1')
       .then(response => response.json())
