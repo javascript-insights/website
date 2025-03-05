@@ -10,6 +10,7 @@ const drawRand = ({ width, height }) => {
     const canvas = document.createElement('canvas');
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
+    canvas.setAttribute('style', 'margin-top:10px');
     canvas.setAttribute('id', 'canvas');
     document.body.appendChild(canvas);
     const ctx = canvas.getContext('2d');
@@ -31,10 +32,10 @@ document.addEventListener("DOMContentLoaded", () => drawRand({ width, height }))
 
 function gsbutton() {
     fetch('./chuck-550x524.txt')
-        .then(response => response.text())
+        .then(response => response.json())
         .then(responseText => {
 
-            const response = responseText.split(',').map(Number);
+            const response = responseText.map(Number);
 
             const ctx = document.getElementById('canvas').getContext('2d');
 

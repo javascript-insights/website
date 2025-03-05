@@ -25,90 +25,208 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <p>Follow the instructions below to learn how to use the Network
-    panel in browser DevTools.</p>
+  <main>
+    <section>
+      <h2>Network Detective Training Ground 🌐</h2>
+      <p>Welcome, aspiring Network Inspector! Let's investigate some mysterious network activities.</p>
 
-  <h2>Instructions</h2>
-  <ol>
-    <li>Open your browser's DevTools (usually by pressing <code>F12</code> or <code>Ctrl+Shift+I</code>).</li>
-    <li>Navigate to the Network panel.</li>
-    <li>Click on the buttons below to make network requests and observe the results in the Network panel.</li>
-    <li>Analyze the request and response headers, status codes, and payloads.</li>
-    <li>Identify any CORS-related headers and understand their purpose.</li>
-  </ol>
+      <div class="exercise">
+        <h3>🕵️ Exercise 1: The Slow Loading Mystery</h3>
+        <button onclick="loadSlowResource()">Load Really Slow Resource</button>
+        <div class="hints">
+          <p>Use the Network panel to investigate this slow-loading request! 🔍</p>
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Time" column in the Network panel</li>
+              <li>Examine the "Waterfall" timeline for loading details</li>
+              <li>Look for any bottlenecks in request timing</li>
+            </ul>
+          </details>
+        </div>
+      </div>
 
-  <h2>Tasks</h2>
-  <ul>
-    <li><button id="fetchData1">Fetch Data 1</button>: Make a simple GET request to
-      <code>https://jsonplaceholder.typicode.com/posts</code>.
-    </li>
-    <li><button id="fetchData2">Fetch Data 2</button>: Make a GET request to
-      <code>https://jsonplaceholder.typicode.com/posts</code> via a CORS proxy.
-    </li>
-    <li><button id="fetchData3">Fetch Data 3</button>: Make a GET request to
-      <code>https://api.publicapis.org/entries</code>.
-    </li>
-  </ul>
+      <hr>
 
-  <div>
-    <h2>Cross-Origin Resource Sharing (CORS)</h2>
-    <p>CORS is a security feature implemented by web browsers to control how resources are requested from a different
-      domain than the one that served the web page. Here's a detailed explanation:</p>
+      <div class="exercise">
+        <h3>🎭 Exercise 2: The Status Code Theater</h3>
+        <button onclick="generateRandomStatus()">Generate Random Status Code</button>
+        <div class="hints">
+          <p>Can you catch all the different HTTP status codes? Collect them like Pokémon! 🎮</p>
+          <details>
+            <summary>Tips & Tricks</summary>
+            <ul class="tips-list">
+              <li>Check the "Status" column in the Network panel 🔍</li>
+              <li>Look for any 4xx or 5xx status codes 🚫</li>
+              <li>Inspect the "Response" tab for more details 📜</li>
+              <li>Try to identify the meaning of each status code 🤔</li>
+              <li>What do you think about the 418 status code? Is it a joke? 🤪</li>
+            </ul>
+          </details>
+        </div>
+      </div>
 
-    <h3>What is CORS?</h3>
-    <p>CORS is an HTTP-header based mechanism that allows a server to specify any origins (domain, scheme, or port)
-      other than its own from which a browser should permit loading resources. It helps in securely managing
-      cross-origin requests and data transfers between browsers and servers.</p>
+      <hr>
 
-    <h3>Why is CORS Needed?</h3>
-    <p>Browsers enforce a security policy called the <strong>Same-Origin Policy</strong>. This policy restricts web
-      pages from making requests to a different domain than the one that served the web page. While this policy enhances
-      security by preventing malicious websites from accessing sensitive data on other sites, it also limits legitimate
-      cross-origin requests. CORS provides a way to relax these restrictions securely.</p>
+      <div class="exercise">
+        <h3>🎪 Exercise 3: The Header Circus</h3>
+        <button onclick="sendWeirdHeaders()">Send Bizarre Headers</button>
+        <p>Find the silly custom header I've hidden in this request. Hint: It involves pizza 🍕</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Headers" tab in the Network panel</li>
+              <li>Look for any custom or unusual headers</li>
+              <li>Inspect the request and response headers carefully</li>
+            </ul>
+          </details>
+        </div>
+      </div>
 
-    <h3>How Does CORS Work?</h3>
-    <p>CORS works by adding specific HTTP headers to responses from the server. These headers inform the browser whether
-      to allow the cross-origin request. Here are the key headers involved:</p>
+      <hr>
+
+      <div class="exercise">
+        <h3>🎢 Exercise 4: The Payload Rollercoaster</h3>
+        <button onclick="sendRandomData()">Send Random JSON</button>
+        <p>How big was that payload? Was it minified? Time to investigate!</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Payload" tab in the Network panel</li>
+              <li>Look for any minified or compressed data</li>
+              <li>Inspect the size of the payload in the "Size" column</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="exercise">
+        <h3>🎮 Exercise 5: The Cache Quest</h3>
+        <button onclick="testCaching()">Toggle Cache Test</button>
+        <p>Can you spot which requests are served from cache? Find the treasure in the Size column!</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Size" column in the Network panel</li>
+              <li>Look for any entries marked as "from cache"</li>
+              <li>Inspect the "Size" and "Time" columns for clues</li>
+              <li>Try using the "Disable Cache" button. What do you see?</li>
+              <li>Do you know why 60 is cached? What is the response header?</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="exercise">
+        <h3>🌊 Exercise 6: The Waterfall Challenge</h3>
+        <button onclick="loadManyResources()">Trigger Resource Cascade</button>
+        <p>Watch these requests race! Who's blocking whom? Time to become a waterfall expert!</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Waterfall" view in the Network panel</li>
+              <li>Look for any requests that are blocking others</li>
+              <li>Inspect the timing of each request in the waterfall</li>
+              <li>Try to identify any bottlenecks or delays</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="exercise">
+        <h3>🎭 Exercise 7: The MIME Type Masquerade</h3>
+        <button onclick="sendMixedContent()">Mix Content Types</button>
+        <p>Something's not what it seems... Can you spot the impostor content type?</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Look for any mismatched or unexpected MIME types</li>
+              <li>Inspect the "Content-Type" header in response and request headers</li>
+              <li>Try to identify any discrepancies between the expected and actual content type</li>
+              <li>What do you think about the "text/plain" content type? Is it correct?</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="exercise">
+        <h3>🎪 Exercise 8: The Redirect Circus</h3>
+        <button onclick="startRedirectChain()">Start Redirect Chain</button>
+        <p>Follow the bouncing request! How many redirects can you count?</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Status" column for any 3xx status codes</li>
+              <li>Inspect the "Initiator" column to see what triggered the redirect</li>
+              <li>Look for any "Location" headers in the response</li>
+              <li>Count how many redirects occurred in the chain</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="exercise">
+        <h3>🔍 Exercise 9: The Client Side Cookie Monster</h3>
+        <button onclick="playCookieGame1()">Feed the Cookie Monster - Client side cookies</button>
+        <p>Help! The cookie monster is hungry! Check those request headers for tasty cookies!</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Cookies" in the Application tool.</li>
+              <li>Inspect the "Request Headers" for any cookie-related entries</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="exercise">
+        <h3>🔍 Exercise 10: The Server Side Cookie Monster</h3>
+        <button onclick="playCookieGame2()">Feed the Cookie Monster - Server side cookies</button>
+        <p>Help! The cookie monster is hungry! Check those request headers for tasty cookies!</p>
+        <div class="hints">
+          <details>
+            <summary>Need help?</summary>
+            <ul>
+              <li>Check the "Cookies" tab in the Network panel.</li>
+              <li>Try to identify any cookies that are being set or modified</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <hr>
+
+  <aside class="pro-tips">
+    <h3>🎯 Pro Tips:</h3>
     <ul>
-      <li><strong>Access-Control-Allow-Origin</strong>: Specifies which origins are allowed to access the resource. It
-        can be a specific origin (e.g., <code>https://example.com</code>) or a wildcard (<code>*</code>) to allow any
-        origin.</li>
-      <li><strong>Access-Control-Allow-Methods</strong>: Lists the HTTP methods (e.g., GET, POST) that are allowed when
-        accessing the resource.</li>
-      <li><strong>Access-Control-Allow-Headers</strong>: Lists the headers that can be used in the actual request.</li>
-      <li><strong>Access-Control-Allow-Credentials</strong>: Indicates whether the request can include user credentials
-        (e.g., cookies, HTTP authentication).</li>
+      <li>Use the Filter box to find specific requests</li>
+      <li>Right-click column headers to customize your view</li>
+      <li>Press Ctrl+R (Cmd+R) to clear and reload</li>
+      <li>Look for the red entries - they're usually the fun ones!</li>
     </ul>
-
-    <h3>Preflight Requests</h3>
-    <p>For certain types of requests, browsers send a <strong>preflight request</strong> using the HTTP OPTIONS method
-      before the actual request. This preflight request checks if the server permits the actual request. The server
-      responds with the allowed methods and headers, and if the preflight check passes, the browser proceeds with the
-      actual request.</p>
-
-    <h3>Example Scenario</h3>
-    <p>Imagine a web page served from <code>https://domain-a.com</code> wants to fetch data from
-      <code>https://domain-b.com/api/data</code>. Without CORS, the browser would block this request due to the
-      Same-Origin Policy. With CORS, <code>https://domain-b.com</code> can include the following headers in its response
-      to allow the request:
-    </p>
-    <pre><code>Access-Control-Allow-Origin: https://domain-a.com
-Access-Control-Allow-Methods: GET, POST
-Access-Control-Allow-Headers: Content-Type
-</code></pre>
-
-    <h3>Handling CORS Errors</h3>
-    <p>If a CORS request fails, the browser will block the request, and the JavaScript code will receive a generic
-      error. The specifics of the error can be found in the browser's console.</p>
-
-    <h3>Benefits of CORS</h3>
-    <ul>
-      <li><strong>Security</strong>: CORS allows servers to control who can access their resources, enhancing security.
-      </li>
-      <li><strong>Flexibility</strong>: It provides a way to enable legitimate cross-origin requests while maintaining
-        the security benefits of the Same-Origin Policy.</li>
-    </ul>
-  </div>
+  </aside>
+  </main>
 </body>
 
 </html>

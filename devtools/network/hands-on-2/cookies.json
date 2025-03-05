@@ -1,0 +1,28 @@
+{
+  "cookies": [
+    {
+      "name": "Chocolate Chip",
+      "type": "classic"
+    },
+    {
+      "name": "Oatmeal Raisin",
+      "type": "chewy"
+    },
+    {
+      "name": "Snickerdoodle",
+      "type": "sugar"
+    },
+    {
+      "name": "Peanut Butter",
+      "type": "soft"
+    },
+    {
+      "name": "Sugar Cookie",
+      "type": "crispy"
+    },
+    {
+      "name": "Double Chocolate",
+      "type": "rich"
+    }
+  ]
+}

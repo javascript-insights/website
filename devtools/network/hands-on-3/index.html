@@ -23,30 +23,42 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <p>
-    Please create a minimal web server that serves an HTML page with an HTML canvas tag on it. On the canvas, you need
-    to print an image. The image file is a text file that represents an image by RGBA Colors, which means that every 4
-    values (separated by a comma) represent the color of one pixel. R, G, B and A can get a value between 0 to 255. The
-    size of the image appears in the file name right after the dash sign. For example, if the file name is
-    chuck-550x524.txt, the image width is 550px and the image height is 524px.
+  <div class="instructions">
+    <h2>Image Loading Challenge</h2>
+    <p>
+      This page contains a canvas that should display an image loaded from a text file. The image data is represented
+      using RGBA colors,
+      where each pixel is defined by four comma-separated values (Red, Green, Blue, Alpha), ranging from 0 to 255.
+    </p>
+    <p>
+      The image dimensions are encoded in the filename (e.g., "chuck-550x524.txt" means width=550px, height=524px).
+    </p>
+    <p>
+      <strong>Your Task:</strong> There's a bug preventing the image from displaying on the canvas. Use the DevTools
+      <strong>Network</strong> tab to inspect the request/response, and try to use the overrides features to fix it.
+    </p>
 
-    There is a sample HTML file (index.html), with a script tag on it with a javascript code (index.js) that creates the
-    canvas tag dynamically and prints a random image on it.
+    <p class="challenge">Good luck with the debugging challenge! 🚀</p>
 
-    Please note that the image file can be very large, maybe you can think of an optimization... And, please provide
-    instructions on how to run the web server.
+    <div class="hints">
+      <details>
+        <summary>Need help?</summary>
+        <ul>
+          <li>Examine the Network tab when clicking the "Get Data" button</li>
+          <li>Check if the response headers are correct for a text file</li>
+          <li>Try using Local Overrides to modify the response content</li>
+          <li>The image should show Chuck Norris (he's already waiting there, and you know Chuck Norris doesn't wait for
+            anyone! 💪)</li>
+        </ul>
+      </details>
+    </div>
 
-    Good Luck!
-  </p>
+    <p><strong>Note:</strong> The current image is a placeolder, ramdomally generated image.</p>
 
-  <li><strong>Fetch Image</strong>
+  </div>
+  <div>
     <button onclick="gsbutton()">Get Data</button>
-  </li>
-
-
-
+  </div>
 </body>
-
-
 
 </html>
