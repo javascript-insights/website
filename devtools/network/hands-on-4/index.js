@@ -1,34 +1,33 @@
 window.addEventListener("load", function () {
-    document.getElementById('fetchData1').addEventListener('click', () => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.json())
-            .then(data => {
-                console.log(JSON.stringify(data, null, 2));
-            })
-            .catch(error => {
-                console.error('Error: ' + error);
-            });
-    });
 
-    document.getElementById('fetchData2').addEventListener('click', () => {
-        fetch('https://cors-anywhere.herokuapp.com/https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.json())
-            .then(data => {
-                console.log(JSON.stringify(data, null, 2));
-            })
-            .catch(error => {
-                console.error('Error: ' + error);
-            });
-    });
+    function fetchData(url, method = 'GET') {
+        const resultDiv = document.getElementById('result');
+        resultDiv.textContent = 'Loading...';
 
-    document.getElementById('fetchData3').addEventListener('click', () => {
-        fetch('https://api.publicapis.org/entries')
-            .then(response => response.json())
+        fetch(url, {
+            method: method
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
             .then(data => {
-                console.log(JSON.stringify(data, null, 2));
+                resultDiv.textContent = `Successfully fetched. Data: ${data}`;
             })
             .catch(error => {
-                console.error('Error: ' + error);
+                resultDiv.textContent = `CORS Error: ${error.message}`;
             });
-    });
+    }
+
+    const domain = 'https://javascript-insights-server-azf4hfbxetbnd4gy.israelcentral-01.azurewebsites.net';
+
+    document.getElementById('fetch0').addEventListener('click', () => fetchData(domain + '/cors/allow-all'));
+    document.getElementById('fetch1').addEventListener('click', () => fetchData(domain + '/cors/specific-origin'));
+    document.getElementById('fetch2').addEventListener('click', () => fetchData(domain + '/cors/allow-methods'));
+    document.getElementById('fetch3').addEventListener('click', () => fetchData(domain + '/cors/allow-methods', 'PUT'));
+    document.getElementById('fetch4').addEventListener('click', () => fetchData(domain + '/cors/with-credentials'));
+    document.getElementById('fetch5').addEventListener('click', () => fetchData(domain + '/cors/custom-headers'));
+    document.getElementById('fetch6').addEventListener('click', () => fetchData(domain + '/cors/max-age'));
+    document.getElementById('fetch7').addEventListener('click', () => fetchData(domain + '/cors/preflight', 'OPTIONS'));
+    document.getElementById('fetch8').addEventListener('click', () => fetchData(domain + '/cors/preflight', 'POST'));
 });
