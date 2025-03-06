@@ -19,7 +19,7 @@
     <a href="./puzzles/index.html">Puzzles</a>
   </div>
   <main>
-    <h2>Welcome to the Fun Side of JavaScript! 
+    <h2>Welcome to the Fun Side of JavaScript!
       <span class="animated-icon">🎪</span>
     </h2>
     <style>
@@ -28,17 +28,32 @@
         animation: bounce 1s infinite;
         cursor: pointer;
       }
+
       @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
       }
+
       .animated-icon:hover {
         animation: spin 0.5s infinite linear;
       }
+
       @keyframes spin {
-        100% { transform: rotate(360deg); }
+        100% {
+          transform: rotate(360deg);
+        }
       }
     </style>
+    <div style="margin: 20px;">
+      <img src="https://media.giphy.com/media/SvFocn0wNMx0iv2rYz/giphy.gif" alt="Funny coding gif" width="400" />
+    </div>
 </body>
 
 </html>
