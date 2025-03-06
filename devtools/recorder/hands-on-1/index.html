@@ -28,26 +28,84 @@
   </header>
   <main>
     <section id="intro">
-      <h2>Introduction</h2>
-      <p>Follow the tasks below to practice using the tool.</p>
-    </section>
-    <section id="tasks">
-      <h2>Tasks</h2>
-      <p>Complete the following tasks and record your interactions:</p>
+      <h2>🎥 Introduction to DevTools Recorder</h2>
+      <p>The Recorder tool helps you capture, replay and measure user flows. In this hands-on exercise, you'll learn how
+        to:</p>
       <ul>
-        <li>Fill out the form below and submit it.</li>
-        <li>Navigate to different pages and record your navigation.</li>
+        <li>🎬 Start and stop recording user interactions</li>
+        <li>💾 Create and save recording scripts</li>
+        <li>▶️ Replay recorded actions</li>
+        <li>📤 Export recordings to different formats</li>
       </ul>
-      <form>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-        <button type="submit">Submit</button>
+    </section>
+
+    <section id="tasks"></section>
+    <h2>🎯 Practice Tasks</h2>
+    <p>Open DevTools (F12), go to Recorder tab, and record yourself completing these tasks:</p>
+    <div class="task-group">
+      <h3>1. 🧭 Navigation Practice</h3>
+      <nav class="practice-nav">
+        <a href="#intro">Go to Intro</a>
+        <a href="#tasks">Go to Tasks</a>
+        <a href="#tips">Go to Tips</a>
+      </nav>
+
+      <h3>2. 📝 Form Interactions</h3>
+      <form id="userForm">
+        <div class="form-field">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required placeholder="Bruce Wayne">
+        </div>
+        <div class="form-field">
+          <label for="email">Email:</label>
+          <input type="email" id="email" required placeholder="definitely.not.batman@wayne.com">
+        </div>
+        <div class="form-field">
+          <label for="color">Favorite Color:</label>
+          <select id="color">
+            <option value="black">Bat Black</option>
+            <option value="blue">Superman Blue</option>
+            <option value="green">Hulk Green</option>
+          </select>
+        </div>
+        <button type="submit">Submit Form</button>
       </form>
-    </section>
-    <section id="analysis">
-      <h2>Analysis</h2>
-      <p>Analyze your recorded tasks and optimize performance based on the tips provided.</p>
-    </section>
+
+      <h3>3. 🎮 Interactive Elements</h3>
+      <div class="clickable-boxes">
+        <button onclick="alert('Why did the programmer quit his job? Because he didn\'t get arrays! 😄')">Click Me
+          1</button>
+        <button onclick="alert('Box 2 clicked! Nothing funny here, move along... 🕵️')">Click Me 2</button>
+        <button onclick="alert('Box 3 clicked! You are really thorough, aren\'t you? 🤓')">Click Me 3</button>
+      </div>
+
+      <h3>4. 🏋️ Advanced Challenges</h3>
+      <div class="advanced-tasks">
+        <details>
+          <summary>Rapid Sequence Challenge</summary>
+          <p>Record clicking all buttons in under 2 seconds!</p>
+        </details>
+        <details>
+          <summary>Form Fill Speed Run</summary>
+          <p>Fill and submit the form as fast as possible</p>
+        </details>
+        <details>
+          <summary>Navigation Marathon</summary>
+          <p>Click all navigation links in sequence, then reverse order</p>
+        </details>
+      </div>
+      </section>
+
+      <section id="tips">
+        <h2>💡 Recording Tips</h2>
+        <ul>
+          <li>🎬 Start recording before performing any actions</li>
+          <li>📝 Use clear names for your recordings</li>
+          <li>🔄 Test your recording by replaying it</li>
+          <li>⚡ Try exporting to different formats (JSON, Playwright)</li>
+        </ul>
+      </section>
   </main>
+  </div>
 
 </body>
