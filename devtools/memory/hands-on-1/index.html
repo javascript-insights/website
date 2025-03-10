@@ -85,11 +85,17 @@
     <p>Goal: Understand circular references in memory</p>
     <p>Steps:</p>
     <ol>
-      <li>Take initial snapshot</li>
-      <li>Click "Create Loop"</li>
-      <li>Take snapshot and look for circular references</li>
-      <li>Find these 2 Objects, and these 2 Arrays and observe there sizes</li>
-      <li>Click "Break Loop" to clean up</li>
+      <li>Take an initial memory snapshot as baseline</li>
+      <li>Click "Create Loop" button to generate circular references</li>
+      <li>Take a second snapshot and examine:
+        <ul>
+          <li>Look for 2 objects that reference each other</li>
+          <li>Find 2 arrays that are part of the circular chain</li>
+          <li>Note the memory size of each component</li>
+        </ul>
+      </li>
+      <li>Click "Break Loop" button to remove references</li>
+      <li>Take final snapshot to verify cleanup</li>
     </ol>
     <div class="button-group">
       <button id="createLoop">Create Loop 🔄</button>
@@ -106,18 +112,39 @@
     <p>Goal: Learn about linked list memory management and references</p>
     <p>Steps:</p>
     <ol>
-      <li>Take initial snapshot</li>
-      <li>Click "Create Linked List" to create a chain of nodes</li>
-      <li>Take snapshot and observe the linked list structure</li>
-      <li>Click "Clear List" to remove the list</li>
-      <li>Take final snapshot and verify cleanup</li>
-      <li>Look at the Retainers tab to see how nodes reference each other</li>
-      <li>Find the head node and traverse through next pointers</li>
-      <li>Store a middle node as global variable and observe memory retention</li>
-      <li>Try breaking a link in the middle - what happens to garbage collection?</li>
-      <li>Look at the element Distance. Do you understand its value?</li>
-      <li>Look for any circular references in the list structure</li>
-      <li>Experiment with different list sizes to see memory impact</li>
+      <li>Take an initial memory snapshot</li>
+      <li>Click "Create Linked List" button to generate nodes</li>
+      <li>Take a second snapshot and examine:
+        <ul>
+          <li>Find all nodes in the list</li>
+          <li>Look at how nodes connect to each other</li>
+          <li>Note the memory size of each node</li>
+        </ul>
+      </li>
+      <li>Understanding node connections:
+        <ul>
+          <li>Find the head node (first in list)</li>
+          <li>Click each 'next' pointer to follow the chain</li>
+          <li>Notice how 'Distance' values change through the chain</li>
+        </ul>
+      </li>
+      <li>Try these experiments:
+        <ul>
+          <li>Right-click any node → Store as global variable</li>
+          <li>Break the chain: set node.next = null</li>
+          <li>Run garbage collection</li>
+          <li>Take snapshot - check which nodes remained</li>
+        </ul>
+      </li>
+      <li>Advanced testing:
+        <ul>
+          <li>Store a middle node as global variable</li>
+          <li>Clear the head node</li>
+          <li>Check which nodes stay in memory</li>
+        </ul>
+      </li>
+      <li>Click "Clear List" to remove everything</li>
+      <li>Take final snapshot to verify cleanup</li>
     </ol>
     <div class="button-group">
       <button id="createList">Create Linked List 🔗</button>
@@ -135,21 +162,32 @@
     <p>Goal: Learn about DOM element memory management</p>
     <p>Steps:</p>
     <ol>
-      <li>Take initial snapshot</li>
-      <li>Click "Grow Family Tree" to create DOM elements</li>
-      <li>Take snapshot and observe DOM tree size</li>
-      <li>Click "Prune Tree" to remove elements</li>
-      <li>Take final snapshot and verify cleanup</li>
-      <li>Try to find all ways to see the new elements. How many ways did you spot? 🕵️‍♂️</li>
-      <li>Look at the element Distance. Do you understand its value?</li>
-      <li>Look at the 'Array' object. Do you understand the window icon next to it?</li>
-      <li>Look at the 'div' objects. Do you understan why it contains other elements like the document?</li>
-      <li>Click on one of the div elements and look at the Retainers tab at the buttom. Try to see the tree structure
+      <li>Take an initial memory snapshot before starting</li>
+      <li>Click "Grow Family Tree" to generate DOM elements</li>
+      <li>Take a second snapshot and examine:
+        <ul>
+          <li>Find newly created DOM elements</li>
+          <li>Note the total size of the DOM tree</li>
+        </ul>
       </li>
-      <li>Store as global variable one of the tree-nodes, and write this in the console 'temp1.parentElement', what is
-        that object? Try to find more reference objects...</li>
-
-      <li>Try to override the depth and number of child parameter and observe the results</li>
+      <li>Click "Prune Tree" to remove all elements</li>
+      <li>Take final snapshot to confirm cleanup</li>
+      <li>Investigate the DOM elements:
+        <ul>
+          <li>Look at the "Distance" value - it shows how many references away from GC roots</li>
+          <li>Notice the window icon next to Array objects - indicates global scope</li>
+          <li>Examine why div elements contain document references</li>
+        </ul>
+      </li>
+      <li>Explore element relationships:
+        <ul>
+          <li>Select a div element and check the Retainers tab</li>
+          <li>Store an element as global variable (temp1)</li>
+          <li>Use console to explore: temp1.parentElement</li>
+          <li>Try finding other element relationships</li>
+        </ul>
+      </li>
+      <li>Advanced: Try modifying depth and children parameters to see memory impact</li>
     </ol>
     <div class="button-group">
       <button id="growTree">Grow Family Tree 🌳</button>

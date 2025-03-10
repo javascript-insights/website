@@ -86,17 +86,23 @@ window.addEventListener("load", function foo() {
 
         // Create a linked list with 100 nodes
         let head = new Node(0);
+        head["❌_head_❌"] = new Array(1000).fill('🤯');
         let current = head;
         for (let i = 1; i < 100; i++) {
             current.next = new Node(i);
             current = current.next;
             // Store middle node as global reference
-            if (i === 50) globalReference = current;
+            if (i === 50) {
+                globalReference = current;
+                globalReference["❌_globalReference_❌"] = new Array(1000).fill('🌍');
+            }
         }
         linkedList = head;
+        linkedList["❌_linkedList_❌"] = new Array(1000).fill('🔗');
 
         // Visualize the list
         const visualizer = document.getElementById('listVisualizer');
+        visualizer["❌_visualizer_❌"] = new Array(1000).fill('🪟');
         visualizer.innerHTML = '';
         current = head;
         while (current) {
