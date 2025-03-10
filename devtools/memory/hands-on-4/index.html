@@ -12,57 +12,44 @@
 </head>
 
 <body>
-  <h1>Memory Hands-On 3</h1>
+  <h1>Memory Hands-On 4</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
     <a href="../index.html">Memory</a>
-    <a href="./index.html">Hands-On 3</a>
+    <a href="./index.html">Hands-On 4</a>
   </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
 
-  <main class="memory-exercises">
-    <section class="exercise">
-      <h2>Exercise 1: Memory Monster</h2>
-      <p>Click the button to create 1000 objects. Watch the memory grow!</p>
-      <button id="createObjects">Feed the Memory Monster 🧟‍♂️</button>
-      <button id="clearObjects">Put Monster on Diet 🥗</button>
-    </section>
+  <p>
+    <button id="createTree">
+      🌱 Create tree (watch me grow!)
+      <img src="https://media.giphy.com/media/3o7TKSha51ATTx9KzC/giphy.gif" width="20" height="20" alt="growing tree">
+    </button>
+  </p>
 
-    <section class="exercise">
-      <h2>Exercise 2: The Leaky Party</h2>
-      <p>Every time you click, we'll start a party that never ends! (Memory leak with event listeners)</p>
-      <button id="startParty">Start Party 🎉</button>
-      <div id="danceFloor"></div>
-    </section>
+  <p>
+    <button id="detachTree">
+      🪓 Detach tree (timber!)
+      <img src="https://media.giphy.com/media/l2Je66zG6mAAZxgqI/giphy.gif" width="20" height="20" alt="falling tree">
+    </button>
+  </p>
 
-    <section class="exercise">
-      <h2>Exercise 3: The Infinity Loop</h2>
-      <p>Watch what happens when we create an infinite reference loop!</p>
-      <button id="createLoop">Create Loop 🔄</button>
-      <button id="breakLoop">Break Loop 🔨</button>
-    </section>
+  <p>
+    <button id="removeTreeReference">
+      🌲 Remove tree reference (goodbye old friend)
+      <img src="https://media.giphy.com/media/3o6Zt7NPnoGorOryHC/giphy.gif" width="20" height="20" alt="disappearing">
+    </button>
+  </p>
 
-    <section class="exercise">
-      <h2>Exercise 4: DOM Family Tree</h2>
-      <p>Let's create a huge DOM tree and see how it affects memory</p>
-      <button id="growTree">Grow Family Tree 🌳</button>
-      <button id="pruneTree">Prune Tree ✂️</button>
-      <div id="familyTree"></div>
-    </section>
-
-    <div class="tips">
-      <h3>📝 Memory Profiling Tips:</h3>
-      <ul>
-        <li>Take a snapshot before and after each exercise</li>
-        <li>Look for retained size differences</li>
-        <li>Check for detached DOM elements</li>
-        <li>Use the comparison view to spot memory leaks</li>
-      </ul>
-    </div>
-  </main>
+  <p>
+    <button id="removeLeafReference">
+      🍂 Remove leaf reference (leaf it alone!)
+      <img src="https://media.giphy.com/media/l2JhIUyUs8KDCCf3W/giphy.gif" width="20" height="20" alt="falling leaf">
+    </button>
+  </p>
 
 </body>
 

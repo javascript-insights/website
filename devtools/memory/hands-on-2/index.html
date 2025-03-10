@@ -23,9 +23,65 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <button class="button" id="leakButton">
-    🤪 Create nodes (they're leaking everywhere! 💦)
-  </button>
-  <img src="https://media.giphy.com/media/3o6MbteqhE5geJM6Zi/giphy.gif" alt="leaking pipe"
-    style="width:190px;vertical-align:middle">
+  <div class="instructions">
+    <h2>Find detached elements</h2>
+
+    <ol>
+      <li>Using the <strong>Heap Snapshot</strong>:
+        <ul>
+          <li>Click "Take heap snapshot" in DevTools</li>
+          <li>Perform the exercise actions (click the button)</li>
+          <li>Take another heap snapshot</li>
+          <li>Type "Detached" in the class filter box and observe the detached objects</li>
+          <li>In the dropdown, select "Objects retained by detached DOM nodes" view, and observe the objects</li>
+          <li>In the dropdown, select "Comparison" view</li>
+          <li>Compare the two snapshots to see what changed</li>
+          <li>Look specifically for:
+            <ul>
+              <li>Detached DOM elements</li>
+            </ul>
+          </li>
+          <li>Wait a few seconds and take another heap snapshot</li>
+          <li>Are these Detached objects these? Or GC collected them?</li>
+        </ul>
+      </li>
+      <li>Using the <strong>Memory Timeline</strong>:
+        <ul>
+          <li>Select "Record allocation timeline" in the Memory tab</li>
+          <li>Click "Start" to begin recording</li>
+          <li>Click that button like it owes you money! 🤑 (many times)</li>
+          <li>Click "Stop" to analyze the timeline</li>
+          <li>Look specifically for:
+            <ul>
+              <li>Detached DOM elements</li>
+            </ul>
+          </li>
+          <li></li>
+        </ul>
+      </li>
+      <li>Finding <strong>Allocations sampling</strong>:
+        <ul>
+          <li>Start the Allocations sampling</li>
+          <li>Perform the exercise actions (click the button)</li>
+          <li>Stop and observe the file and the function where allocations come from</li>
+        </ul>
+      </li>
+      <li>Finding <strong>Detached Elements</strong>:
+        <ul>
+          <li>Start the "Detached Elements"</li>
+          <li>Do you see some?</li>
+          <li>Perform the exercise actions (click the button)</li>
+          <li>Start another "Detached Elements"</li>
+          <li>And now? Do you see some?</li>
+        </ul>
+      </li>
+    </ol>
+
+    <button class="button" id="leakButton">
+      🤪 Create nodes (they're leaking everywhere! 💦)
+    </button>
+    <div></div>
+    <img src="https://media.giphy.com/media/3o6Mb36zzO2TyvHriw/giphy.gif" alt="leaking pipe"
+      style="width:400px;margin-top: 20px;">
+  </div>
 </body>

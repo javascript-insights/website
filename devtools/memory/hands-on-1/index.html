@@ -23,38 +23,157 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <div class="container">
-    <h1>🧠 Memory Tool Practice: The Brain Drain Game! 🎮</h1>
-    <p>Welcome to the ultimate memory leak safari! Where we intentionally break things for fun! 
-       <img src="https://media.giphy.com/media/YrBRYRDN4M5ryrNOND/giphy.gif" alt="computer on fire" width="50"></p>
-    <p><button class="button" id="leakButton">🚰 Create Memory Leak (Oops!)</button></p>
-    <p><button class="button" id="clearButton">🧹 Clean Up This Mess</button></p>
-    <p><button class="button" id="detachButton">👻 Create Ghost Elements</button></p>
-    <p><button class="button" id="duplicateStringsButton">🐑 Clone Some Strings (Dolly Style)</button></p>
-    <p><button class="button" id="retainConsoleButton">🔒 Make Console Hoard Objects</button></p>
-    <div class="instructions">
-      <h2>🎓 How to Break Things Professionally</h2>
-      <ol>
-        <li>🌐 Open this site (you're already here, congrats!)</li>
-        <li>🔍 Open DevTools (F12 or right-click - it's like x-ray vision)</li>
-        <li>💾 Find the "Memory" tab (it's where the magic happens)</li>
-        <li>💣 Click "Create Memory Leak" repeatedly (some people just want to watch the world burn)</li>
-        <li>📸 Take a heap snapshot (it's like a memory selfie)</li>
-        <li>🧼 Hit "Clear Memory" (spring cleaning time!)</li>
-        <li>📸 Take another snapshot (before/after pics are always fun)</li>
-        <li>🔬 Analyze what went wrong (detective mode activated)</li>
-        <li>👻 Make some detached elements (ghost party!)</li>
-        <li>🕵️ Hunt down those sneaky detached elements</li>
-        <li>📝 Create duplicate strings (ctrl+c ctrl+v gone wrong)</li>
-        <li>🎯 Find those copy-paste casualties</li>
-        <li>📦 Retain some objects (object hoarding 101)</li>
-        <li>🔍 Find the console's secret stash</li>
-        <li>📊 Track allocations (like watching your bank account, but with memory)</li>
-        <li>⚖️ Compare snapshots (spot the differences!)</li>
-        <li>🌳 View the containment tree (family tree of objects)</li>
-        <li>🕷️ Find zombie DOM nodes (they're undead!)</li>
-      </ol>
-    </div>
+  <div class="instructions">
+    <ul>
+      <li>Open Chrome DevTools (Press F12 or Right Click > Inspect)</li>
+      <li>Click on the "Memory" tab in DevTools</li>
+      <li>Make sure you have a clean start - reload the page if needed or use incognito</li>
+    </ul>
   </div>
 
+  <main class="memory-exercises"></main>
+  <section class="exercise">
+    <h2>Exercise 1: Memory Monster</h2>
+    <p>Goal: Observe how creating many objects affects memory allocation</p>
+    <p>Steps:</p>
+    <ol>
+      <li>Take initial snapshot</li>
+      <li>Click "Feed the Memory Monster" and watch memory grow</li>
+      <li>Take second snapshot</li>
+      <li>Click "Put Monster on Diet" to clean up</li>
+      <li>Take final snapshot and compare all three</li>
+      <li>Try to find all ways to see the new objects. How many ways did you spot? 🕵️‍♂️</li>
+      <li>Pro tip: If your computer starts sweating, you're doing it right! 💦</li>
+      <li>Note: No actual monsters were harmed in this memory experiment 🧟‍♂️</li>
+    </ol>
+    <div class="button-group">
+      <button id="createObjects">Feed the Memory Monster 🧟‍♂️</button>
+      <span class="tooltip">Creates 1000 objects with large arrays, consuming memory</span>
+    </div>
+    <div class="button-group"></div>
+    <button id="clearObjects">Put Monster on Diet 🥗</button>
+    <span class="tooltip">Clears all created objects to free up memory</span>
+    </div>
+  </section>
+
+  <section class="exercise">
+    <h2>Exercise 2: The Leaky Party</h2>
+    <p>Goal: Identify memory leaks caused by event listeners</p>
+    <p>Steps:</p>
+    <ol>
+      <li>Select "Record allocation timeline" in the Memory tab</li>
+      <li>Click "Start" to begin recording</li>
+      <li>Start the Party! Let those bytes boogie and watch memory do the disco! 💃🕺</li>
+      <li>Click "Stop" to analyze the timeline</li>
+      <li>Look for memory spikes in the timeline and use the timeline selector (blue markers) to analyze each spike
+        individually</li>
+      <li>Try the same Click "Start Party" multiple times</li>
+      <li>Take snapshot and look for accumulated event listeners</li>
+    </ol>
+    <div class="button-group">
+      <button id="startParty">Start Party 🎉</button>
+      <span class="tooltip">Creates dancers with setInterval that never gets cleared, causing a memory leak</span>
+    </div>
+    <div class="button-group">
+      <button id="stopParty">Stop Party ⛔</button>
+    </div>
+    <div id="danceFloor"></div>
+  </section>
+
+  <section class="exercise">
+    <h2>Exercise 3: The Infinity Loop</h2>
+    <p>Goal: Understand circular references in memory</p>
+    <p>Steps:</p>
+    <ol>
+      <li>Take initial snapshot</li>
+      <li>Click "Create Loop"</li>
+      <li>Take snapshot and look for circular references</li>
+      <li>Find these 2 Objects, and these 2 Arrays and observe there sizes</li>
+      <li>Click "Break Loop" to clean up</li>
+    </ol>
+    <div class="button-group">
+      <button id="createLoop">Create Loop 🔄</button>
+      <span class="tooltip">Creates objects that reference each other in a circular way</span>
+    </div>
+    <div class="button-group">
+      <button id="breakLoop">Break Loop 🔨</button>
+      <span class="tooltip">Breaks the circular reference by resetting objects</span>
+    </div>
+  </section>
+
+  <section class="exercise">
+    <h2>Exercise 4: Memory Linked List</h2>
+    <p>Goal: Learn about linked list memory management and references</p>
+    <p>Steps:</p>
+    <ol>
+      <li>Take initial snapshot</li>
+      <li>Click "Create Linked List" to create a chain of nodes</li>
+      <li>Take snapshot and observe the linked list structure</li>
+      <li>Click "Clear List" to remove the list</li>
+      <li>Take final snapshot and verify cleanup</li>
+      <li>Look at the Retainers tab to see how nodes reference each other</li>
+      <li>Find the head node and traverse through next pointers</li>
+      <li>Store a middle node as global variable and observe memory retention</li>
+      <li>Try breaking a link in the middle - what happens to garbage collection?</li>
+      <li>Look at the element Distance. Do you understand its value?</li>
+      <li>Look for any circular references in the list structure</li>
+      <li>Experiment with different list sizes to see memory impact</li>
+    </ol>
+    <div class="button-group">
+      <button id="createList">Create Linked List 🔗</button>
+      <span class="tooltip">Creates a linked list with multiple connected nodes</span>
+    </div>
+    <div class="button-group">
+      <button id="clearList">Clear List 🗑️</button>
+      <span class="tooltip">Removes all nodes and clears references</span>
+    </div>
+    <div id="listVisualizer"></div>
+  </section>
+
+  <section class="exercise">
+    <h2>Exercise 5: DOM Family Tree</h2>
+    <p>Goal: Learn about DOM element memory management</p>
+    <p>Steps:</p>
+    <ol>
+      <li>Take initial snapshot</li>
+      <li>Click "Grow Family Tree" to create DOM elements</li>
+      <li>Take snapshot and observe DOM tree size</li>
+      <li>Click "Prune Tree" to remove elements</li>
+      <li>Take final snapshot and verify cleanup</li>
+      <li>Try to find all ways to see the new elements. How many ways did you spot? 🕵️‍♂️</li>
+      <li>Look at the element Distance. Do you understand its value?</li>
+      <li>Look at the 'Array' object. Do you understand the window icon next to it?</li>
+      <li>Look at the 'div' objects. Do you understan why it contains other elements like the document?</li>
+      <li>Click on one of the div elements and look at the Retainers tab at the buttom. Try to see the tree structure
+      </li>
+      <li>Store as global variable one of the tree-nodes, and write this in the console 'temp1.parentElement', what is
+        that object? Try to find more reference objects...</li>
+
+      <li>Try to override the depth and number of child parameter and observe the results</li>
+    </ol>
+    <div class="button-group">
+      <button id="growTree">Grow Family Tree 🌳</button>
+      <span class="tooltip">Creates a large tree of nested DOM elements</span>
+    </div>
+    <div class="button-group">
+      <button id="pruneTree">Prune Tree ✂️</button>
+      <span class="tooltip">Removes all created DOM elements</span>
+    </div>
+    <div id="familyTree"></div>
+  </section>
+
+  <div class="tips">
+    <h3>📝 Memory Profiling Tips:</h3>
+    <ul>
+      <li>Use the search box in snapshots to find specific objects</li>
+      <li>Pay attention to the "Distance" column to find memory leaks</li>
+      <li>Look for "Detached" elements which indicate potential leaks</li>
+      <li>Use "Record allocation timeline" to track memory changes in real-time</li>
+      <li>Check "Shallow size" vs "Retained size" to understand true memory impact</li>
+    </ul>
+  </div>
+  </main>
+
 </body>
+
+</html>

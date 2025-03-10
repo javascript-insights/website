@@ -24,17 +24,45 @@
   </div>
 
   <div class="container">
-    <h1>🧠 Memory Tool Demo (Warning: May Cause Memory Madness!) 🤪</h1>
+    <h1>Memory Tool (Warning: May Cause Memory Madness!) 🤪</h1>
     <p>Welcome to the wildest memory adventure! Let's make your browser sweat! 💦</p>
-    <p><button class="button" id="leakButton">🚰 Create Memory Leak (Oops!)</button></p>
-    <p><button class="button" id="clearButton">🧹 Clean Up This Mess!</button></p>
-    <p><button class="button" id="growButton">🎈 Make Memory Go Brrrr!</button></p>
-    <p><button class="button" id="detachButton">👻 Create Ghost Elements</button></p>
-    <p><button class="button" id="duplicateStringsButton">🐑 Clone String Army</button></p>
-    <p><button class="button" id="shallowSizeButton">📏 How Big? (That's What She Said)</button></p>
-    <p><button class="button" id="retainedSizeButton">🏋️ Show True Weight</button></p>
-    <p><button class="button" id="distanceButton">🚀 Space Between Things</button></p>
-    <p><button class="button" id="createObjectsBtn">🎭 Create Objects & Thanos Snap Half</button></p>
+
+    <p>
+      <button class="button" id="leakButton">🚰 Create Memory Leak (Oops!)</button>
+      <span>Creates arrays that are never cleaned up</span>
+    </p>
+    <p>
+      <button class="button" id="clearButton">🧹 Clean Up This Mess!</button>
+      <span>Clears the leaked memory arrays</span>
+    </p>
+    <p>
+      <button class="button" id="growButton">🎈 Make Memory Go Brrrr!</button>
+      <span>Adds huge strings to memory</span>
+    </p>
+    <p>
+      <button class="button" id="detachButton">👻 Create Ghost Elements</button>
+      <span>Creates DOM elements not attached to document</span>
+    </p>
+    <p>
+      <button class="button" id="duplicateStringsButton">🐑 Clone String Army</button>
+      <span>Creates many duplicate string values</span>
+    </p>
+    <p>
+      <button class="button" id="shallowSizeButton">📏 How Big?</button>
+      <span>Creates objects to show shallow memory size</span>
+    </p>
+    <p>
+      <button class="button" id="retainedSizeButton">🏋️ Show True Weight</button>
+      <span>Creates nested objects to show retained memory</span>
+    </p>
+    <p>
+      <button class="button" id="distanceButton">🚀 Space Between Things</button>
+      <span>Creates a long chain of linked objects</span>
+    </p>
+    <p>
+      <button class="button" id="createObjectsBtn">🎭 Create Objects & Thanos Snap Half</button>
+      <span>Creates objects then deletes half</span>
+    </p>
 
     <div class="instructions">
       <h2>🎮 How to Play with Your Browser's Memory</h2>

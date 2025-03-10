@@ -1,64 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
-    'use strict';
-    var leakedNodes = [],
-        parentDiv, leaf, counter = 0;
+    let leaks = [];
+    let detachedElements = [];
+    let duplicatedStrings = [];
 
-    function createLeaf() {
-        counter++;
-        var div = document.createElement('div');
-        div.appendChild(document.createTextNode('Leaf  ' + counter));
-        div.someText = (new Array(1E6).join('x'));
-        return div;
-    }
-
-    function createBranch(number) {
-        var div = document.createElement('div');
-        createNodesAndReturnLastLeaf(div, number - 1);
-        return div;
-    }
-
-    function createNodesAndReturnLastLeaf(parentDiv, number) {
-        var i, lastLeaf;
-        for (i = 0; i < number; i++) {
-            parentDiv.appendChild(createBranch(number));
+    document.getElementById('leakButton').addEventListener('click', () => {
+        // Simulate a memory leak by creating a large array and not releasing it
+        for (let i = 0; i < 10000; i++) {
+            leaks.push(new Array(10000).fill('❌leak❌'));
         }
-        for (i = 0; i < number; i++) {
-            parentDiv.appendChild(lastLeaf = createLeaf(number, i));
+        console.log('Memory leak created');
+    });
+
+    document.getElementById('clearButton').addEventListener('click', () => {
+        // Clear the memory leak
+        leaks = [];
+        console.log('Memory cleared');
+    });
+
+    document.getElementById('detachButton').addEventListener('click', () => {
+        // Create detached elements
+        for (let i = 0; i < 100; i++) {
+            let elem = document.createElement('div');
+            elem.textContent = '❌Detached Element ' + i;
+            detachedElements.push(elem);
         }
-        return lastLeaf;
-    }
-
-    function createTree() {
-        parentDiv = document.createElement('div');
-        leaf = createNodesAndReturnLastLeaf(parentDiv, 4);
-        document.body.appendChild(parentDiv);
-    }
-
-    function detachTree() {
-        document.body.removeChild(parentDiv);
-    }
-
-    function removeTreeReference() {
-        parentDiv = null;
-    }
-
-    function removeLeafReference() {
-        leaf = null;
-    }
-
-    document.getElementById('createTree').addEventListener('click', () => {
-        createTree();
+        console.log('Detached elements created');
     });
 
-    document.getElementById('detachTree').addEventListener('click', () => {
-        detachTree();
+    document.getElementById('duplicateStringsButton').addEventListener('click', () => {
+        // Create duplicated strings
+        for (let i = 0; i < 10000; i++) {
+            duplicatedStrings.push('❌' + 'duplicated string '.repeat(1000) + '❌');
+        }
+        console.log('Duplicated strings');
     });
 
-    document.getElementById('removeTreeReference').addEventListener('click', () => {
-        removeTreeReference();
-    });
-
-    document.getElementById('removeLeafReference').addEventListener('click', () => {
-        removeLeafReference();
+    document.getElementById('retainConsoleButton').addEventListener('click', () => {
+        // Create objects that will be retained in console
+        for (let i = 0; i < 100; i++) {
+            let obj = {
+                ['❌id❌']: i,
+                ['❌data❌']: new Array(1000).fill('❌retained data❌'),
+                ['❌timestamp❌']: new Date()
+            };
+            console.log(obj); // Objects logged to console are retained in memory
+        }
+        console.log('Objects retained in console');
     });
 });

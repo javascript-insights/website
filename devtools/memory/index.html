@@ -22,72 +22,77 @@
     <a href="./hands-on-1/index.html">Hands-On 1</a>
     <a href="./hands-on-2/index.html">Hands-On 2</a>
     <a href="./hands-on-3/index.html">Hands-On 3</a>
-    <a href="./hands-on-4/index.html">Hands-On 4</a>
+    <!-- <a href="./hands-on-4/index.html">Hands-On 4</a> -->
   </div>
   <section>
-    <h2>Memory Tool</h2>
+    <h2>Memory Tool 🧠 </h2>
     <p>The Memory tool in DevTools helps you understand memory usage and find memory leaks in your web applications. It
       provides insights into how memory is allocated and retained, allowing you to optimize your application's
-      performance.</p>
+      performance. (Because nobody wants their app to have the memory of a goldfish! 🐠)</p>
 
     <ul>
-      <li>A page's performance gets progressively worse over time. This is possibly a symptom of a memory leak. A
-        memory
-        leak is when a bug in the page causes the page to progressively use more and more memory over time.</li>
-      <li>A page's performance is consistently bad. This is possibly a symptom of memory bloat. Memory bloat is when a
+      <li>🐌 A page's performance gets progressively worse over time. This is possibly a symptom of a memory leak. A
+        memory leak is when a bug in the page causes the page to progressively use more and more memory over time.</li>
+      <li>🐢 A page's performance is consistently bad. This is possibly a symptom of memory bloat. Memory bloat is when
+        a
         page uses more memory than is necessary for optimal page speed.</li>
-      <li>A page's performance is delayed or appears to pause frequently. This is possibly a symptom of frequent
-        garbage
-        collections. Garbage collection is when the browser reclaims memory. The browser decides when this happens.
+      <li>⏸️ A page's performance is delayed or appears to pause frequently. This is possibly a symptom of frequent
+        garbage collections. Garbage collection is when the browser reclaims memory. The browser decides when this
+        happens.
         During collections, all script execution is paused. So if the browser is garbage collecting a lot, script
-        execution is going to get paused a lot.</li>
+        execution is going to get paused a lot. (Like a very thorough janitor who keeps stopping you to clean!)</li>
     </ul>
 
-    <h2>Task Manager</h2>
+    <h1>Before we dive in the Memory tool 🤿</h1>
+    <h2>OS Task Manager ⚙️</h2>
     <ul>
       <li>Open the Task Manager (Ctrl + Shift + Esc).</li>
       <li>Click on the "Processes" tab.</li>
       <li>Look for the process that corresponds to your browser.</li>
       <li>Check the "Memory" column to see how much memory the browser is using.</li>
       <li>Click on the "Memory" column to sort the processes by memory usage.</li>
-      <li>Look for any processes that are using an unusually high amount of memory.</li>
+      <li>Look for any processes that are using an unusually high amount of memory. (If you find your browser eating all
+        your
+        RAM, that's normal! 😅)</li>
     </ul>
+
+    <h2>Browser Task Manager ⚙️</h2>
+    <p>Open the Browser Task Manager (Shift + Esc)</p>
 
     <p>These two columns tell you different things about how your page is using memory:</p>
     <ul>
-      <li>The Memory footprint column represents OS memory. DOM nodes are stored in OS memory. If this value is
+      <li>📊 The Memory footprint column represents OS memory. DOM nodes are stored in OS memory. If this value is
         increasing, DOM nodes are getting created.</li>
-      <li>The JavaScript Memory column represents the JS heap. This column contains two values. The value you're
+      <li>💾 The JavaScript Memory column represents the JS heap. This column contains two values. The value you're
         interested in is the live number (the number in parentheses). The live number represents how much memory the
-        reachable objects on your page are using. If this number is increasing, either new objects are being created, or
-        the existing objects are growing.</li>
+        reachable objects on your page are using.</li>
     </ul>
 
-    <h2>Memory Tool</h2>
+    <h1>Memory Tool 🔍</h1>
 
-    <h3>Shallow Size</h3>
+    <h3>📏 Shallow Size</h3>
     <p>Shallow size is the amount of memory allocated for an object itself, excluding the memory used by objects
-      referenced by it. It represents the memory footprint of the object alone.</p>
+      referenced by it. Think of it as the object's personal space bubble!</p>
 
-    <h3>Retained Size</h3>
+    <h3>📦 Retained Size</h3>
     <p>Retained size is the total memory size that will be freed when the object is garbage collected. It includes the
-      shallow size of the object and the sizes of all objects that are only accessible through this object. Retained
-      size helps in understanding the impact of an object on the overall memory usage.</p>
+      shallow size of the object and the sizes of all objects that are only accessible through this object.</p>
 
-    <h3>Distance</h3>
-    <p>Distance is a metric that indicates how far an object is from the root of the object graph. It represents the
-      number of references that need to be traversed to reach the object from the root. A smaller distance means the
-      object is closer to the root and more likely to be retained in memory, while a larger distance indicates the
-      object is deeper in the object graph and more likely to be garbage collected.</p>
+    <h3>🗺️ Distance</h3>
+    <p>Distance is a metric that indicates how far an object is from the root of the object graph. The further away it
+      is,
+      the more likely it is to get lost in the heap jungle!</p>
 
-    (array)
-    (compiled code)
-    (concatenated string)
+    <h1>Performance Tool ⚡</h1>
+    <p>The Performance tool in DevTools helps you analyze the performance of your web application. It provides
+      insights into how your application is performing, including CPU usage, <strong>memory usage</strong>, and network
+      activity. (Like
+      a
+      personal trainer for your app!)</p>
 
-
-    <h2>Performance Tool</h2>
-
-    <h2>Memory Inspector Tool</h2>
+    <h1>Memory Inspector Tool 🔬</h1>
+    <p>The Memory Inspector tool in DevTools helps you analyze the memory usage of your web application. It provides
+      insights into how memory is allocated and retained, allowing you to optimize your application's performance.</p>
 
   </section>
 </body>

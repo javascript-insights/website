@@ -1,11 +1,6 @@
 window.addEventListener("load", function foo() {
 
-  let grow = [];
   let leaks = [];
-  let detachedElements = [];
-  let duplicatedStrings = [];
-  let objects = [];
-
 
   document.getElementById('leakButton').addEventListener('click', () => {
     // Simulate a memory leak by creating a large array and not releasing it
@@ -21,12 +16,15 @@ window.addEventListener("load", function foo() {
     console.log('Memory cleared');
   });
 
+  let grow = [];
+
   document.getElementById('growButton').addEventListener('click', () => {
     // memory grow
     grow.push(new Array(1000000).join('x'));
     console.log('Memory growed');
   });
 
+  let detachedElements = [];
   document.getElementById('detachButton').addEventListener('click', () => {
     // Create detached elements
     for (let i = 0; i < 100; i++) {
@@ -37,6 +35,7 @@ window.addEventListener("load", function foo() {
     console.log('Detached elements created');
   });
 
+  let duplicatedStrings = [];
   document.getElementById('duplicateStringsButton').addEventListener('click', () => {
     // Create duplicated strings
     for (let i = 0; i < 10000; i++) {
@@ -45,10 +44,10 @@ window.addEventListener("load", function foo() {
     console.log('Duplicated strings created');
   });
 
+  let shallowSizeArray = [];
   document.getElementById('shallowSizeButton').addEventListener('click', function () {
     console.log('Shallow Size button clicked');
     // Logic to demonstrate Shallow Size in the memory tool
-    let shallowSizeArray = [];
     for (let i = 0; i < 1000; i++) {
       shallowSizeArray.push({ index: i });
     }

@@ -1,85 +1,64 @@
-// Global variables to store references
-let objects = [];
-let partyIntervals = [];
-let loopObjects = { a: {}, b: {} };
-let treeNodes = [];
-
-// Exercise 1: Memory Monster
-document.getElementById('createObjects').addEventListener('click', () => {
-    for (let i = 0; i < 1000; i++) {
-        objects.push({
-            id: Math.random(),
-            data: new Array(1000).fill('🧟‍♂️'),
-            timestamp: new Date()
-        });
-    }
-});
-
-document.getElementById('clearObjects').addEventListener('click', () => {
-    objects = [];
-});
-
-// Exercise 2: The Leaky Party
-document.getElementById('startParty').addEventListener('click', () => {
-    const danceFloor = document.getElementById('danceFloor');
-    const dancer = document.createElement('div');
-    dancer.textContent = '💃';
-    dancer.style.position = 'relative';
-    danceFloor.appendChild(dancer);
-
-    // Create a new interval for each dancer that's never cleared
-    const interval = setInterval(() => {
-        dancer.style.left = Math.random() * 100 + 'px';
-        dancer.style.top = Math.random() * 100 + 'px';
-    }, 1000);
-
-    partyIntervals.push(interval);
-});
-
-// Exercise 3: The Infinity Loop
-document.getElementById('createLoop').addEventListener('click', () => {
-    loopObjects.a.ref = loopObjects.b;
-    loopObjects.b.ref = loopObjects.a;
-});
-
-document.getElementById('breakLoop').addEventListener('click', () => {
-    loopObjects = { a: {}, b: {} };
-});
-
-// Exercise 4: DOM Family Tree
-document.getElementById('growTree').addEventListener('click', () => {
-    const tree = document.getElementById('familyTree');
-    function createNode(depth) {
-        if (depth > 5) return null;
-        
-        const node = document.createElement('div');
-        node.className = 'tree-node';
-        node.textContent = '🌳';
-        
-        for (let i = 0; i < 3; i++) {
-            const child = createNode(depth + 1);
-            if (child) {
-                node.appendChild(child);
-                treeNodes.push(child);
-            }
-        }
-        return node;
-    }
-
-    const root = createNode(0);
-    if (root) {
-        tree.appendChild(root);
-        treeNodes.push(root);
-    }
-});
-
-document.getElementById('pruneTree').addEventListener('click', () => {
-    const tree = document.getElementById('familyTree');
-    tree.innerHTML = '';
-    treeNodes = [];
-});
-
-// Wait for DOM to be loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Memory exercises loaded and ready!');
+    'use strict';
+    var leakedNodes = [],
+        parentDiv, leaf, counter = 0;
+
+    function createLeaf() {
+        counter++;
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode('Leaf  ' + counter));
+        div.someText = (new Array(1E6).join('x'));
+        return div;
+    }
+
+    function createBranch(number) {
+        var div = document.createElement('div');
+        createNodesAndReturnLastLeaf(div, number - 1);
+        return div;
+    }
+
+    function createNodesAndReturnLastLeaf(parentDiv, number) {
+        var i, lastLeaf;
+        for (i = 0; i < number; i++) {
+            parentDiv.appendChild(createBranch(number));
+        }
+        for (i = 0; i < number; i++) {
+            parentDiv.appendChild(lastLeaf = createLeaf(number, i));
+        }
+        return lastLeaf;
+    }
+
+    function createTree() {
+        parentDiv = document.createElement('div');
+        leaf = createNodesAndReturnLastLeaf(parentDiv, 4);
+        document.body.appendChild(parentDiv);
+    }
+
+    function detachTree() {
+        document.body.removeChild(parentDiv);
+    }
+
+    function removeTreeReference() {
+        parentDiv = null;
+    }
+
+    function removeLeafReference() {
+        leaf = null;
+    }
+
+    document.getElementById('createTree').addEventListener('click', () => {
+        createTree();
+    });
+
+    document.getElementById('detachTree').addEventListener('click', () => {
+        detachTree();
+    });
+
+    document.getElementById('removeTreeReference').addEventListener('click', () => {
+        removeTreeReference();
+    });
+
+    document.getElementById('removeLeafReference').addEventListener('click', () => {
+        removeLeafReference();
+    });
 });

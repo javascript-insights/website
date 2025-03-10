@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createLeakedNodes() {
         var i;
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 100; i++) {
             leakedNodes.push(createNode("Leaked:" + i));
         }
     }
 
     function createGCNodes() {
         var i;
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 100; i++) {
             createNode("Collected:" + i);
         }
     }
