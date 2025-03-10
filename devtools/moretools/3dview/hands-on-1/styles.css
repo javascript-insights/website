@@ -9,31 +9,31 @@
 
 .box1 {
     z-index: 1;
-    top: 650px;
+    top: 850px;
     left: 450px;
 }
 
 .box2 {
     z-index: 2;
-    top: 670px;
+    top: 870px;
     left: 470px;
 }
 
 .box3 {
     z-index: 3;
-    top: 690px;
+    top: 890px;
     left: 490px;
 }
 
 .box4 {
     z-index: 4;
-    top: 710px;
+    top: 910px;
     left: 510px;
 }
 
 .box5 {
     z-index: 5;
-    top: 730px;
+    top: 930px;
     left: 530px;
 }
 
