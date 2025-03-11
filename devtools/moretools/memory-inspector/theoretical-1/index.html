@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Memory Inspector - Theoretical 1</h1>
+  <h1>Memory Inspector Theoretical 1</h1>
   <nav class="breadcrumb">
     <a href="../../../../index.html">JavaScript Insights</a>
     <a href="../../../index.html">DevTools</a>
@@ -23,27 +23,29 @@
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
+  <h1>Inspect ArrayBuffers in JS</h1>
+  <p>Use the Memory Inspector tool to inspect the ArrayBuffers in JS</p>
+  <p>In this example, we will create a loop that creates a new ArrayBuffer and fills it with random data. We will then
+    inspect the memory used by the ArrayBuffer in the Memory Inspector.</p>
 
-  <h1>Memory Inspector Tool Demo</h1>
-  <p>Welcome to the Memory Inspector tool demo. Use the buttons below to allocate different types of memory and inspect
-    them using the Memory Inspector in DevTools.</p>
-
-  <button onclick="allocateArrayBuffer()">Allocate ArrayBuffer</button>
-  <button onclick="allocateTypedArray()">Allocate TypedArray</button>
-  <button onclick="allocateObject()">Allocate Object</button>
-  <button onclick="allocateString()">Allocate String</button>
-  <button onclick="allocateMap()">Allocate Map</button>
-  <button onclick="allocateSet()">Allocate Set</button>
-  <button onclick="allocateWeakMap()">Allocate WeakMap</button>
-  <button onclick="allocateWeakSet()">Allocate WeakSet</button>
-
-  <div class="instructions">
-    <h2>Instructions</h2>
-    <p>1. Open the DevTools in your browser (F12 or right-click and select "Inspect").</p>
-    <p>2. Navigate to the "Memory" tab.</p>
-    <p>3. Click on the "Take snapshot" button to capture the current memory state.</p>
-    <p>4. Use the buttons above to allocate different types of memory.</p>
-    <p>5. Take another snapshot after each allocation to see the changes in memory usage.</p>
-    <p>6. Analyze the memory snapshots to understand how different types of memory are allocated and managed.</p>
-  </div>
+  <h2>Steps</h2>
+  <p>
+  <ol>
+    <li>Open DevTools, and open Sources Panel</li>
+    <li>Open <code>index.js</code></li>
+    <li>Set a breakpoint in line 18 in the loop body</li>
+    <li>Reload the page</li>
+    <li>Inspect the Scope View and open the <i>Module Scope</i></li>
+    <li>Open up the memory inspector for the</li>
+    <ul>
+      <li><code>buffer</code> by clicking on the memory icon (or through the context menu of <code>buffer</code> by
+        right clicking, then "Reveal in Memory Inspector panel")</li>
+      <li>Uint8Array <code>b2</code> by expanding to see the buffer, and select the memory icon (or through the context
+        menu of <code>b2</code></li>
+      <li>Uint8Array <code>b1</code> by expanding to see the buffer, and select the memory icon (or through the context
+        menu of <code>b1</code> (refocuses on the memory tab of the first buffer)</li>
+    </ul>
+    <li>Step and see updates to buffers in the memory inspector</li>
+  </ol>
+  </p>
 </body>

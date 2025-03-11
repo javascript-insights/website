@@ -27,22 +27,25 @@
   <h1>Memory Inspector Tool Demo</h1>
   <div class="instructions">
     <h2>Instructions</h2>
-    <p>Welcome to the Memory Inspector Tool demo! In this exercise, you will learn how to use the Memory Inspector tool
-      to find a hidden key in the memory.</p>
+    <p>Welcome! In this exercise, you'll learn to use the Memory Inspector tool to find a hidden secret in the code.</p>
     <p>Follow these steps:</p>
     <ol>
-      <li>Open the Developer Tools in your browser (usually by pressing <strong>F12</strong> or
-        <strong>Ctrl+Shift+I</strong>).
-      </li>
-      <li>Navigate to the <strong>Memory Inspector</strong> tab.</li>
-      <li>Add a brackpoint and start the game</li>
-      <li>Analyze the buffer to find the hidden key.</li>
+      <li>Open Developer Tools (<strong>F12</strong> or <strong>Ctrl+Shift+I</strong>)</li>
+      <li>Go to the <strong>Sources</strong> tab and find <strong>index.js</strong></li>
+      <li>Set a breakpoint on the line with <code>console.log('Buffer created...')</code></li>
+      <li>Click the "Start Game" button below</li>
+      <li>When the code pauses, switch to the <strong>Memory Inspector</strong> tab</li>
+      <li>Look for the <code>buffer</code> variable in memory</li>
+      <li>The secret key is encoded in this buffer - can you decode it?</li>
     </ol>
-    <p>Good luck!</p>
+    <button onclick="toggleHint()" class="hint-button">Show Hint</button>
+    <p id="hint" style="display: none">Hint: The buffer contains text data that's been encoded. Try viewing the buffer
+      as Uint8Array instead of
+      Uint32Array - each character is a single byte!</p>
   </div>
   <div class="game">
     <h2>The Game</h2>
-    <p>Find the hidden key in the memory to unlock the secret message!</p>
+    <p>Find the hidden secret message in the memory!</p>
     <button id="startGame">Start Game</button>
   </div>
 </body>

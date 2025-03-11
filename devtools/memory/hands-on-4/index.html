@@ -23,33 +23,78 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <p>
-    <button id="createTree">
-      🌱 Create tree (watch me grow!)
-      <img src="https://media.giphy.com/media/3o7TKSha51ATTx9KzC/giphy.gif" width="20" height="20" alt="growing tree">
-    </button>
-  </p>
 
-  <p>
-    <button id="detachTree">
-      🪓 Detach tree (timber!)
-      <img src="https://media.giphy.com/media/l2Je66zG6mAAZxgqI/giphy.gif" width="20" height="20" alt="falling tree">
-    </button>
-  </p>
+  <h1>Memory Inspector Tool Demo</h1>
+  <p>Welcome to the Memory Inspector tool demo. Use the buttons below to allocate different types of memory and inspect
+    them using the Memory Inspector in DevTools.</p>
 
-  <p>
-    <button id="removeTreeReference">
-      🌲 Remove tree reference (goodbye old friend)
-      <img src="https://media.giphy.com/media/3o6Zt7NPnoGorOryHC/giphy.gif" width="20" height="20" alt="disappearing">
-    </button>
-  </p>
+  <div class="button-container">
+    <div class="button-group">
+      <button onclick="allocateArrayBuffer()">Allocate ArrayBuffer</button>
+      <span class="tooltip">Creates a fixed-length raw binary data buffer of 50MB</span>
+    </div>
 
-  <p>
-    <button id="removeLeafReference">
-      🍂 Remove leaf reference (leaf it alone!)
-      <img src="https://media.giphy.com/media/l2JhIUyUs8KDCCf3W/giphy.gif" width="20" height="20" alt="falling leaf">
-    </button>
-  </p>
+    <div class="button-group">
+      <button onclick="allocateTypedArray()">Allocate TypedArray</button>
+      <span class="tooltip">Creates a 50MB Uint8Array of 8-bit unsigned integers</span>
+    </div>
+
+    <div class="button-group">
+      <button onclick="allocateObject()">Allocate Object</button>
+      <span class="tooltip">Creates an object with 1 million entries, each containing index, random value and array
+        data</span>
+    </div>
+
+    <div class="button-group">
+      <button onclick="allocateString()">Allocate String</button>
+      <span class="tooltip">Creates a string with 10 million 'a' characters</span>
+    </div>
+
+    <div class="button-group">
+      <button onclick="allocateMap()">Allocate Map</button>
+      <span class="tooltip">Creates a Map with 1 million entries, each containing index, random value and array
+        data</span>
+    </div>
+
+    <div class="button-group">
+      <button onclick="allocateSet()">Allocate Set</button>
+      <span class="tooltip">Creates a Set with 1 million unique objects, each containing index, random value and array
+        data</span>
+    </div>
+
+    <div class="button-group">
+      <button onclick="allocateWeakMap()">Allocate WeakMap</button>
+      <span class="tooltip">Creates a WeakMap with 1 million weakly referenced key-value pairs</span>
+    </div>
+
+    <div class="button-group">
+      <button onclick="allocateWeakSet()">Allocate WeakSet</button>
+      <span class="tooltip">Creates a WeakSet with 1 million weakly referenced objects</span>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <h2>How to Use the Memory Inspector</h2>
+    <ol>
+      <h3>Setup:</h3>
+      <li>Open Chrome DevTools by pressing F12 or right-clicking anywhere and selecting "Inspect"</li>
+      <li>Click on the "Memory" tab in DevTools (if not visible, click >> to show more tabs)</li>
+
+      <h3>Taking Snapshots:</h3>
+      <li>Click "Take heap snapshot" in the Memory panel</li>
+      <li>Wait for the initial snapshot to complete - this is your baseline</li>
+
+      <h3>Testing Memory Allocation:</h3>
+      <li>Click any of the buttons above to allocate different types of memory</li>
+      <li>Take another heap snapshot after each allocation</li>
+      <li>Compare snapshots by selecting them from the left panel to see memory changes</li>
+
+      <h3>Analysis:</h3>
+      <li>Look for your allocated objects in the snapshot comparison</li>
+      <li>Observe the size and count of allocated objects</li>
+      <li>Note how different data structures consume memory differently</li>
+    </ol>
+  </div>
 
 </body>
 

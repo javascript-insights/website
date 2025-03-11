@@ -27,7 +27,32 @@
     <a href="./hands-on-4/index.html">Hands-On 4</a>
   </div>
   <p>Use the 3D Animations to understand Animations</p>
-
+  <div class="animation-container">
+    <div class="emoji">🤪</div>
+    <style>
+      .emoji {
+        font-size: 48px;
+        animation: wobble 1s infinite;
+      }
+      @keyframes wobble {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(20deg); }
+        75% { transform: rotate(-20deg); }
+      }
+    </style>
+    <style>
+      .animation-container {
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-100px); }
+      }
+    </style>
+  </div>
 </body>
 
 </html>

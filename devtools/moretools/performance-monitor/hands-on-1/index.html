@@ -26,37 +26,59 @@
 
   <h1>Performance Monitor Tool Demo</h1>
   <div class="instructions">
-    <p>Welcome to the Performance Monitor Tool demo! Use the buttons below to simulate different performance trends.
-      Open your browser's DevTools and navigate to the Performance Monitor tab to observe the changes.</p>
-    <p>Instructions:</p>
-    <ul>
-      <li>Click on the buttons to simulate different trends.</li>
-      <li>Observe the changes in the Performance Monitor tab in DevTools.</li>
-      <li>Analyze how each trend affects the performance metrics.</li>
-    </ul>
+    <p>🎮 Welcome to the Performance Monitor Tool demo! This wacky playground helps you see how different shenanigans
+      affect
+      your browser's performance! 🎪</p>
+    <p>How to use (it's easier than making a sandwich 🥪):</p>
+    <ol>
+      <li>Open Chrome DevTools (F12 or right-click > Inspect) 🔍</li>
+      <li>Find "More tools" (click the mysterious three dots ⋮) and select "Performance monitor"</li>
+      <li>Click any of the crazy buttons below and watch chaos unfold! 🎢</li>
+      <li>Watch your browser sweat in real-time! 💦</li>
+    </ol>
   </div>
-  <button onclick="simulateCPUUsage()">Simulate High CPU Usage</button>
-  <button onclick="simulateJSHeapSize()">Simulate Large JS Heap Size</button>
-  <button onclick="simulateDOMNodes()">Simulate Many DOM Nodes</button>
-  <button onclick="simulateJSEventListeners()">Simulate Many JS Event Listeners</button>
-  <button onclick="simulateDocuments()">Simulate Multiple Documents</button>
-  <button onclick="simulateDocumentFrames()">Simulate Multiple Document Frames</button>
-  <button onclick="simulateLayoutsPerSec()">Simulate High Layouts/sec</button>
-  <button onclick="simulateStyleRecalcPerSec()">Simulate High Style Recalc/sec</button>
 
-  <div class="explanation"></div>
-  <h2>Explanation:</h2>
-  <ul>
-    <li><strong>Simulate High CPU Usage:</strong> A busy-wait loop for 1 second to simulate high CPU usage.</li>
-    <li><strong>Simulate Large JS Heap Size:</strong> Creates a large array to consume memory.</li>
-    <li><strong>Simulate Many DOM Nodes:</strong> Adds 1000 new div elements to the DOM.</li>
-    <li><strong>Simulate Many JS Event Listeners:</strong> Adds 1000 click event listeners to the body.</li>
-    <li><strong>Simulate Multiple Documents:</strong> Adds 10 iframes to simulate multiple documents.</li>
-    <li><strong>Simulate Multiple Document Frames:</strong> Adds 10 iframes to simulate multiple document frames.</li>
-    <li><strong>Simulate High Layouts/sec:</strong> Adds 1000 absolutely positioned div elements to trigger layout
-      calculations.</li>
-    <li><strong>Simulate High Style Recalc/sec:</strong> Adds 1000 div elements with different colors to trigger style
-      recalculations.</li>
-  </ul>
+  <div class="button-group">
+    <div class="button-with-explanation">
+      <button onclick="simulateCPUUsage()">🔥 Make CPU Go Brrrr!</button>
+      <span>Makes your CPU dance for 1 second! Hope it knows how to salsa 💃</span>
+    </div>
+
+    <div class="button-with-explanation"></div>
+    <button onclick="simulateJSHeapSize()">🗑️ Eat All The Memory!</button>
+    <span>Creates an array so big it needs its own zip code</span>
   </div>
+
+  <div class="button-with-explanation">
+    <button onclick="simulateDOMNodes()">🌳 DOM Tree Party</button>
+    <span>Spawns 1000 div elements - it's like a div family reunion!</span>
+  </div>
+
+  <div class="button-with-explanation"></div>
+  <button onclick="simulateJSEventListeners()">👂 Add All The Listeners!</button>
+  <span>Adds 1000 click listeners - your browser is now very attentive</span>
+  </div>
+
+  <div class="button-with-explanation">
+    <button onclick="simulateDocuments()">📄 Document Multiplication</button>
+    <span>Creates 10 iframes because one page is never enough</span>
+  </div>
+
+  <div class="button-with-explanation"></div>
+  <button onclick="simulateDocumentFrames()">🖼️ Frame-a-palooza</button>
+  <span>Adds 10 iframes - it's getting framey in here!</span>
+  </div>
+
+  <div class="button-with-explanation">
+    <button onclick="simulateLayoutsPerSec()">🎨 Layout Chaos</button>
+    <span>1000 divs playing musical chairs with positions</span>
+  </div>
+
+  <div class="button-with-explanation">
+    <button onclick="simulateStyleRecalcPerSec()">🎭 Style Party</button>
+    <span>1000 divs having a costume party!</span>
+  </div>
+  </div>
+
+  <img src="https://media.giphy.com/media/ZrJcTENQacGhW/giphy.gif" alt="Success" style="width: 400px; margin: 20px 0;">
 </body>

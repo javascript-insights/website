@@ -24,28 +24,26 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>Inspect ArrayBuffers in JS</h1>
+  <h1>Inspect ArrayBuffers in JavaScript</h1>
   <p>
-    This demos that we can inspect the ArrayBuffers in JS.
+    Learn how to inspect and monitor ArrayBuffers using Chrome DevTools.
   </p>
-  <h2>Steps</h2>
-  <p>
+  <h2>Instructions</h2>
   <ol>
-    <li>Open DevTools, and open Sources Panel</li>
-    <li>Open <code>index.js</code></li>
-    <li>Set a breakpoint in line 18 in the loop body</li>
-    <li>Reload the page</li>
-    <li>Inspect the Scope View and open the <i>Module Scope</i></li>
-    <li>Open up the memory inspector for the</li>
-    <ul>
-      <li><code>buffer</code> by clicking on the memory icon (or through the context menu of <code>buffer</code> by
-        right clicking, then "Reveal in Memory Inspector panel")</li>
-      <li>Uint8Array <code>b2</code> by expanding to see the buffer, and select the memory icon (or through the context
-        menu of <code>b2</code></li>
-      <li>Uint8Array <code>b1</code> by expanding to see the buffer, and select the memory icon (or through the context
-        menu of <code>b1</code> (refocuses on the memory tab of the first buffer)</li>
-    </ul>
-    <li>Step and see updates to buffers in the memory inspector</li>
+    <li>Open Chrome DevTools (F12 or right-click > Inspect)</li>
+    <li>Navigate to the Sources Panel</li>
+    <li>Find and open the <code>index.js</code> file</li>
+    <li>Set a breakpoint by clicking on line 18 inside the loop</li>
+    <li>Refresh the page to trigger the breakpoint</li>
+    <li>In the Scope View (right panel), expand the <i>Module Scope</i> section</li>
+    <li>Open the Memory Inspector for each of these variables:
+      <ul>
+        <li><code>buffer</code>: Click the memory icon next to it (or right-click > "Reveal in Memory Inspector panel")
+        </li>
+        <li><code>b2</code>: Expand the Uint8Array, locate its buffer, and click the memory icon</li>
+        <li><code>b1</code>: Expand the Uint8Array, locate its buffer, and click the memory icon</li>
+      </ul>
+    </li>
+    <li>Use the Step button (F10) to advance through the code and watch the buffer values update in real-time</li>
   </ol>
-  </p>
 </body>

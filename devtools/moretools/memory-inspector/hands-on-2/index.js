@@ -13,3 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+function toggleHint() {
+    const hint = document.getElementById('hint');
+    hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
+}

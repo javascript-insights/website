@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Monitor - Theoretical 1</h1>
+  <h1>Performance Monitor Theoretical 1</h1>
   <nav class="breadcrumb">
     <a href="../../../../index.html">JavaScript Insights</a>
     <a href="../../../index.html">DevTools</a>
@@ -26,38 +26,57 @@
 
   <h1>Performance Monitor Tool Demo</h1>
   <div class="instructions">
-    <p>Welcome to the Performance Monitor Tool demo! Use the buttons below to simulate different performance trends.
-      Open your browser's DevTools and navigate to the Performance Monitor tab to observe the changes.</p>
-    <p>Instructions:</p>
-    <ul>
-      <li>Click on the buttons to simulate different trends.</li>
-      <li>Observe the changes in the Performance Monitor tab in DevTools.</li>
-      <li>Analyze how each trend affects the performance metrics.</li>
-    </ul>
+    <p>Welcome to the Performance Monitor Tool demo! This demo helps you understand how different operations affect
+      browser performance.</p>
+    <p>How to use:</p>
+    <ol>
+      <li>Open Chrome DevTools (Press F12 or right-click > Inspect)</li>
+      <li>Go to the "More tools" menu (click three dots) and select "Performance monitor"</li>
+      <li>Click any button below to see its effect on performance metrics</li>
+      <li>Watch how the metrics change in real-time in the Performance Monitor</li>
+    </ol>
   </div>
-  <button onclick="simulateCPUUsage()">Simulate High CPU Usage</button>
-  <button onclick="simulateJSHeapSize()">Simulate Large JS Heap Size</button>
-  <button onclick="simulateDOMNodes()">Simulate Many DOM Nodes</button>
-  <button onclick="simulateJSEventListeners()">Simulate Many JS Event Listeners</button>
-  <button onclick="simulateDocuments()">Simulate Multiple Documents</button>
-  <button onclick="simulateDocumentFrames()">Simulate Multiple Document Frames</button>
-  <button onclick="simulateLayoutsPerSec()">Simulate High Layouts/sec</button>
-  <button onclick="simulateStyleRecalcPerSec()">Simulate High Style Recalc/sec</button>
 
-  <div class="explanation"></div>
-  <h2>Explanation:</h2>
-  <ul>
-    <li><strong>Simulate High CPU Usage:</strong> A busy-wait loop for 1 second to simulate high CPU usage.</li>
-    <li><strong>Simulate Large JS Heap Size:</strong> Creates a large array to consume memory.</li>
-    <li><strong>Simulate Many DOM Nodes:</strong> Adds 1000 new div elements to the DOM.</li>
-    <li><strong>Simulate Many JS Event Listeners:</strong> Adds 1000 click event listeners to the body.</li>
-    <li><strong>Simulate Multiple Documents:</strong> Adds 10 iframes to simulate multiple documents.</li>
-    <li><strong>Simulate Multiple Document Frames:</strong> Adds 10 iframes to simulate multiple document frames.</li>
-    <li><strong>Simulate High Layouts/sec:</strong> Adds 1000 absolutely positioned div elements to trigger layout
-      calculations.</li>
-    <li><strong>Simulate High Style Recalc/sec:</strong> Adds 1000 div elements with different colors to trigger style
-      recalculations.</li>
-  </ul>
+  <div class="button-group">
+    <div class="button-with-explanation">
+      <button onclick="simulateCPUUsage()">Simulate High CPU Usage</button>
+      <span>Creates a busy-wait loop for 1 second to show CPU spike</span>
+    </div>
+
+    <div class="button-with-explanation">
+      <button onclick="simulateJSHeapSize()">Simulate Large JS Heap Size</button>
+      <span>Creates a large array in memory to show memory usage increase</span>
+    </div>
+
+    <div class="button-with-explanation">
+      <button onclick="simulateDOMNodes()">Simulate Many DOM Nodes</button>
+      <span>Adds 1000 div elements to show impact on DOM node count</span>
+    </div>
+
+    <div class="button-with-explanation">
+      <button onclick="simulateJSEventListeners()">Simulate Many JS Event Listeners</button>
+      <span>Adds 1000 click listeners to demonstrate event listener impact</span>
+    </div>
+
+    <div class="button-with-explanation">
+      <button onclick="simulateDocuments()">Simulate Multiple Documents</button>
+      <span>Creates 10 iframes to show effect of multiple documents</span>
+    </div>
+
+    <div class="button-with-explanation">
+      <button onclick="simulateDocumentFrames()">Simulate Multiple Document Frames</button>
+      <span>Adds 10 iframes to demonstrate frame count impact</span>
+    </div>
+
+    <div class="button-with-explanation">
+      <button onclick="simulateLayoutsPerSec()">Simulate High Layouts/sec</button>
+      <span>Creates 1000 positioned divs to trigger layout calculations</span>
+    </div>
+
+    <div class="button-with-explanation">
+      <button onclick="simulateStyleRecalcPerSec()">Simulate High Style Recalc/sec</button>
+      <span>Adds 1000 colored divs to trigger style recalculations</span>
+    </div>
   </div>
 
 </body>
