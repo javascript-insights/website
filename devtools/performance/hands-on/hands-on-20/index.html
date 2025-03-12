@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Performance Hands-On 20 - Maximum call stack size exceeded</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../../index.html">JavaScript Insights</a>
+    <a href="../../../../index.html">DevTools</a>
+    <a href="../../index.html">Performance</a>
+    <a href="../index.html">Hands-On</a>
+    <a href="./index.html">Maximum call stack size exceeded</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <div class="content">
+    <h2>Maximum call stack size exceeded</h2>
+    <p>In this hands-on exercise, we will explore the "Maximum call stack size exceeded" error in JavaScript.</p>
+    <p>This error occurs when a function calls itself recursively without a proper base case, leading to an infinite
+      loop of function calls.</p>
+    <p>To trigger this error, we will create a simple recursive function that does not have a base case.</p>
+    <button id="triggerError" onclick="loop(0);">Trigger Error</button>
+    <p id="errorMessage" style="color: red;"></p>
+    <p>Once the error is triggered, we will use the browser's DevTools Performance tool to inspect the call stack and
+      understand what went wrong.</p>
+
+    <p>Let's get started!</p>
+
+  </div>
+
+
+</body>
+
+</html>

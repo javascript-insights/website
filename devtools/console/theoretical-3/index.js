@@ -23,3 +23,4 @@ window.addEventListener("load", function () {
     technologies.forEach(tech => { console.info(tech); })
     console.groupEnd('Technolgies');
 });
+

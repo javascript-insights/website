@@ -162,7 +162,38 @@
         <strong id="FreezeIt3000">FreezeIt3000 snippets</strong>
         <span class="tooltiptext">Click to copy FreezeIt3000 code</span>
       </li>
+      <li><strong>Event Listeners Brackpoints</strong></li>
     </ul>
+
+    <div class="accessibility-section">
+      <h1>Accessibility Features Demo</h1>
+
+      <div class="a11y-demo" role="main" aria-label="Accessibility demonstration">
+        <button aria-label="Submit form" role="button" tabindex="0">
+          Submit
+        </button>
+
+        <nav aria-label="Main navigation" role="navigation">
+          <ul>
+            <li><a href="#" aria-current="page">Home</a></li>
+            <li><a href="#" aria-label="About us section">About</a></li>
+          </ul>
+        </nav>
+
+        <form role="form" aria-label="Contact form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" aria-required="true">
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" aria-required="true">
+        </form>
+
+        <div class="color-contrast" style="background: #eee;">
+          <p style="color: #777;">Text with poor contrast ratio</p>
+          <p style="color: #000;">Text with good contrast ratio</p>
+        </div>
+      </div>
+    </div>
 
     <h1>CSS Overview tool</h1>
 

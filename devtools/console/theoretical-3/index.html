@@ -24,56 +24,103 @@
   </div>
 
   <div class="content">
-    <div class="demo-section">
-      <h3>1. Stack Trace Analysis 🔍</h3>
-      <img src="https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif" alt="Sherlock Holmes gif" width="100">
-      <button onclick="startStackTrace()">Run Stack Trace Demo</button>
-    </div>
+    
 
-    <div class="demo-section">
-      <h3>2. Async Debugging 🕐</h3>
-      <img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif" alt="Waiting gif" width="100">
-      <button onclick="demonstrateAsync()">Run Async Demo</button>
-    </div>
-
-    <div class="demo-section">
-      <h3>3. Error Handling 💥</h3>
-      <img src="https://media.giphy.com/media/YrBRYRDN4M5ryrNOND/giphy.gif" alt="Error gif" width="100">
-      <button onclick="demonstrateErrorHandling()">Run Error Demo</button>
-    </div>
+  <div class="demo-section">
+    <h3>1. Stack Trace Analysis 🔍</h3>
+    <img src="https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif" alt="Sherlock Holmes gif" width="100">
+    <button onclick="startStackTrace()">Run Stack Trace Demo</button>
+    <script>
+      function startStackTrace() {
+        console.clear();
+        console.log("🕵️ Detective mode activated!");
+        function function1() { function2(); }
+        function function2() { function3(); }
+        function function3() { console.trace('🔍 Elementary, my dear Watson!'); }
+        function1();
+      }
+    </script>
   </div>
 
-  <script>
-    function startStackTrace() {
-      console.clear();
-      console.log("🕵️ Detective mode activated!");
-      function function1() { function2(); }
-      function function2() { function3(); }
-      function function3() { console.trace('🔍 Elementary, my dear Watson!'); }
-      function1();
-    }
-
-    async function demonstrateAsync() {
-      console.clear();
-      console.log('🚀 Houston, we have liftoff...');
-      try {
-        const result = await fetch('https://api.example.com/data');
-        console.log('🎯 Mission accomplished:', result);
-      } catch (error) {
-        console.error('🔥 Houston, we have a problem:', error);
+  <div class="demo-section">
+    <h3>2. Async Debugging 🕐</h3>
+    <img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif" alt="Waiting gif" width="100">
+    <button onclick="demonstrateAsync()">Run Async Demo</button>
+    <script>
+      async function demonstrateAsync() {
+        console.clear();
+        console.log('🚀 Houston, we have liftoff...');
+        try {
+          const result = await fetch('https://api.example.com/data');
+          console.log('🎯 Mission accomplished:', result);
+        } catch (error) {
+          console.error('🔥 Houston, we have a problem:', error);
+        }
       }
-    }
+    </script>
+  </div>
 
-    function demonstrateErrorHandling() {
-      console.clear();
-      try {
-        throw new Error('🎭 Drama queen error incoming!');
-      } catch (error) {
-        console.error('🎪 Caught the troublemaker:', error);
-        console.dir(error);
+  <div class="demo-section">
+    <h3>3. Error Handling 💥</h3>
+    <img src="https://media.giphy.com/media/YrBRYRDN4M5ryrNOND/giphy.gif" alt="Error gif" width="100">
+    <button onclick="demonstrateErrorHandling()">Run Error Demo</button>
+    <script>
+      function demonstrateErrorHandling() {
+        console.clear();
+        try {
+          throw new Error('🎭 Drama queen error incoming!');
+        } catch (error) {
+          console.error('🎪 Caught the troublemaker:', error);
+          console.dir(error);
+        }
       }
-    }
-  </script>
+    </script>
+  </div>
+
+  <div class="demo-section">
+    <h3>4. Console Assertions 🎯</h3>
+    <img src="https://media.giphy.com/media/3o7TKwmnDgQb5jemjK/giphy.gif" alt="Truth check gif" width="100">
+    <button onclick="demonstrateAssertions()">Run Assertions Demo</button>
+    <script>
+      function demonstrateAssertions() {
+        console.clear();
+        const user = { age: 15 };
+        console.assert(user.age >= 18, 'User is not an adult!');
+        const numbers = [1, 2, 3];
+        console.assert(numbers.length > 0, 'Array is empty!');
+      }
+    </script>
+  </div>
+
+  <div class="demo-section">
+    <h3>5. Performance Timing ⚡</h3>
+    <img src="https://media.giphy.com/media/3o7ZetIsjtbkgNE1I4/giphy.gif" alt="Speed gif" width="100">
+    <button onclick="demonstrateTiming()">Run Timing Demo</button>
+    <script>
+      function demonstrateTiming() {
+        console.clear();
+        console.time('Loop timing');
+        for (let i = 0; i < 1000000; i++) { }
+        console.timeEnd('Loop timing');
+      }
+    </script>
+  </div>
+
+  <div class="demo-section">
+    <h3>6. Memory Usage 🧠</h3>
+    <img src="https://media.giphy.com/media/LWGLH6Z5LPuM0/giphy.gif" alt="Brain gif" width="100">
+    <button onclick="demonstrateMemory()">Run Memory Demo</button>
+    <script>
+      function demonstrateMemory() {
+        console.clear();
+        console.log('Memory Usage:', performance.memory);
+        const arr = new Array(10000000); // Allocating memory
+        setTimeout(() => {
+          console.log('Memory after allocation:', performance.memory);
+        }, 1000);
+      }
+    </script>
+  </div>
 
   <script>
     // $('script');
