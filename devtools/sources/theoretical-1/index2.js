@@ -16,6 +16,7 @@ function ham() {
 }
 
 function eggs() {
+  var amtiDamti = 1;
   debugger;
   console.log('eggs');
 }

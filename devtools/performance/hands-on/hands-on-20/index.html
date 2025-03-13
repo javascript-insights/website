@@ -37,8 +37,16 @@
 
     <p>Let's get started!</p>
 
-  </div>
+    <p>Try to modify the code in index.js to add a few milliseconds delay between each loop iteration.</p>
+    <p>What has changed in the behavior? Did it prevent the stack overflow?</p>
 
+    <button id="showHint" onclick="showHint();" style="margin-top: 10px;">Show Hint</button>
+    <p id="hintText" style="display: none; color: blue;">
+      Hint: You can use setTimeout() to add a delay. Try wrapping the recursive call in:
+      setTimeout(() => loop(i + 1), 100);
+    </p>
+
+  </div>
 
 </body>
 

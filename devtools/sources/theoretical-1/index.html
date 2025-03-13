@@ -56,9 +56,10 @@
     </li>
 
     <li>🤔 <strong>Conditional breakpoint</strong> (for when you're feeling fancy)
+      <button onclick="conditionalBreakpoint()">Conditional Breakpoint</button>
       <pre>
       // Right-click line number -> Add conditional breakpoint
-      // Example condition: i === 5 || user.name === "Alice"
+      // Example condition: i === 5 && user.name === "Alice"
       for (let i = 0; i < 10; i++) {
         console.log('Loop iteration:', i); // Add conditional breakpoint here
         processData(i);
@@ -69,7 +70,7 @@
       <div id="targetElement">Right click me in DevTools to set a DOM breakpoint! <button onclick="modifyDOM()">Modify
           DOM</button></div>
     </li>
-    <li>🌐 <strong>XHR breakpoint</strong>
+    <li>🌐 <strong>XHR breakpoint</strong> click the + button
       <button onclick="gsbutton()">Get Data (Maybe)</button>
     </li>
     <li>💥 <strong>Exception breakpoint</strong>
@@ -77,8 +78,13 @@
       <button onclick="uncoughtexbutton()">Can't Catch Me!</button>
     </li>
     <li>🎮 <strong>Function breakpoint</strong> - debug() (your last resort)
+      <button onclick="calculateSum(5, 10)">Calculate Sum: 5 + 10</button>
       <pre>
         function calculateSum(a, b) {
+          console.log('Calculating sum...');
+          console.log('a:', a);
+          console.log('b:', b);
+          console.log('Sum:', a + b);
           return a + b;
         }
 
@@ -87,6 +93,7 @@
       </pre>
     </li>
     <li>📝 <strong>Logpoints</strong> (for when console.log is too mainstream)
+      <button onclick="calculateTotal(5, 6)">Calculate Total: 5 x 6</button>
       <pre>
       // Add a logpoint by right-clicking the line number and selecting 'Add logpoint'
       // Instead of using console.log, you can add a message like:
@@ -103,12 +110,14 @@
   <ul>
     <li><strong>Overrides</strong>
       <ul>
-        <li>🔄 In the Sources tab, select the JS file you want to override</li>
+        <li>🔄 In the Sources tab, select the JS file you want to override (right-click override content)</li>
         <li>✅ Allow DevTools to modify local files when prompted</li>
         <li>📁 Select the folder you want to work with in the Sources panel</li>
         <li>✏️ Make your changes in the editor pane</li>
         <li>💾 Save changes (Ctrl+S) - a purple dot will appear next to overridden files</li>
         <li>🔄 Reload the page - your changes will persist</li>
+        <li>🔍 To see the changes, open the DevTools and check the "Overrides" section</li>
+        <li>🎨 Try to update the css in the element styles tool</li>
         <li>⚠️ To remove override, right-click the file and select "Remove override"</li>
       </ul>
     </li>
@@ -119,6 +128,8 @@
         <li>📁 In Browser DevTools Sources panel, right click the left pane and select "Add folder to workspace"</li>
         <li>📎 Select the "theoretical-1" folder you created</li>
         <li>✅ Allow Browser to access the folder when prompted</li>
+        <li>📂 Open the index.html file (file:///C:/theoretical-1/index.html) you can right-click on the file and copy
+          the link address</li>
       </ul>
     </li>
   </ul>
