@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showAlert() {
-  alert('Button clicked!');
+  console.log('Button clicked!');
 }
 
 function hoverEffect() {
   console.log('Button hovered!');
 }
 
-// Example of unused JavaScript
+// ⛔ ⛔ ⛔ Example of unused JavaScript ⛔ ⛔ ⛔ 
 function unusedFunction() {
   console.log('This function is not used.');
 }
