@@ -42,12 +42,59 @@
           <button onclick="getIndexedDB()">🔎 Where Did I Put That?</button>
         </li>
         <li>🍪 Cookies (Nom nom nom) -
-          <button onclick="setClientCookie()">🥠 Bake Cookie</button>
-          <button onclick="getClientCookie()">😋 Eat Cookie</button>
-          <button onclick="setServerCookie()">👨‍🍳 Chef's Special</button>
-          <button onclick="getServerCookie()">🍽️ Taste Test</button>
+          <div>
+            <button onclick="setClientCookie()">🥠 Bake Cookie</button>
+            <button onclick="getClientCookie()">😋 Eat Cookie</button>
+          </div>
+          <div>
+            <button onclick="setServerCookie()">👨‍🍳 Chef's Special - Server Cookie</button>
+            <button onclick="getServerCookie()">🍽️ Taste Chef's Special</button>
+          </div>
           <a href="https://samesite-sandbox.glitch.me/" target="_blank">🎪 Cookie Circus</a>
         </li>
+        <li>🎛️ Advanced Cookie Controls -
+          <ul>
+            <li>🌟 Default Settings -
+              <button onclick="setDefaultCookies()">🔄 Set Default Cookies</button>
+            </li>
+            <li>⚙️ Custom Cookie Workshop -
+              <div>
+                🏷️ Name: <input type="text" id="cookieName" value="testCookie">
+                📝 Value: <input type="text" id="cookieValue" value="testValue">
+              </div>
+              <div>
+                <input type="checkbox" id="httpOnly" checked>
+                <label for="httpOnly">🔒 HTTP Only</label>
+
+                <input type="checkbox" id="secure" checked>
+                <label for="secure">🛡️ Secure</label>
+
+                <input type="checkbox" id="crossOrigin">
+                <label for="crossOrigin">🌐 Cross Origin</label>
+              </div>
+              <div>
+                🎯 SameSite:
+                <select id="sameSite">
+                  <option value="lax">Lax</option>
+                  <option value="strict">Strict</option>
+                  <option value="none">None</option>
+                </select>
+                <button onclick="setCustomCookie()">✨ Create Custom Cookie</button>
+              </div>
+            </li>
+            <li>📖 Cookie Inspector -
+              <button onclick="readCookies()">🔍 Read All Cookies</button>
+            </li>
+            <li>🗑️ Cookie Cleanup -
+              <input type="text" id="cookieToClear" placeholder="Cookie name to clear">
+              <button onclick="clearCookie()">🧹 Clear Cookie</button>
+            </li>
+            <li>📊 Cookie Status -
+              <pre id="cookieDisplay"></pre>
+            </li>
+          </ul>
+        </li>
+
         <li>🔐 Private state tokens (Super secret spy stuff) -
           <button onclick="generatePrivateStateToken()" disabled>🕵️ Generate Secret Code</button>
         </li>

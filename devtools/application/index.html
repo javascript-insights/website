@@ -38,7 +38,119 @@
     <li>💾 Cache Storage (like your browser's mini-fridge)</li>
     <li>🔄 Background Services (the ninjas working behind the scenes)</li>
   </ul>
-  <img src="https://media.giphy.com/media/JJWElkRz4O4zS/giphy.gif" alt="Typing cat gif" style="width:400px">
+
+  <h2>Service Workers:</h2>
+  <p>
+    They act as proxy servers between web applications, the browser, and the network. They primarily enable offline
+    experiences, caching, push notifications, and background sync. Service workers intercept network requests, allowing
+    control over how the application behaves in various situations, especially when the network is unavailable. They
+    operate in a separate thread, without DOM access, and are designed to be fully asynchronous.
+  </p>
+
+  <h2>Background Workers (Web Workers):</h2>
+  <p>
+    They are general-purpose background threads designed to run CPU-intensive tasks without blocking the main thread,
+    ensuring a responsive user interface. Background workers facilitate parallel processing, allowing complex
+    computations or data processing to occur independently. They do not intercept network requests; instead, the main
+    thread explicitly sends messages to them. Their lifespan is tied to the tab or page they are created in, terminating
+    when the tab is closed.
+  </p>
+
+  <h3>Comparison:</h3>
+  <table border="1">
+    <tr>
+      <th>Feature</th>
+      <th>Service Worker</th>
+      <th>Background Worker (Web Worker)</th>
+    </tr>
+    <tr>
+      <td>Purpose</td>
+      <td>Network proxy, offline support, caching, push notifications</td>
+      <td>Background processing, offloading CPU-intensive tasks</td>
+    </tr>
+    <tr>
+      <td>Network</td>
+      <td>Intercepts network requests</td>
+      <td>Does not intercept network requests</td>
+    </tr>
+    <tr>
+      <td>DOM Access</td>
+      <td>No DOM access</td>
+      <td>No DOM access</td>
+    </tr>
+    <tr>
+      <td>Lifespan</td>
+      <td>Independent of the page/tab</td>
+      <td>Tied to the page/tab</td>
+    </tr>
+    <tr>
+      <td>Use Cases</td>
+      <td>PWAs, offline functionality, push notifications</td>
+      <td>Complex calculations, data processing, real-time applications</td>
+    </tr>
+    <tr>
+      <td>Communication</td>
+      <td>Intercepts fetch requests, listens for push events</td>
+      <td>Receives messages via postMessage</td>
+    </tr>
+  </table>
+
+  <h3>Service Worker Example:</h3>
+  <pre><code>
+// In your main.js
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(registration => console.log('SW registered'))
+    .catch(error => console.log('SW registration failed'));
+}
+
+// In sw.js
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open('v1').then(cache => {
+      return cache.addAll([
+        '/',
+        '/styles.css',
+        '/app.js'
+      ]);
+    })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
+  );
+});
+  </code></pre>
+
+  <h3>Web Worker Example:</h3>
+  <pre><code>
+// In your main.js
+const worker = new Worker('worker.js');
+
+worker.postMessage({ data: 'Start calculation' });
+
+worker.onmessage = function(e) {
+  console.log('Result:', e.data);
+};
+
+// In worker.js
+self.onmessage = function(e) {
+  // Heavy computation here
+  const result = e.data.data + ' completed';
+  self.postMessage(result);
+};
+  </code></pre>
+
+  <p>
+    While both operate in background threads, their roles are distinct. Service workers enhance web application
+    capabilities related to network requests and offline access, whereas background workers improve performance by
+    handling computationally intensive tasks separately from the main thread.
+  </p>
+
+  <img src="https://media.giphy.com/media/DpNrB4a210Qg0/giphy.gif" alt="Typing cat gif" style="width:400px">
   </p>
 </body>
 

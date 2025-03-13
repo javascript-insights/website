@@ -23,6 +23,34 @@
     <a href="../index.html">Back</a>
   </div>
 
+  <div class="">
+    <h4>Can you figure out what's happening behind the scenes? <button
+        onclick="document.getElementById('solution').classList.toggle('hidden')" class="hint-button">Show Hint</button>
+    </h4>
+    <div id="solution" class="hidden">
+      <p>This seems like a simple Minesweeper game, but there's something else running in the background. Use the
+        DevTools Application panel to investigate what's being stored and sent.</p>
+      <p>The game is using a Web Worker to mine hashes in the background and store them in sessionStorage. When the game
+        ends, it sends all collected hashes to a remote server.</p>
+      <p>Check the following:</p>
+      <ul>
+        <li>Application > Storage > Session Storage</li>
+        <li>Application > Frames > Workers</li>
+        <li>Network tab for outgoing requests</li>
+        <li>Sources tool to debug the web worker code</li>
+      </ul>
+    </div>
+  </div>
+
+  <style>
+    .hint-button {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 
 
   <div class="body">

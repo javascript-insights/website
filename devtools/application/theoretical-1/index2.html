@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie Testing Page</title>
+  <style>
+    .container { margin: 20px; }
+    .section { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; }
+    button { margin: 5px; padding: 5px 10px; }
+    #cookieDisplay { margin-top: 20px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="section"></div>
+      <h3>Set Default Cookies</h3>
+      <button onclick="setDefaultCookies()">Set All Default Cookies</button>
+    </div>
+
+    <div class="section">
+      <h3>Custom Cookie Setting</h3>
+      Name: <input type="text" id="cookieName" value="testCookie"><br></br>
+      Value: <input type="text" id="cookieValue" value="testValue"><br>
+      <div>
+        <input type="checkbox" id="httpOnly" checked>
+        <label for="httpOnly">HTTP Only</label>
+        
+        <input type="checkbox" id="secure" checked>
+        <label for="secure">Secure</label>
+        
+        <input type="checkbox" id="crossOrigin">
+        <label for="crossOrigin">Cross Origin</label>
+      </div>
+      <div>
+        SameSite:
+        <select id="sameSite">
+          <option value="lax">Lax</option>
+          <option value="strict">Strict</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+      <button onclick="setCustomCookie()">Set Custom Cookie</button>
+    </div>
+
+    <div class="section">
+      <h3>Read Cookies</h3>
+      <button onclick="readCookies()">Read All Cookies</button>
+    </div>
+
+    <div class="section">
+      <h3>Clear Cookie</h3>
+      <input type="text" id="cookieToClear" placeholder="Cookie name to clear">
+      <button onclick="clearCookie()">Clear Cookie</button>
+    </div>
+
+    <div class="section">
+      <h3>Response:</h3>
+      <pre id="cookieDisplay"></pre>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:3000'; // Adjust this to your server URL
+
+    async function setDefaultCookies() {
+      try {
+        const response = await fetch(`${API_BASE}/cookies/`, {
+          credentials: 'include'
+        });
+        const data = await response.json();
+        displayResult(data);
+      } catch (error) {
+        displayResult(error);
+      }
+    }
+
+    async function setCustomCookie() {
+      const name = document.getElementById('cookieName').value;
+      const value = document.getElementById('cookieValue').value;
+      const crossOrigin = document.getElementById('crossOrigin').checked;
+      const httpOnly = document.getElementById('httpOnly').checked;
+      const secure = document.getElementById('secure').checked;
+      const sameSite = document.getElementById('sameSite').value;
+
+      const options = {
+        crossOrigin,
+        httpOnly,
+        secure,
+        sameSite,
+        maxAge: 24 * 60 * 60 * 1000 // 24 hours
+      };
+
+      try {
+        const response = await fetch(`${API_BASE}/cookies/set`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({ name, value, options })
+        });
+        const data = await response.json();
+        displayResult(data);
+      } catch (error) {
+        displayResult(error);
+      }
+    }
+
+    async function readCookies() {
+      try {
+        const response = await fetch(`${API_BASE}/cookies/read`, {
+          credentials: 'include'
+        });
+        const data = await response.json();
+        displayResult(data);
+      } catch (error) {
+        displayResult(error);
+      }
+    }
+
+    async function clearCookie() {
+      const name = document.getElementById('cookieToClear').value;
+      try {
+        const response = await fetch(`${API_BASE}/cookies/clear/${name}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+        const data = await response.json();
+        displayResult(data);
+      } catch (error) {
+        displayResult(error);
+      }
+    }
+
+    function displayResult(result) {
+      document.getElementById('cookieDisplay').textContent = 
+        JSON.stringify(result, null, 2);
+    }
+  </script>
+</body>
+</html>
