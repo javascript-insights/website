@@ -57,29 +57,42 @@
             <li>🌟 Default Settings -
               <button onclick="setDefaultCookies()">🔄 Set Default Cookies</button>
             </li>
-            <li>⚙️ Custom Cookie Workshop -
-              <div>
-                🏷️ Name: <input type="text" id="cookieName" value="testCookie">
-                📝 Value: <input type="text" id="cookieValue" value="testValue">
-              </div>
-              <div>
-                <input type="checkbox" id="httpOnly" checked>
-                <label for="httpOnly">🔒 HTTP Only</label>
+            <li>⚙️ Custom Cookie Workshop - <button onclick="setCustomCookie()" class="cookie-button">✨ Create Custom
+                Cookie</button>
+              <div class="cookie-controls">
+                <div class="input-group">
+                  <label for="cookieName">🏷️ Name:</label>
+                  <input type="text" id="cookieName" value="testCookie" class="cookie-input">
+                  <label for="cookieValue">📝 Value:</label>
+                  <input type="text" id="cookieValue" value="testValue" class="cookie-input">
+                </div>
 
-                <input type="checkbox" id="secure" checked>
-                <label for="secure">🛡️ Secure</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="httpOnly" checked>
+                    <label for="httpOnly">🔒 HTTP Only</label>
+                  </div>
 
-                <input type="checkbox" id="crossOrigin">
-                <label for="crossOrigin">🌐 Cross Origin</label>
-              </div>
-              <div>
-                🎯 SameSite:
-                <select id="sameSite">
-                  <option value="lax">Lax</option>
-                  <option value="strict">Strict</option>
-                  <option value="none">None</option>
-                </select>
-                <button onclick="setCustomCookie()">✨ Create Custom Cookie</button>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="secure" checked>
+                    <label for="secure">🛡️ Secure</label>
+                  </div>
+
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="crossOrigin">
+                    <label for="crossOrigin">🌐 Cross Origin</label>
+                  </div>
+                </div>
+
+                <div class="cookie-actions">
+                  <label for="sameSite">🎯 SameSite:</label>
+                  <select id="sameSite" class="cookie-select">
+                    <option value="lax">Lax</option>
+                    <option value="strict">Strict</option>
+                    <option value="none">None</option>
+                  </select>
+
+                </div>
               </div>
             </li>
             <li>📖 Cookie Inspector -
