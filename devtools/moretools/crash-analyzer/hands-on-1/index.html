@@ -28,30 +28,39 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <main class="container">
-    <section>
-      <h2>Interactive Elements</h2>
-      <button id="clickButton" class="btn">Click Me</button>
-      <button id="hoverButton" class="btn">Hover Over Me</button>
-      <div id="hiddenDiv" class="hidden">You found me!</div>
-    </section>
-    <section>
-      <h2>More Activities</h2>
-      <input type="text" id="textInput" placeholder="Type something...">
-      <button id="showHidden" class="btn">Show Hidden Div</button>
-    </section>
-    <section>
-      <h2>Advanced Activities</h2>
-      <button id="toggleButton" class="btn">Toggle Visibility</button>
-      <div id="toggleDiv" class="hidden">Toggle me!</div>
-    </section>
-    <section>
-      <h2>Expert Activities</h2>
-      <button id="changeColorButton" class="btn">Change Color</button>
-      <div id="colorDiv">Change my color!</div>
-    </section>
-  </main>
+  <div class="instructions">
+    <h2>Welcome to the Crash Analyzer Practice!</h2>
+    <p>In this exercise, you'll learn how to use Crash Analyzer tool to debug JavaScript errors.</p>
 
-  <hr />
+    <h3>Instructions:</h3>
+    <ol>
+      <li>Open Chrome DevTools (F12 or Ctrl+Shift+I)</li>
+      <li>Go to the Console tab</li>
+      <li>Try clicking the buttons below and observe the errors</li>
+      <li>Use the error stack traces to identify the source of the problems</li>
+    </ol>
+  </div>
+
+  <div class="playground">
+    <h3>Error Playground</h3>
+    <button onclick="triggerNullError()">Trigger Null Error</button>
+    <button onclick="triggerTypeError()">Trigger Type Error</button>
+    <button onclick="triggerReferenceError()">Trigger Reference Error</button>
+    <button onclick="triggerRecursion()">Trigger Stack Overflow</button>
+
+    <div id="result" class="result-box">
+      <p>Error messages will appear in the console!</p>
+    </div>
+  </div>
+
+  <div class="tips">
+    <h3>Tips:</h3>
+    <ul>
+      <li>Look for the red error messages in the console</li>
+      <li>Examine the call stack to trace error origins</li>
+      <li>Click on file names in the stack trace to view source code</li>
+      <li>Use the pause on exceptions button to debug in real-time</li>
+    </ul>
+  </div>
 
 </body>
