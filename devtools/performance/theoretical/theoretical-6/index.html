@@ -24,63 +24,65 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h2>Understanding Frame Performance in DevTools</h2>
+  <h2>🎯 Understanding Frame Performance in DevTools</h2>
 
   <p>DevTools provides numerous ways to analyze frames per second:</p>
   <ul>
-    <li>Use the Frames section to view how long a particular frame took.</li>
-    <li>Use the FPS meter for a real time estimate of FPS as the page runs.</li>
+    <li>📊 Use the Frames section to view how long a particular frame took.</li>
+    <li>⏱️ Use the FPS meter for a real time estimate of FPS as the page runs.</li>
   </ul>
 
   <div class="demo-section">
-    <h3>Interactive Demo: Frame Types</h3>
+    <h3>🎮 Interactive Demo: Frame Types</h3>
     <p>Click the buttons below to simulate different frame scenarios:</p>
-    <button onclick="simulateNormalFrames()">Normal Frames</button>
-    <button onclick="simulateDroppedFrames()">Dropped Frames</button>
-    <button onclick="simulatePartialFrames()">Partial Frames</button>
+    <button onclick="simulateNormalFrames()">▶️ Normal Frames</button>
+    <button onclick="simulateDroppedFrames()">⚠️ Dropped Frames</button>
+    <button onclick="simulatePartialFrames()">↗️ Partial Frames</button>
+  </div>
+
+  <div class="practice-section">
+    <div class="animation-container" style="padding: 20px; min-height: 200px;"></div>
+    <div id="ball" style="margin: -30px 20px;"></div>
+  </div>
   </div>
 
   <div class="frame-types">
-    <h3>Frame Types in DevTools:</h3>
+    <h3>🔍 Frame Types in DevTools:</h3>
     <ul>
-      <li><strong>Idle frame</strong> (white) - No changes
+      <li><strong>⚪ Idle frame</strong> (white) - No changes
         <div class="frame-example idle"></div>
       </li>
-      <li><strong>Frame</strong> (green) - Rendered as expected
+      <li><strong>🟢 Frame</strong> (green) - Rendered as expected
         <div class="frame-example normal"></div>
       </li>
-      <li><strong>Partially presented frame</strong> (yellow) - Some visual updates in time
+      <li><strong>🟡 Partially presented frame</strong> (yellow) - Some visual updates in time
         <div class="frame-example partial"></div>
       </li>
-      <li><strong>Dropped frame</strong> (red) - Failed to render in time
+      <li><strong>🔴 Dropped frame</strong> (red) - Failed to render in time
         <div class="frame-example dropped"></div>
       </li>
     </ul>
   </div>
 
   <div class="practice-section">
-    <h3>Practice Exercise</h3>
+    <h3>💡 Practice Exercise</h3>
     <p>Open DevTools (F12) and select the Performance tab. Start recording and interact with the animation below:</p>
-    <div class="animation-container">
-      <div id="ball"></div>
-    </div>
     <p>Try to identify:</p>
     <ol>
-      <li>The frame rate during normal operation</li>
-      <li>When frames drop during heavy animations</li>
-      <li>The impact of browser throttling</li>
+      <li>📈 The frame rate during normal operation</li>
+      <li>📉 When frames drop during heavy animations</li>
+      <li>🔧 The impact of browser throttling</li>
     </ol>
   </div>
 
   <div class="tips">
-    <h3>Pro Tips:</h3>
+    <h3>💪 Pro Tips:</h3>
     <ul>
-      <li>Use CPU throttling in DevTools to simulate performance issues</li>
-      <li>Look for red markers in the frames section indicating dropped frames</li>
-      <li>Pay attention to the frame timing in the detailed view</li>
+      <li>🔄 Use CPU throttling in DevTools to simulate performance issues</li>
+      <li>⚠️ Look for red markers in the frames section indicating dropped frames</li>
+      <li>⏰ Pay attention to the frame timing in the detailed view</li>
     </ul>
   </div>
-
 
 </body>
 
