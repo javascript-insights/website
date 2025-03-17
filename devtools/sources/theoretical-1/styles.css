@@ -12,5 +12,6 @@ th {
 }
 
 button {
-  background-color: #efefef;
+  background-image: linear-gradient(to right, #ff6666, #ffb366, #ffff66, #66ff66, #6666ff, #8c66ff, #ff66ff);
+  border: dotted;
 }
