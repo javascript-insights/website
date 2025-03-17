@@ -25,12 +25,44 @@
   </div>
 
   <div class="container">
+    <h2>Understanding INP (Interaction to Next Paint)</h2>
+    <p>INP measures the responsiveness of a page to user interactions. A good INP score should be under 200ms.</p>
+
+    <div class="demo-section"></div>
+    <h3>Demo 1: Simple Interaction</h3>
     <img id="shiftingImage" src="./static/Einstein.jpg" alt="Sample Image"
       style="display: none; width: 300px; height: 200px; margin-left: 148px;" />
-    <button id="testButton">Click Me</button>
-    <button id="testButton2">Click Me 2</button>
+    <button id="testButton" class="demo-button">Quick Response Button</button>
+    <p>This button responds immediately - good INP example</p>
+  </div>
 
+  <div class="demo-section">
+    <h3>Demo 2: Poor INP Example</h3>
+    <button id="testButton2" class="demo-button">Slow Response Button</button>
+    <p>This button intentionally blocks for 300ms - poor INP example</p>
     <p id="result"></p>
+  </div>
+
+  <div class="instructions">
+    <h3>How to Measure INP:</h3>
+    <ol>
+      <li>Open Chrome DevTools (F12)</li>
+      <li>Go to Performance tab</li>
+      <li>Start recording</li>
+      <li>Click the buttons above</li>
+      <li>Stop recording and analyze the interaction traces</li>
+    </ol>
+  </div>
+
+  <div class="tips">
+    <h3>Common INP Issues:</h3>
+    <ul>
+      <li>Heavy JavaScript execution</li>
+      <li>Layout thrashing</li>
+      <li>Long task blocking</li>
+      <li>Complex event handlers</li>
+    </ul>
+  </div>
   </div>
 
   <script>
@@ -38,9 +70,11 @@
       const img = document.getElementById('shiftingImage');
       img.style.display = img.style.display === 'none' ? 'block' : 'none';
     }, 2000);
-  </script>
 
-  <script>
+    document.getElementById('testButton').addEventListener('click', () => {
+      document.getElementById('result').textContent = 'Quick response!';
+    });
+
     document.getElementById('testButton2').addEventListener('click', () => {
       // Simulate heavy computation
       const startTime = Date.now();
@@ -49,7 +83,7 @@
       }
 
       // Update UI after delay
-      document.getElementById('result').textContent = 'Button clicked!';
+      document.getElementById('result').textContent = 'Slow response after 300ms delay!';
 
       // Force layout recalculation
       document.body.style.backgroundColor = '#fff';
@@ -57,6 +91,28 @@
       document.body.style.backgroundColor = '#f0f0f0';
     });
   </script>
+
+  <style>
+    .demo-section {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .demo-button {
+      padding: 10px 20px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    .instructions,
+    .tips {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+    }
+  </style>
 
 </body>
 

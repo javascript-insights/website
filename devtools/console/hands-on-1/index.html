@@ -24,86 +24,97 @@
   </div>
 
   <div class="content">
-    <h2>Exercises</h2>
+    <h2>💻 Exercises</h2>
     <p>Complete these exercises using your browser's Console (F12):</p>
+    <p>This is a hands-on exercise that will help you understand console methods in JavaScript. For each exercise:</p>
+    <ol>
+      <li>🤔 Think about how you would solve it</li>
+      <li>⌨️ Try writing the code in your brain 🧠 (or borrow someone else's)</li>
+      <li>👆 Click the exercise's button to see an example solution</li>
+      <li>🔄 Compare your approach with the example</li>
+    </ol>
+    <p>Remember: There are often multiple valid ways to solve these exercises!</p>
 
     <div class="exercise">
-      <h3>Exercise 1: Basic Logging</h3>
+      <h3>📝 Exercise 1: Basic Logging</h3>
       <p>Tasks:</p>
       <ol>
         <li>Log your name using console.log()</li>
         <li>Log a warning message about battery level</li>
         <li>Log an error message about connection failure</li>
       </ol>
-      <button onclick="checkExercise1()">Check Exercise 1</button>
+      <div class="button-group">
+        <button onclick="checkExercise1()">Check Exercise 1</button>
+        <button onclick="showCode('code1')">Show Code</button>
+      </div>
+      <pre id="code1" style="display: none">
+  console.log('Your name here');
+  console.warn('Warning: Battery at 10%');
+  console.error('Error: Connection failed');</pre>
     </div>
 
     <div class="exercise">
-      <h3>Exercise 2: Styled Output</h3>
+      <h3>🎨 Exercise 2: Styled Output</h3>
       <p>Create a console message that:</p>
       <ol>
         <li>Uses a blue color</li>
         <li>Has a font size of 20px</li>
         <li>Is bold</li>
       </ol>
-      <button onclick="checkExercise2()">Check Exercise 2</button>
+      <div class="button-group">
+        <button onclick="checkExercise2()">Check Exercise 2</button>
+        <button onclick="showCode('code2')">Show Code</button>
+      </div>
+      <pre id="code2" style="display: none">
+  console.log('%cYour styled message here', 'color: blue; font-size: 20px; font-weight: bold');</pre>
     </div>
 
     <div class="exercise">
-      <h3>Exercise 3: Grouping</h3>
+      <h3>📊 Exercise 3: Grouping</h3>
       <p>Create a grouped console output for a car object with:</p>
       <ol>
         <li>Main group named "Car Details"</li>
         <li>Basic info (model, year)</li>
         <li>Nested group for "Technical Specs"</li>
       </ol>
+      <div class="button-group"></div>
       <button onclick="checkExercise3()">Check Exercise 3</button>
+      <button onclick="showCode('code3')">Show Code</button>
     </div>
+    <pre id="code3" style="display: none">
+  console.group('Car Details');
+  console.log('Model: [Your car model]');
+  console.log('Year: [Year]');
+  console.group('Technical Specs');
+  console.log('Engine: [Engine details]');
+  console.log('Power: [Power details]');
+  console.groupEnd();
+  console.groupEnd();</pre>
   </div>
 
-  <script>
-    // Exercise checking functions
-    function checkExercise1() {
-      console.clear();
-      console.info('Exercise 1 Template:');
-      console.log('Your name here');
-      console.warn('Warning: Battery at 10%');
-      console.error('Error: Connection failed');
-    }
-
-    function checkExercise2() {
-      console.clear();
-      console.info('Exercise 2 Template:');
-      console.log('%cYour styled message here', 'color: blue; font-size: 20px; font-weight: bold');
-    }
-
-    function checkExercise3() {
-      console.clear();
-      console.info('Exercise 3 Template:');
-      console.group('Car Details');
-      console.log('Model: [Your car model]');
-      console.log('Year: [Year]');
-      console.group('Technical Specs');
-      console.log('Engine: [Engine details]');
-      console.log('Power: [Power details]');
-      console.groupEnd();
-      console.groupEnd();
-    }
-  </script>
-
-  <div class="exercise">
-    <h3>Exercise 4: Table of Superhero Bugs</h3>
-    <p>Create a table of debugging superheroes:</p>
-    <ol>
-      <li>Use console.table() to show bug-fighting heroes</li>
-      <li>Include: name, superpower, bugsSquashed</li>
-      <li>Add at least 3 debugging champions</li>
-    </ol>
+  <div class="exercise"></div>
+  <h3>📊 Exercise 4: Table of Superhero Bugs</h3>
+  <p>Create a table of debugging superheroes:</p>
+  <ol>
+    <li>Use console.table() to show bug-fighting heroes</li>
+    <li>Include: name, superpower, bugsSquashed</li>
+    <li>Add at least 3 debugging champions</li>
+  </ol>
+  <div class="button-group">
     <button onclick="checkExercise4()">Check Exercise 4</button>
+    <button onclick="showCode('code4')">Show Code</button>
+  </div>
+  <pre id="code4" style="display: none">
+  const debugHeroes = [
+    { name: 'Captain Console', superpower: 'Log Vision', bugsSquashed: 9001 },
+    { name: 'The Debuginator', superpower: 'Breakpoint Mastery', bugsSquashed: 8000 },
+    { name: 'Stack Trace Girl', superpower: 'Error Whispering', bugsSquashed: 7500 }
+  ];
+  console.table(debugHeroes);</pre>
   </div>
 
   <div class="exercise">
-    <h3>Exercise 5: Debug Olympics</h3>
+    <h3>⏱️ Exercise 5: Debug Olympics</h3>
     <p>Create console timers for a Debug Olympics:</p>
     <ol>
       <li>Start timer "BugHunting"</li>
@@ -112,53 +123,38 @@
       <li>Sprint for 1 second</li>
       <li>End both timers</li>
     </ol>
-    <button onclick="checkExercise5()">Check Exercise 5</button>
+    <div class="button-group">
+      <button onclick="checkExercise5()">Check Exercise 5</button>
+      <button onclick="showCode('code5')">Show Code</button>
+    </div>
+    <pre id="code5" style="display: none">
+  console.time('BugHunting');
+  setTimeout(() => {
+    console.time('CodeSprinting');
+    setTimeout(() => {
+    console.timeEnd('CodeSprinting');
+    console.timeEnd('BugHunting');
+    }, 1000);
+  }, 2000);</pre>
   </div>
 
   <div class="exercise">
-    <h3>Exercise 6: Console Comedy Club</h3>
+    <h3>😄 Exercise 6: Console Comedy Club</h3>
     <p>Create funny console messages:</p>
     <ol>
       <li>Use different console styles</li>
       <li>Make at least one dad joke</li>
       <li>Include emoji 🐛</li>
     </ol>
-    <button onclick="checkExercise6()">Check Exercise 6</button>
+    <div class="button-group">
+      <button onclick="checkExercise6()">Check Exercise 6</button>
+      <button onclick="showCode('code6')">Show Code</button>
+    </div>
+    <pre id="code6" style="display: none">
+  console.log('%cWhy do programmers prefer dark mode?', 'color: #FF69B4; font-size: 16px');
+  console.log('%cBecause light attracts bugs! 🐛', 'color: #4CAF50; font-size: 20px; font-weight: bold');
+  console.warn('Warning: Dad joke overload detected! 😄');</pre>
   </div>
-
-  <script>
-    function checkExercise4() {
-      console.clear();
-      console.info('Exercise 4 Template:');
-      const debugHeroes = [
-        { name: 'Captain Console', superpower: 'Log Vision', bugsSquashed: 9001 },
-        { name: 'The Debuginator', superpower: 'Breakpoint Mastery', bugsSquashed: 8000 },
-        { name: 'Stack Trace Girl', superpower: 'Error Whispering', bugsSquashed: 7500 }
-      ];
-      console.table(debugHeroes);
-    }
-
-    function checkExercise5() {
-      console.clear();
-      console.info('Exercise 5 Template:');
-      console.time('BugHunting');
-      setTimeout(() => {
-        console.time('CodeSprinting');
-        setTimeout(() => {
-          console.timeEnd('CodeSprinting');
-          console.timeEnd('BugHunting');
-        }, 1000);
-      }, 2000);
-    }
-
-    function checkExercise6() {
-      console.clear();
-      console.info('Exercise 6 Template:');
-      console.log('%cWhy do programmers prefer dark mode?', 'color: #FF69B4; font-size: 16px');
-      console.log('%cBecause light attracts bugs! 🐛', 'color: #4CAF50; font-size: 20px; font-weight: bold');
-      console.warn('Warning: Dad joke overload detected! 😄');
-    }
-  </script>
 
 </body>
 

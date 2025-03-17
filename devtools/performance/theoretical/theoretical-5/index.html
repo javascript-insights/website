@@ -24,64 +24,126 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <header>
-    <nav>
+  <main class="content">
+    <h2>Understanding Network Performance Analysis</h2>
+
+    <section class="demo-section">
+      <h3>Interactive Network Demo</h3>
+      <div class="network-requests">
+        <!-- Images with different loading strategies -->
+        <img src="large-image.jpg" alt="Lazy Loaded Image" loading="lazy">
+        <img src="medium-image.jpg" alt="Eager Loaded Image" loading="eager">
+        <img src="small-image.jpg" alt="Default Loading Image">
+
+        <!-- Preloaded resources -->
+        <link rel="preload" href="critical-image.jpg" as="image">
+        <link rel="preload" href="critical-font.woff2" as="font" crossorigin>
+        <link rel="prefetch" href="next-page-resource.js">
+
+        <!-- CSS with different loading strategies -->
+        <link rel="stylesheet" href="critical.css">
+        <link rel="stylesheet" href="non-critical.css" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="optional.css" disabled>
+
+        <!-- Scripts with various loading attributes -->
+        <script src="blocking-script.js"></script>
+        <script src="deferred-script.js" defer></script>
+        <script src="async-script.js" async></script>
+        <script src="module-script.js" type="module"></script>
+        <script src="nomodule-script.js" nomodule></script>
+
+        <!-- Media with different loading strategies -->
+        <picture>
+          <source srcset="large.webp" type="image/webp">
+          <source srcset="large.jpg" type="image/jpeg">
+          <img src="fallback.jpg" alt="Picture Element Demo" loading="lazy">
+        </picture>
+
+        <video preload="none" width="320" height="240" controls>
+          <source src="video.webm" type="video/webm">
+          <source src="video.mp4" type="video/mp4">
+        </video>
+
+        <audio preload="metadata" controls>
+          <source src="audio.ogg" type="audio/ogg">
+          <source src="audio.mp3" type="audio/mpeg">
+        </audio>
+
+        <iframe src="embedded-content.html" loading="lazy" width="300" height="200"></iframe>
+      </div>
+    </section>
+
+    <section class="instructions">
+      <h3>Loading Strategies Explained</h3>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li>loading="lazy": Defer loading until near viewport</li>
+        <li>loading="eager": Load immediately</li>
+        <li>rel="preload": High-priority fetch</li>
+        <li>rel="prefetch": Low-priority fetch for future use</li>
+        <li>defer: Execute script after HTML parsing</li>
+        <li>async: Load and execute script asynchronously</li>
+        <li>type="module": Load as ES module</li>
+        <li>preload="none"/"metadata"/"auto": Media loading hints</li>
       </ul>
-    </nav>
-  </header>
-  <main>
-    <h2>Home Page</h2>
-    <p>This page is designed to demonstrate the Performance tool in browser DevTools.</p>
-    <img src="image1.jpg" alt="Sample Image 1">
-    <img src="image2.jpg" alt="Sample Image 2">
-    <script src="script.js"></script>
+    </section>
+
+    <section class="network-analysis">
+      <h3>Understanding Network Performance in DevTools</h3>
+      
+      <!-- Color Coding and Markers -->
+      <div class="analysis-block">
+      <h4>Visual Indicators</h4>
+      <ul>
+        <li>🔴 Red triangle - Render blocking request</li>
+        <li>🎨 Color codes next to Network track show request types</li>
+        <li>➡️ Click request to see dependency arrows</li>
+      </ul>
+      </div>
+
+      <!-- Request Information -->
+      <div class="analysis-block">
+      <h4>Request Details (Hover to See)</h4>
+      <ul>
+        <li>📍 Full URL</li>
+        <li>⏱️ Total load time</li>
+        <li>⚡ Priority level</li>
+        <li>🔄 Loading stages</li>
+      </ul>
+      </div>
+
+      <!-- Timeline Explanation -->
+      <div class="analysis-block">
+      <h4>Timeline Components</h4>
+      <ul>
+        <li>|— Left line: Initial connection</li>
+        <li>□ Light section: Server wait time</li>
+        <li>■ Dark section: Download time</li>
+        <li>—| Right line: Processing time</li>
+      </ul>
+      </div>
+
+      <!-- Quick Tips -->
+      <div class="analysis-block">
+      <h4>Pro Tips</h4>
+      <ul>
+        <li>Right-click → "Reveal in Network panel" for details</li>
+        <li>Check Summary tab for priority information</li>
+        <li>Monitor render-blocking resources</li>
+      </ul>
+      </div>
+    </section>
+
+    <!-- Rest of the content remains the same -->
+    <section class="tips">
+      <h3>Performance Optimization Tips</h3>
+      <ul>
+        <li>Use async/defer for non-critical scripts</li>
+        <li>Implement lazy loading for images</li>
+        <li>Prioritize critical resources</li>
+        <li>Minimize render-blocking resources</li>
+      </ul>
+    </section>
   </main>
-
-  <section>
-    <h3>Network Track Analysis</h3>
-    <div class="network-info">
-      <p>Next to the Network track name, there's a legend with color-coded request types.</p>
-
-      <p>Render blocking requests are marked with a red triangle in the upper right corner.</p>
-
-      <h4>Request Tooltip Information</h4>
-      <ul>
-        <li>Request's URL and total execution time</li>
-        <li>Priority or priority changes (e.g., Medium -> High)</li>
-        <li>Render blocking status</li>
-        <li>Request timing breakdown</li>
-      </ul>
-
-      <p>Clicking a request draws an arrow from its initiator to the request.</p>
-
-      <div class="summary-info">
-        <h4>Summary Tab Details</h4>
-        <p>The Performance panel's Summary tab shows:</p>
-        <ul>
-          <li>Initial Priority and final Priority fields</li>
-          <li>Detailed request timing breakdown</li>
-        </ul>
-        <p>For more information, see <a href="#">Optimizing resource loading with the Fetch Priority API</a>.</p>
-      </div>
-
-      <div class="timing-breakdown">
-        <h4>Request Timing Components</h4>
-        <ul>
-          <li>Left line (|–): Events up to Connection start</li>
-          <li>Light bar portion: Request sent and Waiting for server response</li>
-          <li>Dark bar portion: Content download</li>
-          <li>Right line (–|): Main thread waiting time</li>
-        </ul>
-      </div>
-
-      <p>Additional timing details can be found in the Network panel's Timing tab (Right-click request and select
-        "Reveal in Network panel").</p>
-    </div>
-  </section>
 
 </body>
 

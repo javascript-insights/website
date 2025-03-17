@@ -1,33 +1,53 @@
-.boring-text {
-    font-size: 3rem;
-    color: #333;
-    margin: 0 2rem;
+.content {
+    padding: 20px;
+    margin: 0 auto;
 }
 
-.container {
-    position: relative;
-    height: 600px;
-    overflow: hidden;
+.exercise-buttons {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
 }
 
-.card-home {
-    position: absolute;
-    top: 0;
-    animation: scroll 10s linear 1s infinite;
-}
-
-span {
-    min-width: 290px;
-    min-height: 40px;
-    display: block;
-    color: white;
+button {
+    padding: 10px 20px;
     margin: 5px;
+    cursor: pointer;
 }
 
-@keyframes scroll {
-    100% {
-        top: -360px;
-    }
+button:hover {
+    background-color: #e0e0e0;
+}
 
-    /* top is the number of spans (in this case 8) multiplied by span height (45px as described above)*/
+.hints {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+.error-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.category {
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.category h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
 }

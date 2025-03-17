@@ -29,67 +29,66 @@
   <main>
     <div class="hero-image"></div>
     <div class="content">
+      <h2>📊 Understanding Largest Contentful Paint (LCP)</h2>
+      <p>Largest Contentful Paint (LCP) is a critical performance metric that measures how quickly the main content of
+        your webpage becomes visible to users. As one of Google's Core Web Vitals, it directly impacts your site's
+        search ranking and user experience.</p>
 
-      <h3>Largest Contentful Paint (LCP)</h3>
-      <p>Largest Contentful Paint (LCP) is a performance metric that measures the time it takes for the largest visible
-        content element (such as an image, video, or block of text) to load and become visible within the viewport. It
-        is one of the Core Web Vitals, which are essential for providing a good user experience. LCP focuses on the main
-        content of the page and aims to ensure that this content loads quickly.</p>
+      <div class="info-box">
+        <h3>🎯 Target LCP Scores</h3>
+        <ul class="score-list">
+          <li>🟢 Good: 0-2.5 seconds</li>
+          <li>🟡 Needs Improvement: 2.5-4.0 seconds</li>
+          <li>🔴 Poor: Over 4.0 seconds</li>
+        </ul>
+      </div>
 
-      <h4>Key Points about LCP:</h4>
+      <h3>🔍 What Does LCP Measure?</h3>
+      <p>LCP tracks the render time of the largest content element visible in the viewport, including:</p>
       <ul>
-        <li><strong>Measurement:</strong> LCP measures the time from when the page starts loading to when the largest
-          content element is fully rendered.</li>
-        <li><strong>Elements Considered:</strong> Typical elements include images, video poster images, background
-          images, and block-level text elements.</li>
-        <li><strong>Good LCP Score:</strong> A good LCP score is 2.5 seconds or less. This means the largest content
-          element should load within this time frame for at least 75% of page visits.</li>
+        <li>📸 Images (including background images)</li>
+        <li>🎥 Video poster images</li>
+        <li>📝 Text blocks</li>
+        <li>🎨 SVG elements</li>
       </ul>
 
-      <h4>Optimization Tips for LCP</h4>
-      <h5>Optimize Images:</h5>
+      <h3>⚡ Optimization Strategies</h3>
+
+      <h4>1. 🖼️ Image Optimization</h4>
       <ul>
-        <li><strong>Compress and Resize:</strong> Use tools to compress and resize images without losing quality.</li>
-        <li><strong>Responsive Images:</strong> Use the <code>srcset</code> attribute to serve different image sizes
-          based on the user's device.</li>
-        <li><strong>Next-Gen Formats:</strong> Use modern image formats like WebP for better compression.</li>
+        <li><strong>Compression:</strong> Use tools like ImageOptim, Squoosh, or Sharp</li>
+        <li><strong>Modern Formats:</strong> Implement WebP with fallbacks:
+          <code>&lt;picture&gt;
+        &lt;source srcset="image.webp" type="image/webp"&gt;
+        &lt;img src="image.jpg" alt="..."&gt;
+        &lt;/picture&gt;</code>
+        </li>
+        <li><strong>Responsive Images:</strong> Use srcset and sizes attributes</li>
       </ul>
 
-      <h5>Preload Key Resources:</h5>
+      <h4>2. 🚀 Resource Loading</h4>
       <ul>
-        <li><strong>Preload Critical Assets:</strong> Use <code>&lt;link rel="preload"&gt;</code> to load important
-          resources like fonts and hero images faster.</li>
+        <li><strong>Preload Critical Assets:</strong>
+          <code>&lt;link rel="preload" href="hero.jpg" as="image"&gt;</code>
+        </li>
+        <li><strong>Lazy Loading:</strong> Add <code>loading="lazy"</code> to below-the-fold images</li>
       </ul>
 
-      <h5>Lazy Load Offscreen Images:</h5>
+      <h4>3. ⚙️ Server Optimization</h4>
       <ul>
-        <li><strong>Lazy Loading:</strong> Use the <code>loading="lazy"</code> attribute for images that are not
-          immediately visible to the user.</li>
+        <li><strong>CDN Usage:</strong> Implement a Content Delivery Network</li>
+        <li><strong>Caching Headers:</strong> Set appropriate cache-control headers</li>
+        <li><strong>TTFB:</strong> Optimize Time to First Byte (under 200ms ideal)</li>
       </ul>
 
-      <h5>Reduce Server Response Times:</h5>
+      <h4>4. 🏗️ CSS and JavaScript</h4>
       <ul>
-        <li><strong>Optimize Server Performance:</strong> Improve server response times by optimizing database queries,
-          using a Content Delivery Network (CDN), and reducing server-side processing time.</li>
+        <li><strong>Critical CSS:</strong> Inline critical CSS for above-the-fold content</li>
+        <li><strong>Minification:</strong> Minify CSS and JavaScript files</li>
+        <li><strong>Defer Non-Critical JS:</strong> Use <code>defer</code> or <code>async</code></li>
+        <li><strong>Tree Shaking:</strong> Remove unused CSS and JS</li>
       </ul>
 
-      <h5>Remove Render-Blocking Resources:</h5>
-      <ul>
-        <li><strong>Minimize CSS and JavaScript:</strong> Reduce the number of CSS and JavaScript files that block
-          rendering. Use asynchronous loading for non-critical scripts.</li>
-      </ul>
-
-      <h5>Use Efficient Caching:</h5>
-      <ul>
-        <li><strong>Browser Caching:</strong> Implement proper caching strategies to store frequently accessed resources
-          locally on the user's device.</li>
-      </ul>
-
-      <h5>Optimize Web Fonts:</h5>
-      <ul>
-        <li><strong>Font Loading:</strong> Use <code>font-display: swap</code> to ensure text is visible while web fonts
-          are loading.</li>
-      </ul>
     </div>
   </main>
 </body>

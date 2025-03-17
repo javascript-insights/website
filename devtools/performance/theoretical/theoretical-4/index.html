@@ -25,10 +25,49 @@
   </div>
 
   <div class="container">
-    <button onclick="cpuIntensiveTask()">Run CPU Intensive Task</button>
-    <button onclick="simpleTask()">Run Simple Task</button>
-    <div id="result"></div>
+    <div class="instructions">
+      <h2>CPU Performance Analysis</h2>
+      <p>This demo helps you understand CPU performance profiling using Chrome DevTools:</p>
+      <ol>
+        <li>Open Chrome DevTools (F12)</li>
+        <li>Go to the Performance tab</li>
+        <li>Click the record button (or press Ctrl+E)</li>
+        <li>Click "Run CPU Intensive Task"</li>
+        <li>Stop recording after a few seconds</li>
+        <li>Observe the flame chart and CPU utilization</li>
+      </ol>
+      <p>Compare the results with the "Run Simple Task" to see the difference in CPU usage patterns.</p>
+    </div>
+
+    <div class="actions">
+      <button onclick="cpuIntensiveTask()">Run CPU Intensive Task</button>
+      <button onclick="simpleTask()">Run Simple Task</button>
+      <div id="result"></div>
+    </div>
   </div>
+
+  <div class="tips">
+    <h3>Tips:</h3>
+    <ul>
+      <li>Look at the Interactions section to find the function execution</li>
+      <li>Check the Flame Graph for CPU usage over time</li>
+      <li>Use the search option Ctrl+F and search for "click"</li>
+      <li>Check the Call Tree for function call hierarchy</li>
+      <li>Use the Stack Chart to visualize CPU usage over time</li>
+    </ul>
+  </div>
+
+
+  <div class="warning">
+    <p>⚠️ Warning: Dad joke ahead!</p>
+  </div>
+  <div class="joke">
+    <p>Why did the CPU break up with the GPU?</p>
+    <p>Because it couldn't handle the load! 🐱‍💻</p>
+  </div>
+  <!-- <div style="margin: 20px;">
+    <img src="https://media.giphy.com/media/kC8N6DPOkbqWTxkNTe/giphy.gif" alt="Funny coding gif" width="432" />
+  </div> -->
 
 </body>
 

@@ -1,91 +1,149 @@
 window.addEventListener("load", function () {
-    // Reference Error Example
-    document.getElementById('button1').addEventListener('click', function() {
-        try {
-            console.log(undefinedVariable);
-        } catch (e) {
-            console.error('Can you spot the ReferenceError?', e);
+
+    var canvas, ctx;
+    var interval;
+    var width, height;
+    var size, step;
+    var Sum_1;
+    color1 = Math.floor(Math.random() * 16777215).toString(16)
+    color1 = "#" + ("000000" + color1).slice(-6)
+    color2 = Math.floor(Math.random() * 16777215).toString(16)
+    color2 = "#" + ("000000" + color2).slice(-6)
+
+    function setup() {
+        width = 500;
+        height = 500;
+        canvas = document.getElementById("scrawl");
+        ctx = canvas.getContext("2d");
+        size = 125;
+        step = 500 / size;
+        Sum_1 = 0;
+
+
+        initialize();
+        interval = setInterval(run, 2);
+
+    }
+
+    // Intiiales Setzen der Boards
+    function initialize() {
+        Old = new Array(size);
+        New = new Array(size);
+        //Anzahl der Nachbarn
+        Neigh = new Array(size);
+        Ratio1 = new Array(size);
+
+        for (i = 0; i < Old.length; ++i) {
+            Old[i] = new Array(size);
+            New[i] = new Array(size);
+            Neigh[i] = new Array(size);
+            Ratio1[i] = new Array(size);
+
         }
-    });
+        for (i = 0; i < size; ++i) {
+            for (j = 0; j < size; ++j) {
+                Ratio1[i][j] = 0;
+                Neigh[i][j] = 8;
+                if (i === 0 || i === size - 1) {
+                    Neigh[i][j] = 5;
+                    if (j === 0 || j === size - 1) {
+                        Neigh[i][j] = 3
+                    }
+                }
+                if (j === 0 || j === size - 1) {
+                    Neigh[i][j] = 5;
+                    if (i === 0 || i === size - 1) {
+                        Neigh[i][j] = 3
+                    }
+                }
 
-    // Type Error Example
-    document.getElementById('button2').addEventListener('click', function() {
-        try {
-            const number = 42;
-            number.toLowerCase();
-        } catch (e) {
-            console.error('Can you spot the TypeError?', e);
+
+                if (i < size / 2) {
+                    Old[i][j] = 1;
+                    Sum_1 += 1
+                }
+                else {
+                    Old[i][j] = 0;
+                }
+                New[i][j] = Old[i][j];
+            }
         }
-    });
+        Sum_1 = Sum_1 / (size * size);
+    }
 
-    // Syntax Error Example
-    document.getElementById('button3').addEventListener('click', function() {
-        try {
-            eval('if (true) { console.log("Hello" };'); // Missing parenthesis
-        } catch (e) {
-            console.error('Can you spot the SyntaxError?', e);
+    function ratio() {
+        for (i = 0; i < size; ++i) {
+            for (j = 0; j < size; ++j) {
+                Ratio1[i][j] = 0;
+                if (i > 0) {
+                    if (j > 0) { Ratio1[i][j] += Old[i - 1][j - 1]; }
+                    Ratio1[i][j] += Old[i - 1][j];
+                    if (j < size - 1) { Ratio1[i][j] += Old[i - 1][j + 1]; }
+                }
+
+                if (j > 0) { Ratio1[i][j] += Old[i][j - 1]; }
+                if (j < size - 1) { Ratio1[i][j] += Old[i][j + 1]; }
+
+                if (i < size - 1) {
+                    if (j > 0) { Ratio1[i][j] += Old[i + 1][j - 1]; }
+                    Ratio1[i][j] += Old[i + 1][j];
+                    if (j < size - 1) { Ratio1[i][j] += Old[i + 1][j + 1]; }
+                }
+
+                Ratio1[i][j] = Ratio1[i][j] / Neigh[i][j];
+            }
         }
-    });
+        console.log(Neigh[1][1]);
+        console.log(Ratio1[1][1]);
+        console.log(Sum_1);
 
-    // Range Error Example
-    document.getElementById('button4').addEventListener('click', function() {
-        try {
-            const arr = new Array(-1); // Invalid array length
-        } catch (e) {
-            console.error('Can you spot the RangeError?', e);
+    }
+
+    function draw() {
+
+
+        for (i = 0; i < size; ++i) {
+            for (j = 0; j < size; ++j) {
+                ctx.fillStyle = color1;
+                if (Old[i][j] === 1) { ctx.fillStyle = color2; }
+                ctx.fillRect(i * step, j * step, step, step);
+            }
         }
-    });
+    }
 
-    // URI Error Example
-    document.getElementById('button5').addEventListener('click', function() {
-        try {
-            decodeURIComponent('%'); // Invalid URI encoding
-        } catch (e) {
-            console.error('Can you spot the URIError?', e);
+    function calculate() {
+
+        for (i = 0; i < size; ++i) {
+            for (j = 0; j < size; ++j) {
+                help = Math.random();
+
+                if ((Ratio1[i][j]) > help) {
+                    Old[i][j] = 1;
+                } else {
+                    Old[i][j] = 0;
+                }
+            }
         }
-    });
 
-    // Network Error Example
-    document.getElementById('button6').addEventListener('click', function() {
-        fetch('https://nonexistent-domain-123456.com')
-            .then(response => response.json())
-            .catch(e => console.error('Can you spot the NetworkError?', e));
-    });
 
-    // DOM Exception Example
-    document.getElementById('button7').addEventListener('click', function() {
-        try {
-            document.createElement('::::'); // Invalid element name
-        } catch (e) {
-            console.error('Can you spot the DOMException?', e);
+        Sum_1 = 0;
+        for (i = 0; i < size; ++i) {
+            for (j = 0; j < size; ++j) {
+                if (Old[i][j] == 1) Sum_1 += 1;
+            }
         }
-    });
+        Sum_1 = Sum_1 / (size * size);
 
-    // JSON Parse Error Example
-    document.getElementById('button8').addEventListener('click', function() {
-        try {
-            JSON.parse('{invalid json}');
-        } catch (e) {
-            console.error('Can you spot the JSON Parse Error?', e);
-        }
-    });
 
-    // Promise Error Example
-    document.getElementById('button9').addEventListener('click', function() {
-        new Promise((resolve, reject) => {
-            throw new Error('Promise rejected');
-        }).catch(e => console.error('Can you spot the Promise Error?', e));
-    });
+    }
 
-    // Console Warning
-    console.warn('This is a warning message');
 
-    // Console Info
-    console.info('This is an info message');
+    function run() {
+        ratio();
+        draw();
+        calculate();
+    }
 
-    // Console Debug
-    console.debug('This is a debug message');
+    setup();
 
-    // Console Trace
-    console.trace('This is a stack trace');
 });

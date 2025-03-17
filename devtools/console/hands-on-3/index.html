@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Performance Analysis - JavaScript Insights</title>
+  <title>JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -23,122 +23,28 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <main class="content">
-    <section>
-      <h2>Understanding Console Errors</h2>
-      <p>In this hands-on exercise, you'll learn how to identify and fix common JavaScript console errors.</p>
 
-      <h3>Common Types of Errors:</h3>
-      <ul>
-        <li>ReferenceError - When trying to use undefined variables</li>
-        <li>TypeError - When operations are performed on incompatible types</li>
-        <li>SyntaxError - When code doesn't follow JavaScript syntax rules</li>
-        <li>RangeError - When a numeric value is outside its valid range</li>
-        <li>URIError - When using invalid characters in URI functions</li>
-        <li>NetworkError - When network requests fail</li>
-        <li>DOMException - When an operation is impossible to perform</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Practice Exercise</h2>
-      <p>Open your browser's DevTools (F12) and check the console. You'll find several errors that need fixing.</p>
-
-      <div class="error-categories">
-        <div class="category">
-          <h3>JavaScript Errors</h3>
-          <div class="exercise-buttons">
-            <button id="button1">Test Reference Error</button>
-            <button id="button2">Test Type Error</button>
-            <button id="button3">Test Syntax Error</button>
-            <button id="button4">Test Range Error</button>
-            <button id="button5">Test URI Error</button>
-          </div>
-        </div>
-
-        <div class="category">
-          <h3>Network & DOM Errors</h3>
-          <div class="exercise-buttons">
-            <button id="button6">Test Network Error</button>
-            <button id="button7">Test DOM Exception</button>
-            <button id="button8">Test Invalid JSON</button>
-            <button id="button9">Test Promise Error</button>
-          </div>
-        </div>
+  <center>
+    <div style="width: 100%; margin-top: 20px;"><span
+        style="font-family:Arial Black, Gadget, sans-serif ;font-size: 1.5em; color:black;">PIXELS FIGHTING
+    </div>
+    </span></div>
+    <div style="width: 100%">
+      <span style="font-family: 'Comic Sans MS', cursive; font-size: 1em; color: #666;">
+        Watch these pixels duke it out! 🥊 May the best pixel win! 🏆
+      </span>
+      <div style="margin: 10px; color: #888;">
+        Open your console (F12) to see the battle stats! But please don't try to help your favorite pixel win... that would be cheating! 😉
       </div>
+    </div>
+    <canvas id="scrawl" width="500" height="500"></canvas>
 
-      <div class="hints">
-        <h3>Hints:</h3>
-        <ul>
-          <li>For the Reference Error: Check if all variables are properly declared</li>
-          <li>For the Type Error: Make sure you're using the correct data types</li>
-          <li>For the Syntax Error: Look for missing parentheses or brackets</li>
-          <li>For Range Error: Check if numeric operations are within valid bounds</li>
-          <li>For URI Error: Verify URI encoding/decoding operations</li>
-          <li>For Network Error: Check network connectivity and URL validity</li>
-          <li>For DOM Exception: Ensure DOM operations are valid</li>
-        </ul>
-      </div>
-    </section>
+    <div style="width: 100%"><span style="font-family:Arial, Helvetica, sans-serif;font-size: 1em;"> <a
+          href="https://pixelsfighting.com/" target="_blank">&#9758 pixelsfighting.com &#9756</a></span>
+    </div>
 
-    <section>
-      <h2>Performance Analysis Practice</h2>
-      <div class="exercise">
-        <h3>Exercise 1: Profile Execution Time</h3>
-        <p>Profile and optimize this function:</p>
-        <button onclick="profileFunction()">Run Profile</button>
-      </div>
+  </center>
 
-      <div class="exercise">
-        <h3>Exercise 2: Memory Leak Detection</h3>
-        <p>Find and fix the memory leak:</p>
-        <button onclick="startMemoryLeak()">Start Memory Test</button>
-        <button onclick="stopMemoryLeak()">Stop Memory Test</button>
-      </div>
-
-      <div class="exercise">
-        <h3>Exercise 3: Network Performance</h3>
-        <p>Analyze network requests:</p>
-        <button onclick="makeNetworkRequests()">Test Network</button>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    function profileFunction() {
-      console.profile('Exercise1');
-      let data = new Array(10000).fill(0).map((_, i) => i);
-      data.sort(() => Math.random() - 0.5);
-      console.profileEnd('Exercise1');
-    }
-
-    let interval;
-    let leakyArray = [];
-
-    function startMemoryLeak() {
-      interval = setInterval(() => {
-        leakyArray.push(new Array(10000));
-        console.log('Memory size:', leakyArray.length);
-      }, 1000);
-    }
-
-    function stopMemoryLeak() {
-      clearInterval(interval);
-      leakyArray = [];
-    }
-
-    async function makeNetworkRequests() {
-      console.time('NetworkRequests');
-      try {
-        await fetch('https://api.example.com/data1');
-        await fetch('https://api.example.com/data2');
-        await fetch('https://api.example.com/data3');
-      } catch (error) {
-        console.error('Network Error:', error);
-      }
-      console.timeEnd('NetworkRequests');
-    }
-  </script>
 </body>
 
 </html>

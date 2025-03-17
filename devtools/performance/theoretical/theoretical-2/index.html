@@ -25,10 +25,41 @@
   </div>
 
   <main>
-    <div class="content">
-      <p>This is a paragraph of text that will stay in place.</p>
-      <img src="large-image.png" alt="Large Image" class="large-image">
-      <p>This text will shift down when the image loads.</p>
+    <div class="explanation">
+      <h2>Understanding Cumulative Layout Shift (CLS)</h2>
+      <p>CLS measures visual stability by tracking unexpected layout shifts. A good CLS score is below 0.1.</p>
+      <ul>
+        <li>Watch the multiple images load without dimensions</li>
+        <li>Notice how content keeps shifting as elements load</li>
+        <li>Open DevTools (F12) → Performance tab</li>
+        <li>Click the reload button (⭮) to record and observe the severe layout shifts</li>
+      </ul>
+    </div>
+
+    <div class="content" id="dynamicContent"></div>
+    <p>This text will shift repeatedly!</p>
+    <img src="large-image.png" alt="Image 1" class="large-image">
+    <p>More shifting text...</p>
+    <img src="large-image.png" alt="Image 2" class="large-image">
+    <p>Even more shifting text!</p>
+    <img src="large-image.png" alt="Image 3" class="large-image">
+    </div>
+
+    <script>
+      // Dynamically insert content above existing content
+      setTimeout(() => {
+        const div = document.getElementById('dynamicContent');
+        div.insertAdjacentHTML('afterbegin', '<h2>Surprise Header!</h2>');
+      }, 1000);
+    </script>
+
+    <div class="solution">
+      <h3>How to Fix CLS:</h3>
+      <ol>
+        <li>Always specify image dimensions</li>
+        <li>Reserve space for dynamic content</li>
+        <li>Avoid inserting content above existing content</li>
+      </ol>
     </div>
   </main>
 

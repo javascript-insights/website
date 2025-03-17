@@ -22,41 +22,117 @@
     <a href="./hands-on/index.html">Hands On</a>
   </div>
 
-  <p>The Performance panel lets you record CPU performance profiles of your web applications. Analyze profiles to find
-    potential performance bottlenecks and ways you can optimize resource use.</p>
+  <p>📊 The Performance panel in Browser DevTools helps you analyze your web app's performance. It records detailed CPU
+    profiles showing exactly where time is spent, helping you identify slowdowns and optimize your code for better
+    speed.</p>
 
-  <p>Use the Performance panel to do the following:</p>
+  <h2>Using the Performance Panel</h2>
+  <p>The Performance panel helps you analyze and optimize your web application by:</p>
 
   <ul>
-    <li>Record a performance profile.</li>
-    <li>Change capture settings.</li>
-    <li>Analyze a performance report.</li>
+    <li>🎥 Recording performance profiles to see what's happening</li>
+    <li>⚙️ Adjusting capture settings for different scenarios</li>
+    <li>📈 Examining detailed performance reports</li>
   </ul>
 
-  <p>Common advice for keeping JavaScript apps fast includes:</p>
+  <h2>Performance Best Practices</h2>
+  <p>Two key rules for fast JavaScript applications:</p>
   <ul>
-    <li>Don't block the main thread.</li>
-    <li>Break up long tasks.</li>
+    <li>🚫 Keep the main thread free - don't let long operations block user interactions</li>
+    <li>✂️ Split large operations into smaller chunks</li>
   </ul>
-  <p>Shipping less JavaScript can help, but it's not always enough. To optimize tasks, you need to understand what tasks
-    are and how the browser handles them.</p>
-  <p>A task is any piece of work the browser does, such as rendering, parsing HTML/CSS, and running JavaScript.
-    JavaScript tasks impact performance by queuing tasks during startup and responding to interactions.</p>
+
+  <h2>Understanding Browser Tasks</h2>
+  <p>⚡ While reducing JavaScript size helps performance, how you execute code matters more.</p>
+
+  <p>🎯 Browser tasks include:</p>
+  <ul>
+    <li>Rendering the page</li>
+    <li>Parsing HTML and CSS</li>
+    <li>Running JavaScript code</li>
+    <li>Handling user interactions</li>
+  </ul>
+
+  <h2>🔄 What is An Event Loop in JavaScript? <a
+      href="https://www.geeksforgeeks.org/what-is-an-event-loop-in-javascript/" target="_blank">🤓</a></h2>
+  <p>The event loop is an important concept in JavaScript that enables asynchronous programming by handling tasks
+    efficiently. Since JavaScript is single-threaded, it uses the event loop to manage the execution of multiple tasks
+    without blocking the main thread.</p>
+
+  <div class="code-example">
+    <script>
+      console.log("Start");
+
+      setTimeout(() => {
+        console.log("setTimeout Callback");
+      }, 0);
+
+      Promise.resolve().then(() => {
+        console.log("Promise Resolved");
+      });
+
+      console.log("End");</script>
+
+    <div class="output">
+      <p>Output:</p>
+      <pre>
+        Start
+        End
+        Promise Resolved
+        setTimeout Callback
+      </pre>
+    </div>
+  </div>
+
+  <p>In this example:</p>
+  <ul>
+    <li><code>console.log("Start")</code> executes first.</li>
+    <li><code>setTimeout</code> schedules its callback but does not execute it immediately.</li>
+    <li><code>Promise.resolve().then()</code> is placed in the microtask queue and executes before the callback queue.
+    </li>
+    <li>Promise Resolved appears before setTimeout Callback due to microtask priority.</li>
+  </ul>
+  JavaScript executes code synchronously in a single thread. However, it can handle asynchronous operations such as
+  fetching data from an API, handling user events, or setting timeouts without pausing execution. This is made possible
+  by the event loop.
+
   <p>The main thread processes one task at a time. Tasks longer than 50ms are long tasks, and their blocking period
     affects user interactions. Breaking up long tasks into smaller ones allows the browser to respond to higher-priority
     work sooner.</p>
   <img src="./static/a-depiction-how-breaking-999bc2dd02872_960.png"
-    alt="A depiction of how breaking up long tasks can improve performance" style="width: 600px;" />
+    alt="A depiction of how breaking up long tasks can improve performance" style="width: 600px;margin-left: 44px;" />
   <p>By breaking up tasks, the browser can handle user interactions more efficiently, making the interface feel more
     responsive.</p>
 
   <ol>
     <h3>Work...</h3>
     <script>
+      function calculateSum(currentValue, currentResult) {
+        return currentResult + currentValue;
+      }
+
       function mineBitcoin() {
         let result = 0;
         for (let i = 0; i < 100000000; i++) {
-          result += i;
+          result = calculateSum(i, result);
+        }
+        return result;
+      }
+    </script>
+
+    <script>
+      async function calculateSumAsync(currentValue, currentResult) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(currentResult + currentValue);
+          }, 0);
+        });
+      }
+
+      async function mineBitcoinAsync() {
+        let result = 0;
+        for (let i = 0; i < 100000; i++) {
+          result = await calculateSumAsync(i, result);
         }
         return result;
       }
@@ -67,10 +143,17 @@
       <strong>Using console.time and console.timeEnd</strong>
       <p>This method is straightforward and useful for measuring the time taken by a specific block of code.</p>
       <script>
-        console.time('MyFunction1');
+        console.time('mineBitcoin - 1');
         // Your code block
         mineBitcoin();
-        console.timeEnd('MyFunction1');
+        console.timeEnd('mineBitcoin - 1');
+      </script>
+
+      <script>
+        console.time('mineBitcoinAsync - 1');
+        // Your code block
+        mineBitcoinAsync();
+        console.timeEnd('mineBitcoinAsync - 1');
       </script>
     </li>
     <li>
@@ -87,11 +170,11 @@
         performance.mark('end');
 
         // Measure the duration
-        performance.measure('MyFunction2', 'start', 'end');
+        performance.measure('mineBitcoin - 2', 'start', 'end');
 
         // Log the result
-        const measure = performance.getEntriesByName('MyFunction2')[0];
-        console.log(`MyFunction2 took ${measure.duration} milliseconds`);
+        const measure = performance.getEntriesByName('mineBitcoin - 2')[0];
+        console.log(`mineBitcoin - 2 took ${measure.duration} milliseconds`);
       </script>
     </li>
     <li>
@@ -104,8 +187,9 @@
         mineBitcoin();
 
         const end = performance.now();
-        console.log(`MyFunction3 took ${end - start} milliseconds`);
+        console.log(`mineBitcoin - 3 took ${end - start} milliseconds`);
       </script>
+
     </li>
   </ol>
   <h2>Navigation Controls</h2>
@@ -153,6 +237,13 @@
     <li>Reset trace (T)</li>
     <li>Add script to ignore list (I)</li>
   </ul>
+
+  <h2>Adding Annotations in Performance Tool</h2>
+  <p>Annotations help document and analyze specific events during performance analyzing.</p>
+  <p>To add a Lable to an entry, right-click on the element and select "Lable entry".</p>
+  <p>To add a link to another entry, right-click on the element and selete "Link entreis".</p>
+  <p>To define time range, Shift and drag the flame chart.</p>
+
 
   <h1>Web Vitals</h1>
   <p>Web Vitals is an initiative by Google to provide unified guidance for quality signals that are essential to

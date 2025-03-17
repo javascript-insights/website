@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>Debugging Challenges - JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -23,28 +23,109 @@
     <a href="../index.html">Back</a>
   </div>
 
+  <h2>🧩 Debugging Challenges</h2>
+  <p>Welcome to the Console Debugging Challenges! Here, you'll tackle a series of fun and tricky exercises designed to
+    test your console skills. Each challenge will help you understand how to effectively use the console for debugging
+    and logging in JavaScript.</p>
+  <p>Remember, the console is your best friend when it comes to debugging. Use it wisely!</p>
+  <p>For each exercise, try to solve it on your own first. If you get stuck, click the button to see a hint or solution.
+  </p>
+  <p>Good luck, and happy debugging! 🎉</p>
 
-  <center>
-    <div style="width: 100%; margin-top: 20px;"><span
-        style="font-family:Arial Black, Gadget, sans-serif ;font-size: 1.5em; color:black;">PIXELS FIGHTING
-    </div>
-    </span></div>
-    <div style="width: 100%">
-      <span style="font-family: 'Comic Sans MS', cursive; font-size: 1em; color: #666;">
-        Watch these pixels duke it out! 🥊 May the best pixel win! 🏆
-      </span>
-      <div style="margin: 10px; color: #888;">
-        Open your console (F12) to see the battle stats! But please don't try to help your favorite pixel win... that would be cheating! 😉
-      </div>
-    </div>
-    <canvas id="scrawl" width="500" height="500"></canvas>
 
-    <div style="width: 100%"><span style="font-family:Arial, Helvetica, sans-serif;font-size: 1em;"> <a
-          href="https://pixelsfighting.com/" target="_blank">&#9758 pixelsfighting.com &#9756</a></span>
+  <div class="content">
+    <div class="exercise">
+      <h3>🎨 Exercise 1: Style Me Up!</h3>
+      <p>Check these fancy console styles:</p>
+      <button onclick="runStyleExamples()">Show Styled Logs</button>
     </div>
 
-  </center>
+    <div class="exercise">
+      <h3>🎯 Exercise 2: Count My Clicks</h3>
+      <p>How many times can you click in 5 seconds?</p>
+      <button id="clickCounter">Click me fast!</button>
+    </div>
 
+    <div class="exercise">
+      <h3>🐌 Exercise 3: The Slow Calculator</h3>
+      <p>Find out why this calculator is taking forever:</p>
+      <button onclick="runSlowCalculator()">Calculate</button>
+    </div>
+
+    <div class="exercise">
+      <h3>🎭 Exercise 4: DOM Detective</h3>
+      <p>Inspect these mysterious elements:</p>
+      <div id="mysteryBox">🎁</div>
+    </div>
+
+    <div class="exercise">
+      <h3>🔍 Exercise 5: Debug the Dance Party</h3>
+      <p>Fix the broken dance moves:</p>
+      <button onclick="startDanceParty()">Start Dancing</button>
+    </div>
+  </div>
+
+  <script>
+    function runStyleExamples() {
+      console.log('Normal log - boring!');
+      console.info('🔵 Info: Did you know console can be colorful?');
+      console.warn('🟡 Warning: Things are getting interesting!');
+      console.error('🔴 Error: Oops, but make it fancy!');
+      console.log('%cRainbow Text!', 'font-size: 20px; background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); -webkit-background-clip: text; color: transparent;');
+      console.table([
+        { name: '🐱 Cat', sound: 'Meow', rating: 10 },
+        { name: '🐶 Dog', sound: 'Woof', rating: 10 },
+        { name: '🦊 Fox', sound: '???', rating: '🤔' }
+      ]);
+    }
+
+    // Click counter game
+    document.getElementById('clickCounter').addEventListener('click', function () {
+      console.time('clickSpeed');
+      console.count('Clicks');
+      console.timeEnd('clickSpeed');  // End previous timer if exists
+    });
+
+    function runSlowCalculator() {
+      console.time('calculationTime');
+      let result = 0;
+      for (let i = 0; i < 1000000; i++) {
+        result += Math.random() * i;
+        if (i % 100000 === 0) {
+          console.log(`${(i / 1000000 * 100).toFixed(0)}% complete...`);
+        }
+      }
+      console.timeEnd('calculationTime');
+      console.log('Final result:', result);
+    }
+
+    // Mystery box with hidden properties
+    const mysteryBox = document.getElementById('mysteryBox');
+    mysteryBox.addEventListener('mouseover', function () {
+      console.dir(this);
+      console.log('🕵️ Tip: Check the console.dir output!');
+    });
+
+    function startDanceParty() {
+      const dancers = ['🕺', '💃', '🐒', '🦁', '🐨'];
+      console.group('Dance Party Debug');
+      try {
+        dancers.forEach((dancer, i) => {
+          setTimeout(() => {
+            console.log(`${dancer} is dancing!`);
+            if (i === 2) throw new Error('Oh no! Someone tripped! 🤕');
+          }, i * 1000);
+        });
+      } catch (e) {
+        console.error('Dance party crashed!', e);
+      }
+      console.groupEnd();
+    }
+
+    // Initial welcome message
+    console.log('%cWelcome to Console Adventures! 🎮', 'font-size: 24px; color: #4CAF50; font-weight: bold;');
+    console.log('👉 Tip: Try right-clicking elements and selecting "Break on..."');
+  </script>
 </body>
 
 </html>

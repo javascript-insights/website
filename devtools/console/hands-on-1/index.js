@@ -1,149 +1,65 @@
-window.addEventListener("load", function () {
+function showCode(id) {
+    const codeBlock = document.getElementById(id);
+    codeBlock.style.display = codeBlock.style.display === 'none' ? 'block' : 'none';
+}
 
-    var canvas, ctx;
-    var interval;
-    var width, height;
-    var size, step;
-    var Sum_1;
-    color1 = Math.floor(Math.random() * 16777215).toString(16)
-    color1 = "#" + ("000000" + color1).slice(-6)
-    color2 = Math.floor(Math.random() * 16777215).toString(16)
-    color2 = "#" + ("000000" + color2).slice(-6)
+// Exercise checking functions remain unchanged
+function checkExercise1() {
+    console.clear();
+    console.info('Exercise 1 Template:');
+    console.log('Your name here');
+    console.warn('Warning: Battery at 10%');
+    console.error('Error: Connection failed');
+}
 
-    function setup() {
-        width = 500;
-        height = 500;
-        canvas = document.getElementById("scrawl");
-        ctx = canvas.getContext("2d");
-        size = 125;
-        step = 500 / size;
-        Sum_1 = 0;
+function checkExercise2() {
+    console.clear();
+    console.info('Exercise 2 Template:');
+    console.log('%cYour styled message here', 'color: blue; font-size: 20px; font-weight: bold');
+}
 
+function checkExercise3() {
+    console.clear();
+    console.info('Exercise 3 Template:');
+    console.group('Car Details');
+    console.log('Model: [Your car model]');
+    console.log('Year: [Year]');
+    console.group('Technical Specs');
+    console.log('Engine: [Engine details]');
+    console.log('Power: [Power details]');
+    console.groupEnd();
+    console.groupEnd();
+}
 
-        initialize();
-        interval = setInterval(run, 2);
+// Exercise checking functions remain unchanged
+function checkExercise4() {
+    console.clear();
+    console.info('Exercise 4 Template:');
+    const debugHeroes = [
+        { name: 'Captain Console', superpower: 'Log Vision', bugsSquashed: 9001 },
+        { name: 'The Debuginator', superpower: 'Breakpoint Mastery', bugsSquashed: 8000 },
+        { name: 'Stack Trace Girl', superpower: 'Error Whispering', bugsSquashed: 7500 }
+    ];
+    console.table(debugHeroes);
+}
 
-    }
+function checkExercise5() {
+    console.clear();
+    console.info('Exercise 5 Template:');
+    console.time('BugHunting');
+    setTimeout(() => {
+        console.time('CodeSprinting');
+        setTimeout(() => {
+            console.timeEnd('CodeSprinting');
+            console.timeEnd('BugHunting');
+        }, 1000);
+    }, 2000);
+}
 
-    // Intiiales Setzen der Boards
-    function initialize() {
-        Old = new Array(size);
-        New = new Array(size);
-        //Anzahl der Nachbarn
-        Neigh = new Array(size);
-        Ratio1 = new Array(size);
-
-        for (i = 0; i < Old.length; ++i) {
-            Old[i] = new Array(size);
-            New[i] = new Array(size);
-            Neigh[i] = new Array(size);
-            Ratio1[i] = new Array(size);
-
-        }
-        for (i = 0; i < size; ++i) {
-            for (j = 0; j < size; ++j) {
-                Ratio1[i][j] = 0;
-                Neigh[i][j] = 8;
-                if (i === 0 || i === size - 1) {
-                    Neigh[i][j] = 5;
-                    if (j === 0 || j === size - 1) {
-                        Neigh[i][j] = 3
-                    }
-                }
-                if (j === 0 || j === size - 1) {
-                    Neigh[i][j] = 5;
-                    if (i === 0 || i === size - 1) {
-                        Neigh[i][j] = 3
-                    }
-                }
-
-
-                if (i < size / 2) {
-                    Old[i][j] = 1;
-                    Sum_1 += 1
-                }
-                else {
-                    Old[i][j] = 0;
-                }
-                New[i][j] = Old[i][j];
-            }
-        }
-        Sum_1 = Sum_1 / (size * size);
-    }
-
-    function ratio() {
-        for (i = 0; i < size; ++i) {
-            for (j = 0; j < size; ++j) {
-                Ratio1[i][j] = 0;
-                if (i > 0) {
-                    if (j > 0) { Ratio1[i][j] += Old[i - 1][j - 1]; }
-                    Ratio1[i][j] += Old[i - 1][j];
-                    if (j < size - 1) { Ratio1[i][j] += Old[i - 1][j + 1]; }
-                }
-
-                if (j > 0) { Ratio1[i][j] += Old[i][j - 1]; }
-                if (j < size - 1) { Ratio1[i][j] += Old[i][j + 1]; }
-
-                if (i < size - 1) {
-                    if (j > 0) { Ratio1[i][j] += Old[i + 1][j - 1]; }
-                    Ratio1[i][j] += Old[i + 1][j];
-                    if (j < size - 1) { Ratio1[i][j] += Old[i + 1][j + 1]; }
-                }
-
-                Ratio1[i][j] = Ratio1[i][j] / Neigh[i][j];
-            }
-        }
-        console.log(Neigh[1][1]);
-        console.log(Ratio1[1][1]);
-        console.log(Sum_1);
-
-    }
-
-    function draw() {
-
-
-        for (i = 0; i < size; ++i) {
-            for (j = 0; j < size; ++j) {
-                ctx.fillStyle = color1;
-                if (Old[i][j] === 1) { ctx.fillStyle = color2; }
-                ctx.fillRect(i * step, j * step, step, step);
-            }
-        }
-    }
-
-    function calculate() {
-
-        for (i = 0; i < size; ++i) {
-            for (j = 0; j < size; ++j) {
-                help = Math.random();
-
-                if ((Ratio1[i][j]) > help) {
-                    Old[i][j] = 1;
-                } else {
-                    Old[i][j] = 0;
-                }
-            }
-        }
-
-
-        Sum_1 = 0;
-        for (i = 0; i < size; ++i) {
-            for (j = 0; j < size; ++j) {
-                if (Old[i][j] == 1) Sum_1 += 1;
-            }
-        }
-        Sum_1 = Sum_1 / (size * size);
-
-
-    }
-
-
-    function run() {
-        ratio();
-        draw();
-        calculate();
-    }
-
-    setup();
-
-});
+function checkExercise6() {
+    console.clear();
+    console.info('Exercise 6 Template:');
+    console.log('%cWhy do programmers prefer dark mode?', 'color: #FF69B4; font-size: 16px');
+    console.log('%cBecause light attracts bugs! 🐛', 'color: #4CAF50; font-size: 20px; font-weight: bold');
+    console.warn('Warning: Dad joke overload detected! 😄');
+}

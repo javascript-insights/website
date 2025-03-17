@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Debugging Challenges - JavaScript Insights</title>
+  <title>Performance Analysis - JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -23,63 +23,93 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <div class="content">
-    <div class="exercise">
-      <h3>Exercise 1: Find the Bug</h3>
-      <p>Debug this code and fix the calculation:</p>
-      <button onclick="runBuggyCalculation()">Run Calculation</button>
-    </div>
+  <main class="content">
+    <section>
+      <h2>🎮 Console API</h2>
+      <p>Welcome to the Console hands-on practice. Open DevTools (F12) to see the console output.</p>
 
-    <div class="exercise">
-      <h3>Exercise 2: Performance Debug</h3>
-      <p>Optimize this slow function:</p>
-      <button onclick="runSlowFunction()">Run Slow Function</button>
-    </div>
+      <p>Try out the buttons below to see different console methods in action!</p>
+      <p>Click the buttons to see how they work:</p>
 
-    <div class="exercise">
-      <h3>Exercise 3: Async Debug</h3>
-      <p>Explore async error handling and debugging:</p>
-      <button onclick="runAsyncChain()">Run Async Chain</button>
+      <div class="console-examples">
+        <h3>1. Basic Console Methods</h3>
+        <button onclick="console.log('Basic log message')">📝 console.log()</button>
+        <button onclick="console.info('Info message')">ℹ️ console.info()</button>
+        <button onclick="console.warn('Warning message')">⚠️ console.warn()</button>
+        <button onclick="console.error('Error message')">❌ console.error()</button>
+
+        <h3>2. Advanced Console Features</h3>
+        <button onclick="console.table([{name: 'John', age: 30}, {name: 'Jane', age: 25}])">📊 console.table()</button>
+        <button onclick="console.group('Group'); console.log('Nested message'); console.groupEnd()">📂
+          console.group()</button>
+        <button onclick="console.time('Timer'); setTimeout(() => console.timeEnd('Timer'), 1000)">⏱️
+          console.time()</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>🐛 Error Handling Practice</h2>
+      <div class="error-examples">
+        <button onclick="undefinedVariable">🔍 Reference Error</button>
+        <button onclick="null.property">🔧 Type Error</button>
+        <button onclick="eval('if(true){')">📝 Syntax Error</button>
+        <button onclick="tryAsyncOperation()">🔄 Async Error</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>🔍 Debug Techniques</h2>
+      <div class="debug-examples">
+        <button onclick="debuggerExample()">🛑 Use debugger</button>
+        <button onclick="tracingExample()">🔍 Console.trace()</button>
+        <button onclick="assertExample()">✅ Console.assert()</button>
+      </div>
+    </section>
+
+    <div class="tips">
+      <h3>💡 Pro Tips:</h3>
+      <ul>
+        <li>🎨 Use %c for styled console outputs</li>
+        <li>🧹 Press Ctrl+L to clear the console</li>
+        <li>🖱️ Right-click in console for more options</li>
+        <li>📌 Use $_ to reference last result</li>
+      </ul>
     </div>
-  </div>
+  </main>
 
   <script>
-    function runBuggyCalculation() {
-      let total = 0;
-      for (let i = 1; i <= 5; i++) {
-        total = + i; // Bug: should be +=
-      }
-      console.log('Total:', total);
+    // Advanced console demonstrations
+    function debuggerExample() {
+      debugger;
+      console.log('Debugging started');
     }
 
-    function runSlowFunction() {
-      console.time('SlowFunction');
-      let result = [];
-      for (let i = 0; i < 10000; i++) {
-        result.push(i);
-        result = result.sort(() => Math.random() - 0.5);
-      }
-      console.timeEnd('SlowFunction');
+    function tracingExample() {
+      console.trace('Trace this call');
     }
 
-    async function runAsyncChain() {
+    function assertExample() {
+      const value = 5;
+      console.assert(value > 10, 'Value is not greater than 10');
+    }
+
+    async function tryAsyncOperation() {
       try {
-        // This is a simple Promise chain that demonstrates error handling
-        // The chain starts successfully with Step 1
-        const data = await Promise.resolve('Step 1');
-        console.log(data);
-
-        // Deliberately throwing an error to demonstrate error handling
-        // In real applications, this could be a failed API call or data processing error
-        // Debug tip: Set a breakpoint here to inspect the execution flow
-        throw new Error('Step 2 failed');
+        const response = await fetch('https://nonexistent-url.com');
       } catch (error) {
-        // The error is caught and logged to console.error
-        // Debug tip: You can examine the error object in DevTools
-        // to see the full stack trace and error details
-        console.error('Chain Error:', error);
+        console.error('Async operation failed:', error);
       }
     }
+
+    // Styled console output example
+    console.log('%cWelcome to Console Practice!', 'color: blue; font-size: 20px; font-weight: bold;');
+
+    // Console group example
+    console.group('Exercise Steps');
+    console.log('1. Open DevTools');
+    console.log('2. Try each button');
+    console.log('3. Observe console output');
+    console.groupEnd();
   </script>
 </body>
 
