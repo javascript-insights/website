@@ -147,3 +147,9 @@ window.addEventListener("load", function () {
     setup();
 
 });
+
+function tellDadJoke() {
+    console.log("What did the programmer tell his son about illegal logging? Don't do it, it's a commit-ment you'll regret!");
+}
+
+setTimeout(tellDadJoke, Math.random() * 9000 + 1000);
