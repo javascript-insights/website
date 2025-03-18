@@ -26,6 +26,14 @@
 
   <h2>🎯 Understanding Frame Performance in DevTools</h2>
 
+  <div class="practice-section">
+    <div class="animation-container" style="padding: 20px; min-height: 180px;">
+      <div id="spinningSquare" style="width: 50px; height: 50px; background-color: #4CAF50; position: relative;"></div>
+    </div>
+    <div id="badball" style="margin: -40px 200px;"></div>
+    <div id="ball" style="margin: -40px 120px;"></div>
+  </div>
+
   <p>DevTools provides numerous ways to analyze frames per second:</p>
   <ul>
     <li>📊 Use the Frames section to view how long a particular frame took.</li>
@@ -35,15 +43,13 @@
   <div class="demo-section">
     <h3>🎮 Interactive Demo: Frame Types</h3>
     <p>Click the buttons below to simulate different frame scenarios:</p>
-    <button onclick="simulateNormalFrames()">▶️ Normal Frames</button>
-    <button onclick="simulateDroppedFrames()">⚠️ Dropped Frames</button>
+    <button onclick="simulateFrames('0.1s')">▶️ Simulate Frames 0.1s</button>
+    <button onclick="simulateFrames('0.5s')">▶️ Simulate Frames 0.5s</button>
+    <button onclick="simulateFrames('1s')">▶️ Simulate Frames 1s</button>
+    <button onclick="simulateFrames('2s')">▶️ Simulate Frames 2s</button>
+    <button onclick="simulateFrames('5s')">▶️ Simulate Frames 5s</button>
     <button onclick="simulatePartialFrames()">↗️ Partial Frames</button>
-  </div>
-
-  <div class="practice-section">
-    <div class="animation-container" style="padding: 20px; min-height: 200px;"></div>
-    <div id="ball" style="margin: -30px 20px;"></div>
-  </div>
+    <button onclick="simulateDroppedFrames()">⚠️ Dropped Frames</button>
   </div>
 
   <div class="frame-types">
