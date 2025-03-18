@@ -24,117 +24,110 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h2>What c</h2>
-  <h3>Complex Animations:</h3>
-  <p>Add more complex animations to simulate real-world scenarios.</p>
-  <p>Example: A bouncing ball, rotating elements, or a sliding carousel.</p>
-
-  <h3>Network Requests:</h3>
-  <p>Simulate different types of network requests (e.g., GET, POST) with varying response times.</p>
-  <p>Example: Fetching data from multiple APIs or simulating slow network conditions.</p>
-
-  <h3>User Interactions:</h3>
-  <p>Include interactive elements like forms, buttons, and sliders.</p>
-  <p>Example: A form submission that triggers a network request and updates the DOM.</p>
-
-  <h3>Dynamic Content:</h3>
-  <p>Load content dynamically using JavaScript.</p>
-  <p>Example: Infinite scrolling or lazy loading images.</p>
-
-  <h3>Heavy Computation:</h3>
-  <p>Add JavaScript functions that perform heavy computations to simulate CPU-intensive tasks.</p>
-  <p>Example: Calculating Fibonacci numbers or sorting large arrays.</p>
-
-  <h3>Event Listeners:</h3>
-  <p>Attach multiple event listeners to elements to track user interactions.</p>
-  <p>Example: Mouse movements, clicks, and keyboard events.</p>
+  <h2>What Can Be Analyzed? 📊</h2>
+  <ul>
+    <li>Complex Animations 🎨</li>
+    <li>Network Requests 🌐</li>
+    <li>User Interactions 👆</li>
+    <li>Dynamic Content 🔄</li>
+    <li>Heavy Computation 💻</li>
+    <li>Event Listeners 👂</li>
+    <li>Rendering Performance 🖼️</li>
+    <li>Memory Usage 📈</li>
+    <li>JavaScript Execution ⏱️</li>
+    <li>Layout Thrashing 📏</li>
+    <li>Repaints and Reflows 🔄</li>
+    <li>Long Tasks ⏳</li>
+    <li>Third-Party Scripts 📜</li>
+    <li>Web Workers 👷‍♂️</li>
+    <li>Service Workers 🔄</li>
+    <li>WebAssembly Performance 🏗️</li>
+    <li>GPU Performance 🎮</li>
+  </ul>
 
   <div class="container">
-    <h1>Performance Tool Demo</h1>
+    <h2>Performance Tool Demo</h2>
     <button class="button" onclick="fetchData()">Fetch Data</button>
     <div class="animation"></div>
   </div>
 
   <div class="container">
-    <h1>Performance Tool Enhanced</h1>
+    <h2>Performance Tool Enhanced</h2>
     <button class="button" onclick="performComputation()">Perform Computation</button>
     <button class="button" onclick="trackMouse()">Track Mouse</button>
     <div id="output"></div>
   </div>
 
-  <h2>Instructions for Participants</h2>
-  <h3>Analyze Complex Animations:</h3>
-  <p>Use the Performance tool to record and analyze the complex animations.</p>
-  <p>Identify any performance bottlenecks.</p>
+  <h2>Performance Tool Sections 🛠️</h2>
+  <div class="section-container">
+    <h3>Summary 📊</h3>
+    <ul>
+      <li><strong>Overview:</strong> The Summary section provides a high-level overview of the performance recording.
+      </li>
+      <li><strong>Purpose:</strong> Quickly identify major performance issues and understand overall performance
+        characteristics.</li>
+    </ul>
 
-  <h3>Monitor Network Requests:</h3>
-  <p>Record the performance while fetching data.</p>
-  <p>Analyze the network request timings and their impact on performance.</p>
+    <h3>Bottom-Up 📈</h3>
+    <ul>
+      <li><strong>Overview:</strong> Shows time spent in each function, starting from the bottom of the call stack.</li>
+      <li><strong>Purpose:</strong> Identify which functions are consuming the most time.</li>
+    </ul>
 
-  <h3>Evaluate Heavy Computation:</h3>
-  <p>Perform the heavy computation task and record the performance.</p>
-  <p>Check the CPU usage and identify any performance issues.</p>
+    <h3>Call Tree 🌲</h3>
+    <ul>
+      <li><strong>Overview:</strong> Displays a hierarchical view of the call stack and function execution times.</li>
+      <li><strong>Purpose:</strong> Understand code execution structure and identify performance bottlenecks.</li>
+    </ul>
 
-  <h3>Track User Interactions:</h3>
-  <p>Use the Performance tool to record mouse movements and other interactions.</p>
-  <p>Analyze the event log to see how interactions affect performance.</p>
+    <h3>Event Log 📝</h3>
+    <ul>
+      <li><strong>Overview:</strong> Lists all events during recording in chronological order.</li>
+      <li><strong>Purpose:</strong> Trace event sequences and understand operation timing.</li>
+    </ul>
+  </div>
 
-
-  <h2>Performance Tool Sections</h2>
-  <h3>Summary:</h3>
-  <p><strong>Overview:</strong> The Summary section provides a high-level overview of the performance recording. It
-    includes key metrics such as total time, CPU usage, and memory usage.</p>
-  <p><strong>Purpose:</strong> This section helps you quickly identify major performance issues and understand the
-    overall performance characteristics of your page.</p>
-
-  <h3>Bottom-Up:</h3>
-  <p><strong>Overview:</strong> The Bottom-Up section shows the time spent in each function, starting from the bottom of
-    the call stack. It aggregates the time spent in each function across all calls.</p>
-  <p><strong>Purpose:</strong> This view helps you identify which functions are consuming the most time, allowing you to
-    focus on optimizing the most time-consuming parts of your code.</p>
-
-  <h3>Call Tree:</h3>
-  <p><strong>Overview:</strong> The Call Tree section displays a hierarchical view of the call stack, showing how
-    functions call each other. It breaks down the time spent in each function, including both self-time (time spent in
-    the function itself) and total time (time spent in the function and its children).</p>
-  <p><strong>Purpose:</strong> This view helps you understand the structure of your code execution and identify which
-    parts of the call stack are contributing most to performance issues.</p>
-
-  <h3>Event Log:</h3>
-  <p><strong>Overview:</strong> The Event Log section lists all events that occurred during the recording in
-    chronological order. This includes network requests, DOM events, and JavaScript execution.</p>
-  <p><strong>Purpose:</strong> This view helps you trace the sequence of events and understand the timing and order of
-    operations that affect your page's performance.</p>
-
-  <h2>Activity Types</h2>
+  <h2>Activity Types in Performance Profiler ⚡</h2>
+  
   <h3>Loading Events:</h3>
   <ul>
-    <li><strong>Parse HTML:</strong> The browser parses the HTML document.</li>
-    <li><strong>Finish Loading:</strong> A network request completes.</li>
-    <li><strong>Receive Data:</strong> Data for a request is received.</li>
-    <li><strong>Send Request:</strong> A network request is sent.</li>
+    <li>📄 <strong>Parse HTML:</strong> Browser parses HTML document</li>
+    <li>✅ <strong>Finish Loading:</strong> Network request completes</li>
+    <li>📥 <strong>Receive Data:</strong> Request data received</li>
+    <li>📤 <strong>Send Request:</strong> Network request sent</li>
+    <li>🔄 <strong>Resource Loading:</strong> Loading external resources</li>
+    <li>📦 <strong>Parse Resource:</strong> Processing loaded resources</li>
   </ul>
 
   <h3>Scripting Events:</h3>
   <ul>
-    <li><strong>Animation Frame Fired:</strong> A scheduled animation frame is executed.</li>
-    <li><strong>Evaluate Script:</strong> A script is evaluated.</li>
-    <li><strong>Function Call:</strong> A top-level JavaScript function is called.</li>
-    <li><strong>Install Timer:</strong> A timer is created with setInterval or setTimeout.</li>
-    <li><strong>Timer Fired:</strong> A timer fires that was scheduled with setInterval or setTimeout.</li>
+    <li>🎬 <strong>Animation Frame Fired:</strong> Scheduled animation frame executes</li>
+    <li>📜 <strong>Evaluate Script:</strong> Script evaluation</li>
+    <li>📞 <strong>Function Call:</strong> Top-level function call</li>
+    <li>⏰ <strong>Install Timer:</strong> Timer creation</li>
+    <li>🔔 <strong>Timer Fired:</strong> Timer execution</li>
+    <li>🎯 <strong>Event:</strong> Event handler execution</li>
+    <li>🔧 <strong>GC:</strong> Garbage collection</li>
+    <li>⚡ <strong>Microtask:</strong> Microtask execution</li>
+    <li>👷 <strong>Program:</strong> Main thread script execution</li>
   </ul>
 
   <h3>Rendering Events:</h3>
   <ul>
-    <li><strong>Layout:</strong> The browser calculates the layout of the page.</li>
-    <li><strong>Paint:</strong> The browser paints the content to the screen.</li>
-    <li><strong>Composite Layers:</strong> The browser composites layers to create the final image.</li>
+    <li>📐 <strong>Layout:</strong> Browser calculates page layout</li>
+    <li>🎨 <strong>Paint:</strong> Browser paints content</li>
+    <li>🎭 <strong>Composite Layers:</strong> Browser composites final image</li>
+    <li>💫 <strong>Recalculate Style:</strong> CSS style calculations</li>
+    <li>🖼️ <strong>Update Layer Tree:</strong> Layer tree modifications</li>
+    <li>🔄 <strong>Invalidate Layout:</strong> Layout invalidation</li>
   </ul>
 
-  <h3>Painting Events:</h3>
+  <h3>System Events:</h3>
   <ul>
-    <li><strong>Paint:</strong> The browser paints the content to the screen.</li>
-    <li><strong>Composite Layers:</strong> The browser composites layers to create the final image.</li>
+    <li>💾 <strong>Memory:</strong> Memory allocation and management</li>
+    <li>🔌 <strong>GPU:</strong> GPU-related activities</li>
+    <li>🌐 <strong>Network:</strong> Network operations</li>
+    <li>📱 <strong>Input:</strong> User input processing</li>
   </ul>
 
 </body>

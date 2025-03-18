@@ -24,9 +24,38 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <button id="clickButton">Click Me!</button>
-  <input type="text" id="textInput" placeholder="Type something...">
-  <script src="script.js"></script>
+  <div class="instructions">
+    <h2>📊 Understanding Interactions in Performance Profiling</h2>
+    <p>Learn how to track and analyze user interactions using Chrome DevTools Performance panel:</p>
+    <ol>
+      <li>🛠️ Open DevTools (Press F12)</li>
+      <li>▶️ Start Recording in Performance tab</li>
+      <li>🖱️ Perform the interactions below</li>
+      <li>⏹️ Stop recording and examine the Interactions track</li>
+      <li>🔍 Click interaction markers to view details</li>
+    </ol>
+  </div>
+
+  <div class="demo-section">
+    <h3>🔄 Test These Interactions</h3>
+    <div class="button-container">
+      <button id="clickButton" class="demo-button"><span>👆 Click Me!</span></button>
+
+      <button id="heavyButton" class="demo-button" onclick="(() => { 
+        for(let i=0; i<10000; i++) { 
+          document.body.style.padding = i % 2 + 'px';
+          document.body.offsetHeight;
+        }; 
+        alert('Done!'); 
+      })()">
+        <span>⚡ Heavy Operation</span>
+      </button>
+
+      <input type="text" id="textInput" placeholder="✍️ Type something..." class="demo-input">
+    </div>
+
+    <p class="hint">💡 Tip: Blue markers in the timeline indicate captured interactions</p>
+  </div>
 
 </body>
 

@@ -12,26 +12,52 @@
 </head>
 
 <body>
-  <h1>Performance Theoretical 11 - Frames</h1>
+  <h1>Performance Theoretical 11 - Memory</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
     <a href="../../index.html">Performance</a>
     <a href="../index.html">Theoretical</a>
-    <a href="./index.html">Frames</a>
+    <a href="./index.html">Memory</a>
   </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
 
-  <div class="body">
-    <div class="counter" id="counter">0</div>
-    <div class="controls">
-      <button id="resetButton">Reset</button>
-      <label for="speedSlider">Speed: <span id="speedValue">1</span>x</label>
-      <input type="range" id="speedSlider" min="1" max="1000" value="1">
-    </div>
-  </div>
+  <section id="memory-leak">
+    <h2>🚰 Memory Leak Example</h2>
+    <p>
+      <strong>Warning:</strong> This demonstrates a memory leak pattern.
+      Each click will create objects that remain in memory.
+    </p>
+    <button id="leakButton" class="warning-btn">
+      <span>⚠️ Create Memory Leak</span>
+    </button>
+  </section>
+
+  <section id="dom-manipulation">
+    <h2>🔄 DOM Manipulation Test</h2>
+    <p>
+      <strong>Info:</strong> This will create multiple DOM elements to demonstrate
+      performance impact of heavy DOM operations.
+    </p>
+    <button id="domButton" class="action-btn">
+      <span>🔨 Manipulate DOM</span>
+    </button>
+    <div id="container" class="result-container"></div>
+  </section>
+
+  <section id="event-listeners">
+    <h2>👂 Event Listeners Test</h2>
+    <p>
+      <strong>Warning:</strong> This will create multiple event listeners to demonstrate
+      the impact of listener accumulation.
+    </p>
+    <button id="listenerButton" class="warning-btn">
+      <span>🎯 Add Listeners</span>
+    </button>
+    <div id="listener-container" class="result-container"></div>
+  </section>
 
 </body>
 
