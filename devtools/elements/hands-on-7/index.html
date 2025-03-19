@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Elements Hands-On 7</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Elements</a>
+    <a href="./index.html">Hands-On 7</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+
+  <div class="body">
+
+    <div class="instructions">
+      <h2>🎯 Understanding CSS Specificity</h2>
+      <p>CSS Specificity determines which styles are applied when multiple rules target the same element.</p>
+      <ol>
+        <li>🛠️ Open DevTools (F12) and go to Elements panel</li>
+        <li>👆 Click on different elements below</li>
+        <li>📝 Observe the Styles panel on the right</li>
+        <li>🔍 Notice how specificity affects which styles win by hovering the style</li>
+      </ol>
+    </div>
+
+    <div class="specificity-explanation">
+      <h3>CSS Specificity Numbers (0,0,0)</h3>
+      <p>Specificity is represented as three numbers:</p>
+      <ul>
+        <li><strong>(1,0,0)</strong> - Number of ID selectors</li>
+        <li><strong>(0,1,0)</strong> - Number of class and attribute selectors</li>
+        <li><strong>(0,0,1)</strong> - Number of element selectors</li>
+      </ul>
+      <p>Examples:</p>
+      <ul>
+        <li><strong>(1,1,1)</strong> - #header .menu p</li>
+        <li><strong>(2,1,0)</strong> - #header #logo .brand</li>
+        <li><strong>(0,2,3)</strong> - nav.menu.dropdown p span a</li>
+        <li><strong>(1,2,1)</strong> - #main .sidebar .widget h2</li>
+      </ul>
+    </div>
+
+    <div class="style-reference">
+      <h4>Specificity Hierarchy (highest to lowest):</h4>
+      <ol>
+        <li>!important</li>
+        <li>Inline styles (style attribute)</li>
+        <li>IDs (#id)</li>
+        <li>Classes (.class)</li>
+        <li>Elements (p, div, etc.)</li>
+      </ol>
+    </div>
+
+    <div class="demo-section">
+      <h3>Specificity Examples</h3>
+      <p>Try inspecting these elements:</p>
+      <div class="practice-area">
+        <div style="color: blue">
+          <p class="text" id="special">This text has inline, ID, class, and element styles</p>
+        </div>
+        <p class="level-1">Class selector (.level-1)</p>
+        <p class="level-1 level-2">Multiple classes. Why level-2 wills level-1? <button
+            onclick="const hint = document.getElementById('specificity-hint'); hint.style.display = hint.style.display === 'none' ? 'block' : 'none'">Toggle
+            Hint</button>
+        <p id="specificity-hint" style="display: none; color: #666; font-style: italic;">
+          In CSS, when multiple classes are applied to the same element, the order in the HTML doesn't matter.
+          What matters is the order of rules in the CSS file. The last matching rule in the CSS file wins,
+          so .level-2 styles override .level-1 because it's defined later in the stylesheet.
+        </p>
+        </p>
+        <p id="unique" class="level-1">ID + Class</p>
+        <p id="super-unique" class="level-1 level-2" style="color: green">Inline + ID + Multiple Classes</p>
+        <p id="super-duper-unique" class="level-1 level-2" style="color: blue">Inline + ID + Multiple Classes 2</p>
+        <p id="super-duper-unique" class="level-2 level-1" style="color: yellow">Inline + ID + Multiple Classes 3</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
