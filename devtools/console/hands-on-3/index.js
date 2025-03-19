@@ -152,3 +152,15 @@ function tellDadJoke() {
 }
 
 setTimeout(tellDadJoke, Math.random() * 9000 + 1000);
+
+
+const originalConsoleLog = console.log;
+let lastLog;
+function overrideLogs() {
+    console.log = function (...args) {
+        lastLog = args[0];
+        //originalConsoleLog.apply(console, args); // Uncomment this line to keep the original console log behavior
+    };
+
+    console.clear();
+}

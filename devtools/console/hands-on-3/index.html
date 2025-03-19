@@ -34,15 +34,32 @@
         Watch these pixels duke it out! 🥊 May the best pixel win! 🏆
       </span>
       <div style="margin: 10px; color: #888;">
-        Open your console (F12) to see the battle stats! But please don't try to help your favorite pixel win... that would be cheating! 😉
+        Open your console (F12) to see the battle stats! But please don't try to help your favorite pixel win... that
+        would be cheating! 😉
       </div>
     </div>
+
     <canvas id="scrawl" width="500" height="500"></canvas>
 
     <div style="width: 100%"><span style="font-family:Arial, Helvetica, sans-serif;font-size: 1em;"> <a
           href="https://pixelsfighting.com/" target="_blank">&#9758 pixelsfighting.com &#9756</a></span>
     </div>
 
+    <div style="width: 100%">
+      <span style="font-family: 'Comic Sans MS', cursive; font-size: 1em; color: #666;">
+        Too many logs, right.... So...
+      </span>
+      <span style="font-family: 'Comic Sans MS', cursive; font-size: 1em; color: #666;">
+        You can override the console.log function to add your own custom behavior. For example, you can swollow all logs
+        and save only the last one.
+      </span>
+      <button onclick="overrideLogs()">Override logs</button>
+      <span style="font-family: 'Comic Sans MS', cursive; font-size: 1em; color: #666;">
+        Now check the value of <code>lastLog</code> in the console. You should see the last log message. You can do it
+        again and agian to see the last log
+        message.
+      </span>
+    </div>
   </center>
 
 </body>
