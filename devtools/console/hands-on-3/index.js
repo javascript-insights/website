@@ -153,3 +153,15 @@ function tellDadJoke() {
 }
 
 setTimeout(tellDadJoke, Math.random() * 9000 + 1000);
+
+
+const originalConsoleLog = console.log;
+let lastLog;
+
+console.log = function(...args) {
+    lastLog = args[0];
+};
+
+window.getLastLog = function() {
+    return lastLog;
+};

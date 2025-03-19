@@ -1,4 +1,15 @@
-.demo-box {
+.stam-box {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+}
+
+.demo-box-1 {
+    border: 2px solid #333;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f0f0f0;
+}
+
+.demo-box-2 {
     border: 2px solid #333;
     padding: 20px;
     margin: 20px 0;
