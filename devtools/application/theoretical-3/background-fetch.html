@@ -13,6 +13,13 @@
     <button id="start-fetch">Start Background Fetch</button>
 
     <script>
+        // Register service worker first
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('background-fetch-service-worker.js')
+                .then(registration => console.log('ServiceWorker registered'))
+                .catch(err => console.error('ServiceWorker registration failed:', err));
+        }
+
         document.getElementById('start-fetch').addEventListener('click', () => {
             if ('BackgroundFetchManager' in self) {
                 navigator.serviceWorker.ready.then(swRegistration => {

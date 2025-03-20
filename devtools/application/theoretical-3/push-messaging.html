@@ -8,28 +8,12 @@
 </head>
 
 <body>
-    <h1>Push Messaging</h1>
+    <h1>Push Messaging Demo</h1>
     <p>This page demonstrates the Push Messaging API.</p>
-    <button id="subscribe">Subscribe to Push</button>
+    <button id="subscribe">Subscribe to Push Notifications</button>
+    <button id="sendNotification">Send Test Notification</button>
 
-    <script>
-        document.getElementById('subscribe').addEventListener('click', () => {
-            if ('serviceWorker' in navigator && 'PushManager' in window) {
-                navigator.serviceWorker.ready.then(swRegistration => {
-                    return swRegistration.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: 'YOUR_PUBLIC_VAPID_KEY'
-                    });
-                }).then(subscription => {
-                    console.log('Push subscription:', subscription);
-                }).catch(error => {
-                    console.error('Push subscription failed:', error);
-                });
-            } else {
-                console.log('Push Messaging not supported.');
-            }
-        });
-    </script>
+    <script src="push-messaging-app.js"></script>
 </body>
 
 </html>

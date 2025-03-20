@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting API</title>
+    <meta http-equiv="Report-To" content='{"group":"default","max_age":31536000,"endpoints":[{"url":"/reports"}]}'>
+</head>
+
+<body>
+    <h1>Speculative Loads Example</h1>
+    <div id="links">
+        <a href="https://example.com/page1">Link 1 - Hover me!</a><br>
+        <a href="https://example.com/page2">Link 2 - Hover me!</a>
+    </div>
+
+    <script>
+        // Get all links
+        const links = document.querySelectorAll('#links a');
+
+        // Add mouseover listener to each link
+        links.forEach(link => {
+            link.addEventListener('mouseover', () => {
+                // Create speculation rules
+                const hints = {
+                    prerender: [{
+                        source: 'mouseover',
+                        where: { href: link.href },
+                        requires: ['anonymous-client-ip']
+                    }]
+                };
+
+                // Apply speculation rules
+                document.querySelector('script[type="speculationrules"]')?.remove();
+                const script = document.createElement('script');
+                script.type = 'speculationrules';
+                script.textContent = JSON.stringify(hints);
+                document.head.appendChild(script);
+            });
+        });
+    </script>
+</body>
+
+</html>

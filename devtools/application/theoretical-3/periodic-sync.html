@@ -13,11 +13,17 @@
     <button id="register-periodic-sync">Register Periodic Sync</button>
 
     <script>
+        // Register service worker first
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('periodic-sync-service-worker.js')
+                .then(registration => console.log('ServiceWorker registered'))
+                .catch(err => console.error('ServiceWorker registration failed:', err));
+        }
+
         document.getElementById('register-periodic-sync').addEventListener('click', () => {
             if ('serviceWorker' in navigator && 'periodicSync' in navigator.serviceWorker) {
                 navigator.serviceWorker.ready.then(swRegistration => {
-                    return swRegistration.periodicSync.register({
-                        tag: 'example-sync',
+                    return swRegistration.periodicSync.register('example-sync', {
                         minInterval: 24 * 60 * 60 * 1000 // 1 day
                     });
                 }).then(() => {

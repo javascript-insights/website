@@ -5,25 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporting API</title>
+    <meta http-equiv="Report-To" content='{"group":"default","max_age":31536000,"endpoints":[{"url":"/reports"}]}'>
 </head>
 
 <body>
     <h1>Reporting API</h1>
     <p>This page demonstrates the Reporting API.</p>
     <p>Check the console for reports.</p>
-
     <script>
         if ('ReportingObserver' in window) {
             const observer = new ReportingObserver((reports, observer) => {
                 reports.forEach(report => {
                     console.log('Report:', report);
                 });
-            }, { buffered: true });
+            }, { buffered: true, types: ['deprecation'] });
 
             observer.observe();
+
+            // Generate a test report by using a deprecated feature
+            document.body.createTextRange();
         } else {
             console.log('Reporting API not supported.');
         }
+    </script>
     </script>
 </body>
 

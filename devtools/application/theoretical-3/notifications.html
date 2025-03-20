@@ -13,16 +13,26 @@
     <button id="show-notification">Show Notification</button>
 
     <script>
-        document.getElementById('show-notification').addEventListener('click', () => {
+        // Register service worker first
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('notifications-service-worker.js')
+                .then(registration => console.log('ServiceWorker registered'))
+                .catch(err => console.error('ServiceWorker registration failed:', err));
+        }
+
+        document.getElementById('show-notification').addEventListener('click', async () => {
             if ('Notification' in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        new Notification('Hello!', {
-                            body: 'This is a notification example.',
-                            icon: '/icon.png'
-                        });
-                    }
-                });
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    // Use the service worker to show the notification
+                    const registration = await navigator.serviceWorker.ready;
+                    registration.showNotification('Hello!', {
+                        body: 'This is a notification example.',
+                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="blue"/></svg>'
+                    });
+                } else if (permission === 'denied') {
+                    console.log('Notification permission denied');
+                }
             } else {
                 console.log('Notifications API not supported.');
             }

@@ -9,8 +9,36 @@
 
 <body>
     <h1>Bounce Tracking Mitigations</h1>
-    <p>This page demonstrates bounce tracking mitigations.</p>
-    <p>Implementing privacy-preserving techniques to prevent bounce tracking.</p>
+    <p>This page demonstrates the Bounce Tracking Mitigations.</p>
+
+    <h2>Practice Exercise</h2>
+    <p>Click these links and observe the Application panel in DevTools:</p>
+
+    <div class="demo">
+        <h3>Standard Link (Potentially Tracked)</h3>
+        <a href="https://example.com">Unprotected Link</a>
+    </div>
+
+    <div class="demo">
+        <h3>Protected Link</h3>
+        <a href="https://example.com" referrerpolicy="no-referrer">With Referrer Policy</a>
+    </div>
+
+    <div class="demo">
+        <h3>Fully Protected Link</h3>
+        <a href="https://example.org" referrerpolicy="no-referrer" rel="noopener">With State Partitioning</a>
+    </div>
+    </div>
+
+    <div class="tips">
+        <h2>Key Points</h2>
+        <ul>
+            <li>Bounce tracking uses intermediate redirects to track user navigation</li>
+            <li>Modern browsers implement protective measures</li>
+            <li>Use DevTools to verify tracking protection status</li>
+            <li>Implement referrer policies and state partitioning for better privacy</li>
+        </ul>
+    </div>
 </body>
 
 </html>

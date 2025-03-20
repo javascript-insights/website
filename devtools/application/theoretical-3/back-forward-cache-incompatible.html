@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Back/Forward Cache Incompatible</title>
 </head>
+
 <body>
     <h1>Back/Forward Cache Incompatible Example</h1>
     <p>This page demonstrates a scenario where the Back/Forward Cache won't work.</p>
@@ -16,6 +18,31 @@
             // This event listener makes the page incompatible with the Back/Forward Cache
             event.returnValue = 'Are you sure you want to leave?';
         });
+
+        // Assume there's a form or something similar on your page:
+        const myForm = document.getElementById('myForm');
+        let hasUserInteracted = false;
+        let dataChanged = false;
+
+        // Listen for any user interaction to set the boolean
+        document.addEventListener('click', () => {
+            hasUserInteracted = true;
+        });
+
+        // Simulate that some data was changed in the form
+        myForm.addEventListener('change', () => {
+            dataChanged = true;
+        });
+
+        // Now, the beforeunload should only trigger if there's interaction
+        window.onbeforeunload = (event) => {
+            if (hasUserInteracted && dataChanged) {
+                event.preventDefault();
+                event.returnValue = ''; // Standard for most browsers
+                return ''; // For some older browsers
+            }
+        };
     </script>
 </body>
+
 </html>
