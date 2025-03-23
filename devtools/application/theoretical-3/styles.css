@@ -10,3 +10,8 @@ th {
   text-align: left;
   padding: 8px;
 }
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
