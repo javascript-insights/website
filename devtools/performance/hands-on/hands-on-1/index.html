@@ -8,11 +8,13 @@
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
-  <script src="index.js"></script>
+  <!-- Add Font Awesome for icons -->
+  <script src="index.js" defer></script>
 </head>
 
 <body>
-  <h1>Performance Hands-On 1 - LCP</h1>
+  <!-- Title with colored icon -->
+  <h1>Performance Hands-On 1 - Largest Contentful Paint (LCP)</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -25,24 +27,69 @@
   </div>
 
   <main>
-    <img loading="lazy" src="large-image.png" class="image1" alt="hero-image"/>
-    <div class="hero-image"></div>
+    <!-- The image below is intentionally not optimized for LCP demonstration -->
+    <img id="hero-image" src="large-image.png" class="image1" alt="hero-image" loading="lazy" />
+
     <div class="content">
-      <h3>Instructions</h3>
-      <p>In this hands-on exercise, you will learn how to measure and optimize the Largest Contentful Paint (LCP) metric using browser devtools.</p>
+      <!-- Main content with colored icons -->
+      <h3>📋 Instructions</h3>
+      <p>In this hands-on exercise, you will learn how to measure and optimize the Largest Contentful Paint (LCP) metric
+        using browser DevTools.</p>
+
+      <h4>🔍 Measuring LCP</h4>
       <ol>
-        <li>Open the browser devtools by pressing <code>F12</code> or <code>Ctrl+Shift+I</code> (Windows/Linux) or <code>Cmd+Opt+I</code> (Mac).</li>
-        <li>Navigate to the "Performance" tab.</li>
-        <li>Click the "Record" button to start recording the performance.</li>
-        <li>Reload the page to capture the loading performance.</li>
-        <li>Stop the recording after the page has fully loaded.</li>
-        <li>Analyze the performance recording to identify the LCP element and its load time.</li>
+        <li>🛠️ Open the browser DevTools by pressing <code>F12</code> or
+          <code>Ctrl+Shift+I</code> (Windows/Linux) or <code>Cmd+Opt+I</code> (Mac).
+        </li>
+        <li>📊 Navigate to the "Performance" tab.</li>
+        <li>🔄 Click the "Reload" button (circular arrow) to start recording and reload the
+          page.</li>
+        <li>⏱️ After the page loads, the recording will stop automatically.</li>
+        <li>🔍 Look for the "LCP" marker in the "Timings" section of the recording.</li>
+        <li>👆 Click on the LCP marker to see details about the LCP element in the
+          summary panel below.</li>
+        <li>🐢 Note: You can use CPU throttling to simulate slower CPU if needed.</li>
+        <li>🔎 Check the console for LCP measurements, there is another way to identify the LCP element on this page.
+          Observe its code.</li>
+        <li>⚡ Click the "Optimize LCP" button below to apply optimizations. Observe the changes in the image tag.</li>
+        <li>💾 To save the optimized version use the "Overrides" feature in DevTools:
+          <ol>
+            <li>📂 In DevTools, go to the "Sources" tab</li>
+            <li>🖱️ Right-click in the navigator panel on the index.html file and select "Override content"</li>
+            <li>📁 Select a folder and grant permission</li>
+            <li>✏️ Open the optimized index.html file in the editor panel and add the optimized content.</li>
+            <li>📋 Right-click on image element in the elements tool and copy the optimized element</li>
+            <li>🔄 Refresh the page to see the changes.</li>
+          </ol>
+        </li>
+        <li>📈 Record the LCP time again and compare the improvement.</li>
       </ol>
-      <h3>Tasks</h3>
-      <ul>
-        <li>Identify the LCP element on the page and note its load time.</li>
-        <li>Optimize the LCP by reducing the load time of the largest content element.</li>
-        <li>Compare the LCP before and after optimization to see the improvement.</li>
+
+
+      <!-- Styling the button to be more prominent -->
+      <button id="optimize-btn" class="btn-primary">⚡ Optimize LCP</button>
+      <div id="optimization-results" class="results-panel"></div>
+
+      <!-- Key techniques with colored icons -->
+      <h3>🛠️ Common LCP Optimization Techniques</h3>
+      <ul class="techniques-list">
+        <li><strong>🖼️ Optimize image loading:</strong> Use properly sized images, modern formats (WebP), and remove
+          lazy-loading from above-the-fold content.</li>
+        <li><strong>⏱️ Preload critical resources:</strong> Use <code>&lt;link rel="preload"&gt;</code> for important
+          images and fonts.</li>
+        <li><strong>⚡ Reduce server response time:</strong> Implement efficient caching and use a CDN.</li>
+        <li><strong>🚫 Eliminate render-blocking resources:</strong> Defer non-critical CSS and JavaScript.</li>
+        <li><strong>💄 Implement critical CSS:</strong> Inline critical CSS to render
+          above-the-fold content quickly.</li>
+      </ul>
+
+      <!-- Resources with colored icons -->
+      <h3>📚 Additional Resources</h3>
+      <ul class="resources-list">
+        <li><a href="https://web.dev/articles/lcp" target="_blank">web.dev
+            Guide to LCP</a></li>
+        <li><a href="https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint"
+            target="_blank">Lighthouse LCP Documentation</a></li>
       </ul>
     </div>
   </main>
