@@ -31,7 +31,7 @@ window.addEventListener("load", function () {
         if (result.outcome === 'accepted') {
             try {
                 const cache = await caches.open('app-install-cache-with-install-button-with-cache');
-                await cache.add('/index.html');
+                await cache.add('./index.html');
                 document.getElementById('installStatus').textContent = 'App installed and cached successfully!';
             } catch (error) {
                 console.error('Error caching page:', error);
