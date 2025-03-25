@@ -69,6 +69,22 @@
         reachable objects on your page are using.</li>
     </ul>
 
+    <h2>Where are DOM Elements Stored? 🏠</h2>
+    <p>DOM elements are not allocated directly within the JavaScript heap. Instead, they reside in a separate memory
+      space managed by the browser's rendering engine, often referred to as "native memory" or "object graph memory."
+      This distinction arises because DOM elements are not purely JavaScript objects; they are part of the browser's
+      internal representation of the web page.</p>
+
+    <p>While DOM elements themselves are not in the JavaScript heap, JavaScript does maintain references to these
+      elements as objects. These references, which act as wrappers around the actual DOM nodes, are stored in the
+      JavaScript heap. This allows JavaScript code to interact with and manipulate DOM elements.</p>
+
+    <p>The separation of DOM elements from the JavaScript heap has implications for memory management. The browser's
+      garbage collector is responsible for reclaiming memory occupied by DOM elements that are no longer in use, but
+      this process is separate from the garbage collection of JavaScript objects. Memory leaks can occur if JavaScript
+      code retains references to DOM elements that have been removed from the document, preventing them from being
+      garbage collected by the browser.</p>
+
     <h1>Memory Tool 🔍</h1>
 
     <h3>📏 Shallow Size</h3>

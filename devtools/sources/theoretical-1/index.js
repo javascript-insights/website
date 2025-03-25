@@ -125,3 +125,19 @@ function downloadFiles() {
       });
   });
 }
+
+////////////////////////////////////////////
+
+function demoAsyncStep() {
+  console.log('outside - before timeout');
+  setTimeout(() => {
+    console.log('inside timeout - after 3 seconds');
+    const result = processAsyncResult();
+    console.log('processed result:', result);
+  }, 3000);
+  console.log('outside - after timeout call');
+
+  function processAsyncResult() {
+    return 'async operation completed';
+  }
+}
