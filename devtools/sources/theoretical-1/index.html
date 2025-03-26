@@ -66,6 +66,15 @@
       }
       </pre>
     </li>
+
+    <li>💡 <strong>Expression breakpoint</strong> (use with conditional breakpoints)
+      <pre>
+      // Put this in a conditional breakpoint to update variables and fix bugs:
+      // (add1=+add1,add2=+add2) && false
+      // This converts strings to numbers and returns false so execution continues
+      </pre>
+    </li>
+
     <li>🎯 <strong>DOM breakpoint</strong> (because who doesn't love DOM drama)
       <div id="targetElement">Right click me in DevTools to set a DOM breakpoint! <button onclick="modifyDOM()">Modify
           DOM</button></div>
