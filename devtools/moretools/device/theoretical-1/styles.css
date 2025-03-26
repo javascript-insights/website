@@ -1,0 +1,164 @@
+/* Device Tool Demo Page Styles */
+
+.device-tool-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 40px;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Feature cards styling */
+.feature-card,
+.practice-card,
+.issue-card,
+.exercise-card {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: white;
+  border-left: 4px solid #4285f4;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.exercise-card {
+  border-left-color: #34a853;
+  /* Google green */
+}
+
+.practice-card {
+  border-left-color: #fbbc05;
+  /* Google yellow */
+}
+
+.issue-card {
+  border-left-color: #ea4335;
+  /* Google red */
+}
+
+/* Code examples */
+.code-example {
+  background-color: #272822;
+  color: #f8f8f2;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 10px 0;
+  font-family: 'Courier New', monospace;
+}
+
+/* Tool highlight section */
+.tool-highlight {
+  background-color: #e8f0fe;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* Demo buttons */
+.demo-button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 10px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.demo-button:hover {
+  background-color: #3367d6;
+}
+
+.demo-result {
+  min-height: 50px;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .device-tool-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .demo-button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* Animation for try-it section to draw attention */
+.try-it-yourself {
+  animation: pulse 2s infinite;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(66, 133, 244, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(66, 133, 244, 0);
+  }
+}
+
+/* Footer styling */
+.page-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f1f3f4;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+/* Dark theme support for demo */
+.dark-theme {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.dark-theme section {
+  background-color: #2d2d2d;
+}
+
+.dark-theme .feature-card,
+.dark-theme .practice-card,
+.dark-theme .issue-card,
+.dark-theme .exercise-card {
+  background-color: #333;
+}
+
+.dark-theme .tool-highlight {
+  background-color: #3a3a3a;
+}
+
+.dark-theme .page-footer {
+  background-color: #2d2d2d;
+}

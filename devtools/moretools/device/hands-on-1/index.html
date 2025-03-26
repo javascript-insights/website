@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Device Hands-On 1</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Device</a>
+    <a href="./index.html">Hands-On 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <section class="instructions">
+    <h2>Device Simulation Tool Practice</h2>
+    <p>The Device Simulation tool allows you to test how your website looks and behaves on different devices and screen
+      sizes.</p>
+
+    <h3>How to Access the Device Simulation Tool</h3>
+    <ol>
+      <li>Open Chrome DevTools by pressing <kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd> (or <kbd>Cmd+Option+I</kbd> on Mac)
+      </li>
+      <li>Click on the Device Toggle icon in the toolbar (looks like a mobile phone) or press <kbd>Ctrl+Shift+M</kbd>
+        (<kbd>Cmd+Shift+M</kbd> on Mac)</li>
+    </ol>
+
+    <h3>Exercises</h3>
+    <ol>
+      <li>Use the Device Simulation tool to view this page as if on an iPhone 12</li>
+      <li>Change the orientation from portrait to landscape</li>
+      <li>Try different device presets and observe how the layout changes</li>
+      <li>Test the responsive elements below and observe how they adapt</li>
+      <li>Check the network throttling options to simulate slower connections</li>
+    </ol>
+  </section>
+
+  <section class="demo-area">
+    <h2>Responsive Demo Elements</h2>
+
+    <div class="responsive-box">
+      <h3>Responsive Box</h3>
+      <p>This box changes color and layout based on screen width:</p>
+      <ul>
+        <li>Desktop (>1024px): Blue background</li>
+        <li>Tablet (768px-1024px): Green background</li>
+        <li>Mobile (<768px): Red background</li>
+      </ul>
+    </div>
+
+    <div class="image-container">
+      <h3>Responsive Images</h3>
+      <p>These images will stack vertically on mobile and display horizontally on larger screens:</p>
+      <div class="images">
+        <img src="https://placehold.co/300x200/blue/white?text=Image+1" alt="Demo Image 1">
+        <img src="https://placehold.co/300x200/green/white?text=Image+2" alt="Demo Image 2">
+        <img src="https://placehold.co/300x200/red/white?text=Image+3" alt="Demo Image 3">
+      </div>
+    </div>
+
+    <div class="hide-on-mobile">
+      <h3>Hidden on Mobile</h3>
+      <p>This content will disappear on mobile devices (width < 768px).</p>
+    </div>
+
+    <div class="show-on-mobile">
+      <h3>Mobile-Only Content</h3>
+      <p>This content only appears on mobile devices (width < 768px).</p>
+    </div>
+
+    <div class="device-info">
+      <h3>Device Information</h3>
+      <p>Current viewport dimensions: <span id="viewport-size"></span></p>
+      <p>Device pixel ratio: <span id="pixel-ratio"></span></p>
+      <p>User agent: <span id="user-agent"></span></p>
+    </div>
+  </section>
+
+  <section class="tips">
+    <h2>Pro Tips</h2>
+    <ul>
+      <li>You can add custom device presets in the Device Simulation tool</li>
+      <li>Use the Responsive mode to drag the viewport to any custom size</li>
+      <li>The Device Simulation tool doesn't perfectly emulate all device behaviors - always test on real devices when
+        possible</li>
+      <li>The Media Query inspector in DevTools can help you visualize and debug your CSS breakpoints</li>
+    </ul>
+  </section>
+</body>
+
+</html>

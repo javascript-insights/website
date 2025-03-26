@@ -12,7 +12,8 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 2 - CLS</h1>
+  <!-- Title with colored icon -->
+  <h1>Performance Hands-On 2 - Cumulative Layout Shift (CLS)</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -26,27 +27,120 @@
 
   <main>
     <div class="content">
-      <p>This is a paragraph of text that will stay in place.</p>
-      <img src="large-image.png" alt="Large Image" class="large-image">
-      <p>This text will stay in place when the image loads.</p>
-      <!-- Instructions Section -->
-      <section id="instructions">
-        <h2>Instructions</h2>
-        <p>Follow the steps below to complete the tasks:</p>
+      <!-- Main content with colored icons -->
+      <h3>📋 Instructions</h3>
+      <p>In this hands-on exercise, you will learn how to measure and optimize the Cumulative Layout Shift (CLS) metric
+        using browser DevTools.</p>
+
+      <h4>🔍 What is CLS?</h4>
+      <p>Cumulative Layout Shift (CLS) measures the sum of all unexpected layout shifts that occur during the entire
+        lifespan of a page. A layout shift occurs any time a visible element changes its position from one rendered
+        frame to the next.</p>
+
+      <h4>⚡ Demo Section (with CLS Issues)</h4>
+      <div class="demo-container">
+        <div class="cls-demo-box">
+          <h5>Experiencing Layout Shift</h5>
+          <p>The content below has intentional layout shift issues. Watch what happens as resources load:</p>
+
+          <div id="cls-problem-demo" class="cls-example">
+            <p>Some initial content that will shift around...</p>
+            <div class="late-load-ad" id="late-ad">
+              <p>This is an advertisement that loads late!</p>
+              <p>It doesn't have reserved space.</p>
+            </div>
+            <p id="demo-text">This text will shift down when the ad appears above it. Try scrolling or clicking the
+              button below to trigger the shift!</p>
+            <button id="trigger-cls" class="btn-primary">Trigger Layout Shift</button>
+          </div>
+        </div>
+
+        <div class="cls-demo-box">
+          <h5>Optimized Version (No CLS)</h5>
+          <p>Here's the same content with proper optimization to prevent layout shifts:</p>
+
+          <div id="cls-solution-demo" class="cls-example">
+            <p>Some initial content with proper spacing...</p>
+            <div class="reserved-space-ad" id="optimal-ad">
+              <p>This is an advertisement with reserved space!</p>
+              <p>It loads in a space we set aside for it.</p>
+            </div>
+            <p>This text won't shift because we've reserved space for the ad above.</p>
+            <button id="trigger-fixed-cls" class="btn-primary">Load Ad (No Shift)</button>
+          </div>
+        </div>
+
+        <div id="cls-results" class="results-panel">
+          <h4><i class="fas fa-chart-line"></i> CLS Measurements</h4>
+          <div id="cls-values"></div>
+        </div>
+      </div>
+
+      <h4>🧪 Measuring CLS</h4>
+      <ol>
+        <li>🛠️ Open the browser DevTools by pressing <code>F12</code> or
+          <code>Ctrl+Shift+I</code> (Windows/Linux) or <code>Cmd+Opt+I</code> (Mac).
+        </li>
+        <li>📊 Navigate to the "Performance" tab.</li>
+        <li>🔄 Click the "Reload" button (circular arrow) to start recording and reload the
+          page.</li>
+        <li>👆 Try clicking the "Trigger Layout Shift" button during recording.</li>
+        <li>⏱️ After the page loads and shifts occur, stop the recording.</li>
+        <li>🔍 Look for the red rectangles in the "Experience" section, which indicate layout shifts.</li>
+        <li>👆 Click on these layout shift markers to see details about the affected elements.</li>
+        <li>📊 Check the "Layout Shift Regions" in the filmstrip view (colored rectangles appear where shifts occurred).
+        </li>
+      </ol>
+
+      <h3>🛠️ Common CLS Optimization Techniques</h3>
+      <ul class="techniques-list">
+        <li><strong>🔄 Reserve space for dynamic content:</strong> Always specify width and height attributes for
+          images, videos, embeds and ads.</li>
+        <li><strong>📏 Use proper containing boxes:</strong> Wrap elements that can change size in containers with
+          defined dimensions.</li>
+        <li><strong>⚡ Avoid inserting content above existing content:</strong> Add new content below the viewport or in
+          areas that won't displace existing content.</li>
+        <li><strong>🔠 Use web font loading strategies:</strong> Implement <code>font-display: optional</code> or
+          preload important fonts.</li>
+        <li><strong>🖼️ Use aspect ratio boxes:</strong> For responsive media, use modern CSS aspect-ratio property or
+          padding-top technique.</li>
+        <li><strong>⏳ Transform animations:</strong> Use CSS transforms instead of properties that trigger layout
+          changes.</li>
+      </ul>
+
+      <div class="try-yourself">
+        <h4>🧑‍💻 Try It Yourself!</h4>
+        <p>Use the DevTools Elements panel to fix the layout shift in the problem demo:</p>
         <ol>
-          <li>Open the browser DevTools by pressing <strong>F12</strong> or <strong>Ctrl+Shift+I</strong> (Windows) /
-            <strong>Cmd+Option+I</strong> (Mac).</li>
-          <li>Navigate to the <strong>Network</strong> tab.</li>
-          <li>Reload the page and observe the network requests.</li>
-          <li>Identify the largest file being loaded and note its size and loading time.</li>
-          <li>Switch to the <strong>Performance</strong> tab and start a recording.</li>
-          <li>Reload the page and stop the recording after the page has fully loaded.</li>
-          <li>Analyze the performance recording to identify any bottlenecks.</li>
-          <li>Make changes to the code in <code>index.js</code> to optimize the performance based on your analysis.</li>
+          <li>Add a fixed height to the <code>.late-load-ad</code> element</li>
+          <li>Set <code>min-height</code> to reserve space</li>
+          <li>Reload and observe the improvement in CLS</li>
         </ol>
-      </section>
+        <button id="show-solution" class="btn-secondary">Show Solution</button>
+        <div id="solution-code" style="display: none;">
+          <pre><code>.late-load-ad {
+  min-height: 80px;
+  background: #f0f0f0;
+  border: 1px dashed #ccc;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Resources with colored icons -->
+      <h3>📚 Additional Resources</h3>
+      <ul class="resources-list">
+        <li><a href="https://web.dev/articles/cls" target="_blank">web.dev Guide to CLS</a></li>
+        <li><a href="https://developer.chrome.com/docs/lighthouse/performance/lighthouse-cumulative-layout-shift"
+            target="_blank">Lighthouse CLS Documentation</a></li>
+        <li><a href="https://web.dev/articles/debug-layout-shifts" target="_blank">Debugging Layout Shifts</a></li>
+      </ul>
     </div>
   </main>
+
+  <footer>
+    <p>Remember: A good CLS score is less than 0.1. Anything above 0.25 needs improvement! 🚀</p>
+  </footer>
+
 </body>
 
 </html>

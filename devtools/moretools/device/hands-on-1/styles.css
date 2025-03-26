@@ -1,0 +1,91 @@
+.instructions,
+.demo-area,
+.tips {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+kbd {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    color: #333;
+    display: inline-block;
+    font-size: 0.9em;
+    padding: 2px 5px;
+    margin: 0 2px;
+}
+
+/* Responsive Box Demo */
+.responsive-box {
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    background-color: blue;
+    color: white;
+}
+
+/* Responsive Images */
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.images img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Visibility Classes */
+.hide-on-mobile {
+    display: block;
+}
+
+.show-on-mobile {
+    display: none;
+}
+
+/* Device Info */
+.device-info {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1024px) {
+    .responsive-box {
+        background-color: green;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .responsive-box {
+        background-color: red;
+    }
+
+    .images {
+        flex-direction: column;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .show-on-mobile {
+        display: block;
+    }
+}

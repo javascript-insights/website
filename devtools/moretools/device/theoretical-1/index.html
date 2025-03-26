@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Device Mode: Responsive Design Testing</h1>
+  <nav class="breadcrumb">
+    <a href="../../../../index.html">JavaScript Insights</a>
+    <a href="../../../index.html">DevTools</a>
+    <a href="../../index.html">MoreTools</a>
+    <a href="../index.html">Device</a>
+    <a href="./index.html">Theoretical 1</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <main class="device-tool-container">
+    <section class="intro-section">
+      <h2>📱 Understanding the Device Tool</h2>
+      <p>The Device Mode (or Device Emulation) in browser DevTools is an essential feature for modern web development
+        that allows you to test how your website appears and functions across different devices without needing physical
+        access to those devices.</p>
+
+      <div class="tool-highlight">
+        <h3>🛠️ When to Use Device Mode</h3>
+        <ul>
+          <li><strong>Responsive Design Testing:</strong> Verify your site adapts properly to different screen sizes
+          </li>
+          <li><strong>Mobile-specific UI Testing:</strong> Test touch events, viewport settings, and mobile layouts</li>
+          <li><strong>Performance Analysis:</strong> Simulate different network conditions and CPU throttling</li>
+          <li><strong>Device-specific Bugs:</strong> Identify and fix issues that only appear on certain devices</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <h2>🌟 Key Features of Device Mode</h2>
+
+      <div class="feature-card">
+        <h3>📐 Viewport Size Control</h3>
+        <p>Precisely adjust the dimensions of your viewport to test specific breakpoints or device sizes.</p>
+        <div class="code-example">
+          <code>@media (max-width: 768px) { /* Tablet styles */ }</code>
+        </div>
+        <p><strong>Try it:</strong> Open DevTools (F12), click the Device Mode icon (mobile device icon) in the toolbar,
+          and drag the viewport edges to resize.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📱 Device Emulation</h3>
+        <p>Select from a list of common devices to automatically set screen size, pixel ratio, and user agent.</p>
+        <p><strong>Common devices include:</strong> iPhone 13, Samsung Galaxy S21, iPad Pro, and many more.</p>
+        <p><strong>Try it:</strong> In Device Mode, use the dropdown menu at the top to select a specific device to
+          emulate.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔄 Orientation Switching</h3>
+        <p>Test how your site responds when switching between portrait and landscape orientations.</p>
+        <p><strong>Try it:</strong> Click the rotate button next to the device selection dropdown to toggle orientation.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🌐 Network Throttling</h3>
+        <p>Simulate various network conditions to test how your site performs over slow connections.</p>
+        <p><strong>Try it:</strong> Find the "Network" dropdown in the Device Mode toolbar and select options like "Fast
+          3G" or "Slow 3G".</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🧠 CPU Throttling</h3>
+        <p>Simulate slower devices by throttling CPU performance, useful for testing JavaScript performance.</p>
+        <p><strong>Try it:</strong> Look for the "CPU" dropdown in the Performance panel to simulate slower processors.
+        </p>
+      </div>
+    </section>
+
+    <section class="best-practices">
+      <h2>✅ Best Practices for Device Testing</h2>
+
+      <div class="practice-card">
+        <h3>Use Progressive Enhancement</h3>
+        <p>Start with a basic, functional experience that works on all devices, then layer on enhancements for better
+          devices.</p>
+        <div class="code-example">
+          <code>
+            // Basic functionality for all devices
+            const button = document.querySelector('.action-button');
+            
+            // Enhanced experience for devices that support it
+            if ('IntersectionObserver' in window) {
+              // Add advanced intersection observer functionality
+            }
+          </code>
+        </div>
+      </div>
+
+      <div class="practice-card">
+        <h3>Test Real Devices When Possible</h3>
+        <p>While Device Mode is excellent for development, always validate on real devices before finalizing.</p>
+        <p><strong>Pro tip:</strong> Use services like BrowserStack or LambdaTest for testing on real devices remotely.
+        </p>
+      </div>
+
+      <div class="practice-card">
+        <h3>Design for Mobile First</h3>
+        <p>Start your design and development process with mobile viewport sizes, then expand to larger screens.</p>
+        <div class="code-example">
+          <code>
+            /* Base styles for mobile */
+            .container { padding: 10px; }
+            
+            /* Enhance for larger screens */
+            @media (min-width: 768px) {
+              .container { padding: 20px; }
+            }
+          </code>
+        </div>
+      </div>
+    </section>
+
+    <section class="common-issues">
+      <h2>⚠️ Common Device Testing Issues</h2>
+
+      <div class="issue-card">
+        <h3>Touch Events vs. Mouse Events</h3>
+        <p>Remember that mobile devices use touch events, not mouse events, which behave differently.</p>
+        <p><strong>Solution:</strong> Use pointer events for cross-device compatibility:</p>
+        <div class="code-example">
+          <code>
+            element.addEventListener('pointerdown', handleInteraction);
+            // Instead of mousedown or touchstart
+          </code>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <h3>Font Size Readability</h3>
+        <p>Text that's readable on desktop may be too small on mobile.</p>
+        <p><strong>Solution:</strong> Use relative units and minimum sizes:</p>
+        <div class="code-example">
+          <code>
+            body {
+              font-size: 16px; /* Base size */
+            }
+            p {
+              font-size: 1rem; /* Relative to base */
+              min-font-size: 14px; /* Never smaller than this */
+            }
+          </code>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <h3>Hover States on Touch Devices</h3>
+        <p>Hover effects don't work intuitively on touch devices.</p>
+        <p><strong>Solution:</strong> Use media queries to apply hover effects only when appropriate:</p>
+        <div class="code-example">
+          <code>
+            @media (hover: hover) {
+              .button:hover {
+                background-color: #0056b3;
+              }
+            }
+          </code>
+        </div>
+      </div>
+    </section>
+
+    <section class="resources-section">
+      <h2>📚 Additional Resources</h2>
+
+      <div class="resource-links">
+        <ul>
+          <li><a href="https://developer.chrome.com/docs/devtools/device-mode/" target="_blank">Chrome DevTools: Device
+              Mode</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_Mode" target="_blank">Firefox:
+              Responsive Design Mode</a></li>
+          <li><a href="https://web.dev/responsive-web-design-basics/" target="_blank">Web.dev: Responsive Web Design
+              Basics</a></li>
+          <li><a href="https://www.smashingmagazine.com/2018/09/importance-manual-accessibility-testing/"
+              target="_blank">The Importance of Manual Accessibility Testing</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="try-it-yourself">
+      <h2>🧪 Try It on This Page!</h2>
+      <p>This very page is built with responsive design principles. Use the DevTools Device Mode to resize and test how
+        the layout adapts to different screen sizes and devices.</p>
+      <button id="changeTheme" class="demo-button">Toggle Dark/Light Theme</button>
+      <button id="simulateTouch" class="demo-button">Simulate Touch Event</button>
+      <div id="touchResult" class="demo-result"></div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <p>Remember: While Device Mode is a powerful tool, nothing replaces testing on actual devices for the most accurate
+      results.</p>
+  </footer>
+</body>
+
+</html>
