@@ -9,11 +9,6 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <script src="index.js"></script>
-  <style>
-    body {
-      background-color: #f0f0f0;
-    }
-  </style>
 </head>
 
 <body>
@@ -28,73 +23,114 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <p>This site will help you understand the capabilities of the Lighthouse tool with more elements and features.</p>
+  <p>This site demonstrates common Lighthouse issues and how they're detected.</p>
 
   <div class="section">
-    <h2 class="animate">Performance</h2>
-    <p>Analyze the performance of your website, including metrics like First Contentful Paint, Speed Index, and more.
-    </p>
+    <h2 class="animate">Performance Issues</h2>
+    <p>This section demonstrates performance problems that Lighthouse will detect.</p>
     <div class="image-container">
-      <img src="large-image.jpg">
+      <!-- Unoptimized, oversized image with no dimensions -->
+      <img src="https://via.placeholder.com/3000x2000" alt="">
     </div>
     <script>
+      // Long-running JavaScript that blocks the main thread
       for (let i = 0; i < 10000; i++) {
-        console.log('Performance test log ' + i);
+        console.log('Performance blocking log ' + i);
       }
-      // Long-running JavaScript task
-      setTimeout(function mineBitcoin() {
-        for (let i = 0; i < 1000000000; i++) { }
+      // More blocking code
+      setTimeout(function blockMainThread() {
+        const start = Date.now();
+        while (Date.now() - start < 3000) { } // Block for 3 seconds
       }, 1000);
     </script>
   </div>
 
   <div class="section">
-    <h2>Accessibility</h2>
-    <p>Check the accessibility of your website to ensure it is usable by all users, including those with disabilities.
-    </p>
-    <button class="button">Click Me</button>
-    <div class="hidden" aria-hidden="true">Hidden content</div>
+    <h2>Accessibility Problems</h2>
+    <!-- Missing alt text -->
+    <img src="lighthouse-logo.png">
+    <!-- Poor contrast -->
+    <p style="color: #aaaaaa; background-color: #eeeeee;">This text has poor contrast ratio.</p>
+    <!-- Missing labels -->
+    <input type="text" placeholder="Name (no label)">
+    <button onclick="alert('clicked')"></button>
   </div>
 
   <div class="section">
-    <h2>Best Practices</h2>
-    <p>Ensure your website follows best practices for web development, including security and performance.</p>
-    <img src="large-image.jpg">
+    <h2>Best Practices Issues</h2>
+    <!-- HTTP resource on HTTPS page -->
+    <img src="http://via.placeholder.com/100x100">
+    <!-- Browser errors in console -->
     <script>
-      console.log('Best practices test');
+      undefinedVariable.property = true;
+      document.querySelector('#non-existent-element').innerHTML = 'Error';
+    </script>
+    <!-- Deprecated APIs -->
+    <script>
+      document.write("This uses deprecated API");
     </script>
   </div>
 
   <div class="section">
-    <h2>SEO</h2>
-    <p>Optimize your website for search engines to improve visibility and ranking.</p>
-    <h1>Heading 1</h1>
-    <p>Some content here.</p>
-    <a href="#">Link text</a>
+    <h2>SEO Problems</h2>
+    <!-- Multiple h1 tags -->
+    <h1>This is another H1 that will hurt SEO</h1>
+    <!-- Tiny text -->
+    <p style="font-size: 8px;">This text is too small for mobile devices.</p>
+    <!-- Links with no descriptive text -->
+    <a href="#">Click here</a>
+    <!-- Crawlable links -->
+    <a href="#" onclick="navigate('page2.html'); return false;">JavaScript link</a>
   </div>
 
   <div class="section">
-    <h2>PWA</h2>
-    <p>Check if your website meets the criteria for a Progressive Web App (PWA).</p>
-    <link rel="manifest" href="manifest.json">
+    <h2>PWA Failures</h2>
+    <p>This site is missing essential PWA features like:</p>
+    <ul>
+      <li>No service worker</li>
+      <li>No manifest.json</li>
+      <li>Not responsive</li>
+      <li>No offline capabilities</li>
+    </ul>
+    <!-- No HTTPS, no manifest -->
+  </div>
+
+  <div class="section">
+    <h2>Layout Shift Problems</h2>
+    <div id="layout-shift-container" style="min-height: 100px;">
+      <p>Watch this space...</p>
+    </div>
     <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
-      }
+      // Create layout shift after page load
+      setTimeout(() => {
+        const container = document.getElementById('layout-shift-container');
+        container.innerHTML = '<div style="height: 300px; background-color: red;">Surprise content!</div>';
+      }, 2000);
     </script>
   </div>
 
   <div class="section">
-    <h2>Additional Elements</h2>
-    <p>Here are some additional elements to further test the capabilities of the Lighthouse tool.</p>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name"><br><br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" onpaste="return false;" ondrop="return false;"
-        autocomplete="off"><br><br>
-      <input type="submit" value="Submit">
-    </form>
+    <h2>Resource Loading Issues</h2>
+    <!-- Render-blocking resources -->
+    <link rel="stylesheet" href="dummy-render-blocking.css">
+    <!-- Commented out the actual Bootstrap CSS that would affect layout -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <!-- Large network payloads -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- No resource hints -->
+  </div>
+
+  <div class="section">
+    <h2>Image and Video Issues</h2>
+    <p>Images and videos should be optimized for performance.</p>
+    <!-- Unoptimized image -->
+    <img src="https://via.placeholder.com/3000x2000" alt="Unoptimized Image" width="300" height="200">
+    <!-- Video and audio elements -->
+    <video width="320" height="240" controls>
+      <source src="movie.ogg" type="video/ogg">
+      <source src="movie.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
     <video width="320" height="240" controls>
       <source src="movie.mp4" type="video/mp4">
       Your browser does not support the video tag.
@@ -103,31 +139,26 @@
       <source src="audio.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-  </div>
 
-  <div class="section">
-    <h2>Layout Shift Test</h2>
-    <p>This section contains elements that cause layout shifts.</p>
-    <div class="delayed-image"></div>
+    <div class="section">
+      <h2>Lighthouse Training Resources</h2>
+      <p>After seeing these issues, learn how to fix them at:</p>
+      <ul>
+        <li><a href="https://web.dev/lighthouse-performance/">Lighthouse Performance Guide</a></li>
+        <li><a href="https://web.dev/lighthouse-accessibility/">Accessibility Improvements</a></li>
+        <li><a href="https://web.dev/lighthouse-best-practices/">Best Practices Guide</a></li>
+      </ul>
+    </div>
+
+    <!-- Loading multiple render-blocking scripts -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-      setTimeout(() => {
-        document.querySelector('.delayed-image').style.display = 'block';
-      }, 2000);
+      // More unnecessary JavaScript
+      for (let i = 0; i < 5000; i++) {
+        console.log('More logs ' + i);
+      }
     </script>
-  </div>
-
-  <div class="section">
-    <h2>Instructions</h2>
-    <p>To use the Lighthouse tool, open Chrome DevTools, go to the "Lighthouse" tab, and select the categories you want
-      to audit. Click "Generate report" to see the results.</p>
-  </div>
-
-  <script src="index.js" rel="preload"></script>
-  <script>
-    for (let i = 0; i < 10000; i++) {
-      console.log('Additional log ' + i);
-    }
-  </script>
 </body>
 
 </html>
