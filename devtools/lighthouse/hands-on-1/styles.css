@@ -1,37 +1,94 @@
-.hidden {
-  display: none;
+.instructions,
+.demo-area,
+.tips,
+.resources,
+.expert-advice {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.button {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
+kbd {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    color: #333;
+    display: inline-block;
+    font-size: 0.9em;
+    padding: 2px 5px;
+    margin: 0 2px;
 }
 
-.button:hover {
-  background-color: #2980b9;
+/* Test Sections */
+.test-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-.image-container {
-  width: 100%;
-  height: 300px;
-  background: url('large-image.jpg') no-repeat center center;
-  background-size: cover;
+.controls {
+    margin-bottom: 15px;
 }
 
-.delayed-image {
-  width: 100%;
-  height: 300px;
-  background: url('large-image.jpg') no-repeat center center;
-  background-size: cover;
-  position: absolute;
-  top: 10000px;
-  left: 0;
+.controls button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.animate {
-  transform: translateX(100px);
-  transition: transform 0.5s;
+.controls button:hover {
+    background-color: #0056b3;
+}
+
+.sandbox {
+    min-height: 100px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+/* Advice Cards */
+.advice-card {
+    background-color: #fff;
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0 4px 4px 0;
+}
+
+.advice-card h3 {
+    color: #007bff;
+    margin-top: 0;
+}
+
+/* Resources Section */
+.resources a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.resources a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .controls button {
+        width: 100%;
+        margin-right: 0;
+    }
 }

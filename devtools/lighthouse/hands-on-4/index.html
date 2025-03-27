@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="I got to 100 with Lighthouse" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js" async></script>
+</head>
+
+<body>
+  <h1>Lighthouse Hands-On 4</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Lighthouse</a>
+    <a href="./index.html">Hands-On 4</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <section class="instructions">
+    <h2>Lighthouse Tool Practice</h2>
+    <p>In this exercise, you'll learn how Lighthouse identifies performance and accessibility issues.</p>
+
+    <h3>How to Use This Page</h3>
+    <ol>
+      <li>This page intentionally contains performance, accessibility, and best practices issues</li>
+      <li>Run a Lighthouse audit to identify the problems (expect low scores!)</li>
+      <li>Use the buttons to fix issues one by one</li>
+      <li>Re-run Lighthouse after each fix to see how scores improve</li>
+    </ol>
+    <h3>Common Issues Lighthouse Detects</h3>
+    <ul>
+      <li>Unoptimized images (no width/height, uncompressed)</li>
+      <li>Render-blocking resources</li>
+      <li>Accessibility problems (contrast, missing alt text)</li>
+      <li>Missing meta tags and SEO elements</li>
+      <li>JavaScript performance issues</li>
+    </ul>
+  </section>
+  <main>
+    <section class="exercise">
+      <h2>Exercise 1: Image Optimization</h2>
+      <!-- Intentionally problematic: huge unoptimized image with no dimensions -->
+      <img src="huge-cat.jpg" id="unoptimized-image">
+      <button onclick="optimizeImage()">Optimize Me!</button>
+      <p>Problems: Unoptimized image, missing dimensions, no lazy loading</p>
+    </section>
+
+    <section class="exercise">
+      <h2>Exercise 2: Font Loading</h2>
+      <!-- Adding render-blocking custom font -->
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        .fancy-text {
+          font-family: 'Pacifico', cursive;
+          font-size: 24px;
+        }
+      </style>
+      <div class="fancy-text">This text uses a render-blocking font</div>
+      <button onclick="fixFontLoading()">Fix Font Loading</button>
+      <p>Problem: Render-blocking font loading</p>
+    </section>
+
+    <section class="exercise">
+      <h2>Exercise 3: JavaScript Performance</h2>
+      <div id="heavy-animation" style="font-size: 50px;">🎈</div>
+      <button onclick="startHeavyAnimation()">Start Laggy Animation</button>
+      <button onclick="fixAnimation()">Fix Animation</button>
+      <p>Problem: Inefficient JavaScript animation blocking main thread</p>
+    </section>
+
+    <section class="exercise">
+      <h2>Exercise 4: Accessibility Challenge</h2>
+      <!-- Poor contrast text -->
+      <div id="bad-contrast" style="color: #CCCCCC; background-color: #DDDDDD; padding: 10px;">
+        Click me if you can see me!
+      </div>
+      <button onclick="fixAccessibility()">Fix Accessibility</button>
+      <p>Problems: Poor color contrast, missing ARIA attributes</p>
+    </section>
+
+    <section class="exercise">
+      <h2>Exercise 5: SEO Fun</h2>
+      <div id="seo-nightmare">
+        <!-- Missing alt text -->
+        <img src="cat-meme.jpg">
+        <div onclick="alert('clicked')">Click here for stuff</div>
+      </div>
+      <button onclick="fixSEO()">Fix SEO</button>
+      <p>Problems: Missing alt text, non-descriptive link text</p>
+    </section>
+
+    <section class="tips">
+      <h2>Lighthouse Tips</h2>
+      <ul>
+        <li><strong>Performance:</strong> Check for render-blocking resources, unoptimized images, and JavaScript
+          efficiency</li>
+        <li><strong>Accessibility:</strong> Ensure proper contrast, alt text, semantic HTML and ARIA attributes</li>
+        <li><strong>Best Practices:</strong> Use HTTPS, proper image aspect ratios, avoid deprecated APIs</li>
+        <li><strong>SEO:</strong> Include meta tags, descriptive link text, mobile friendly design</li>
+      </ul>
+    </section>
+  </main>
+
+
+</body>

@@ -4,12 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="I got to 100 with Lighthouse" />
   <title>JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
-  <script src="index.js" async></script>
+  <script src="index.js"></script>
+  <style>
+    body {
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 
 <body>
@@ -24,5 +28,120 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h2>I got to 100 with Lighthouse</h2>
+  <p>This site will help you understand the capabilities of the Lighthouse tool by showing examples of poor practices.
+  </p>
+
+  <div class="section">
+    <h2 class="animate">Performance Issues</h2>
+    <p>This section demonstrates performance problems that Lighthouse will detect.</p>
+    <!-- Unoptimized huge image without dimensions -->
+    <div class="image-container">
+      <img src="https://via.placeholder.com/5000x5000">
+    </div>
+    <script>
+      // Render-blocking JavaScript
+      for (let i = 0; i < 10000; i++) {
+        console.log('Performance test log ' + i);
+      }
+      // Long-running JavaScript task
+      setTimeout(() => {
+        let result = 0;
+        for (let i = 0; i < 100000000; i++) {
+          result += i;
+        }
+      }, 1000);
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>Accessibility Problems</h2>
+    <p>Here are some elements with accessibility issues:</p>
+    <!-- Missing alternative text -->
+    <img src="chart.jpg">
+    <!-- Low contrast text -->
+    <p style="color: #cccccc; background-color: #ffffff;">This text has poor contrast</p>
+    <!-- Missing form labels -->
+    <input type="text" placeholder="Search without label">
+    <div tabindex="0" role="button" style="background: blue; width: 100px; height: 50px;"></div>
+  </div>
+
+  <div class="section">
+    <h2>Best Practices Issues</h2>
+    <p>Elements that violate best practices:</p>
+    <!-- HTTP resources on HTTPS page -->
+    <img src="http://insecure-image.com/image.jpg" alt="Insecure image">
+    <!-- No doctype -->
+    <!-- Deprecated HTML -->
+    <font size="3">Deprecated font tag</font>
+    <marquee>Moving text is outdated</marquee>
+  </div>
+
+  <div class="section">
+    <h2>SEO Problems</h2>
+    <p>Issues that hurt search engine optimization:</p>
+    <!-- Multiple h1 tags -->
+    <h1>Another H1 in the page</h1>
+    <!-- Missing meta descriptions -->
+    <!-- Links without descriptive text -->
+    <a href="#">Click here</a>
+    <a href="#">Read more</a>
+    <!-- Tiny tap targets -->
+    <div style="display: flex;">
+      <a href="#" style="padding: 2px; margin: 1px;">1</a>
+      <a href="#" style="padding: 2px; margin: 1px;">2</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>PWA Failures</h2>
+    <p>Missing elements required for Progressive Web Apps:</p>
+    <!-- No service worker -->
+    <!-- Missing manifest -->
+    <!-- Not HTTPS -->
+  </div>
+
+  <div class="section">
+    <h2>Layout Shift Demonstration</h2>
+    <p>Watch how elements shift after loading:</p>
+    <div id="layout-shift-container">
+      <p>Content that will shift</p>
+    </div>
+    <script>
+      setTimeout(() => {
+        const container = document.getElementById('layout-shift-container');
+        const banner = document.createElement('div');
+        banner.style.height = '200px';
+        banner.style.background = 'red';
+        banner.innerText = 'Late-loading banner';
+        container.prepend(banner);
+      }, 3000);
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>Instructor Notes</h2>
+    <p>To use Lighthouse effectively:</p>
+    <ol>
+      <li>Open Chrome DevTools (F12 or right-click → Inspect)</li>
+      <li>Navigate to the Lighthouse tab</li>
+      <li>Select categories to audit (Performance, Accessibility, Best Practices, SEO, PWA)</li>
+      <li>Choose device emulation (Mobile or Desktop)</li>
+      <li>Click "Generate report" and analyze the results</li>
+    </ol>
+    <p>Have students identify at least 3 issues from each category and propose solutions.</p>
+  </div>
+
+  <!-- Excessive JavaScript loading -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+  <script>
+    // More render-blocking JavaScript
+    for (let i = 0; i < 5000; i++) {
+      console.log('Additional unnecessary log ' + i);
+    }
+  </script>
 </body>
+
+</html>

@@ -4,16 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>Lighthouse Tool - JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <script src="index.js"></script>
-  <style>
-    body {
-      background-color: #f0f0f0;
-    }
-  </style>
 </head>
 
 <body>
@@ -28,106 +23,141 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <p>This site will help you understand the capabilities of the Lighthouse tool with more elements and features.</p>
+  <section class="instructions">
+    <h2>Lighthouse Tool Practice</h2>
+    <p>Lighthouse is an open-source automated tool for improving the quality of web pages. It can audit performance,
+      accessibility, progressive web apps, SEO, and more.</p>
 
-  <div class="section">
-    <h2 class="animate">Performance</h2>
-    <p>Analyze the performance of your website, including metrics like First Contentful Paint, Speed Index, and more.
-    </p>
-    <div class="image-container">
-      <img src="large-image.jpg">
+    <h3>How to Access Lighthouse</h3>
+    <ol>
+      <li>Open Chrome DevTools by pressing <kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd> (or <kbd>Cmd+Option+I</kbd> on Mac)
+      </li>
+      <li>Click on the "Lighthouse" tab in the DevTools panel</li>
+      <li>Alternatively, you can access it through Chrome's menu: More Tools → Developer Tools → Lighthouse</li>
+    </ol>
+
+    <h3>Exercises</h3>
+    <ol>
+      <li>Run a Lighthouse audit on this page with default settings</li>
+      <li>Review the report and identify potential improvements</li>
+      <li>Try running the audit in both mobile and desktop device modes</li>
+      <li>Use the provided buttons below to toggle elements that affect Lighthouse scores, you should experiment with
+        the different Lighthouse modes</li>
+      <li>After making changes using the buttons, re-run the Lighthouse audit to see how the scores change</li>
+    </ol>
+  </section>
+
+  <section class="demo-area">
+    <h2>Lighthouse Demo Elements</h2>
+
+    <div class="test-section">
+      <h3>Performance Test Elements</h3>
+      <div class="controls">
+        <button id="load-large-image">Load Large Unoptimized Image</button>
+        <button id="load-render-blocking">Add Render-Blocking Resource</button>
+        <button id="reset-performance">Reset Performance Elements</button>
+      </div>
+      <div id="performance-sandbox" class="sandbox">
+        <p>Performance test area - click buttons above to load test elements</p>
+      </div>
     </div>
-    <script>
-      for (let i = 0; i < 10000; i++) {
-        console.log('Performance test log ' + i);
-      }
-      // Long-running JavaScript task
-      setTimeout(() => {
-        for (let i = 0; i < 1000000000; i++) { }
-      }, 1000);
-    </script>
-  </div>
 
-  <div class="section">
-    <h2>Accessibility</h2>
-    <p>Check the accessibility of your website to ensure it is usable by all users, including those with disabilities.
-    </p>
-    <button class="button">Click Me</button>
-    <div class="hidden" aria-hidden="true">Hidden content</div>
-  </div>
+    <div class="test-section">
+      <h3>Accessibility Test Elements</h3>
+      <div class="controls">
+        <button id="add-low-contrast">Add Low Contrast Text</button>
+        <button id="add-missing-labels">Add Inputs Without Labels</button>
+        <button id="add-missing-alt">Add Image Without Alt Text</button>
+        <button id="reset-accessibility">Reset Accessibility Elements</button>
+      </div>
+      <div id="accessibility-sandbox" class="sandbox">
+        <p>Accessibility test area - click buttons above to load test elements</p>
+      </div>
+    </div>
 
-  <div class="section">
-    <h2>Best Practices</h2>
-    <p>Ensure your website follows best practices for web development, including security and performance.</p>
-    <img src="large-image.jpg">
-    <script>
-      console.log('Best practices test');
-    </script>
-  </div>
+    <div class="test-section">
+      <h3>Best Practices Test Elements</h3>
+      <div class="controls">
+        <button id="add-console-errors">Generate Console Errors</button>
+        <button id="add-http-resource">Load HTTP Resource on HTTPS</button>
+        <button id="reset-best-practices">Reset Best Practices Elements</button>
+      </div>
+      <div id="best-practices-sandbox" class="sandbox">
+        <p>Best practices test area - click buttons above to load test elements</p>
+      </div>
+    </div>
 
-  <div class="section">
-    <h2>SEO</h2>
-    <p>Optimize your website for search engines to improve visibility and ranking.</p>
-    <h1>Heading 1</h1>
-    <p>Some content here.</p>
-    <a href="#">Link text</a>
-  </div>
+    <div class="test-section">
+      <h3>SEO Test Elements</h3>
+      <div class="controls">
+        <button id="add-small-text">Add Small/Unreadable Text</button>
+        <button id="remove-meta-tags">Simulate Missing Meta Tags</button>
+        <button id="reset-seo">Reset SEO Elements</button>
+      </div>
+      <div id="seo-sandbox" class="sandbox">
+        <p>SEO test area - click buttons above to load test elements</p>
+      </div>
+    </div>
+  </section>
 
-  <div class="section">
-    <h2>PWA</h2>
-    <p>Check if your website meets the criteria for a Progressive Web App (PWA).</p>
-    <link rel="manifest" href="manifest.json">
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
-      }
-    </script>
-  </div>
+  <section class="tips">
+    <h2>Pro Tips for Lighthouse</h2>
+    <ul>
+      <li><strong>Performance</strong>: Focus on Largest Contentful Paint (LCP), First Input Delay (FID), and Cumulative
+        Layout Shift (CLS) - the Core Web Vitals</li>
+      <li><strong>Throttling</strong>: Use the "Applied throttling" dropdown to simulate different network conditions
+      </li>
+      <li><strong>CI Integration</strong>: Consider running Lighthouse in your CI/CD pipeline using Lighthouse CI</li>
+      <li><strong>Extensions</strong>: Disable browser extensions when running audits as they can affect performance
+        measurements</li>
+      <li><strong>Multiple runs</strong>: Run the audit multiple times and average the results for more accurate scoring
+      </li>
+      <li><strong>Incognito mode</strong>: For the most reliable results, run Lighthouse in incognito mode to avoid
+        browser extensions interference</li>
+    </ul>
+  </section>
 
-  <div class="section">
-    <h2>Additional Elements</h2>
-    <p>Here are some additional elements to further test the capabilities of the Lighthouse tool.</p>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name"><br><br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" onpaste="return false;" ondrop="return false;"
-        autocomplete="off"><br><br>
-      <input type="submit" value="Submit">
-    </form>
-    <video width="320" height="240" controls>
-      <source src="movie.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <audio controls>
-      <source src="audio.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
+  <section class="resources">
+    <h2>Additional Resources</h2>
+    <ul>
+      <li><a href="https://developers.google.com/web/tools/lighthouse" target="_blank">Lighthouse Official
+          Documentation</a></li>
+      <li><a href="https://web.dev/measure/" target="_blank">web.dev Measure Tool (powered by Lighthouse)</a></li>
+      <li><a href="https://github.com/GoogleChrome/lighthouse-ci" target="_blank">Lighthouse CI for automated
+          testing</a></li>
+      <li><a href="https://web.dev/learn-web-vitals/" target="_blank">Learn Web Vitals</a></li>
+      <li><a href="https://web.dev/lighthouse-performance/" target="_blank">Performance Scoring Guide</a></li>
+    </ul>
+  </section>
 
-  <div class="section">
-    <h2>Layout Shift Test</h2>
-    <p>This section contains elements that cause layout shifts.</p>
-    <div class="delayed-image"></div>
-    <script>
-      setTimeout(() => {
-        document.querySelector('.delayed-image').style.display = 'block';
-      }, 2000);
-    </script>
-  </div>
+  <section class="expert-advice">
+    <h2>Expert Advice</h2>
+    <div class="advice-card">
+      <h3>Understanding Lighthouse Scores</h3>
+      <p>Lighthouse scores are calculated based on a set of audits for each category:</p>
+      <ul>
+        <li><strong>0-49 (Red)</strong>: Poor - significant improvements needed</li>
+        <li><strong>50-89 (Orange)</strong>: Needs improvement - addressing these issues will enhance user experience
+        </li>
+        <li><strong>90-100 (Green)</strong>: Good - your page is performing well</li>
+      </ul>
+      <p>Remember that scores can vary between runs due to network conditions and device performance. Focus on the
+        specific recommendations rather than just the overall score.</p>
+    </div>
 
-  <div class="section">
-    <h2>Instructions</h2>
-    <p>To use the Lighthouse tool, open Chrome DevTools, go to the "Lighthouse" tab, and select the categories you want
-      to audit. Click "Generate report" to see the results.</p>
-  </div>
-
-  <script src="index.js" rel="preload"></script>
-  <script>
-    for (let i = 0; i < 10000; i++) {
-      console.log('Additional log ' + i);
-    }
-  </script>
+    <div class="advice-card">
+      <h3>Common Lighthouse Issues and Fixes</h3>
+      <ul>
+        <li><strong>Eliminate render-blocking resources</strong>: Use async or defer for non-critical JavaScript and CSS
+        </li>
+        <li><strong>Properly size images</strong>: Serve images in proper dimensions and formats (WebP, AVIF)</li>
+        <li><strong>Minimize main-thread work</strong>: Reduce JavaScript execution time and break up long tasks</li>
+        <li><strong>Reduce unused JavaScript/CSS</strong>: Implement code splitting and tree shaking</li>
+        <li><strong>Use accessible names for buttons/links</strong>: Ensure all interactive elements have descriptive
+          labels</li>
+      </ul>
+    </div>
+  </section>
 </body>
 
 </html>
