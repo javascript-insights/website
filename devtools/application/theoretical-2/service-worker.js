@@ -11,7 +11,7 @@
  *               is called from the web app
  */
 
-const CACHE_NAME = 'service-worker-cache';
+const CACHE_NAME = 'service-worker-cache-theoretical-2';
 const urlsToCache = [
     //'./',
     //'./index.html',

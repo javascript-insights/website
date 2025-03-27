@@ -1,5 +1,5 @@
 window.addEventListener('load', async () => {
-    const cacheName = 'app-cache-with-cache-button';
+    const cacheName = 'cache-button-theoretical-2';
     // offline support - caching window.location.href on button click
     ///////////////////////////////////////////////////////////////////////////
     document.getElementById('cacheButton').addEventListener('click', async () => {

@@ -196,7 +196,7 @@ async function saveToSharedStorage() {
 // Cache Storage
 async function cacheResource() {
   if ('caches' in window) {
-    const cache = await caches.open('demo-cache');
+    const cache = await caches.open('demo-cache-theoretical-1');
     //await cache.add('/static/favicon.png');
     await cache.add('./getstarted.json');
     alert('Resource cached successfully');

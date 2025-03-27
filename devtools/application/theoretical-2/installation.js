@@ -30,7 +30,7 @@ window.addEventListener("load", function () {
         const result = await deferredPrompt.userChoice;
         if (result.outcome === 'accepted') {
             try {
-                const cache = await caches.open('app-install-cache-with-install-button-with-cache');
+                const cache = await caches.open('app-install-cache-with-install-button-with-cache-theoretical-2');
                 await cache.add('./index.html');
                 document.getElementById('installStatus').textContent = 'App installed and cached successfully!';
             } catch (error) {
