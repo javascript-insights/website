@@ -209,6 +209,24 @@ function gsbutton() {
   fetch('./getstarted.json');
 };
 
+// Cache Storage 2
+async function cacheResource2() {
+  if ('caches' in window) {
+    const cache = await caches.open('demo-cache-theoretical-1');
+    //await cache.add('/static/favicon.png');
+    await cache.add('https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow');
+    alert('Resource cached successfully');
+  } else {
+    alert('Cache Storage not supported');
+  }
+}
+
+function gsbutton2() {
+  fetch('https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow')
+    .then(response => response.text())
+    .then(data => alert(data));
+};
+
 //////////////////////////////////////////////////////////////
 
 // Storage Buckets
