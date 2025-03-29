@@ -108,24 +108,26 @@
           </ul>
         </li>
 
-        <li>🔐 Private state tokens (Super secret spy stuff) -
+        <li>🔐 Private state tokens -
           <button onclick="generatePrivateStateToken()" disabled>🕵️ Generate Secret Code</button>
         </li>
-        <li>👥 Interest groups (The cool kids club) -
+        <li>👥 Interest groups -
           <button onclick="joinInterestGroup()" disabled>🤝 Join the Party</button>
         </li>
-        <li>🤝 Shared storage (Community piggy bank) -
+        <li>🤝 Shared storage -
           <button onclick="saveToSharedStorage()" disabled>🏦 Share the Wealth</button>
         </li>
-        <li>📦 Cache storage (The time machine) -
+        <li>📦 Cache storage -
           <button onclick="gsbutton()">🔮 Fetch data</button>
-          <button onclick="cacheResource()">⏰ Save for Later</button>
+          <button onclick="cacheResource()">⏰ Cache Data</button>
         </li>
         <li>🔄 Cache storage 2 -
-          <button onclick="gsbutton2()">🔮 Fetch data 2</button>
-          <button onclick="cacheResource2()">⏰ Save for Later 2</button>
+          <button onclick="fetchDataDemo()">🔮 Fetch Data 2</button>
+          <button onclick="cacheDataDemo()">⏰ Cache Data 2</button>
+          <div id="cacheStatus" style="margin-top: 5px; font-size: 0.9em; color: #666;"></div>
+          <div id="fetchResult" style="margin-top: 10px; padding: 8px; border: 1px solid #ddd; display: none;"></div>
         </li>
-        <li>🪣 Storage Buckets (Digital sandbox) -
+        <li>🪣 Storage Buckets -
           <button onclick="createBucket()" disabled>⛱️ Dig a Hole</button>
           <button onclick="storeDataInBucket()" disabled>🏖️ Bury Treasure</button>
         </li>

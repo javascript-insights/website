@@ -209,23 +209,44 @@ function gsbutton() {
   fetch('./getstarted.json');
 };
 
-// Cache Storage 2
-async function cacheResource2() {
-  if ('caches' in window) {
-    const cache = await caches.open('demo-cache-theoretical-1');
-    //await cache.add('/static/favicon.png');
-    await cache.add('https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow');
-    alert('Resource cached successfully');
-  } else {
-    alert('Cache Storage not supported');
-  }
+
+function fetchDataDemo() {
+  const url = 'https://jsonplaceholder.typicode.com/todos/1';
+  const statusEl = document.getElementById('cacheStatus');
+  const resultEl = document.getElementById('fetchResult');
+
+  statusEl.textContent = 'Fetching data...';
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      statusEl.textContent = 'Data fetched successfully!';
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+    })
+    .catch(error => {
+      statusEl.textContent = 'Error fetching data: ' + error.message;
+    });
 }
 
-function gsbutton2() {
-  fetch('https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow')
-    .then(response => response.text())
-    .then(data => alert(data));
-};
+function cacheDataDemo() {
+  const url = 'https://jsonplaceholder.typicode.com/todos/1';
+  const statusEl = document.getElementById('cacheStatus');
+  const cacheName = 'demo-cache-v1';
+
+  statusEl.textContent = 'Caching data...';
+
+  caches.open(cacheName)
+    .then(cache => {
+      return cache.add(url)
+        .then(() => {
+          statusEl.textContent = 'Data cached successfully! Try fetching while offline.';
+        });
+    })
+    .catch(error => {
+      statusEl.textContent = 'Error caching data: ' + error.message;
+    });
+}
 
 //////////////////////////////////////////////////////////////
 
