@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
-  <script src="index.js"></script>
+  <script src="index.js" defer></script>
 </head>
 
 <body>
@@ -27,49 +27,252 @@
   <p>Welcome to the Rendering Tool Demo website. This site demonstrates the capabilities of the Rendering tool in
     browser DevTools.</p>
 
+  <section class="instructions">
+    <h2>How to Access the Rendering Panel</h2>
+    <ol>
+      <li>Open DevTools by pressing <kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd> (or <kbd>Cmd+Option+I</kbd> on Mac)</li>
+      <li>Click the three-dot menu (⋮) in DevTools</li>
+      <li>Select <strong>More tools</strong> > <strong>Rendering</strong></li>
+      <li>A new Rendering panel will appear, typically at the bottom of DevTools</li>
+    </ol>
+    <p>The Rendering panel helps you identify and debug visual performance issues, layout problems, and paint
+      inefficiencies.</p>
+  </section>
+
   <div class="section">
     <h2>Paint Flashing</h2>
     <p>Enable paint flashing to see areas of the page that are being repainted.</p>
-    <div style="width: 100px; height: 100px; background-color: red;" onclick="this.style.backgroundColor = 'blue';">
+    <div class="demo-box paint-demo" onclick="this.style.backgroundColor = getRandomColor();">
+      Click me to change color
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, check <strong>Paint flashing</strong></li>
+        <li>Click the box above several times</li>
+        <li>Notice the green highlights that appear around the box - these indicate areas being repainted</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Excessive repainting can cause performance issues. Identifying what triggers
+        repaints helps optimize rendering performance.</p>
     </div>
   </div>
 
   <div class="section">
     <h2>Layout Shift Regions</h2>
     <p>Highlight regions of the page that are shifting during layout changes.</p>
-    <div style="width: 100px; height: 100px; background-color: green;" onclick="this.style.width = '200px';"></div>
+    <div class="demo-container">
+      <div class="demo-box layout-shift-demo">This will expand</div>
+      <button id="shift-btn">Trigger Layout Shift</button>
+    </div>
+    <div id="new-element"></div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, check <strong>Layout Shift Regions</strong></li>
+        <li>Click the "Trigger Layout Shift" button above</li>
+        <li>Watch for blue highlighted regions showing where content shifted</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Layout shifts create poor user experience. The Cumulative Layout Shift (CLS)
+        metric is a key Web Vital for measuring page stability.</p>
+    </div>
   </div>
 
   <div class="section">
     <h2>Layer Borders</h2>
     <p>Show borders around layers to visualize layer boundaries.</p>
-    <div style="width: 100px; height: 100px; background-color: yellow; transform: translateZ(0);"></div>
+    <div class="demo-box layer-demo" id="layer-demo">
+      <div class="layer layer1">Layer 1 (transform)</div>
+      <div class="layer layer2">Layer 2 (will-change)</div>
+      <div class="layer layer3">Layer 3 (normal)</div>
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, check <strong>Layer borders</strong></li>
+        <li>Notice the orange borders that appear around composited layers</li>
+        <li>Hover over different elements to see layer information</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Understanding layer composition helps diagnose performance issues. Too many
+        layers can consume memory, while too few may cause excessive repainting.</p>
+    </div>
   </div>
 
   <div class="section">
     <h2>FPS Meter</h2>
     <p>Display the frames per second (FPS) meter to monitor rendering performance.</p>
-    <div style="width: 100px; height: 100px; background-color: purple;"></div>
+    <div class="demo-box fps-demo" id="fps-demo">
+      <button id="animation-toggle">Start Animation</button>
+      <div class="animation-container">
+        <div class="moving-element"></div>
+      </div>
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, check <strong>FPS meter</strong></li>
+        <li>Click "Start Animation" to run a simple animation</li>
+        <li>Watch the FPS counter in the top-right corner of your browser</li>
+        <li>Try throttling your CPU (in Performance panel) to see how it affects FPS</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Smooth animations require maintaining 60 FPS. The FPS meter helps identify
+        performance bottlenecks that cause frame drops.</p>
+    </div>
   </div>
 
   <div class="section">
     <h2>Scrolling Performance Issues</h2>
     <p>Highlight areas of the page that have scrolling performance issues.</p>
-    <div style="width: 100px; height: 100px; background-color: orange; overflow: scroll;">
-      <div style="width: 200px; height: 200px; background-color: lightblue;"></div>
+    <div class="demo-box scroll-demo">
+      <div class="scroll-container" id="scroll-container">
+        <div class="scroll-content">
+          <p>This content has expensive scroll handlers. Scroll to see potential issues.</p>
+          <div class="scroll-items"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, check <strong>Scrolling performance issues</strong></li>
+        <li>Scroll inside the box above</li>
+        <li>Watch for highlighted areas indicating potential performance issues</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Scroll jank creates a poor user experience. This tool helps identify expensive
+        event handlers or visual updates that occur during scrolling.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Highlight Ad Frames</h2>
+    <p>Visualize ad iframes on your page to identify their impact and placement.</p>
+    <div class="demo-box ad-frames-demo">
+      <div class="page-mockup">
+        <div class="mockup-header">Sample Website Header</div>
+        <div class="mockup-content">
+          <div class="mockup-text">
+            <p>This is sample content demonstrating how ads appear on a webpage.</p>
+            <p>The browser can highlight frames that are used for advertisements.</p>
+          </div>
+          <div class="ad-frame ad-frame-sidebar">
+            <div class="ad-content">ADVERTISEMENT</div>
+          </div>
+        </div>
+        <div class="mockup-footer">
+          <div class="ad-frame ad-frame-banner">
+            <div class="ad-content">BANNER ADVERTISEMENT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, check <strong>Highlight ad frames</strong></li>
+        <li>Ad iframes will be highlighted with a purple overlay</li>
+        <li>This helps identify advertisements across your site</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Identifying ad frames helps debug layout issues caused by ads and understand
+        their impact on page performance and user experience.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Disable Local Fonts</h2>
+    <p>See how your page displays when local fonts are not available.</p>
+    <div class="demo-box fonts-demo">
+      <div class="font-samples">
+        <p class="font-system">This text uses system fonts (Arial, Helvetica)</p>
+        <p class="font-serif">This text uses serif fonts (Times New Roman)</p>
+        <p class="font-mono">This text uses monospace fonts (Courier)</p>
+        <p class="font-custom">This text uses a custom font (if available)</p>
+      </div>
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, check <strong>Disable local fonts</strong></li>
+        <li>Observe how the text above changes as local fonts are replaced with standard fonts</li>
+        <li>Notice how this affects layout and text appearance</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Testing without local fonts helps ensure your site remains legible when custom
+        fonts fail to load or aren't available. It's an important resilience test for your design.</p>
     </div>
   </div>
 
   <div class="section">
     <h2>Emulate CSS Media</h2>
     <p>Emulate different CSS media types (screen, print) and media features (prefers-color-scheme).</p>
-    <div style="width: 100px; height: 100px; background-color: pink;"></div>
+    <div class="demo-box media-demo" id="media-demo">
+      <div class="media-content">
+        <p>This content responds to different media types and features.</p>
+        <div class="screen-only">This is visible only in screen mode</div>
+        <div class="print-only">This is visible only in print mode</div>
+        <div class="dark-mode-content">This has different styling in dark mode</div>
+      </div>
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, find the <strong>Emulate CSS media type</strong> dropdown</li>
+        <li>Select "print" to see how the page would look when printed</li>
+        <li>Then select "screen" to return to normal view</li>
+        <li>Below that, find <strong>Emulate CSS media feature prefers-color-scheme</strong></li>
+        <li>Try "dark" and "light" settings to see how your site responds</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Testing different media conditions lets you ensure your site works correctly
+        across contexts without having to actually print or change system settings.</p>
+    </div>
   </div>
 
   <div class="section">
-    <h2>Dark Mode</h2>
-    <p>Toggle dark mode to see how the page looks with a dark theme.</p>
-    <div style="width: 100px; height: 100px; background-color: black; color: white;">Dark Mode</div>
+    <h2>Emulate Vision Deficiencies</h2>
+    <p>Simulate how your page appears to users with different vision deficiencies.</p>
+    <div class="demo-box vision-demo">
+      <div class="color-boxes">
+        <div class="color-box red">Red</div>
+        <div class="color-box green">Green</div>
+        <div class="color-box blue">Blue</div>
+        <div class="color-box yellow">Yellow</div>
+        <div class="color-box purple">Purple</div>
+      </div>
+    </div>
+    <div class="tips">
+      <h3>How to use:</h3>
+      <ol>
+        <li>In the Rendering panel, find <strong>Emulate vision deficiencies</strong></li>
+        <li>Try different options like "Protanopia" or "Deuteranopia"</li>
+        <li>Observe how the colored boxes above would appear to users with these conditions</li>
+      </ol>
+      <p><strong>Why it matters:</strong> Accessibility is crucial for inclusive web design. This tool helps ensure your
+        color choices work for all users, including those with color vision deficiencies.</p>
+    </div>
   </div>
 
+  <section class="best-practices">
+    <h2>Rendering Performance Best Practices</h2>
+    <ul>
+      <li><strong>Minimize layout changes:</strong> Batch DOM updates and avoid forcing layout recalculation</li>
+      <li><strong>Avoid expensive paint operations:</strong> Use transform and opacity for animations instead of
+        properties that trigger layout</li>
+      <li><strong>Be strategic with layers:</strong> Promote elements to their own layer only when needed</li>
+      <li><strong>Debounce scroll events:</strong> Don't run heavy calculations during scroll</li>
+      <li><strong>Use requestAnimationFrame:</strong> For smooth visual updates that sync with the browser's paint cycle
+      </li>
+      <li><strong>Test on low-end devices:</strong> Performance issues are more visible on constrained hardware</li>
+    </ul>
+  </section>
+
+  <section class="exercise">
+    <h2>Practice Exercise</h2>
+    <p>Use the Rendering panel to analyze this page and answer the following questions:</p>
+    <ol>
+      <li>Which elements on this page are being promoted to their own compositing layer?</li>
+      <li>What happens to the FPS when you run the animation while throttling CPU?</li>
+      <li>Which elements cause layout shifts?</li>
+      <li>How does this page appear to users with Tritanopia?</li>
+    </ol>
+    <p><em>Tip: Take screenshots or notes of what you observe to better understand the rendering behavior.</em></p>
+  </section>
 </body>
+
+</html>
