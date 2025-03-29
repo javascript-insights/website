@@ -1,0 +1,342 @@
+:root {
+    --primary-color: #4285f4;
+    --secondary-color: #34a853;
+    --accent-color: #ea4335;
+    --background-color: #f8f9fa;
+    --text-color: #202124;
+    --border-color: #dadce0;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tips-container {
+    background-color: #e8f0fe;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 0 4px 4px 0;
+}
+
+.demo-section {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.demo-box {
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.instructions {
+    background-color: #fafafa;
+    padding: 15px;
+    border-left: 3px solid var(--secondary-color);
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+/* Paint flashing demo */
+.paint-demo {
+    background-color: #bbdefb;
+}
+
+.paint-demo.active {
+    background-color: #ffccbc;
+}
+
+/* Layout shift demo */
+.layout-demo {
+    height: 50px;
+    transition: height 0.5s ease;
+}
+
+.layout-demo.expanded {
+    height: 150px;
+}
+
+/* Animation demo */
+.animation-demo {
+    position: relative;
+    overflow: hidden;
+}
+
+.animation-demo.animated {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #bbdefb;
+    }
+
+    50% {
+        background-color: #90caf9;
+    }
+
+    100% {
+        background-color: #bbdefb;
+    }
+}
+
+/* Layer borders demo */
+.layer-demo {
+    transform: translateZ(0);
+    background-color: #c8e6c9;
+}
+
+/* Scrolling demo */
+.scroll-container {
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin: 15px 0;
+}
+
+.scroll-content {
+    padding: 15px;
+    min-height: 500px;
+}
+
+.sticky-elem {
+    position: sticky;
+    top: 0;
+    background-color: #ffecb3;
+    padding: 10px;
+    z-index: 10;
+}
+
+/* Media type demo */
+.media-demo {
+    background-color: #e1bee7;
+    padding: 15px;
+}
+
+@media print {
+    .media-demo {
+        background-color: transparent;
+        color: black;
+        border: 1px solid black;
+    }
+}
+
+/* Dark mode demo */
+.dark-mode-demo {
+    background-color: white;
+    color: black;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dark-mode-demo {
+        background-color: #333;
+        color: white;
+    }
+}
+
+/* Reduced motion demo */
+.motion-demo {
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.moving-element {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #ff9800;
+    border-radius: 50%;
+    animation: move 3s infinite alternate;
+}
+
+@keyframes move {
+    0% {
+        left: 0;
+        top: 0;
+    }
+
+    100% {
+        left: calc(100% - 50px);
+        top: calc(100% - 50px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .moving-element {
+        animation: none;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Color palette for vision deficiencies */
+.color-palette {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.color-palette div {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+/* Font demo */
+.font-demo {
+    margin: 15px 0;
+}
+
+.custom-font {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+}
+
+.system-font {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+}
+
+/* Accessibility features */
+.contrast-demo {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f5f5f5;
+}
+
+.low-contrast {
+    color: #aaaaaa;
+}
+
+.high-contrast {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* FPS meter style for overlay */
+.fps-meter {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-family: monospace;
+    z-index: 9999;
+    display: none;
+}
+
+/* Slow element highlighting */
+.slow-element {
+    background-color: #ffcdd2;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.slow-element.active {
+    animation: expensive-animation 0.5s infinite;
+}
+
+@keyframes expensive-animation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Flexbox and grid highlighting */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.grid-item {
+    background-color: #b3e5fc;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.flex-item {
+    background-color: #dcedc8;
+    padding: 20px;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* Container queries demo */
+.container-demo {
+    container-type: inline-size;
+    resize: horizontal;
+    overflow: auto;
+    width: 300px;
+    border: 1px dashed #999;
+    padding: 10px;
+    margin: 15px 0;
+}
+
+@container (min-width: 400px) {
+    .container-content {
+        display: flex;
+        gap: 10px;
+    }
+}
+
+.container-content>div {
+    background-color: #e1f5fe;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+kbd {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    color: #333;
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}

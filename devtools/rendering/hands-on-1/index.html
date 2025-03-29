@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>Chrome DevTools Rendering Panel - JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Rendering Hands-On 1</h1>
+  <h1>Chrome DevTools Rendering Panel</h1>
   <nav class="breadcrumb">
     <a href="../../../index.html">JavaScript Insights</a>
     <a href="../../index.html">DevTools</a>
@@ -23,65 +23,291 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>Rendering Tool Hands-On</h1>
-  <p>Welcome to the hands-on practice website for the Rendering tool. Follow the instructions below to practice using
-    each feature of the Rendering tool.</p>
+  <main class="content">
+    <h2>Chrome DevTools Rendering Panel: Interactive Practice</h2>
+    <p>This interactive workshop helps you practice using Chrome DevTools' Rendering panel, which is essential for
+      diagnosing and fixing visual and performance problems. Each section demonstrates a specific feature.</p>
 
-  <div class="tips">
-    <h3>Practice Tips:</h3>
-    <ul>
-      <li>Open Chrome DevTools (F12) and go to the three-dot menu → More tools → Rendering</li>
-      <li>Try enabling different rendering options one at a time to observe their effects</li>
-      <li>Pay attention to performance metrics when interacting with the elements</li>
-      <li>Notice how different CSS properties trigger different types of rendering updates</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Paint Flashing</h2>
-    <p>Enable paint flashing in DevTools and click the box below to see the areas being repainted.</p>
-    <div style="width: 100px; height: 100px; background-color: red;" onclick="this.style.backgroundColor = 'blue';">
+    <div class="tips-container">
+      <h3>Getting Started:</h3>
+      <ol>
+        <li>Open Chrome DevTools with <kbd>F12</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>
+          (<kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd> on Mac)</li>
+        <li>Navigate to <strong>More tools</strong> → <strong>Rendering</strong> from the three-dot menu in DevTools
+        </li>
+        <li>Try each feature below one at a time to observe its effect</li>
+        <li>Use the checkboxes and dropdown options in the Rendering panel to enable/disable features</li>
+      </ol>
     </div>
-  </div>
 
-  <div class="section">
-    <h2>Layout Shift Regions</h2>
-    <p>Enable layout shift regions in DevTools and click the box below to see the regions shifting during layout
-      changes.</p>
-    <div style="width: 100px; height: 100px; background-color: green;" onclick="this.style.width = '200px';"></div>
-  </div>
+    <section class="demo-section">
+      <h3>1. Paint Flashing</h3>
+      <p>Highlights areas of the page that need to be repainted when changes occur. Repainting can be expensive for
+        performance.</p>
+      <div class="demo-box paint-demo">
+        Click me to change color and observe paint flashing
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Paint flashing</code> in the Rendering panel, then click the box to see
+        which areas get repainted. Green highlights indicate areas being repainted.
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>Layer Borders</h2>
-    <p>Enable layer borders in DevTools to visualize layer boundaries around the box below.</p>
-    <div style="width: 100px; height: 100px; background-color: yellow; transform: translateZ(0);"></div>
-  </div>
+    <section class="demo-section">
+      <h3>2. Layout Shift Regions</h3>
+      <p>Highlights elements that shifted during layout changes, helping identify Cumulative Layout Shift (CLS) issues.
+        CLS is an important Core Web Vital that affects user experience and SEO.</p>
+      <button class="trigger-button">Toggle Layout Shift</button>
+      <div class="demo-box layout-demo">
+        This box will change size and cause layout shifts
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Layout Shift Regions</code>, then click the button to see highlighted
+        regions. Blue highlights show where elements have moved from, and orange shows where they moved to.
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>FPS Meter</h2>
-    <p>Enable the FPS meter in DevTools to monitor the rendering performance of the box below.</p>
-    <div style="width: 100px; height: 100px; background-color: purple;"></div>
-  </div>
+    <section class="demo-section">
+      <h3>3. Frame Rendering Stats</h3>
+      <p>Shows real-time FPS (frames per second) metrics during interactions. Aim for 60 FPS for smooth animations.</p>
+      <div id="animation-box" class="demo-box animation-demo">
+        Hover over me to trigger animation
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Frame Rendering Stats</code> and hover over the box to see performance
+        metrics. The overlay shows FPS, GPU memory usage, and frame timing data.
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>Scrolling Performance Issues</h2>
-    <p>Enable scrolling performance issues in DevTools and scroll the box below to see any performance issues
-      highlighted.</p>
-    <div style="width: 100px; height: 100px; background-color: orange; overflow: scroll;">
-      <div style="width: 200px; height: 200px; background-color: lightblue;"></div>
+    <section class="demo-section">
+      <h3>4. Layer Borders</h3>
+      <p>Visualizes compositing layers with colored borders to identify unnecessary layers, which can consume memory.
+      </p>
+      <div class="demo-box layer-demo">
+        I have transform: translateZ(0) which forces a new compositing layer
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Layer borders</code> to see this element's compositing layer. Orange
+        borders indicate layers that were created for specific reasons (transforms, opacity, etc.).
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>5. Scrolling Performance Issues</h3>
+      <p>Identifies elements that might cause performance issues when scrolling.</p>
+      <div class="scroll-container">
+        <div class="scroll-content">
+          <p>Scroll me to check for performance issues. This content has various CSS properties that might trigger
+            warnings.</p>
+          <div class="sticky-elem">I'm sticky!</div>
+          <p>More content to enable scrolling. Sticky elements and complex layouts can impact scrolling performance.</p>
+          <p>Even more content to allow scrolling...</p>
+          <p>The Rendering panel will highlight issues like touch and wheel event handlers that might block scrolling.
+          </p>
+          <p>It also identifies non-composited scrolling elements, which can be less performant.</p>
+          <p>Final content to allow more scrolling...</p>
+        </div>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Scrolling performance issues</code> and scroll the container. Elements
+        with potential issues will be highlighted with a warning explanation.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>6. CSS Media Type Emulation</h3>
+      <p>Test how your page looks with different media types without actually changing the output method.</p>
+      <div class="media-demo">
+        <p>This text changes style based on media type (print vs. screen)</p>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> In the Rendering panel, set <code>Emulate CSS media type</code> to "print" to see how
+        this section would appear when printed. This helps test print stylesheets without actually printing.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>7. Emulate CSS media feature prefers-color-scheme</h3>
+      <p>Test your dark mode implementation without changing system settings.</p>
+      <div class="dark-mode-demo">
+        <p>I respond to dark mode! My styling changes based on color scheme preference.</p>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Set <code>Emulate CSS media feature prefers-color-scheme</code> to "dark" or "light".
+        This allows testing color schemes without changing your operating system settings.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>8. Emulate CSS media feature prefers-reduced-motion</h3>
+      <p>Test how your animations appear for users who prefer reduced motion. This is an important accessibility
+        consideration.</p>
+      <div class="motion-demo">
+        <div class="moving-element">I animate!</div>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Set <code>Emulate CSS media feature prefers-reduced-motion</code> to "reduce". Notice
+        how the animation changes or stops to accommodate users who may experience motion sickness or distractions from
+        animations.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>9. Emulate vision deficiencies</h3>
+      <p>See how your page appears to users with different vision deficiencies to ensure accessibility.</p>
+      <div class="color-palette">
+        <div style="background-color: #F00;">Red</div>
+        <div style="background-color: #0F0;">Green</div>
+        <div style="background-color: #00F;">Blue</div>
+        <div style="background-color: #FF0;">Yellow</div>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Try different options under <code>Emulate vision deficiencies</code> like Protanopia
+        (red-blind), Deuteranopia (green-blind), Tritanopia (blue-blind), or Achromatopsia (complete color blindness).
+        This helps ensure your color choices are accessible to all users.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>10. Disable local fonts</h3>
+      <p>Test how your page looks when local fonts can't be used, helping identify font fallback issues.</p>
+      <div class="font-demo">
+        <p class="custom-font">This text uses Arial as the primary font</p>
+        <p class="system-font">This text uses system fonts</p>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Disable local fonts</code> to see how text appears with fallback fonts.
+        This helps test font stacks and ensure content remains readable if primary fonts aren't available.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>11. Emulate focused page</h3>
+      <p>Test how your page behaves when it doesn't have focus. Some animations or timers might pause when a page loses
+        focus.</p>
+      <div class="demo-box" id="focus-demo">
+        <p>This element might behave differently when the page doesn't have focus.</p>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Toggle <code>Emulate a focused page</code> off to simulate how the page behaves when
+        it's not the active tab. This helps test background behavior of web applications.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>12. Emulate CSS Container Queries</h3>
+      <p>Test responsive designs that use container queries. Container queries let elements adapt based on their parent
+        container's size rather than the viewport.</p>
+      <div class="container-demo">
+        <p><strong>Resize this container ↔️</strong> (drag the bottom-right corner)</p>
+        <div class="container-content">
+          <div>Item 1</div>
+          <div>Item 2</div>
+        </div>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Resize the container horizontally to see how the layout changes when it crosses the
+        400px threshold. In the Rendering panel, try the Container Queries debugging tools to see the containers and
+        container query breakpoints.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>13. Enable CSS Grid/Flexbox debugging</h3>
+      <p>Visualize CSS Grid and Flexbox layouts to better understand and debug complex layouts.</p>
+      <button id="toggle-grid-overlay">Show Grid Overlay Info</button>
+      <div class="grid-container">
+        <div class="grid-item">Grid Item 1</div>
+        <div class="grid-item">Grid Item 2</div>
+        <div class="grid-item">Grid Item 3</div>
+      </div>
+      <div class="flex-container">
+        <div class="flex-item">Flex Item 1</div>
+        <div class="flex-item">Flex Item 2</div>
+        <div class="flex-item">Flex Item 3</div>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> In DevTools Elements panel, select a grid or flex container and look for the badge that
+        says "grid" or "flex". Click it to see the layout overlay. From the Rendering panel, you can also enable
+        persistent overlay features.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>14. Contrast issues</h3>
+      <p>Identify elements with poor color contrast that could cause accessibility issues.</p>
+      <div class="contrast-demo">
+        <p class="low-contrast">This text has low contrast and may be difficult to read for some users.</p>
+        <p class="high-contrast">This text has good contrast and is readable.</p>
+        <button id="toggle-contrast">Toggle Contrast</button>
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Highlight contrast issues</code> in the Rendering panel to see elements
+        flagged for poor color contrast. This helps identify accessibility issues for users with visual impairments.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>15. Expensive Paint Operations</h3>
+      <p>Identify and debug operations that cause expensive repaints, which can slow down your page.</p>
+      <button id="expensive-paint-button">Trigger Expensive Paint</button>
+      <div class="expensive-paint-demo"
+        style="height: 150px; position: relative; border: 1px solid #ddd; overflow: hidden;">
+        Click the button to generate many elements at once
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Enable <code>Paint flashing</code> AND <code>Frame Rendering Stats</code>, then click
+        the button. Watch for frame rate drops and large green overlay areas indicating heavy paint operations.
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h3>16. Slow DOM operations</h3>
+      <p>Identify elements that trigger expensive DOM operations and layout thrashing.</p>
+      <div class="slow-element">
+        Click me to trigger expensive layout calculations (layout thrashing)
+      </div>
+      <div class="instructions">
+        <strong>Try it:</strong> Open the Performance panel alongside the Rendering panel. Start recording, click the
+        element above, and stop recording. Look for long tasks in the performance timeline related to layout
+        recalculation.
+      </div>
+    </section>
+
+    <div class="tips-container">
+      <h3>Pro Tips for DevTools Rendering Panel:</h3>
+      <ul>
+        <li><strong>Combine tools:</strong> Use Paint flashing with FPS meter to identify expensive repaints that hurt
+          performance</li>
+        <li><strong>Core Web Vitals:</strong> Use Layout Shift Regions to identify and fix CLS issues that affect your
+          site's SEO</li>
+        <li><strong>Performance auditing:</strong> Use the FPS meter during scrolling and animations to ensure smooth
+          60fps experiences</li>
+        <li><strong>Accessibility:</strong> Always test with vision deficiencies and reduced motion settings to ensure
+          your site is usable by everyone</li>
+        <li><strong>Memory usage:</strong> Check layer borders to identify unnecessary compositing layers that might
+          consume excess GPU memory</li>
+        <li><strong>Mobile testing:</strong> Combine the Rendering panel with Device Mode to debug mobile-specific
+          rendering issues</li>
+        <li><strong>Print debugging:</strong> Use media type emulation to test print stylesheets without wasting paper
+        </li>
+        <li><strong>Animation issues:</strong> Look for "non-composited animations" warnings to identify animations that
+          don't use the GPU</li>
+      </ul>
     </div>
-  </div>
 
-  <div class="section">
-    <h2>Emulate CSS Media</h2>
-    <p>Use DevTools to emulate different CSS media types and features on the box below.</p>
-    <div style="width: 100px; height: 100px; background-color: pink;"></div>
-  </div>
-
-  <div class="section">
-    <h2>Dark Mode</h2>
-    <p>Toggle dark mode in DevTools to see how the box below looks with a dark theme.</p>
-    <div style="width: 100px; height: 100px; background-color: black; color: white;">Dark Mode</div>
-  </div>
-
+    <div class="tips-container">
+      <h3>Additional Resources:</h3>
+      <ul>
+        <li><a href="https://developer.chrome.com/docs/devtools/rendering/" target="_blank">Chrome DevTools Rendering
+            Documentation</a></li>
+        <li><a href="https://web.dev/vitals/" target="_blank">Web Vitals - Core metrics for a healthy site</a></li>
+        <li><a href="https://web.dev/debug-layout-shifts/" target="_blank">Debug layout shifts</a></li>
+        <li><a href="https://web.dev/prefers-reduced-motion/" target="_blank">Prefers-reduced-motion: Taking a
+            no-motion-first approach</a></li>
+      </ul>
+    </div>
+  </main>
 </body>
+
+</html>
