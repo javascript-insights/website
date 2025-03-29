@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Application Theoretical 4 🧪</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Application</a>
+    <a href="./index.html">Theoretical 4</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <main class="container">
+    <h2>Browser Cache & Application Storage 💾</h2>
+
+    <section>
+      <h3>Cache Storage Demo 🗃️</h3>
+      <p>The Application panel in DevTools allows you to inspect and manage various storage types, including Cache
+        Storage.</p>
+
+      <div class="demo-container">
+        <h4>Cache Operations:</h4>
+        <button id="populateCache">Add to Cache ➕</button>
+        <button id="matchCache">Fetch from Cache 🔍</button>
+        <button id="updateCache">Update Cache 🔄</button>
+        <button id="deleteFromCache">Delete Item ❌</button>
+        <button id="clearCache">Clear All Cache 🧹</button>
+        <div id="cacheStatus">Cache status: not initialized</div>
+        <div id="cacheResult"></div>
+      </div>
+
+      <div class="instructions">
+        <h4>How to View Cache Storage: 👀</h4>
+        <ol>
+          <li>Open DevTools (F12 or Right-click → Inspect) 🛠️</li>
+          <li>Navigate to the "Application" tab 📱</li>
+          <li>In the left sidebar, expand "Cache" under "Storage" 📂</li>
+          <li>Click on "Cache Storage" to see all caches 🗄️</li>
+          <li>Click on specific cache names to view their contents 📋</li>
+        </ol>
+
+        <h4>How to Verify Network Caching: ✅</h4>
+        <ol>
+          <li>Open DevTools (F12) and go to the "Network" tab 🌐</li>
+          <li>Click "Add to Cache" button to cache resources ➕</li>
+          <li>Click "Fetch from Cache" to load from cache 🔍</li>
+          <li>Look for resources in the Network panel with "from disk cache" or "from memory cache" status 💽</li>
+          <li>Note how subsequent requests are served from cache without network activity ⚡</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <h3>Cache API Features 🚀</h3>
+      <p>The Cache API allows for storing network requests and responses for offline use or performance benefits:</p>
+      <ul>
+        <li><strong>Add (put/add):</strong> Store responses in the cache ➕</li>
+        <li><strong>Match:</strong> Retrieve cached responses 🔍</li>
+        <li><strong>Update:</strong> Replace existing cached responses 🔄</li>
+        <li><strong>Delete:</strong> Remove items from cache ❌</li>
+        <li><strong>Keys:</strong> List all cached URLs 🔑</li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>
