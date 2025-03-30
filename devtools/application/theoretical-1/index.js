@@ -199,6 +199,7 @@ async function cacheResource() {
     const cache = await caches.open('demo-cache-theoretical-1');
     //await cache.add('/static/favicon.png');
     await cache.add('./getstarted.json');
+    await cache.add('./styles.css');
     alert('Resource cached successfully');
   } else {
     alert('Cache Storage not supported');
