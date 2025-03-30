@@ -1,10 +1,10 @@
 window.addEventListener("DOMContentLoaded", function foo() {
 
-  // document.getElementById('fetchData').addEventListener('click', fetchData);
-  // document.getElementById('postData').addEventListener('click', postData);
-  // document.getElementById('fetchError').addEventListener('click', fetchError);
-  // document.getElementById('postError').addEventListener('click', postError);
-  // document.getElementById('fetchDataUrl').addEventListener('click', fetchDataUrl);
+  document.getElementById('fetchData').addEventListener('click', fetchData);
+  document.getElementById('postData').addEventListener('click', postData);
+  document.getElementById('fetchError').addEventListener('click', fetchError);
+  document.getElementById('postError').addEventListener('click', postError);
+  document.getElementById('fetchDataUrl').addEventListener('click', fetchDataUrl);
 
   document.getElementById('swFetchData').addEventListener('click', swFetchData);
 
