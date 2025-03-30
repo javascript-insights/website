@@ -73,4 +73,24 @@ window.addEventListener("load", function foo() {
       .catch(error => console.error('Error fetching data URL:', error));
   }
 
+  // CORS Example
+  function fetchData(url, method = 'GET') {
+
+    fetch(url, {
+      method: method
+    })
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.text();
+      })
+      .then(data => {
+      })
+      .catch(error => {
+      });
+  }
+
+  const domain = 'https://javascript-insights-server-azf4hfbxetbnd4gy.israelcentral-01.azurewebsites.net';
+
+  document.getElementById('fetchcors').addEventListener('click', () => fetchData(domain + '/cors/specific-origin'));
+
 });
