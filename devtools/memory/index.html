@@ -62,11 +62,12 @@
 
     <p>These two columns tell you different things about how your page is using memory:</p>
     <ul>
-      <li>📊 The Memory footprint column represents OS memory. DOM nodes are stored in OS memory. If this value is
+      <li>📊 This column represents the amount of memory that the operating system has reserved for a specific process,
+        including shared and private memory. DOM nodes are stored in OS memory. If this value is
         increasing, DOM nodes are getting created.</li>
       <li>💾 The JavaScript Memory column represents the JS heap. This column contains two values. The value you're
         interested in is the live number (the number in parentheses). The live number represents how much memory the
-        reachable objects on your page are using.</li>
+        reachable objects on your page are using. The other value is the total allocated memory for this process.</li>
     </ul>
 
     <h2>Where are DOM Elements Stored? 🏠</h2>
@@ -84,6 +85,55 @@
       this process is separate from the garbage collection of JavaScript objects. Memory leaks can occur if JavaScript
       code retains references to DOM elements that have been removed from the document, preventing them from being
       garbage collected by the browser.</p>
+
+
+    <h2>Memory Profiling Types in DevTools 📊</h2>
+    <p>When you open the Memory panel in Chrome DevTools, you'll see three different types of memory profiles you can
+      take:</p>
+
+    <h3>1. Heap Snapshot 📸</h3>
+    <p>A Heap Snapshot provides a detailed view of your page's memory distribution at a specific point in time.</p>
+    <ul>
+      <li><strong>What it shows:</strong> All JavaScript objects and DOM nodes that are being held in memory</li>
+      <li><strong>Best for:</strong> Identifying memory leaks, finding detached DOM elements</li>
+      <li><strong>How to use it:</strong> Take snapshots before and after suspected memory-leaking operations, then
+        compare them</li>
+    </ul>
+
+    <h3>2. Allocation Instrumentation on Timeline (Allocation Sampling) ⏱️</h3>
+    <p>This profile records memory allocations over time while performing actions on your page.</p>
+    <ul>
+      <li><strong>What it shows:</strong> Where, when, and how memory is being allocated</li>
+      <li><strong>Best for:</strong> Understanding memory allocation patterns during specific user interactions</li>
+      <li><strong>How to use it:</strong> Start recording, perform actions on your page, then stop recording to analyze
+      </li>
+    </ul>
+
+    <h3>3. Allocation Sampling 🧪</h3>
+    <p>This lightweight profiling method samples the JavaScript heap at regular intervals.</p>
+    <ul>
+      <li><strong>What it shows:</strong> Where memory allocation is happening in your JavaScript code</li>
+      <li><strong>Best for:</strong> Identifying which functions are allocating the most memory</li>
+      <li><strong>How to use it:</strong> Record while performing an action, then examine the resulting call tree</li>
+    </ul>
+
+    <h3>4. Detached elements </h3>
+    <p>Detached elements are DOM nodes that are no longer attached to the document but still occupy memory. They can
+      lead to memory leaks if references to them are retained in JavaScript.</p>
+    <ul>
+      <li><strong>What it shows:</strong> DOM nodes that are not part of the document but still exist in memory</li>
+      <li><strong>Best for:</strong> Identifying potential memory leaks caused by detached elements</li>
+      <li><strong>How to use it:</strong> Use the Heap Snapshot to find and analyze detached elements</li>
+    </ul>
+
+    <h3>When to Use Each Type 🤔</h3>
+    <p>Choose your profiling method based on what you're trying to diagnose:</p>
+    <ul>
+      <li><strong>For finding memory leaks:</strong> Heap Snapshots are your best friend</li>
+      <li><strong>For optimizing performance:</strong> Allocation Timeline helps identify costly operations</li>
+      <li><strong>For quick analysis:</strong> Allocation Sampling provides useful data with minimal performance impact
+      </li>
+    </ul>
 
     <h1>Memory Tool 🔍</h1>
 

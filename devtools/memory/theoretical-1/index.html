@@ -48,6 +48,10 @@
       <span>Creates many duplicate string values</span>
     </p>
     <p>
+      <button class="button" id="duplicateStringsButton2">🐏🐑 Clone String Army 2</button>
+      <span>Creates many duplicate string values using String object</span>
+    </p>
+    <p>
       <button class="button" id="shallowSizeButton">📏 How Big?</button>
       <span>Creates objects to show shallow memory size</span>
     </p>
@@ -60,35 +64,82 @@
       <span>Creates a long chain of linked objects</span>
     </p>
     <p>
-      <button class="button" id="createObjectsBtn">🎭 Create Objects & Thanos Snap Half</button>
+      <button class="button" id="createObjectsBtn" disabled>🎭 Create Objects & Thanos Snap Half</button>
       <span>Creates objects then deletes half</span>
     </p>
 
-    <div class="instructions">
-      <h2>🎮 How to Play with Your Browser's Memory</h2>
+
+    <div class="explanation">
+      <h2>Understanding the Memory Tool</h2>
+      <p>This tool helps you explore how JavaScript manages memory in your browser. It's designed to demonstrate various
+        memory concepts for learning purposes.</p>
+
+      <h3>Key Memory Concepts:</h3>
+      <ul>
+        <li><strong>Memory Leaks</strong>: When objects remain in memory even though they're no longer needed, causing
+          memory usage to grow over time.</li>
+        <li><strong>Shallow Size</strong>: The memory consumed by the object itself, not including what it references.
+        </li>
+        <li><strong>Retained Size</strong>: The total memory that would be freed if the object was deleted (including
+          all objects it keeps alive).</li>
+        <li><strong>Detached DOM</strong>: Elements created but not attached to the document tree, which can leak if
+          references are kept.</li>
+      </ul>
+
+      <h3>Retainers:</h3>
+      <p>The "Retainers" tab in the Memory DevTools shows you which other objects in memory are holding references to
+        the currently selected object, preventing it from being garbage collected. Understanding retainer paths helps
+        you identify:</p>
+      <ul>
+        <li><strong>Reference Chains:</strong> How objects are connected to each other</li>
+        <li><strong>GC Roots:</strong> The primary objects that keep others alive</li>
+        <li><strong>Memory Leaks:</strong> Unexpected references that prevent cleanup</li>
+        <li><strong>Object Lifetimes:</strong> Why certain objects persist longer than expected</li>
+      </ul>
+
+      <h3>How to Use the Memory Panel:</h3>
       <ol>
-        <li>📱 Open this fun page (you're already here, smarty pants!)</li>
-        <li>🔍 Find DevTools (F12 or right-click like a pro)</li>
-        <li>🎯 Find the "Memory" tab (it's the scary one)</li>
-        <li>💣 Click buttons randomly and watch chaos unfold</li>
-        <li>📸 Take memory selfies (they're called snapshots)</li>
-        <li>🧹 Hit "Clear Memory" when your browser starts crying</li>
-        <li>📊 Look at pretty graphs and pretend you understand them</li>
-        <li>🕵️ Play detective with memory leaks</li>
-        <li>👻 Make some ghost elements (spooky!)</li>
-        <li>🔍 Hunt those ghostly elements down</li>
-        <li>📝 Create string clones (they're lonely)</li>
-        <li>🎭 Find those duplicate strings (they're hiding)</li>
-        <li>📦 Check how shallow your objects are</li>
-        <li>⚖️ Weigh your objects (no fat-shaming)</li>
-        <li>🗺️ Measure distance (like space, but for memory)</li>
-        <li>⏱️ Watch memory grow like your coffee addiction</li>
-        <li>🔄 Compare snapshots (spot the differences!)</li>
-        <li>🌳 View the family tree of objects</li>
-        <li>🏃 Chase those runaway DOM nodes</li>
-        <li>🎭 Find what DevTools is hoarding (it's a secret)</li>
+        <li>Take a snapshot before performing an action</li>
+        <li>Perform one of the memory actions using the buttons</li>
+        <li>Take another snapshot</li>
+        <li>Use "Comparison" view to see what changed between snapshots</li>
+        <li>Explore "Allocated objects" to see what was created</li>
       </ol>
-      <p>⚠️ Warning: No browsers were harmed in the making of this demo... much.</p>
+
+      <h3>Memory Panel Views:</h3>
+      <ul>
+        <li><strong>Containment (Heap Contents):</strong> This view shows how objects are referenced and retained in
+          memory, helping you understand object relationships and potential memory leaks.</li>
+        <li><strong>Comparison:</strong> This view allows you to compare different heap snapshots to identify changes in
+          memory usage.</li>
+        <li><strong>Statistics:</strong> This view provides a circular chart showing how much memory each object type
+          takes up.</li>
+      </ul>
+
+      <div class="instructions">
+        <h2>📋 Step-by-Step Memory Investigation Guide</h2>
+        <ol>
+          <li>Open Chrome DevTools by pressing F12 or right-clicking and selecting "Inspect"</li>
+          <li>Navigate to the "Memory" tab in DevTools</li>
+          <li>Take an initial snapshot by clicking "Take heap snapshot"</li>
+          <li>Press one of the buttons above to perform a memory operation</li>
+          <li>Take another snapshot after the operation completes</li>
+          <li>Select "Comparison" view in the dropdown to see what changed</li>
+          <li>Look for new objects in the "# New" column</li>
+          <li>Explore object relationships by clicking on items</li>
+          <li>Use the search box to find specific objects</li>
+          <li>Check "Shallow size" and "Retained size" values to understand memory impact</li>
+          <li>Look for detached DOM nodes by searching for "Detached"</li>
+          <li>Use the "Clear Memory" button when finished with an experiment</li>
+          <li>Try different operations and observe their unique memory patterns</li>
+          <li>Compare multiple snapshots to track memory growth over time</li>
+          <li>Identify memory leaks by finding objects that persist unexpectedly</li>
+        </ol>
+        <p class="tip">Tip: Pay attention to the relationship between objects by exploring the retainer chains.</p>
+      </div>
+
+      <p class="note">Note: Take snapshots between each button press to clearly observe memory changes.</p>
     </div>
+
   </div>
 </body>
