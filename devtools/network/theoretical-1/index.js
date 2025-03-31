@@ -74,7 +74,7 @@ window.addEventListener("load", function foo() {
   }
 
   // CORS Example
-  function fetchData(url, method = 'GET') {
+  function fetchDataCors(url, method = 'GET') {
 
     fetch(url, {
       method: method
@@ -84,13 +84,15 @@ window.addEventListener("load", function foo() {
         return response.text();
       })
       .then(data => {
+        console.log(data);
       })
       .catch(error => {
+        console.error('Error in fetchDataCors:', error);
       });
   }
 
   const domain = 'https://javascript-insights-server-azf4hfbxetbnd4gy.israelcentral-01.azurewebsites.net';
 
-  document.getElementById('fetchcors').addEventListener('click', () => fetchData(domain + '/cors/specific-origin'));
+  document.getElementById('fetchcors').addEventListener('click', () => fetchDataCors(domain + '/cors/specific-origin'));
 
 });
