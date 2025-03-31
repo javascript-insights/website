@@ -199,7 +199,6 @@ async function cacheResource() {
     const cache = await caches.open('demo-cache-theoretical-1');
     //await cache.add('/static/favicon.png');
     await cache.add('./getstarted.json');
-    await cache.add('./styles.css');
     alert('Resource cached successfully');
   } else {
     alert('Cache Storage not supported');
@@ -207,7 +206,23 @@ async function cacheResource() {
 }
 
 function gsbutton() {
-  fetch('./getstarted.json');
+  // Try to get the resource from cache first
+  caches.match('./getstarted.json')
+    .then(response => {
+      if (response) {
+        // If found in cache, return the cached response
+        console.log('Found in cache:', response);
+        return response;
+      }
+      // If not in cache, fetch from network
+      console.log('Not found in cache, fetching from network');
+      return fetch('./getstarted.json');
+    })
+    .catch(error => {
+      console.error('Error retrieving from cache:', error);
+      // Fallback to network request if cache access fails
+      return fetch('./getstarted.json');
+    });
 };
 
 
@@ -218,15 +233,38 @@ function fetchDataDemo() {
 
   statusEl.textContent = 'Fetching data...';
 
-  fetch(url)
-    .then(response => response.json())
+  // First try to get the data from cache
+  caches.match(url)
+    .then(cachedResponse => {
+      if (cachedResponse) {
+        // If we found data in the cache, use it
+        statusEl.textContent = 'Data retrieved from cache!';
+        return cachedResponse.json();
+      }
+      // If not in cache, fetch from network
+      statusEl.textContent = 'Cache miss, fetching from network...';
+      throw new Error('Cache miss');
+    })
     .then(data => {
-      statusEl.textContent = 'Data fetched successfully!';
       resultEl.style.display = 'block';
       resultEl.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      return; // Skip the network fetch below
     })
     .catch(error => {
-      statusEl.textContent = 'Error fetching data: ' + error.message;
+      if (error.message !== 'Cache miss') {
+        statusEl.textContent = 'Error accessing cache: ' + error.message;
+      }
+      // Continuing with the network fetch
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          statusEl.textContent = 'Data fetched successfully!';
+          resultEl.style.display = 'block';
+          resultEl.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        })
+        .catch(error => {
+          statusEl.textContent = 'Error fetching data: ' + error.message;
+        });
     });
 }
 
