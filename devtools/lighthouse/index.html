@@ -24,7 +24,7 @@
     <a href="./hands-on-3/index.html">Hands-On 3</a>
     <a href="./hands-on-4/index.html">Hands-On 4</a>
   </div>
-  
+
   <p>This website is designed to help you understand and utilize the capabilities of the Lighthouse DevTool. Lighthouse
     is an open-source, automated tool for improving the quality of web pages. You can use it to audit performance,
     accessibility, progressive web apps, SEO, and more.</p>
@@ -32,83 +32,182 @@
     your web development skills. Each section will provide theoretical insights and hands-on exercises to ensure you
     gain practical experience.</p>
 
-    <h2>User Flows in Lighthouse</h2>
-    <p>Historically, Lighthouse has analyzed the cold pageload of a page. Starting in 2022 (Lighthouse v10), it can analyze and report on the entire page lifecycle via "user flows".</p>
-    <p>You might be interested in flows if…</p>
-    <ul>
-      <li>… you want to run Lighthouse on your whole webapp, not just the landing page.</li>
-      <li>… you want to know if all parts of the web experience are accessible (e.g. a checkout process).</li>
-      <li>… you want to know the Cumulative Layout Shift of my SPA page transition</li>
-    </ul>
-    <p>In these cases, you want Lighthouse on a flow, not just a page load.</p>
+  <h2>User Flows in Lighthouse</h2>
+  <p>Historically, Lighthouse has analyzed the cold pageload of a page. Starting in 2022 (Lighthouse v10), it can
+    analyze and report on the entire page lifecycle via "user flows".</p>
+  <p>You might be interested in flows if…</p>
+  <ul>
+    <li>… you want to run Lighthouse on your whole webapp, not just the landing page.</li>
+    <li>… you want to know if all parts of the web experience are accessible (e.g. a checkout process).</li>
+    <li>… you want to know the Cumulative Layout Shift of my SPA page transition</li>
+  </ul>
+  <p>In these cases, you want Lighthouse on a flow, not just a page load.</p>
 
-    <h3>The three modes: Navigation, Timespan, Snapshot</h3>
-    <p>Lighthouse can now run in three modes: navigations, timespans, and snapshots. Each mode has its own unique use cases, benefits, and limitations. Later, you'll create a flow by combining these three core report types.</p>
-    <ul>
-      <li><strong>Navigation mode</strong> analyzes a single page load. It should feel familiar as all Lighthouse runs prior to v9.6.0 were essentially in this mode. Even in v9.6.0 and onwards, it remains the default.</li>
-      <li><strong>Timespan mode</strong> analyzes an arbitrary period of time, typically containing user interactions.</li>
-      <li><strong>Snapshot mode</strong> analyzes the page in a particular state.</li>
-    </ul>
+  <h3>The three modes: Navigation, Timespan, Snapshot</h3>
+  <p>Lighthouse can now run in three modes: navigations, timespans, and snapshots. Each mode has its own unique use
+    cases, benefits, and limitations. Later, you'll create a flow by combining these three core report types.</p>
+  <ul>
+    <li><strong>Navigation mode</strong> analyzes a single page load. It should feel familiar as all Lighthouse runs
+      prior to v9.6.0 were essentially in this mode. Even in v9.6.0 and onwards, it remains the default.</li>
+    <li><strong>Timespan mode</strong> analyzes an arbitrary period of time, typically containing user interactions.
+    </li>
+    <li><strong>Snapshot mode</strong> analyzes the page in a particular state.</li>
+  </ul>
 
-    <table>
-      <thead></thead>
+  <table class="lighthouse-table">
+    <thead>
       <tr>
         <th>Mode</th>
         <th>Use Cases</th>
         <th>Limitations</th>
       </tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
       <tr>
         <td>Navigation</td>
         <td>
-        <ul>
-          <li>✅ Obtain a Lighthouse Performance score and all performance metrics.</li>
-          <li>✅ Assess Progressive Web App capabilities.</li>
-          <li>✅ Analyze accessibility immediately after page load.</li>
-        </ul>
+          <ul>
+            <li>✅ Obtain a Lighthouse Performance score and all performance metrics.</li>
+            <li>✅ Assess Progressive Web App capabilities.</li>
+            <li>✅ Analyze accessibility immediately after page load.</li>
+          </ul>
         </td>
         <td>
-        <ul>
-          <li>🤔 Cannot analyze form submissions or single page app transitions.</li>
-          <li>🤔 Cannot analyze content that isn't available immediately on page load.</li>
-        </ul>
+          <ul>
+            <li>🤔 Cannot analyze form submissions or single page app transitions.</li>
+            <li>🤔 Cannot analyze content that isn't available immediately on page load.</li>
+          </ul>
         </td>
       </tr>
       <tr>
         <td>Timespan</td>
         <td>
-        <ul>
-          <li>✅ Measure layout shifts and JavaScript execution time over a timerange including interactions.</li>
-          <li>✅ Discover performance opportunities to improve the experience for long-lived pages and SPAs.</li>
-        </ul>
+          <ul>
+            <li>✅ Measure layout shifts and JavaScript execution time over a timerange including interactions.</li>
+            <li>✅ Discover performance opportunities to improve the experience for long-lived pages and SPAs.</li>
+          </ul>
         </td>
         <td>
-        <ul>
-          <li>🤔 Does not provide an overall performance score.</li>
-          <li>🤔 Cannot analyze moment-based performance metrics (e.g. Largest Contentful Paint).</li>
-          <li>🤔 Cannot analyze state-of-the-page issues (e.g. no Accessibility category)</li>
-        </ul>
+          <ul>
+            <li>🤔 Does not provide an overall performance score.</li>
+            <li>🤔 Cannot analyze moment-based performance metrics (e.g. Largest Contentful Paint).</li>
+            <li>🤔 Cannot analyze state-of-the-page issues (e.g. no Accessibility category)</li>
+          </ul>
         </td>
       </tr>
       <tr>
         <td>Snapshot</td>
         <td>
-        <ul>
-          <li>✅ Analyze the page in its current state.</li>
-          <li>✅ Find accessibility issues deep within SPAs or complex forms.</li>
-          <li>✅ Evaluate best practices of menus and UI elements hidden behind interaction.</li>
-        </ul>
+          <ul>
+            <li>✅ Analyze the page in its current state.</li>
+            <li>✅ Find accessibility issues deep within SPAs or complex forms.</li>
+            <li>✅ Evaluate best practices of menus and UI elements hidden behind interaction.</li>
+          </ul>
         </td>
         <td>
-        <ul>
-          <li>🤔 Does not provide an overall performance score or metrics.</li>
-          <li>🤔 Cannot analyze any issues outside the current DOM (e.g. no network, main-thread, or performance analysis).</li>
-        </ul>
+          <ul>
+            <li>🤔 Does not provide an overall performance score or metrics.</li>
+            <li>🤔 Cannot analyze any issues outside the current DOM (e.g. no network, main-thread, or performance
+              analysis).</li>
+          </ul>
         </td>
       </tr>
-      </tbody>
-    </table>
+    </tbody>
+  </table>
+
+  <style>
+    .lighthouse-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .lighthouse-table th,
+    .lighthouse-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .lighthouse-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .lighthouse-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .lighthouse-table tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    .lighthouse-table ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+  </style>
+
+  <h1>Web Vitals</h1>
+  <p>Web Vitals is an initiative by Google to provide unified guidance for quality signals that are essential to
+    delivering a great user experience on the web.</p>
+  <p>The Web Vitals initiative aims to simplify the landscape, and help sites focus on the metrics that matter most, the
+    Core Web Vitals.</p>
+  <h2>Core Web Vitals</h2>
+  <p>Core Web Vitals are the subset of Web Vitals that apply to all web pages, should be measured by all site owners,
+    and will be surfaced across all devtools. Each of the Core Web Vitals represents a distinct facet of the user
+    experience, is measurable in the field, and reflects the real-world experience of a critical user-centric outcome.
+  </p>
+  <ul>
+    <li><strong>Largest Contentful Paint (LCP)</strong>: Measures loading performance. A good LCP should occur within
+      2.5 seconds of when the page starts loading.</li>
+    <li><strong>Interaction to Next Paint (INP)</strong>: Measures interactivity. A good INP should be 200 milliseconds
+      or less.</li>
+    <li><strong>Cumulative Layout Shift (CLS)</strong>: Measures visual stability. A good CLS should be 0.1 or less.
+    </li>
+    <li><strong>First Contentful Paint (FCP)</strong>: Measures loading performance. A good FCP should occur within 1
+      second of when the page starts loading.</li>
+    <li><strong>First Meaningful Paint (FMP)</strong>: Measures loading performance. A good FMP should occur within 1
+      second of when the page starts loading.</li>
+    <li><strong>Speed Index (SI)</strong>: Measures loading performance. A good SI should be 3.4 seconds or less.</li>
+    <li><strong>Time to Interactive (TTI)</strong>: Measures interactivity. A good TTI should be 5 seconds or less.</li>
+    <li><strong>First Paint (FP)</strong>: Measures loading performance. A good FP should occur within 1 second of when
+      the page starts loading.</li>
+    <li><strong>First Interactive (FI)</strong>: Measures interactivity. A good FI should be 5 seconds or less.</li>
+    <li><strong>Total Blocking Time</strong>: Measures the total amount of time that a user is blocked from interacting
+      with the page. A good TBT should be 300 milliseconds or less.</li>
+  </ul>
+  <p>To ensure you're hitting the recommended target for these metrics for most of your users, a good threshold to
+    measure is the 75th percentile of page loads, segmented across mobile and desktop devices.</p>
+
+  <div class="cwv-metrics">
+    <img src="static/lcp.svg" alt="Largest Contentful Paint threshold recommendations" width="250" height="220">
+    <img src="static/inp.svg" alt="Interaction to Next Paint threshold recommendations" width="250" height="220">
+    <img src="static/cls.svg" alt="Cumulative Layout Shift threshold recommendations" width="250" height="220">
+  </div>
+
+  <p><a href="https://web.dev/articles/vitals">Core Web Vitals</a></p>
+
+  <ul>
+    <li><a href="https://web.dev/articles/optimize-lcp">Optimize LCP</a></li>
+    <li><a href="https://web.dev/articles/optimize-inp">Optimize INP</a></li>
+    <li><a href="https://web.dev/articles/optimize-cls">Optimize CLS</a></li>
+  </ul>
+
+  <h2>View Timings</h2>
+  <p>On the Timings track, view important markers such as:</p>
+
+  <ul>
+    <li>First Paint (FP)</li>
+    <li>First Contentful Paint (FCP)</li>
+    <li>Largest Contentful Paint (LCP)</li>
+    <li>DOMContentLoaded Event (DCL)</li>
+    <li>Onload Event (L)</li>
+    <li>Your custom performance.mark() calls. An individual mark with tooltip is shown labelled
+      "Last JavaScript code".</li>
+    <li>Your custom performance.measure() calls. A yellow span is shown and labelled.</li>
+  </ul>
 </body>
 
 </html>
