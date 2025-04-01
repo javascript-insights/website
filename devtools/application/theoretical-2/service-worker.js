@@ -14,8 +14,8 @@
 const CACHE_NAME = 'service-worker-cache-theoretical-2';
 const urlsToCache = [
     //'./',
-    //'./index.html',
-    './styles.css',
+    './index.html',
+    //'./styles.css',
     //'./script.js',
     './index.js',
     //'./installation.js',
