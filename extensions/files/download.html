@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download JavaScript Insights Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4285f4;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .file-list {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .file-item {
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            background-color: #e8f0fe;
+            border-left: 4px solid #4285f4;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .download-btn {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        .download-btn:hover {
+            background-color: #3367d6;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript Insights Extension</h1>
+
+    <p>Download all the necessary files for the JavaScript Insights browser extension. This extension helps you analyze
+        and debug JavaScript on web pages.</p>
+
+    <div class="instructions">
+        <h2>Installation Instructions</h2>
+        <ol>
+            <li>Download all the extension files using the buttons below</li>
+            <li>Create a new folder on your computer to store these files</li>
+            <li>Move all downloaded files to this folder</li>
+            <li>In Chrome, go to <code>chrome://extensions</code></li>
+            <li>Enable "Developer mode" using the toggle in the top-right corner</li>
+            <li>Click "Load unpacked" and select your extension folder</li>
+            <li>The extension should now appear in your browser toolbar</li>
+        </ol>
+    </div>
+
+    <h2>Extension Files</h2>
+    <div class="file-list">
+        <div class="file-item">
+            <strong>manifest.json</strong> - Configuration file for the extension
+            <a href="manifest.json" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>icon.png</strong> - Extension icon
+            <a href="icon.png" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>popup.html</strong> - Extension popup interface
+            <a href="popup.html" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>popup.js</strong> - JavaScript for the popup
+            <a href="popup.js" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>background.js</strong> - Background service worker
+            <a href="background.js" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>content.js</strong> - Content script for web pages
+            <a href="content.js" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>devtools.html</strong> - DevTools integration page
+            <a href="devtools.html" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>devtools.js</strong> - JavaScript for DevTools integration
+            <a href="devtools.js" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>panel.html</strong> - DevTools panel interface
+            <a href="panel.html" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>panel-script.js</strong> - JavaScript for the DevTools panel
+            <a href="panel-script.js" download>Download</a>
+        </div>
+        <div class="file-item">
+            <strong>icon.png</strong> - Extension icon
+            <a href="icon.png" download>Download</a>
+        </div>
+    </div>
+
+    <button class="download-btn" id="download-all-btn">Download All Files as ZIP</button>
+
+    <div class="instructions">
+        <h2>Features</h2>
+        <ul>
+            <li><strong>Popup Interface</strong> - Quick analysis of scripts on the current page</li>
+            <li><strong>DevTools Panel</strong> - Detailed script analysis and debugging</li>
+            <li><strong>Content Script</strong> - Analyzes JavaScript usage on any web page</li>
+            <li><strong>Background Service</strong> - Maintains extension state and manages data</li>
+        </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+        document.getElementById('download-all-btn').addEventListener('click', async function () {
+            const zip = new JSZip();
+            const files = [
+                'manifest.json', 'icon.png', 'popup.html', 'popup.js',
+                'background.js', 'content.js', 'devtools.html', 'devtools.js',
+                'panel.html', 'panel-script.js'
+            ];
+
+            try {
+                // Fetch and add each file to the zip
+                for (const file of files) {
+                    const response = await fetch(file);
+                    const content = await (file.endsWith('.json') || file.endsWith('.js') || file.endsWith('.html') ?
+                        response.text() : response.blob());
+                    zip.file(file, content);
+                }
+
+                // Generate and download the zip file
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                saveAs(zipBlob, 'javascript-insights-extension.zip');
+            } catch (error) {
+                console.error('Error creating ZIP file:', error);
+                alert('There was an error creating the ZIP file. Please try downloading files individually.');
+            }
+        });
+    </script>
+</body>
+
+</html>
