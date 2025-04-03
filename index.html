@@ -5,90 +5,166 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JavaScript Insights</title>
+  <meta name="description"
+    content="Explore JavaScript development, Chrome DevTools, browser extensions, and coding puzzles. Interactive tutorials and hands-on learning for web developers." />
+  <meta name="keywords"
+    content="JavaScript, Chrome DevTools, Browser Extensions, Web Development, Coding Puzzles, JavaScript Tutorial" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://javascript-insights.com/" />
+  <meta property="og:title" content="JavaScript Insights - Learn JavaScript Development & DevTools" />
+  <meta property="og:description"
+    content="Explore JavaScript development, Chrome DevTools, browser extensions, and coding puzzles. Interactive tutorials and hands-on learning for web developers." />
+  <meta property="og:image" content="https://javascript-insights.com/static/favicon.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://javascript-insights.com/" />
+  <meta property="twitter:title" content="JavaScript Insights - Learn JavaScript Development & DevTools" />
+  <meta property="twitter:description"
+    content="Explore JavaScript development, Chrome DevTools, browser extensions, and coding puzzles. Interactive tutorials and hands-on learning for web developers." />
+  <meta property="twitter:image" content="https://javascript-insights.com/static/favicon.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://javascript-insights.com/" />
+
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
+
+  <!-- Schema.org markup -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "JavaScript Insights",
+      "url": "https://javascript-insights.com",
+      "description": "Interactive tutorials and hands-on learning for JavaScript development, Chrome DevTools, and browser extensions.",
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://javascript-insights.com/devtools/",
+          "https://javascript-insights.com/puzzles/",
+          "https://javascript-insights.com/extensions/"
+        ]
+      }
+    }
+  </script>
 </head>
 
 <body>
-  <h1>JavaScript Insights</h1>
-  <nav class="breadcrumb">
-    <a href="./index.html">JavaScript Insights</a>
-  </nav>
-  <div class="navbar">
+  <header>
+    <h1>JavaScript Insights</h1>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">JavaScript Insights</a>
+    </nav>
+  </header>
+  <style>
+    /* Homepage Styles */
+    .animated-icon {
+      display: inline-block;
+      animation: bounce 1s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animated-icon:hover {
+      animation: spin 0.5s infinite linear;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    h2 {
+      margin-left: 20px;
+    }
+
+    .content-image {
+      margin: 20px;
+      display: flex;
+      justify-content: left;
+    }
+
+    .content-image img {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* GitHub Link */
+    .github-link {
+      margin: 20px;
+      margin-left: 134px;
+      display: flex;
+      justify-content: left;
+    }
+
+    .github-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #24292e;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .github-link a:hover {
+      background: #2f363d;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+      color: #5f6368;
+      border-top: 1px solid #e8eaed;
+    }
+  </style>
+  <nav class="navbar" aria-label="Main navigation">
     <a href="./devtools/index.html">DevTools</a>
     <a href="./puzzles/index.html">Puzzles</a>
     <a href="./extensions/index.html">Browser Extensions</a>
     <a href="./about/index.html">About</a>
-  </div>
-  <main>
-    <h2 style="margin-left: 20px;">Welcome to the Fun Side of JavaScript!
+  </nav>
+  <main id="main-content" role="main">
+    <h2>Welcome to the Fun Side of JavaScript!
       <span class="animated-icon">🎪</span>
     </h2>
-    <style>
-      .animated-icon {
-        display: inline-block;
-        animation: bounce 1s infinite;
-        cursor: pointer;
-      }
-
-      @keyframes bounce {
-
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-
-      .animated-icon:hover {
-        animation: spin 0.5s infinite linear;
-      }
-
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-    <div style="margin: 20px; display: flex; justify-content: left;">
-      <img src="https://media.giphy.com/media/SvFocn0wNMx0iv2rYz/giphy.gif" alt="Funny coding gif"
-        style="max-width: 600px; width: 100%;" />
+    <div class="content-image">
+      <img src="https://media.giphy.com/media/SvFocn0wNMx0iv2rYz/giphy.gif"
+        alt="Animated illustration of coding concepts" loading="lazy" />
     </div>
-    <div class="github-link" style="margin: 20px; display: flex; justify-content: left;">
+    <div class="github-link">
       <a href="https://github.com/javascript-insights" target="_blank">
         <svg height="32" viewBox="0 0 16 16" width="32">
-          <path fill="currentColor"
+          <path fill="currentColor" role="img" aria-label="GitHub icon"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
           </path>
         </svg>
         View on GitHub
       </a>
     </div>
-    <style>
-      .github-link {
-        margin: 20px;
-        margin-left: 134px;
-      }
-
-      .github-link a {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 20px;
-        background: #24292e;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
-        transition: background 0.3s;
-      }
-
-      .github-link a:hover {
-        background: #2f363d;
-      }
-    </style>
+  </main>
+  <footer>
+    <p>&copy; 2025 JavaScript Insights. All rights reserved.</p>
+  </footer>
 </body>
 
 </html>
