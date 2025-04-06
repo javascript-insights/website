@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>CPU Performance Analysis | JavaScript Insights</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 4 - CPU</h1>
+  <h1>Performance Hands-On 4 - CPU Profiling</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -25,38 +25,127 @@
   </div>
 
   <div class="container">
-    <h1>Performance Tool Hands-On</h1>
-    <button onclick="cpuIntensiveTask()">Run CPU Intensive Task</button>
-    <button onclick="simpleTask()">Run Simple Task</button>
-    <button id="atgo" onclick="go()">Go</button>
-    <div id="result"></div>
+    <div class="introduction">
+      <h2>Understanding CPU Performance in the Browser</h2>
+      <p>The Performance panel in DevTools allows you to analyze what's happening when your JavaScript code executes,
+        helping you identify and fix performance bottlenecks that affect user experience.</p>
+      <p>In this hands-on exercise, you'll learn how to:</p>
+      <ul>
+        <li>Record and analyze CPU performance</li>
+        <li>Identify JavaScript execution patterns</li>
+        <li>Detect long-running tasks that might block the main thread</li>
+        <li>Understand the difference between efficient and inefficient code</li>
+      </ul>
+    </div>
+
+    <div class="demo-section">
+      <h2>Interactive Demos</h2>
+      <div class="demo-controls">
+        <div class="demo-group">
+          <h3>Basic CPU Tasks</h3>
+          <button onclick="cpuIntensiveTask()" class="primary-btn">Run CPU Intensive Task</button>
+          <button onclick="simpleTask()" class="secondary-btn">Run Simple Task</button>
+        </div>
+
+        <div class="demo-group">
+          <h3>Function Call Patterns</h3>
+          <button id="atgo" onclick="go()" class="primary-btn">Run Sequential Tasks</button>
+          <button onclick="runRecursive()" class="secondary-btn">Run Recursive Task</button>
+        </div>
+
+        <div class="demo-group">
+          <h3>UI Blocking Demonstration</h3>
+          <button onclick="animationTest()" class="primary-btn">Test Animation + CPU Load</button>
+          <button onclick="asyncVsSync()" class="secondary-btn">Compare Async vs Sync</button>
+        </div>
+      </div>
+
+      <div id="animation-area" class="animation-container">
+        <div id="moving-element" class="moving-element"></div>
+      </div>
+
+      <div id="result" class="result-display">Results will appear here</div>
+    </div>
+
     <div class="instructions">
-      <h2>Instructions:</h2>
+      <h2>How to Use the Performance Panel</h2>
       <ol>
-        <li>Open the browser DevTools (F12 or right-click and select "Inspect").</li>
-        <li>Go to the "Performance" tab.</li>
-        <li>Click on the "Record" button to start recording the performance.</li>
-        <li>Click the "Run CPU Intensive Task" button and observe the performance recording.</li>
-        <li>Stop the recording by clicking the "Stop" button.</li>
-        <li>Analyze the recorded performance data:
+        <li>Open DevTools by pressing <kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd> (Windows/Linux) or
+          <kbd>Cmd+Option+I</kbd> (Mac).</li>
+        <li>Navigate to the <strong>Performance</strong> tab.</li>
+        <li>Click the <strong>Record</strong> button (circle icon) to start profiling.</li>
+        <li>Click any of the demo buttons above to perform an action.</li>
+        <li>Click <strong>Stop</strong> to end the recording.</li>
+        <li>Analyze the results using the guidance below.</li>
+      </ol>
+
+      <h2>Reading the Performance Panel</h2>
+      <div class="panel-guide">
+        <h3>Main Sections:</h3>
+        <ul>
+          <li><strong>Overview:</strong> Shows CPU activity, frames per second, and network requests over time.</li>
+          <li><strong>Main Section:</strong> Displays flame chart of JavaScript execution, rendering, and painting.</li>
+          <li><strong>Call Tree:</strong> Shows which functions consumed the most CPU time (Bottom-Up view).</li>
+          <li><strong>Event Log:</strong> Chronological list of events that occurred during recording.</li>
+        </ul>
+
+        <h3>Key Patterns to Look For:</h3>
+        <ul>
+          <li><strong>Long yellow bars:</strong> JavaScript execution blocks that might cause jank.</li>
+          <li><strong>Red frames:</strong> Frames that missed the 60fps target (potential user experience issues).</li>
+          <li><strong>Deep call stacks:</strong> May indicate complex processing that could be optimized.</li>
+          <li><strong>Repeated patterns:</strong> Opportunities for caching or memoization.</li>
+        </ul>
+      </div>
+
+      <h2>Hands-On Tasks</h2>
+      <ol>
+        <li>Compare the flamecharts between the CPU Intensive Task and Simple Task:
           <ul>
-            <li>Identify the CPU usage spikes.</li>
-            <li>Examine the call stack to understand which functions are consuming the most CPU time.</li>
-            <li>Look for any potential performance bottlenecks.</li>
+            <li>What's the difference in execution time?</li>
+            <li>Can you identify which part of the code is causing the performance bottleneck?</li>
           </ul>
         </li>
-        <li>Repeat the process with the "Run Simple Task" button and compare the results.</li>
-        <li>Document your findings and insights.</li>
-      </ol>
-      <h2>Tasks:</h2>
-      <ol>
-        <li>Identify the difference in CPU usage between the CPU Intensive Task and the Simple Task.</li>
-        <li>Explain why the CPU Intensive Task consumes more resources.</li>
-        <li>Suggest optimizations for the CPU Intensive Task to improve performance.</li>
-        <li>Explore other tabs in DevTools (e.g., Network, Memory) to gather more insights about the page's performance.
+        <li>Examine the "Run Sequential Tasks" button performance:
+          <ul>
+            <li>Notice how functions a(), b(), and c() appear in the flamechart.</li>
+            <li>Consider how these could be optimized (hint: think about asynchronous patterns).</li>
+          </ul>
         </li>
-        <li>Share your findings with the class and discuss potential improvements.</li>
+        <li>Use the "Bottom-Up" and "Call Tree" views to identify:
+          <ul>
+            <li>Which functions consume the most CPU time?</li>
+            <li>What's the relationship between parent and child functions?</li>
+          </ul>
+        </li>
+        <li>During the "Animation + CPU Load" test:
+          <ul>
+            <li>Observe the impact on frame rate (FPS meter at the top).</li>
+            <li>Notice how JavaScript execution affects visual updates.</li>
+          </ul>
+        </li>
       </ol>
+
+      <h2>Performance Optimization Tips</h2>
+      <div class="tips">
+        <ul>
+          <li><strong>Use async/await or Promises</strong> for operations that can run in the background.</li>
+          <li><strong>Break up long-running tasks</strong> using setTimeout or requestIdleCallback.</li>
+          <li><strong>Move intensive work to Web Workers</strong> to avoid blocking the main thread.</li>
+          <li><strong>Debounce or throttle</strong> event handlers that might fire frequently.</li>
+          <li><strong>Memoize expensive calculations</strong> to avoid repeating them unnecessarily.</li>
+          <li><strong>Use appropriate data structures</strong> for the operations you're performing.</li>
+        </ul>
+      </div>
+
+      <h2>Additional Resources</h2>
+      <ul>
+        <li><a href="https://developer.chrome.com/docs/devtools/performance/" target="_blank">Chrome DevTools
+            Performance Documentation</a></li>
+        <li><a href="https://web.dev/rail/" target="_blank">RAIL Performance Model</a></li>
+        <li><a href="https://web.dev/optimize-javascript-execution/" target="_blank">Optimizing JavaScript Execution</a>
+        </li>
+      </ul>
     </div>
   </div>
 </body>
