@@ -57,6 +57,21 @@
     </ul>
   </div>
 
+  <div class="flame-chart-legend">
+    <h3>Flame Chart Colors</h3>
+    <p>The flame chart in the Performance panel uses different colors to represent different types of activities:</p>
+    <ul>
+      <li><span style="color: #CCCCCC; font-weight: bold;">Grey</span> - Task (main thread work)</li>
+      <li><span style="color: #FEBA2C; font-weight: bold;">Yellow</span> - JavaScript execution</li>
+      <li><span style="color: #33A8F8; font-weight: bold;">Blue</span> - Rendering events (Layout, Style)</li>
+      <li><span style="color: #9C27B0; font-weight: bold;">Purple</span> - Painting and compositing</li>
+      <li><span style="color: #30B955; font-weight: bold;">Green</span> - System events (GPU, IPC)</li>
+      <li><span style="color: #FF7043; font-weight: bold;">Orange/Red</span> - Long tasks (potentially problematic)</li>
+      <li><span style="color: #FF8BC8; font-weight: bold;">Pink</span> - Loading events</li>
+    </ul>
+    <p>The height of each bar in the flame chart represents call stack depth, while the width shows how long that particular function took to execute.</p>
+  </div>
+
 
   <div class="warning">
     <p>⚠️ Warning: Dad joke ahead!</p>

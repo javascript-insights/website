@@ -30,8 +30,8 @@
     <div class="animation-container" style="padding: 20px; min-height: 180px;">
       <div id="spinningSquare" style="width: 50px; height: 50px; background-color: #4CAF50; position: relative;"></div>
     </div>
-    <div id="badball" style="margin: -40px 200px;"></div>
     <div id="ball" style="margin: -40px 120px;"></div>
+    <div id="badball" style="margin: -40px 200px;"></div>
   </div>
 
   <p>DevTools provides numerous ways to analyze frames per second:</p>
@@ -48,8 +48,13 @@
     <button onclick="simulateFrames('1s')">▶️ Simulate Frames 1s</button>
     <button onclick="simulateFrames('2s')">▶️ Simulate Frames 2s</button>
     <button onclick="simulateFrames('5s')">▶️ Simulate Frames 5s</button>
+  </div>
+
+  <div class="demo-section">
+    <h3>⚠️ Simulate Performance Issues</h3>
     <button onclick="simulatePartialFrames()">↗️ Partial Frames</button>
     <button onclick="simulateDroppedFrames()">⚠️ Dropped Frames</button>
+    <button onclick="betterFrameDropSimulation()">⚠️ Better Dropped Frames</button>
   </div>
 
   <div class="frame-types">
@@ -68,6 +73,65 @@
         <div class="frame-example dropped"></div>
       </li>
     </ul>
+  </div>
+
+  <div class="explanation-section">
+    <h3>🔄 Difference Between Partially Presented Frames and Dropped Frames</h3>
+
+    <div class="explanation-grid">
+      <div class="explanation-item">
+        <h4>🟡 Partially Presented Frames</h4>
+        <p>A partially presented frame occurs when:</p>
+        <ul>
+          <li>The browser begins rendering the frame but doesn't complete all visual updates within the time budget</li>
+          <li>Some visual elements update while others wait for the next frame</li>
+          <li>The user sees a partial update rather than no update at all</li>
+          <li>These appear as yellow frames in DevTools</li>
+          <li>Usually caused by complex layout operations that can't fully complete in time</li>
+        </ul>
+      </div>
+
+      <div class="explanation-item">
+        <h4>🔴 Dropped Frames</h4>
+        <p>A dropped frame happens when:</p>
+        <ul>
+          <li>The browser completely misses the opportunity to render a frame</li>
+          <li>No visual updates occur during that frame time slot</li>
+          <li>Users experience "stuttering" or "jank" in animations and interactions</li>
+          <li>These appear as red frames in DevTools</li>
+          <li>Often caused by heavy JavaScript operations blocking the main thread</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="explanation-note">Both issues impact user experience, but dropped frames typically cause more noticeable
+      performance problems than partially presented frames.</p>
+  </div>
+
+  <div class="calculation-section">
+    <h3>🧮 Calculating Frame Size</h3>
+    <p>Frame size (or frame budget) is the time available to complete all work for a single frame. It's calculated as:
+    </p>
+
+    <div class="formula">
+      <strong>Frame time (ms) = 1000 ms ÷ FPS (frames per second)</strong>
+    </div>
+
+    <div class="example">
+      <h4>Example:</h4>
+      <ul>
+        <li>For 60 FPS: 1000 ms ÷ 60 = 16.7 ms per frame</li>
+        <li>For 32 FPS: 1000 ms ÷ 32 = 31.3 ms per frame</li>
+        <li>For 24 FPS: 1000 ms ÷ 24 = 41.7 ms per frame</li>
+      </ul>
+    </div>
+
+    <p>This means at 32 FPS, you have approximately 31.3 milliseconds to complete all the work required for each frame.
+      If processing takes longer than this budget, frames will be dropped or partially presented, resulting in visual
+      stuttering.</p>
+
+    <p>The higher your target FPS, the smaller your frame budget becomes, making performance optimization more critical.
+    </p>
   </div>
 
   <div class="practice-section">

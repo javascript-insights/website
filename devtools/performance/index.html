@@ -53,11 +53,38 @@
     <li>Handling user interactions</li>
   </ul>
 
-  <h2>🔄 What is An Event Loop in JavaScript? <a
-      href="https://www.geeksforgeeks.org/what-is-an-event-loop-in-javascript/" target="_blank">🤓</a></h2>
+  <h2>🔄 What is An Event Loop in JavaScript? ➡️<a
+      href="https://www.geeksforgeeks.org/what-is-an-event-loop-in-javascript/" target="_blank">🤓</a>
+    <a href="https://www.youtube.com/watch?v=eiC58R16hb8" target="_blank">👩‍🏫</a>⬅️
+  </h2>
   <p>The event loop is an important concept in JavaScript that enables asynchronous programming by handling tasks
     efficiently. Since JavaScript is single-threaded, it uses the event loop to manage the execution of multiple tasks
     without blocking the main thread.</p>
+
+  <div style="margin: 20px;">
+    <div style="display: flex; justify-content: flex-start; max-width: 600px;">
+      <img src="static/JSEventLoop.gif" alt="Event Loop Illustration" width="100%" />
+    </div>
+  </div>
+  <div style="margin: 20px;">
+    <div style="display: flex; justify-content: flex-start; max-width: 600px;">
+      <img src="static/JSEventLoop.png" alt="Event Loop Illustration" width="100%" />
+    </div>
+  </div>
+
+  <p>When a task is completed, the event loop checks the task queue for any pending tasks. If there are tasks in the
+    queue, the event loop picks the first task and executes it. This process continues until all tasks in the queue are
+    processed.</p>
+  <p>JavaScript uses a callback queue to manage asynchronous tasks. When an asynchronous task is completed, its callback
+    function is added to the callback queue. The event loop checks the callback queue and executes the callback
+    functions in the order they were added.</p>
+  <p>JavaScript uses a microtask queue for tasks that need to be executed immediately after the current task. Microtasks
+    include promise callbacks and mutation observer callbacks. The event loop processes the microtask queue before
+    moving on to the callback queue.</p>
+  <p>In summary, the event loop is a mechanism that allows JavaScript to handle asynchronous tasks efficiently by
+    managing the execution of tasks in a single-threaded environment. It uses a callback queue for asynchronous tasks
+    and a microtask queue for tasks that need to be executed immediately after the current task.</p>
+  <p>Here's a simple example to illustrate how the event loop works:</p>
 
   <div class="code-example">
     <script>
@@ -92,11 +119,8 @@
     </li>
     <li>Promise Resolved appears before setTimeout Callback due to microtask priority.</li>
   </ul>
-  JavaScript executes code synchronously in a single thread. However, it can handle asynchronous operations such as
-  fetching data from an API, handling user events, or setting timeouts without pausing execution. This is made possible
-  by the event loop.
 
-  <p>The main thread processes one task at a time. Tasks longer than 50ms are long tasks, and their blocking period
+  <p><strong>Tasks longer than 50ms are long tasks</strong>, and their blocking period
     affects user interactions. Breaking up long tasks into smaller ones allows the browser to respond to higher-priority
     work sooner.</p>
   <img src="./static/a-depiction-how-breaking-999bc2dd02872_960.png"
@@ -132,15 +156,14 @@
 
       async function mineBitcoinAsync() {
         let result = 0;
-        for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 1000; i++) {
           result = await calculateSumAsync(i, result);
         }
         return result;
       }
     </script>
+
     <li>
-
-
       <strong>Using console.time and console.timeEnd</strong>
       <p>This method is straightforward and useful for measuring the time taken by a specific block of code.</p>
       <script>
@@ -151,10 +174,12 @@
       </script>
 
       <script>
-        console.time('mineBitcoinAsync - 1');
-        // Your code block
-        mineBitcoinAsync();
-        console.timeEnd('mineBitcoinAsync - 1');
+        (async function () {
+          console.time('mineBitcoinAsync - 2');
+          // Your code block
+          await mineBitcoinAsync();
+          console.timeEnd('mineBitcoinAsync - 2');
+        })();
       </script>
     </li>
     <li>
@@ -162,20 +187,20 @@
       <p>The Performance API provides more detailed and precise measurements.</p>
       <script>
         // Start measuring
-        performance.mark('start');
+        performance.mark('start3');
 
         // Your code block
         mineBitcoin();
 
         // End measuring
-        performance.mark('end');
+        performance.mark('end3');
 
         // Measure the duration
-        performance.measure('mineBitcoin - 2', 'start', 'end');
+        performance.measure('mineBitcoin - 3', 'start3', 'end3');
 
         // Log the result
-        const measure = performance.getEntriesByName('mineBitcoin - 2')[0];
-        console.log(`mineBitcoin - 2 took ${measure.duration} milliseconds`);
+        const measure1 = performance.getEntriesByName('mineBitcoin - 3')[0];
+        console.log(`mineBitcoin - 3 took ${measure1.duration} milliseconds`);
       </script>
     </li>
     <li>
@@ -188,10 +213,46 @@
         mineBitcoin();
 
         const end = performance.now();
-        console.log(`mineBitcoin - 3 took ${end - start} milliseconds`);
+        console.log(`mineBitcoin - 4 took ${end - start} milliseconds`);
       </script>
 
     </li>
+
+    <p>It all about finetuning the performance of your code. The above methods are just a few examples of how you can
+      measure and
+      optimize performance in your JavaScript code. Depending on your specific use case, you may need to experiment with
+      different
+      approaches to find the best solution for your needs.</p>
+
+    <script>
+      async function calculateSumAsync5(currentValue, currentResult, runAsync) {
+        if (runAsync) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(currentResult + currentValue);
+            }, 0);
+          });
+        } else {
+          return currentResult + currentValue;
+        }
+      }
+
+      async function mineBitcoinAsync5() {
+        let result = 0;
+        for (let i = 0; i < 1000; i++) {
+          result = await calculateSumAsync5(i, result, i % 50 === 0);
+        }
+        return result;
+      }
+
+      (async function () {
+        console.time('mineBitcoinAsync - 5');
+        // Your code block
+        await mineBitcoinAsync5();
+        console.timeEnd('mineBitcoinAsync - 5');
+      })();
+
+    </script>
   </ol>
   <h2>Navigation Controls</h2>
 
@@ -295,21 +356,21 @@
     <li>Your custom performance.measure() calls. A yellow span is shown and labelled.</li>
   </ul>
 
-  <h2>Flame Chart Colors</h2>
-  <p>The flame chart in the Performance panel uses different colors to represent different types of activities:</p>
-
-  <ul>
-    <li><strong style="color: #CCCCCC">Grey</strong> - Script parsing and compilation</li>
-    <li><strong style="color: #FDB882">Orange</strong> - JavaScript execution</li>
-    <li><strong style="color: #63BA4C">Green</strong> - Painting and compositing</li>
-    <li><strong style="color: #4DB6E3">Blue</strong> - HTML parsing and DOM activities</li>
-    <li><strong style="color: #B866CC">Purple</strong> - Style recalculation and layout</li>
-    <li><strong style="color: #F1C232">Yellow</strong> - System events and garbage collection</li>
-    <li><strong style="color: #E61E27">Red</strong> - Long tasks (over 50ms)</li>
-  </ul>
-
-  <p>The height of each bar in the flame chart represents call stack depth, while the width shows how long that
-    particular function took to execute.</p>
+  <div class="flame-chart-legend">
+    <h3>Flame Chart Colors</h3>
+    <p>The flame chart in the Performance panel uses different colors to represent different types of activities:</p>
+    <ul>
+      <li><span style="color: #CCCCCC; font-weight: bold;">Grey</span> - Task (main thread work)</li>
+      <li><span style="color: #FEBA2C; font-weight: bold;">Yellow</span> - JavaScript execution</li>
+      <li><span style="color: #33A8F8; font-weight: bold;">Blue</span> - Rendering events (Layout, Style)</li>
+      <li><span style="color: #9C27B0; font-weight: bold;">Purple</span> - Painting and compositing</li>
+      <li><span style="color: #30B955; font-weight: bold;">Green</span> - System events (GPU, IPC)</li>
+      <li><span style="color: #FF7043; font-weight: bold;">Orange/Red</span> - Long tasks (potentially problematic)</li>
+      <li><span style="color: #FF8BC8; font-weight: bold;">Pink</span> - Loading events</li>
+    </ul>
+    <p>The height of each bar in the flame chart represents call stack depth, while the width shows how long that
+      particular function took to execute.</p>
+  </div>
 
   <script>
     performance.mark("Last JavaScript code");
