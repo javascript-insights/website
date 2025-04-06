@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 3 - INP</h1>
+  <h1>Performance Hands-On 3 - Interaction to Next Paint (INP)</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -27,26 +27,77 @@
   <!-- Instructions for participants -->
   <div class="instructions">
     <h2>Instructions</h2>
-    <p>In this task, you will learn how to use the browser's DevTools to analyze and improve the performance of web
-      interactions.</p>
-    <ol>
-      <li>Open the browser DevTools (usually by pressing <strong>F12</strong> or <strong>Ctrl+Shift+I</strong>).</li>
-      <li>Navigate to the <strong>Performance</strong> tab.</li>
-      <li>Click the <strong>Start profiling and reload page</strong> button (the circle icon) to begin recording.</li>
-      <li>Click the <strong>testButton1</strong> and observe the performance metrics.</li>
-      <li>Click the <strong>testButton2</strong> and observe the performance metrics.</li>
-      <li>Analyze the recorded performance data to identify any bottlenecks or areas for improvement.</li>
-      <li>Try to optimize the code in <strong>index.js</strong> to reduce the interaction delay.</li>
-    </ol>
-    <p>Use the DevTools to inspect the network requests, JavaScript execution time, and rendering performance. Document
-      your findings and optimizations.</p>
+    <p>In this hands-on, you will learn how to identify, measure, and improve INP using browser DevTools.</p>
+
+    <div class="task">
+      <h3>Task 1: Measure INP</h3>
+      <ol>
+        <li>Open Chrome DevTools (press <kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd> / <kbd>Cmd+Option+I</kbd>)</li>
+        <li>Go to the <strong>Performance</strong> panel</li>
+        <li>Click the <strong>Start recording</strong> button (circle icon)</li>
+        <li>Interact with the buttons below and observe their response time</li>
+        <li>Stop the recording and analyze the results</li>
+      </ol>
+    </div>
+
+    <div class="task">
+      <h3>Task 2: Analyze and Improve</h3>
+      <ol>
+        <li>In the performance recording, look for long tasks in the Main thread</li>
+        <li>Identify which button has the worst INP and why</li>
+        <li>Open <code>index.js</code> and find ways to optimize the problematic code</li>
+        <li>Focus on these optimization techniques:
+          <ul>
+            <li>Breaking up long tasks</li>
+            <li>Removing unnecessary synchronous work</li>
+            <li>Using requestAnimationFrame for visual updates</li>
+          </ul>
+        </li>
+        <li>Re-measure after your optimizations to verify improvement</li>
+      </ol>
+    </div>
+
+    <div class="pro-tips">
+      <h3>Pro Tips</h3>
+      <ul>
+        <li>Use the <strong>Interactions</strong> track in the Performance panel to directly visualize INP</li>
+        <li>The <strong>Summary</strong> tab will show you the total duration of each interaction</li>
+        <li>Look for the <strong>Input delay</strong>, <strong>Processing time</strong>, and <strong>Presentation
+            delay</strong> metrics</li>
+        <li>Check the <strong>Experience</strong> section in the Performance Insights panel for more INP details</li>
+      </ul>
+    </div>
   </div>
 
   <div class="container">
-    <button id="testButton1">Click Me</button>
-    <button id="testButton2">Click Me Too</button>
-    <p id="result1"></p>
-    <p id="result2"></p>
+    <div class="test-section">
+      <h2>Test Your Knowledge</h2>
+      <p>Click each button and observe their INP in DevTools. Can you identify which has poor INP and why?</p>
+
+      <div class="button-group">
+        <button id="testButton1" class="test-button">Heavy Processing Button</button>
+        <div id="result1" class="result-display"></div>
+      </div>
+
+      <div class="button-group">
+        <button id="testButton2" class="test-button">Quick Response Button</button>
+        <div id="result2" class="result-display"></div>
+      </div>
+    </div>
+
+    <div class="timer-display">
+      <span>Response Time: </span><span id="responseTime">0ms</span>
+    </div>
+  </div>
+
+  <div class="resources">
+    <h2>Additional Resources</h2>
+    <ul>
+      <li><a href="https://web.dev/articles/inp" target="_blank">Web.dev: Introduction to INP</a></li>
+      <li><a href="https://developer.chrome.com/docs/lighthouse/performance/" target="_blank">Chrome DevTools:
+          Performance Analysis</a></li>
+      <li><a href="https://web.dev/articles/optimize-inp" target="_blank">Optimizing INP</a></li>
+    </ul>
   </div>
 </body>
 

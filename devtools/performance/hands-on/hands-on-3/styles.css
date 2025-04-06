@@ -1,10 +1,139 @@
 .container {
-        max-width: 600px;
-        margin: 50px auto;
+        max-width: 800px;
+        margin: 30px auto;
         text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
 }
 
 button {
         padding: 10px 20px;
         margin: 20px;
+}
+
+.info-section {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f0f7ff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.instructions {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f5f5f5;
+        border-left: 4px solid #4285f4;
+        border-radius: 4px;
+}
+
+.pro-tips {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #fffde7;
+        border-left: 4px solid #ffab00;
+        border-radius: 4px;
+}
+
+.test-button {
+        padding: 12px 24px;
+        margin: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4285f4;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+}
+
+.test-button:hover {
+        background-color: #3367d6;
+}
+
+.button-group {
+        margin: 20px 0;
+}
+
+.result-display {
+        margin: 10px 0;
+        padding: 10px;
+        min-height: 20px;
+        border-radius: 4px;
+        background-color: #f0f0f0;
+}
+
+.timer-display {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+}
+
+.score-guide {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
+}
+
+.score {
+        padding: 10px;
+        border-radius: 4px;
+        width: 30%;
+        text-align: center;
+}
+
+.good {
+        background-color: #e6f4ea;
+        color: #137333;
+}
+
+.needs-improvement {
+        background-color: #fef7e0;
+        color: #ea8600;
+}
+
+.poor {
+        background-color: #fce8e6;
+        color: #c5221f;
+}
+
+kbd {
+        background-color: #f7f7f7;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+        color: #333;
+        display: inline-block;
+        font-size: 0.9em;
+        line-height: 1;
+        padding: 2px 4px;
+}
+
+.resources {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #e8f0fe;
+        border-radius: 8px;
+}
+
+.resources a {
+        color: #1a73e8;
+        text-decoration: none;
+}
+
+.resources a:hover {
+        text-decoration: underline;
 }
