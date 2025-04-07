@@ -26,69 +26,81 @@
 
   <main>
     <section>
-      <h2>🏃‍♂️ Welcome to the Performance Olympics! 🏃‍♀️</h2>
-      <p>Let's test your Performance profiling skills with these fun challenges:</p>
-
-      <div class="exercise">
-        <h3>🐌 Exercise 1: The Slow Motion Button</h3>
-        <button onclick="createManyDivs()">Click me (if you dare)</button>
-        <p>This button creates 10,000 divs. Profile it and find out why it's so slow!</p>
+      <div class="performance-panel">
+        <h2>🔎 How to Use Performance DevTools</h2>
+        <ol>
+          <li><strong>Open DevTools:</strong> Press F12 or right-click and select "Inspect"</li>
+          <li><strong>Go to Performance tab:</strong> Find it in the DevTools top navigation</li>
+          <li><strong>Record:</strong> Click the ⚫ record button (or Ctrl+E)</li>
+          <li><strong>Run an example:</strong> Click one of the example buttons below</li>
+          <li><strong>Stop recording:</strong> Click the ⏹️ stop button</li>
+          <li><strong>Analyze:</strong> Look at flame charts, summary, and bottlenecks</li>
+        </ol>
+        <button onclick="stopAllDemos()" style="background-color: #e74c3c;">Stop All Demos</button>
       </div>
 
       <div class="exercise">
-        <h3>🎡 Exercise 2: The Infinite Spinner</h3>
+        <h3>1️⃣ DOM Creation Performance</h3>
+        <button onclick="createManyDivs()">Create 5000 Divs</button>
+        <p><strong>What to look for:</strong> Long tasks in the Main thread, scripting time vs. rendering time</p>
+      </div>
+
+      <div class="exercise">
+        <h3>2️⃣ CPU-Heavy Animation</h3>
         <div id="spinner">🌀</div>
-        <button onclick="startHeavyAnimation()">Start Spinning</button>
-        <p>Watch the spinner struggle. Can you identify the performance bottleneck?</p>
+        <button onclick="startHeavyAnimation()">Start CPU-Heavy Animation</button>
+        <p><strong>What to look for:</strong> Frame rate drops, long task markers, jank in the animation</p>
       </div>
 
       <div class="exercise">
-        <h3>🖼️ Exercise 3: Image Loading Marathon</h3>
-        <button onclick="loadManyImages()">Load HD Images</button>
+        <h3>3️⃣ Network Performance</h3>
+        <button onclick="loadManyImages()">Load Multiple Images</button>
         <div id="imageContainer"></div>
-        <p>Profile the network performance. How can we optimize these image loads?</p>
+        <p><strong>What to look for:</strong> Network activity, loading times, resource waterfall</p>
       </div>
 
       <div class="exercise">
-        <h3>🔄 Exercise 4: The Memory Leak Factory</h3>
-        <button onclick="startMemoryLeak()">Leak Some Memory</button>
-        <p>Take a heap snapshot and find where the memory is going!</p>
+        <h3>4️⃣ Memory Leaks</h3>
+        <button onclick="startMemoryLeak()">Create Memory Leak</button>
+        <p><strong>What to look for:</strong> Memory graph increasing, heap snapshots showing retained objects</p>
+        <p><small>Tip: Switch to the Memory tab to take heap snapshots</small></p>
       </div>
 
       <div class="exercise">
-        <h3>🎨 Exercise 5: The Rainbow Rain</h3>
-        <button onclick="startColorCascade()">Make It Rain Colors</button>
-        <div id="rainbowContainer"></div>
-        <p>Watch your CPU melt with this colorful animation! Find out why continuous DOM updates hurt performance.</p>
+        <h3>5️⃣ Animation Performance</h3>
+        <button onclick="startColorCascade()">Start Color Animation</button>
+        <div id="rainbowContainer" style="height: 200px; position: relative; overflow: hidden;"></div>
+        <p><strong>What to look for:</strong> Continuous DOM updates, paint and composite operations</p>
       </div>
 
       <div class="exercise">
-        <h3>🧮 Exercise 6: The Fibonacci Freezer</h3>
-        <button onclick="calculateHugeFibonacci()">Calculate Fibonacci(1000000)</button>
-        <p>Want to freeze your browser? This calculation will do it! Profile the main thread blocking.</p>
+        <h3>6️⃣ Main Thread Blocking</h3>
+        <button onclick="calculateHugeFibonacci()">Calculate Fibonacci</button>
+        <p><strong>What to look for:</strong> Long-running JavaScript, UI freezing, call stack depth</p>
       </div>
 
       <div class="exercise">
-        <h3>🎵 Exercise 7: The DOM Party</h3>
-        <button onclick="startDOMParty()">Start DOM Party</button>
-        <div id="partyZone"></div>
-        <p>Watch elements dance around! Learn about layout thrashing and forced reflows.</p>
+        <h3>7️⃣ Layout Thrashing</h3>
+        <button onclick="startDOMParty()">Start Layout Thrashing</button>
+        <div id="partyZone" style="height: 200px; position: relative;"></div>
+        <p><strong>What to look for:</strong> Forced reflow warnings, layout recalculations</p>
       </div>
 
       <div class="exercise">
-        <h3>🔄 Exercise 8: The Event Loop Carnival</h3>
-        <button onclick="startEventLoopChaos()">Start Event Madness</button>
-        <div id="eventDisplay"></div>
-        <p>Hundreds of events fighting for attention! Profile the event loop and task queuing.</p>
+        <h3>8️⃣ Event Loop Congestion</h3>
+        <button onclick="startEventLoopChaos()">Start Event Storm</button>
+        <div id="eventDisplay" style="height: 200px; overflow-y: auto; border: 1px solid #ddd;"></div>
+        <p><strong>What to look for:</strong> Task scheduling, timers, event handling in flame chart</p>
       </div>
 
       <div class="tips">
-        <h3>🎯 Pro Tips:</h3>
+        <h3>🔍 Performance Analysis Tips:</h3>
         <ul>
-          <li>Use the Performance panel to record each exercise</li>
-          <li>Look for red triangles in the flame chart</li>
-          <li>Check the Summary tab for execution time breakdown</li>
-          <li>Don't forget to check the Memory tab when needed</li>
+          <li><strong>Red triangles</strong> in flame charts indicate performance problems</li>
+          <li>Use the <strong>Summary</strong> tab to see where time is spent (Scripting, Rendering, etc.)</li>
+          <li>Look for <strong>long tasks</strong> (over 50ms) that might cause jank</li>
+          <li>Check <strong>FPS meter</strong> to identify frame rate drops</li>
+          <li>Use <strong>Screenshots</strong> option to correlate visual changes with performance data</li>
         </ul>
       </div>
     </section>
