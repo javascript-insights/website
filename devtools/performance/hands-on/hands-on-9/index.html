@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaScript Insights</title>
+  <title>CSS Selector Performance - DevTools Performance</title>
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="/static/favicon.png" />
@@ -12,224 +12,179 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 9 - Interactions</h1>
+  <h1>Performance Hands-On: CSS Selector Performance</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
     <a href="../../index.html">Performance</a>
     <a href="../index.html">Hands-On</a>
-    <a href="./index.html">Interactions</a>
+    <a href="./index.html">CSS</a>
   </nav>
   <div class="navbar">
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>Performance Tool Hands-On</h1>
-  <button id="clickButton">Click Me!</button>
-  <input type="text" id="textInput" placeholder="Type something...">
-  <button id="loadDataButton">Load Data</button>
-  <div id="dataContainer"></div>
-
-  <section id="handsOnInstructions">
-    <h2>Hands-On: Performance Tool</h2>
+  <section class="instructions">
+    <h2>How to Use This Demo</h2>
     <ol>
-      <li>Open the browser's DevTools (F12 on Windows) and switch to the "Performance" panel.</li>
-      <li>Click the "Record" button in DevTools, then interact with the page (e.g., click buttons, type in the input
-        box).</li>
-      <li>Stop the recording to see the performance metrics and identify potential bottlenecks.</li>
-      <li>Analyze flame charts, timings, and call stacks to understand which operations take the most time.</li>
-      <li>Modify your JavaScript or layout based on your findings, then rerun the performance profiling to confirm
-        improvements.</li>
+      <li>Open Chrome DevTools (F12 or Ctrl+Shift+I)</li>
+      <li>Go to the Performance panel</li>
+      <li>Click the Record button (or press Ctrl+E)</li>
+      <li>Click the buttons below to trigger different CSS selector evaluations</li>
+      <li>Stop the recording and analyze the results</li>
+      <li>Look for "Recalculate Style" events in the flame chart</li>
+      <li>Click on these events to see detailed CSS selector performance metrics</li>
+      <li>Look at the "Selector stats" next to the Summary tab at the buttom</li>
     </ol>
+    <p><strong>Key Insight:</strong> The browser has to work harder with complex CSS selectors, which can impact
+      performance.</p>
   </section>
 
   <section class="selector-demo">
-    <h2>CSS Selector Performance Demo - Analyze CSS selector performance during Recalculate Style events</h2>
+    <h2>CSS Selector Performance Demo</h2>
     <div class="container">
-      <button class="btn deep-nested">.deep-nested button</button>
-      <button class="btn complex-selector" data-type="button">[data-type="button"].complex-selector</button>
-      <button class="btn universal">* .universal</button>
-      <button class="btn id-selector">#id-selector</button>
-      <button class="btn class-selector">.class-selector</button>
-      <button class="btn attribute-selector">attribute[type]</button>
-      <button class="btn pseudo-selector">:hover/:first-child</button>
-      <button class="btn super-slow">Super Slow Selector</button>
-      <button class="btn mega-slow">Mega Slow Selector</button>
+      <button id="efficient-btn" class="btn efficient">Efficient Selectors</button>
+      <button id="inefficient-btn" class="btn inefficient">Inefficient Selectors</button>
+      <button id="compare-btn" class="btn compare">Compare All Selectors</button>
+
       <div class="nested-section">
         <div class="level-1">
           <div class="level-2">
-            <button class="btn descendant">Descendant Selector</button>
+            <div class="level-3">
+              <button class="btn deep-target">Deeply Nested Button</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="result"></div>
+    <div id="result" class="result-panel"></div>
+
     <style>
-      .deep-nested {
-        background: #ffd700;
-      }
-
-      [data-type="button"].complex-selector {
-        background: #ff6b6b;
-      }
-
-      * .universal {
-        background: #4ecdc4;
-      }
-
-      .nested-section .level-1 .level-2 .descendant {
-        background: #95a5a6;
-      }
-
-      #id-selector {
-        background: #8e44ad;
-      }
-
-      .class-selector {
+      /* Efficient selectors */
+      #efficient-btn {
         background: #2ecc71;
       }
 
-      button:first-child {
-        border: 2px solid #000;
+      .efficient {
+        border: 2px solid #27ae60;
       }
 
-      /* Super slow selectors */
-      div:not(.container)>*:not(button):not(.level-2)+div>.btn.descendant {
-        background: #ff0000;
+      /* Inefficient selectors */
+      div.container>button.inefficient[id="inefficient-btn"] {
+        background: #e74c3c;
+        border: 2px solid #c0392b;
       }
 
-      *:not(div):not(button):not(span)~.btn.super-slow:not([disabled]):not(.other) {
-        background: #00ff00;
+      /* Very inefficient selectors */
+      *>.container>*:not(div):not(span)~button.compare:nth-child(n+2):not(:last-child) {
+        background: #3498db;
+        border: 2px solid #2980b9;
       }
 
-      body div.container>button.mega-slow:nth-child(n+2):not(:last-child):not([disabled]) {
-        background: #0000ff;
+      /* Deep nesting */
+      .nested-section .level-1 .level-2 .level-3 .deep-target {
+        background: #f1c40f;
+        border: 2px solid #f39c12;
       }
 
       .btn {
         margin: 10px;
         padding: 10px;
+        font-size: 16px;
+      }
+
+      .result-panel {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        min-height: 50px;
       }
     </style>
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const result = document.getElementById('result');
 
-        // Deep nested selector
-        document.querySelector('.deep-nested').onclick = () => {
-          console.time('deep-nested');
-          document.querySelectorAll('.nested-section .level-1 .level-2 button');
-          console.timeEnd('deep-nested');
-          result.textContent = 'Deep nested selection completed';
+        // Efficient selectors
+        document.getElementById('efficient-btn').onclick = () => {
+          console.time('efficient');
+          // Test ID selector (very efficient)
+          document.getElementById('efficient-btn');
+          // Test class selector (efficient)
+          document.getElementsByClassName('efficient');
+          console.timeEnd('efficient');
+          result.innerHTML = '<p>✅ Efficient selectors tested!</p><p>Check DevTools Performance panel and look for "Recalculate Style" events.</p>';
         };
 
-        // Complex selector
-        document.querySelector('.complex-selector').onclick = () => {
-          console.time('complex');
-          document.querySelectorAll('[data-type="button"].complex-selector');
-          console.timeEnd('complex');
-          result.textContent = 'Complex selection completed';
+        // Inefficient selectors
+        document.getElementById('inefficient-btn').onclick = () => {
+          console.time('inefficient');
+          // Test complex attribute + class selector
+          document.querySelectorAll('div.container > button.inefficient[id="inefficient-btn"]');
+          console.timeEnd('inefficient');
+          result.innerHTML = '<p>⚠️ Inefficient selectors tested!</p><p>Check DevTools Performance panel and look for "Recalculate Style" events.</p>';
         };
 
-        // Universal selector
-        document.querySelector('.universal').onclick = () => {
-          console.time('universal');
-          document.querySelectorAll('* .btn');
-          console.timeEnd('universal');
-          result.textContent = 'Universal selection completed';
-        };
-
-        // ID selector
-        document.querySelector('.id-selector').onclick = () => {
-          console.time('id');
-          document.getElementById('id-selector');
-          console.timeEnd('id');
-          result.textContent = 'ID selection completed';
-        };
-
-        // Class selector
-        document.querySelector('.class-selector').onclick = () => {
-          console.time('class');
-          document.getElementsByClassName('btn');
-          console.timeEnd('class');
-          result.textContent = 'Class selection completed';
-        };
-
-        // Attribute selector
-        document.querySelector('.attribute-selector').onclick = () => {
-          console.time('attribute');
-          document.querySelectorAll('[data-type]');
-          console.timeEnd('attribute');
-          result.textContent = 'Attribute selection completed';
-        };
-
-        // Pseudo selector
-        document.querySelector('.pseudo-selector').onclick = () => {
-          console.time('pseudo');
-          document.querySelectorAll('button:first-child');
-          console.timeEnd('pseudo');
-          result.textContent = 'Pseudo selection completed';
-        };
-
-        // Super slow selector
-        document.querySelector('.super-slow').onclick = () => {
-          console.time('super-slow');
-          for (let i = 0; i < 1000; i++) {
-            document.querySelectorAll('div:not(.container) > *:not(button):not(.level-2) ~ div.nested-section > div.level-1 > div.level-2 > button.btn');
+        // Compare all selectors
+        document.getElementById('compare-btn').onclick = () => {
+          console.time('compare');
+          // Run a stress test with 500 iterations
+          for (let i = 0; i < 500; i++) {
+            // Very inefficient (universal + pseudo + attribute selectors)
+            document.querySelectorAll('* > .container > *:not(div):not(span) ~ button.compare:nth-child(n+2):not(:last-child)');
+            // Deep nesting (inefficient)
+            document.querySelectorAll('.nested-section .level-1 .level-2 .level-3 .deep-target');
+            // Efficient
+            document.getElementById('efficient-btn');
           }
-          console.timeEnd('super-slow');
-          result.textContent = 'Super slow selection completed';
+          console.timeEnd('compare');
+          result.innerHTML = '<p>🔍 Comparison complete!</p><p>In the Performance panel:</p><ul><li>Look for the longest "Recalculate Style" events</li><li>Click on them to see detailed selector metrics</li><li>Compare "Elapsed (ms)" times between different selectors</li></ul>';
         };
 
-        // Mega slow selector
-        document.querySelector('.mega-slow').onclick = () => {
-          console.time('mega-slow');
-          for (let i = 0; i < 1000; i++) {
-            document.querySelectorAll('body *:not(span):not(p) > div.container > *:not(div):not([disabled]):not(.other) ~ button.btn:nth-child(n+2)');
-          }
-          console.timeEnd('mega-slow');
-          result.textContent = 'Mega slow selection completed';
-        };
+        // Add initial instructions
+        result.innerHTML = '<p>👆 Click the buttons above and watch the Performance panel to analyze CSS selector efficiency</p>';
       });
-
     </script>
 
+    <h3>Understanding Performance Panel Results</h3>
     <table>
       <thead>
         <tr>
           <th>Column</th>
-          <th>Description</th>
+          <th>What It Means</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Elapsed (ms)</td>
-          <td>The amount of time the browser spent matching this CSS selector. This time is given in milliseconds (ms).
-          </td>
+          <td>Time spent matching this selector - lower is better!</td>
         </tr>
         <tr>
           <td>Match Attempts</td>
-          <td>The number of elements the browser engine attempted to match with this CSS selector.</td>
+          <td>Elements the browser tried to match with this selector</td>
         </tr>
         <tr>
           <td>Match Count</td>
-          <td>The number of elements the browser engine matched with this CSS selector.</td>
-        </tr>
-        <tr>
-          <td>% of slow-path non-matches</td>
-          <td>The ratio of elements that didn't match with this CSS selector, to the elements that the browser engine
-            attempted to match, and which required the browser engine to use less optimized code to match.</td>
+          <td>Elements that actually matched the selector</td>
         </tr>
         <tr>
           <td>Selector</td>
-          <td>The CSS selector that was matched.</td>
-        </tr>
-        <tr>
-          <td>Style Sheet</td>
-          <td>The CSS style sheet that contains the CSS selector.</td>
+          <td>The CSS selector being evaluated</td>
         </tr>
       </tbody>
     </table>
+
+    <h3>Best Practices for CSS Selector Performance</h3>
+    <ul>
+      <li><strong>Use ID selectors</strong> when possible (#element) - fastest</li>
+      <li><strong>Use class selectors</strong> (.myclass) - very efficient</li>
+      <li><strong>Avoid deep nesting</strong> (.grand > .parent > .child > element)</li>
+      <li><strong>Limit universal selectors</strong> (* or *:not())</li>
+      <li><strong>Be cautious with attribute selectors</strong> ([attr=value])</li>
+      <li><strong>Avoid complex pseudo-selectors</strong> (:nth-child(n+5):not(:last-child))</li>
+    </ul>
   </section>
 </body>
 
