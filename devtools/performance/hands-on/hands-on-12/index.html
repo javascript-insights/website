@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 12 - Memory</h1>
+  <h1>Performance Hands-On 12 - Memory Profiling</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -25,32 +25,113 @@
   </div>
 
   <section id="memory-leak-exercise">
-    <h2>Memory Leak Exercise</h2>
-    <p>In this exercise, you will identify and fix a memory leak.</p>
-    <ol>
-      <li>Open the DevTools and go to the "Performance" tab.</li>
-      <li>Click the "Create Memory Leak" button below multiple times.</li>
-      <li>Take a heap snapshot and analyze the memory usage.</li>
-      <li>Identify the memory leak in the code and fix it.</li>
-      <li>Verify the fix by taking another heap snapshot and comparing the results.</li>
-    </ol>
+    <h2>Exercise 1: Identifying Memory Leaks</h2>
+    <p>Memory leaks occur when your application retains references to objects that are no longer needed, preventing
+      garbage collection.</p>
+
+    <div class="tip-box">
+      <p><strong>Steps to identify memory leaks:</strong></p>
+      <ol>
+        <li>Enable the "Memory" checkbox in the Performance panel</li>
+        <li>Start recording, then click the "Create Memory Leak" button several times</li>
+        <li>Observe the JS Heap graph - a leak will show as a steadily increasing line that doesn't drop</li>
+        <li>Try clicking "Clear Array" and notice if memory is actually released</li>
+      </ol>
+    </div>
+
+    <p>Current memory usage: <span id="memoryUsage">0.00 MB</span></p>
     <button id="leakButton">Create Memory Leak</button>
+    <button id="clearLeaks">Clear Array</button>
+
+    <button class="show-solution" data-solution="leak-solution">Show Solution</button>
+    <div id="leak-solution" class="solution">
+      <h4>Memory Leak Solution:</h4>
+      <p>The issue is that we're storing large arrays in the global <code>leaks</code> array. Even when we try to clear
+        it, we're not properly dereferencing the objects:</p>
+      <div class="code-block">
+        <pre>// Problem - references are kept even after clearing
+const leaks = [];
+document.getElementById('clearLeaks').addEventListener('click', () => {
+  while(leaks.length > 0) {
+    leaks.pop(); // Elements are removed but references might persist
+  }
+});
+
+// Better solution
+document.getElementById('clearLeaks').addEventListener('click', () => {
+  // Set length to zero to clear array completely
+  leaks.length = 0;
+  // Or reassign to empty array
+  // leaks.splice(0, leaks.length);
+});</pre>
+      </div>
+      <p>The key is to ensure all references to the large objects are removed so the garbage collector can reclaim the
+        memory.</p>
+    </div>
   </section>
 
   <section id="optimization-exercise">
-    <h2>Optimization Exercise</h2>
-    <p>In this exercise, you will optimize the DOM manipulation code.</p>
-    <ol>
-      <li>Open the DevTools and go to the "Performance" tab.</li>
-      <li>Click the "Manipulate DOM" button below and record the performance.</li>
-      <li>Analyze the performance recording to identify bottlenecks.</li>
-      <li>Optimize the code to reduce memory usage and improve performance.</li>
-      <li>Verify the optimization by recording the performance again and comparing the results.</li>
-    </ol>
-    <button id="domButton">Manipulate DOM</button>
+    <h2>Exercise 2: DOM Manipulation Optimization</h2>
+    <p>Inefficient DOM manipulation can cause poor performance and high memory usage due to layout thrashing.</p>
+
+    <div class="tip-box">
+      <p><strong>Performance analysis steps:</strong></p>
+      <ol>
+        <li>Start a recording in the Performance panel</li>
+        <li>Click "Inefficient DOM Manipulation" button</li>
+        <li>Stop recording and examine the timeline</li>
+        <li>Look for long tasks and frequent layout recalculations</li>
+        <li>Now try the "Optimized DOM Manipulation" and compare results</li>
+      </ol>
+    </div>
+
+    <button id="domButton">Inefficient DOM Manipulation</button>
+    <button id="optimizedDomButton">Optimized DOM Manipulation</button>
     <div id="container"></div>
+
+    <button class="show-solution" data-solution="dom-solution">Show Solution</button>
+    <div id="dom-solution" class="solution">
+      <h4>DOM Performance Solution:</h4>
+      <p>The inefficient approach inserts elements one at a time, causing multiple reflows and repaints:</p>
+      <div class="code-block">
+        <pre>// Inefficient approach
+for (let i = 0; i < 500; i++) {
+  const div = document.createElement('div');
+  div.textContent = `Item ${i}`;
+  container.appendChild(div); // Causes a reflow each time
+}</pre>
+      </div>
+      <p>The optimized solution uses a document fragment to batch DOM operations:</p>
+      <div class="code-block">
+        <pre>// Efficient approach
+const fragment = document.createDocumentFragment();
+for (let i = 0; i < 500; i++) {
+  const div = document.createElement('div');
+  div.textContent = `Item ${i}`;
+  fragment.appendChild(div); // No reflow here
+}
+container.appendChild(fragment); // Only one reflow</pre>
+      </div>
+      <p>Using document fragments or setting <code>innerHTML</code> once with a complete string can significantly
+        improve performance for large DOM updates.</p>
+      <p><code>document.createDocumentFragment()</code> creates a lightweight container that stores DOM nodes without
+        being part of the actual DOM tree. When you append it to the DOM, only its contents are inserted, not the
+        fragment itself. This prevents multiple reflows because all changes happen in memory first, then are applied to
+        the DOM in a single operation.</p>
+    </div>
   </section>
 
+  <section id="memory-tips">
+    <h2>Memory Performance Best Practices</h2>
+    <ul>
+      <li><strong>Avoid global variables</strong> - they persist for the lifetime of the page</li>
+      <li><strong>Clean up event listeners</strong> when elements are removed</li>
+      <li><strong>Close unused connections</strong> (WebSockets, observers)</li>
+      <li><strong>Use object pooling</strong> for frequently created/destroyed objects</li>
+      <li><strong>Be cautious with closures</strong> that can hold references longer than needed</li>
+      <li><strong>Monitor your app's memory usage</strong> during development and testing</li>
+    </ul>
+  </section>
 </body>
 
 </html>
