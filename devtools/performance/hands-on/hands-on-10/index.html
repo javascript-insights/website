@@ -25,30 +25,81 @@
   </div>
 
   <div class="container">
-    <h1>Performance Tool Hands-On</h1>
-    <button class="button" onclick="fetchData()">Fetch Data</button>
-    <button class="button" onclick="startAnimation()">Start Animation</button>
+    <h1>Performance Tool Demo</h1>
+    <p>Use the buttons below to generate various activities, then analyze them in the Performance panel</p>
+    <button class="button" onclick="runHeavyCalculation()">Run Heavy Calculation</button>
+    <button class="button" onclick="fetchData()">Fetch Network Data</button>
+    <button class="button" onclick="startAnimation()">Toggle Animation</button>
     <div class="animation1" id="animation1"></div>
   </div>
 
-  <div class="instructions">
-    <h2>Performance Hands-On Instructions</h2>
-    <ol>
-      <li>Open DevTools and switch to the "Performance" or "Performance Insights" tab.</li>
-      <li>Click "Record" and then use the buttons to fetch data or trigger events.</li>
-      <li>Stop recording and review the main thread activity, CPU usage, and FPS.</li>
-      <li>Identify scripting, rendering, and painting events in the Timeline panel.</li>
-      <li>Experiment with color changes and animations to examine paint operations.</li>
-    </ol>
+  <div class="feature-section">
+    <h2>Performance Tool Key Features</h2>
+
+    <div class="feature">
+      <h3>1. Summary View</h3>
+      <p>The Summary tab provides an overview of where time was spent loading and running the page.</p>
+      <ul>
+        <li>Shows time spent on Loading, Scripting, Rendering, and Painting</li>
+        <li>Displays CPU usage and frames per second (FPS)</li>
+      </ul>
+      <div class="tip">
+        <strong>Try it:</strong> Click Record, use the buttons above, then check how time is distributed in the Summary
+        panel.
+      </div>
+    </div>
+
+    <div class="feature">
+      <h3>2. Bottom-Up View</h3>
+      <p>Shows functions that took the most time, sorted by "self time" (time spent in the function itself).</p>
+      <ul>
+        <li>Helps identify functions consuming the most CPU time</li>
+        <li>Shows which functions are causing performance bottlenecks</li>
+      </ul>
+      <div class="tip">
+        <strong>Try it:</strong> Click the "Run Heavy Calculation" button, record performance, and check the Bottom-Up
+        tab.
+      </div>
+    </div>
+
+    <div class="feature">
+      <h3>3. Call Tree View</h3>
+      <p>Shows the calling structure - which functions called other functions and how much time was spent.</p>
+      <ul>
+        <li>Provides a top-down view of function calls</li>
+        <li>Helps understand the execution context of slow functions</li>
+      </ul>
+      <div class="tip">
+        <strong>Try it:</strong> Record while using multiple buttons, then examine the Call Tree to see the call
+        hierarchy.
+      </div>
+    </div>
+
+    <div class="feature">
+      <h3>4. Event Log View</h3>
+      <p>Chronological list of all recorded events during the performance capture.</p>
+      <ul>
+        <li>Shows timing of DOM events, timers, network requests, etc.</li>
+        <li>Helps identify event sequences that might affect performance</li>
+      </ul>
+      <div class="tip">
+        <strong>Try it:</strong> Record a session with animation and network activity, then review the Events Log.
+      </div>
+    </div>
   </div>
 
-  <div class="container">
-    <h1>Performance Tool Activity Types</h1>
-    <button class="button" onclick="triggerLoadingEvent()">Trigger Loading Event</button>
-    <button class="button" onclick="triggerScriptingEvent()">Trigger Scripting Event</button>
-    <button class="button" onclick="triggerRenderingEvent()">Trigger Rendering Event</button>
-    <button class="button" onclick="triggerPaintingEvent()">Trigger Painting Event</button>
-    <div class="animation2" id="animation2"></div>
+  <div class="instructions">
+    <h2>Quick Start Guide</h2>
+    <ol>
+      <li>Open DevTools (F12 or Right-click → Inspect)</li>
+      <li>Switch to the "Performance" tab</li>
+      <li>Click the "Record" button (circle icon)</li>
+      <li>Interact with the buttons above to generate activity</li>
+      <li>Click "Stop" to end recording</li>
+      <li>Explore the different views: Summary, Bottom-Up, Call Tree, and Event Log</li>
+      <li>Analyze the data to identify performance bottlenecks</li>
+    </ol>
   </div>
+</body>
 
 </html>
