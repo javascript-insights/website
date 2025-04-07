@@ -29,26 +29,65 @@
     <div class="instructions">
       <h2>Instructions</h2>
       <ol>
-        <li>Open the DevTools in your browser (F12 or right-click and select "Inspect").</li>
-        <li>Go to the "Performance" tab.</li>
-        <li>Click the "Record" button to start recording.</li>
-        <li>Click the "Perform Task" button below to generate some performance data.</li>
-        <li>Click the "Stop" button in DevTools to stop recording.</li>
-        <li>Analyze the performance data to identify any bottlenecks or areas for improvement.</li>
-        <li>Try modifying the code in <code>index.js</code> to optimize the performance and repeat the recording process
-          to see the impact of your changes.</li>
+        <li>Open DevTools (F12 or Ctrl+Shift+I / Cmd+Option+I)</li>
+        <li>Go to the Performance tab</li>
+        <li>Click "Record" and then click "Run BFS" button</li>
+        <li>Wait for the animation to complete, then stop recording</li>
+        <li>Examine the flame chart to see the BFS call stack pattern</li>
+        <li>Repeat the process with "Run DFS" button</li>
+        <li>Compare the flame charts: notice how BFS processes nodes level by level, while DFS explores each branch
+          fully before moving to siblings</li>
       </ol>
+      <div class="tips">
+        <h3>Tips</h3>
+        <ul>
+          <li>Look for the yellow "processNode" blocks in the flame chart</li>
+          <li>Hover over function calls to see their duration</li>
+          <li>Use WASD keys to navigate the flame chart (zoom in/out, move left/right)</li>
+          <li>Try to identify which traversal method might be more efficient for different scenarios</li>
+          <li>Click on some of the functions, and see the next execution function connected with an arrow
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-
-
 
   <div class="tree-demo">
     <h1>Tree Traversal Demo</h1>
     <div id="tree"></div>
     <button onclick="runBFS()">Run BFS</button>
     <button onclick="runDFS()">Run DFS</button>
+    <div class="blocking-control">
+      <label>
+        <input type="checkbox" id="blockingMode" onclick="toggleBlockingMode()">
+        Enable Blocking Mode
+      </label>
+    </div>
     <script>
+      let isBlocking = false;
+
+      function toggleBlockingMode() {
+        isBlocking = document.getElementById('blockingMode').checked;
+        console.log(`Blocking mode ${isBlocking ? 'enabled' : 'disabled'}`);
+      }
+
+      async function wait(ms, blocking = isBlocking) {
+        if (blocking) {
+          const start = Date.now();
+          while (Date.now() - start < ms) {
+            // Force layout/render every 50ms to show animation
+            if ((Date.now() - start) % 50 === 0) {
+              // This forces a reflow/repaint
+              document.body.offsetHeight;
+              // Allow other browser processes to run
+              await new Promise(resolve => setTimeout(resolve, 0));
+            }
+          }
+          return Promise.resolve();
+        }
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
       class TreeNode {
         constructor(value) {
           this.value = value;
@@ -73,59 +112,43 @@
 
       const tree = createTree(5);
 
-      function wait(ms, blocking = false) {
-        if (blocking) {
-          const start = Date.now();
-          while (Date.now() - start < ms) { }
-          return Promise.resolve();
-        }
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-
-      function processNode(node) {
+      async function processNode(node) {
         console.log(`Processing node: ${node.value}`);
         node.element.style.backgroundColor = 'yellow';
-        wait(1000).then(() => {
-          node.element.style.backgroundColor = '';
-        });
+        await wait(1000);
+        node.element.style.backgroundColor = '';
       }
 
-      function processLeaf(node) {
+      async function processLeaf(node) {
         if (!node.isLeaf) return;
         console.log(`Processing leaf: ${node.value}`);
         node.element.style.backgroundColor = 'green';
-        wait(1000).then(() => {
-          node.element.style.backgroundColor = '';
-        });
+        await wait(1000);
+        node.element.style.backgroundColor = '';
       }
 
-      function runBFS() {
+      async function runBFS() {
         const queue = [tree];
-        let delay = 0;
+
         while (queue.length > 0) {
           const node = queue.shift();
-          wait(delay).then(() => {
-            processNode(node);
-            processLeaf(node);
-          });
-          delay += 1000;
+          await processNode(node);
+          await processLeaf(node);
           queue.push(...node.children);
         }
       }
 
-      function runDFS() {
-        let delay = 0;
-        function dfs(node) {
-          wait(delay).then(() => {
-            processNode(node);
-            processLeaf(node);
-          });
-          delay += 1000;
+      async function runDFS() {
+        async function dfs(node) {
+          await processNode(node);
+          await processLeaf(node);
+
           for (const child of node.children) {
-            dfs(child);
+            await dfs(child);
           }
         }
-        dfs(tree);
+
+        await dfs(tree);
       }
 
       // Render tree vertically
