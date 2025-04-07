@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 7 - Main</h1>
+  <h1>Performance Hands-On 7 - Main Flame Chart</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -25,27 +25,57 @@
   </div>
 
   <div class="content">
-    <h1>Performance Tool Hands-On</h1>
+    <h1>Main Flame Chart in Performance Tool</h1>
     <div class="instructions">
-      <h2>Instructions</h2>
+      <h2>What is the Main Flame Chart?</h2>
+      <p>The Main Flame Chart visualizes what's happening on the main thread of your website. It shows JavaScript
+        execution, rendering, and layout operations in a hierarchical format where:</p>
+      <ul>
+        <li><b>Height</b> represents call stack depth</li>
+        <li><b>Width</b> represents execution time</li>
+        <li><b>Colors</b> represent different types of activities (script execution, rendering, etc.)</li>
+      </ul>
+
+      <h2>Hands-On Exercise</h2>
       <ol>
         <li>Open the DevTools in your browser (F12 or right-click and select "Inspect").</li>
         <li>Go to the "Performance" tab.</li>
         <li>Click the "Record" button to start recording.</li>
-        <li>Click the "Perform Task" button below to generate some performance data.</li>
+        <li>Click the different buttons below in sequence to generate diverse performance data.</li>
         <li>Click the "Stop" button in DevTools to stop recording.</li>
-        <li>Analyze the performance data to identify any bottlenecks or areas for improvement.</li>
-        <li>Try modifying the code in <code>index.js</code> to optimize the performance and repeat the recording process
-          to see the impact of your changes.</li>
       </ol>
+
+      <h2>Analyzing the Main Flame Chart</h2>
+      <p>After recording, look for these key elements:</p>
+      <ul>
+        <li><span class="highlight">Yellow Bars</span>: JavaScript execution</li>
+        <li><span class="highlight">Purple Bars</span>: Layout operations</li>
+        <li><span class="highlight">Green Bars</span>: Painting/rendering</li>
+        <li>Long, wide bars indicate potential bottlenecks</li>
+        <li>Click on individual functions to see their execution time</li>
+      </ul>
+
+      <h2>Practice Tips</h2>
+      <ul>
+        <li>Zoom in on specific sections using the mouse wheel</li>
+        <li>Hover over functions to see their names and execution times</li>
+        <li>Find the link to the JavaScript file in the flame chart (look for "index.js") and click on it to see how
+          much time each function and line in your code took to execute</li>
+        <li>Look for recurring patterns that might indicate inefficient loops</li>
+        <li>Compare CPU-intensive tasks with DOM manipulation tasks</li>
+      </ul>
     </div>
-    <button class="button" onclick="performTask()">Perform Task</button>
+
+    <div class="button-container">
+      <button class="button" onclick="performTask()">Run CPU-Intensive Task</button>
+      <button class="button" onclick="manipulateDOM()">Perform DOM Operations</button>
+      <button class="button" onclick="startAnimate()">Run Animation</button>
+      <button class="button" onclick="runAll()">Run All Tasks</button>
+    </div>
+
     <div id="animation" style="width: 50px; height: 50px; background-color: red; position: absolute;"></div>
-    <button class="button" onclick="startAnimate()">Start Animation</button>
+    <div id="results" class="results"></div>
   </div>
-
-  
-
 </body>
 
 </html>
