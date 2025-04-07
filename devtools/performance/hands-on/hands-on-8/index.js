@@ -1,29 +1,37 @@
 window.addEventListener("load", function () {
-    // Add event listener to the button to start worker tasks
-    document.getElementById('startWorkers').addEventListener('click', () => {
-        // Create three web workers
-        const worker1 = new Worker('worker.js');
-        const worker2 = new Worker('worker.js');
-        const worker3 = new Worker('worker.js');
+    const startButton = document.getElementById('startWorkers');
+    const statusElement = document.getElementById('status');
 
-        // Send 'start' message to each worker to begin their tasks
-        worker1.postMessage('start');
-        worker2.postMessage('start');
-        worker3.postMessage('start');
+    startButton.addEventListener('click', () => {
+        statusElement.textContent = "Workers running...";
+        statusElement.className = "running";
+        startButton.disabled = true;
 
-        let completed = 0;
-        const checkCompletion = () => {
-            completed++;
-            if (completed === 3) {
-                console.log('All Worker Tasks Completed');
-            }
-        };
+        // Create workers
+        const workers = [];
+        for (let i = 0; i < 4; i++) {
+            const worker = new Worker('worker.js');
+            workers.push(worker);
 
-        // Listen for messages from the workers indicating task completion
-        worker1.onmessage = worker2.onmessage = worker3.onmessage = (event) => {
-            if (event.data === 'done') {
-                checkCompletion();
-            }
-        };
+            worker.onmessage = (event) => {
+                if (event.data === 'done') {
+                    // Mark this worker as completed
+                    worker.completed = true;
+
+                    // Check if all workers are done
+                    if (workers.every(w => w.completed)) {
+                        statusElement.textContent = "All workers completed!";
+                        statusElement.className = "completed";
+                        startButton.disabled = false;
+                        console.log('All workers completed');
+                    }
+                }
+            };
+        }
+
+        // Start all workers
+        console.log('Starting workers...');
+        performance.mark('workers-start');
+        workers.forEach(worker => worker.postMessage('start'));
     });
 });

@@ -24,26 +24,46 @@
     <a href="../index.html">Back</a>
   </div>
 
-  <h1>Performance Tool Hands-On</h1>
-  <button id="startWorkers">Start Worker Tasks</button>
+  <div class="demo-container">
+    <h2>Web Workers Demo</h2>
+    <p>Click the button below to start multiple web workers that perform CPU-intensive tasks in parallel.</p>
+    <button id="startWorkers">Start Worker Tasks</button>
+    <div id="status">Ready to start workers</div>
+  </div>
 
-  <!-- Instructions for participants -->
   <div class="instructions">
-    <h2>Instructions</h2>
-    <p>Follow the steps below to complete the task:</p>
+    <h2>How to Use the Performance Tool to Analyze Thread Pool Usage</h2>
     <ol>
-      <li>Open the Developer Tools in your browser (usually by pressing F12 or right-clicking on the page and selecting
-        "Inspect").</li>
-      <li>Navigate to the "Performance" tab.</li>
-      <li>Click the "Start Worker Tasks" button to initiate the worker tasks.</li>
-      <li>Click the "Record" button in the Performance tab to start recording the performance.</li>
-      <li>Wait for the worker tasks to complete (you will see a message in the console).</li>
-      <li>Click the "Stop" button in the Performance tab to stop recording.</li>
-      <li>Analyze the recorded performance data to understand the impact of the worker tasks on the page's performance.
-      </li>
+      <li>Open Chrome DevTools (F12 or Ctrl+Shift+I)</li>
+      <li>Switch to the Performance tab</li>
+      <li>Click the ⚫ Record button</li>
+      <li>Click the "Start Worker Tasks" button above</li>
+      <li>Wait for all workers to complete</li>
+      <li>Click the ⏹ Stop button in DevTools</li>
     </ol>
-    <p>Try to identify any performance bottlenecks and think about how you might optimize the code to improve
-      performance.</p>
+  </div>
+
+  <div class="key-points">
+    <h2>What to Look For</h2>
+    <ul>
+      <li><strong>Main Thread:</strong> Should remain responsive during worker execution</li>
+      <li><strong>Worker Threads:</strong> Multiple workers executing in parallel</li>
+      <li><strong>Thread Pool:</strong> Browsers typically limit the number of concurrent workers (usually 4-6)</li>
+      <li><strong>Timeline:</strong> Check how work is distributed across available threads</li>
+    </ul>
+    <p><strong>Tip:</strong> Try increasing the number of workers in the code to exceed your browser's thread pool size
+      and observe what happens!</p>
+  </div>
+
+  <div class="key-points">
+    <h2>Browser Thread Pools</h2>
+    <p>Modern browsers manage computational resources through a thread pool. When you create multiple web workers:</p>
+    <ul>
+      <li>They run in parallel on separate threads from the main UI thread</li>
+      <li>The browser will typically limit concurrent workers to protect system resources</li>
+      <li>If you create more workers than the thread pool size, some will be queued</li>
+      <li>This demo helps visualize how the browser schedules and manages these worker threads</li>
+    </ul>
   </div>
 </body>
 

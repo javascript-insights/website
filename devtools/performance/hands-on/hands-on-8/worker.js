@@ -1,10 +1,12 @@
 self.onmessage = (event) => {
     if (event.data === 'start') {
-        // Perform a computationally intensive task
-        for (let i = 0; i < 1000000000; i++) {
-            Math.sqrt(i);
+        // Simulate CPU-intensive work
+        const startTime = Date.now();
+        while (Date.now() - startTime < 2000) {
+            // Busy wait for 2 seconds
+            Math.sqrt(Math.random() * 10000);
         }
-        // Send a message back to the main thread indicating the task is done
+        // Send result back to main thread
         self.postMessage('done');
     }
 };
