@@ -25,34 +25,54 @@
   </div>
 
   <div class="body">
-    <div id="ball"></div>
+
+    <h1>Frame Performance Demo</h1>
+    <div id="fps-counter">FPS: 0</div>
+    <div class="heavy-element"></div>
+
+    <div class="ball-container" style="
+    height: 100px;
+">
+      <div id="ball"></div>
+    </div>
     <div class="controls">
       <label for="speed">Animation Speed:</label>
-      <input type="range" id="speed" min="1" max="5" value="2">
+      <input type="range" id="speed" min="1" max="30" value="2">
+
+      <div>
+        <button id="stress-test">Start Stress Test</button>
+      </div>
+      <div>
+        <input type="checkbox" id="heavy-animation">
+        <label for="heavy-animation">Enable Heavy Animation</label>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h2>Frame Performance Testing</h2>
+      <p>Use this demo to learn how different operations affect frame rate.</p>
+
+      <h3>Quick Start:</h3>
+      <ol>
+        <li>Open DevTools (F12) and go to the Performance tab</li>
+        <li>Click Record and try these operations:
+          <ul>
+            <li>Change the animation speed</li>
+            <li>Start the stress test (Use the CPU throttling option so every execution takes more than 50 ms)</li>
+            <li>Enable the heavy animation</li>
+          </ul>
+        </li>
+        <li>Stop recording and analyze the results:</li>
+        <ul>
+          <li>Check the flame graph for long tasks</li>
+          <li>Identify any dropped frames</li>
+          <li>Use the "Screenshots" view to see how the UI was affected during the recording</li>
+          <li>Use the "Call Tree" view to see how much time was spent in each function</li>
+          <li>Analyze the impact of different animation speeds on performance</li>
+        </ul>
+      </ol>
     </div>
   </div>
-
-  <div class="instructions">
-    <h2>Instructions</h2>
-    <p>In this task, you will learn how to use the browser DevTools to analyze and improve the performance of a simple
-      animation.</p>
-    <h3>Tasks:</h3>
-    <ol>
-      <li>Open the browser DevTools by pressing <strong>F12</strong> or <strong>Ctrl+Shift+I</strong> (Windows) /
-        <strong>Cmd+Opt+I</strong> (Mac).
-      </li>
-      <li>Navigate to the <strong>Elements</strong> tab and inspect the <code>&lt;div id="ball"&gt;</code> element.
-        Observe how the styles change when you adjust the animation speed.</li>
-      <li>Switch to the <strong>Console</strong> tab and use <code>console.log</code> to log the current animation
-        speed. For example, type <code>console.log(document.getElementById('speed').value);</code> and press Enter.</li>
-      <li>Go to the <strong>Performance</strong> tab and start recording a performance profile. Adjust the animation
-        speed and observe how it affects the performance metrics.</li>
-      <li>Analyze the performance profile and identify any potential bottlenecks or areas for improvement.</li>
-      <li>Experiment with different animation speeds and observe the impact on CPU usage and frame rate.</li>
-      <li>Document your findings and suggest ways to optimize the animation for better performance.</li>
-    </ol>
-  </div>
-
 </body>
 
 </html>
