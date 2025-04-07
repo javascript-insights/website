@@ -25,29 +25,67 @@
   </div>
 
   <div class="content">
-    <h2>Maximum call stack size exceeded</h2>
-    <p>In this hands-on exercise, we will explore the "Maximum call stack size exceeded" error in JavaScript.</p>
-    <p>This error occurs when a function calls itself recursively without a proper base case, leading to an infinite
-      loop of function calls.</p>
-    <p>To trigger this error, we will create a simple recursive function that does not have a base case.</p>
-    <button id="triggerError" onclick="loop(0);">Trigger Error</button>
-    <p id="errorMessage" style="color: red;"></p>
-    <p>Once the error is triggered, we will use the browser's DevTools Performance tool to inspect the call stack and
-      understand what went wrong.</p>
+    <h2>Performance Tools: Call Stack Analysis</h2>
 
-    <p>Let's get started!</p>
+    <div class="section">
+      <h3>Exercise 1: Understanding Call Stack Limits</h3>
+      <p>The browser's Performance panel can help analyze stack overflows and recursive function performance.</p>
+      <ol class="steps">
+        <li>Open DevTools (F12 or right-click and select "Inspect")</li>
+        <li>Go to the Performance tab</li>
+        <li>Click the record button (⚫)</li>
+        <li>Click the button below to trigger a recursive loop</li>
+        <li>Stop recording once the error appears</li>
+        <li>Analyze the call stack in the flame chart</li>
+      </ol>
+      <button id="triggerError" class="demo-button" onclick="loop(0);">Trigger Stack Overflow</button>
+      <p id="errorMessage" class="error-message"></p>
+    </div>
 
-    <p>Try to modify the code in index.js to add a few milliseconds delay between each loop iteration.</p>
-    <p>What has changed in the behavior? Did it prevent the stack overflow?</p>
+    <div class="section">
+      <h3>Exercise 2: Optimizing Recursion</h3>
+      <p>Let's see how setTimeout affects our recursive function in the Performance panel:</p>
+      <ol class="steps">
+        <li>Start a new recording in the Performance tab</li>
+        <li>Click the button below to run the delayed version</li>
+        <li>Observe how the call stack appears different in the flame chart</li>
+        <li>Notice how setTimeout creates separate "tasks" instead of a continuous stack</li>
+      </ol>
+      <button id="triggerDelayed" class="demo-button" onclick="delayedLoop(0);">Run Delayed Version</button>
+    </div>
 
-    <button id="showHint" onclick="showHint();" style="margin-top: 10px;">Show Hint</button>
-    <p id="hintText" style="display: none; color: blue;">
-      Hint: You can use setTimeout() to add a delay. Try wrapping the recursive call in:
-      setTimeout(() => loop(i + 1), 100);
+    <div class="section">
+      <h3>Exercise 3: CPU Profiling</h3>
+      <p>The Performance panel can also show CPU usage patterns:</p>
+      <ol class="steps">
+        <li>Start a new recording with "CPU profile" checked</li>
+        <li>Click the button below to run a CPU-intensive operation</li>
+        <li>Look at the CPU chart in the timeline view</li>
+        <li>Explore the "Bottom-Up" and "Call Tree" tabs to find performance bottlenecks</li>
+      </ol>
+      <button id="triggerCPUTask" class="demo-button" onclick="runCPUIntensiveTask();">Run CPU Task</button>
+    </div>
+
+    <div class="tips-box">
+      <h3>Performance Panel Tips</h3>
+      <ul>
+        <li><strong>Flame Chart:</strong> Shows function call stacks - taller stacks indicate deeper recursion</li>
+        <li><strong>Summary:</strong> Check the pie chart to see where time is spent (Loading, Scripting, Rendering)
+        </li>
+        <li><strong>Bottom-Up:</strong> Shows which functions took the most time overall</li>
+        <li><strong>Call Tree:</strong> Shows the full calling structure of your code</li>
+        <li><strong>Event Log:</strong> Lists each browser event chronologically</li>
+      </ul>
+    </div>
+
+    <button id="showHint" class="hint-button" onclick="showHint();">Show Hint</button>
+    <p id="hintText" class="hint-text">
+      Hint: When analyzing performance, look for "long tasks" (colored red in the timeline) that may be causing jank.
+      Also, compare the call stack height between the regular recursion and setTimeout versions to understand how
+      event loop and task queuing work in JavaScript.
     </p>
 
   </div>
-
 </body>
 
 </html>
