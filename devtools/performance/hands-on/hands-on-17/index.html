@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 7 - Iframe</h1>
+  <h1>Performance Hands-On 17 - Tracking iframe Communication</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -25,66 +25,50 @@
   </div>
 
   <div class="content">
-    <h1>Performance Tool Hands-On</h1>
     <div class="instructions">
+      <h2>What You'll Learn</h2>
+      <p>In this exercise, you'll learn how to use the Performance tool to track and analyze communication between a
+        main page and an iframe using <code>postMessage</code>.</p>
+
       <h2>Instructions</h2>
       <ol>
-        <li>Open the DevTools in your browser (F12 or right-click and select "Inspect").</li>
-        <li>Go to the "Performance" tab.</li>
-        <li>Click the "Record" button to start recording.</li>
-        <li>Click the "Perform Task" button below to generate some performance data.</li>
-        <li>Click the "Stop" button in DevTools to stop recording.</li>
-        <li>Analyze the performance data to identify any bottlenecks or areas for improvement.</li>
-        <li>Try modifying the code in <code>index.js</code> to optimize the performance and repeat the recording process
-          to see the impact of your changes.</li>
+        <li>Open DevTools (F12 or Ctrl+Shift+I / Cmd+Option+I)</li>
+        <li>Go to the "Performance" tab</li>
+        <li>Click the "Record" button (⚫) to start recording</li>
+        <li>Click the "Send message to iframe" button below several times</li>
+        <li>Click the "Send message to main frame" button in the iframe several times</li>
+        <li>Stop the recording by clicking the "Stop" button in DevTools</li>
       </ol>
+
+      <h2>What to Look For in the Performance Panel</h2>
+      <ul>
+        <li>Find the "Main" section in the trace and expand it</li>
+        <li>Look for <code>postMessage</code> events in the timeline</li>
+        <li>Click on a <code>postMessage</code> event to see details about:
+          <ul>
+            <li>The message content</li>
+            <li>The origin of the message</li>
+            <li>The timing between sending and processing the message</li>
+          </ul>
+        </li>
+        <li>Notice how messages are represented as arrows between frames in the timeline</li>
+      </ul>
+    </div>
+
+    <div class="demo-area">
+      <h2>iframe Communication Demo</h2>
+      <p>
+        This demo demonstrates how <code>postMessage</code> communication between frames appears in a performance trace.
+      </p>
+
+      <div class="control-panel">
+        <button id="sendMessage" class="button">Send message to iframe</button>
+        <p id="main-frame-result-text">Received 0 messages</p>
+      </div>
+
+      <iframe src="./iframe.html" class="demo-iframe"></iframe>
     </div>
   </div>
-
-  
-
-  <h1>postMessage Trace Events demo</h1>
-  <p>
-    This demo page provides an interface to send messages between the main frame and an embedded iframe.
-  </p>
-  <p>
-    This is part of a tutorial that demonstrates a feature in the timeline of a performance trace that allows
-    you to easily investigate when a <code>postMessage</code> call occurred,
-    and how long the message was queued before the <code>postMessage</code> handler started.
-  </p>
-  Used by <a
-    href="https://learn.microsoft.com/microsoft-edge/devtools-guide-chromium/evaluate-performance/reference#view-messages-between-windows-iframes-and-dedicated-workers">View
-    messages between windows, iframes, and dedicated workers</a> in <em>Performance features reference</em>.
-  </p>
-  <b>Main frame:</b>
-  <button id="sendMessage" style="display: block; margin-top: 1.5em ;">Send message to iframe</button>
-  <p id="main-frame-result-text">Received 0 messages</p>
-  <iframe src="./iframe.html" style="width: 100%; height: 640px; border: 1px solid #ccc;"></iframe>
-
-  <script>
-    const btn = document.querySelector('#sendMessage');
-    const p = document.querySelector('#main-frame-result-text');
-    const iframe = document.querySelector('iframe')
-    let count = 0;
-
-    btn.addEventListener('click', () => {
-      if (iframe.contentWindow) {
-        iframe.contentWindow.postMessage('my-message-1', '*');
-      }
-    });
-
-    window.addEventListener(
-      'message',
-      (event) => {
-        if (event.data === 'my-message-2') {
-          count++;
-          p.textContent = `Received ${count} messages`;
-        }
-      },
-      false
-    );
-  </script>
-
 </body>
 
 </html>

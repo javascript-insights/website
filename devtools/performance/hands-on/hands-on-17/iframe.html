@@ -8,34 +8,61 @@
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
-    <b>iframe:</b>
-    <button style="display: block; margin-top: 1.5em ;">Send message to main frame</button>
-    <p id="iframe-result-text">Received 0 messages</p>
+    <h2>iframe Content</h2>
+    <p>This is the embedded iframe that will communicate with the main page.</p>
+
+    <div class="control-panel">
+        <button id="sendToParent" class="button">Send message to main frame</button>
+        <p id="iframe-result-text">Received 0 messages</p>
+    </div>
+
+    <div class="info-box">
+        <h3>How it works:</h3>
+        <p>When you click the button above, this iframe sends a message to the parent window using
+            <code>window.parent.postMessage()</code>.
+        </p>
+        <p>Similarly, this iframe listens for messages from the parent window and updates the counter when messages are
+            received.</p>
+    </div>
 
     <script>
-        const btn = document.querySelector('button');
-        const p = document.querySelector('#iframe-result-text');
+        const btn = document.getElementById('sendToParent');
+        const resultText = document.getElementById('iframe-result-text');
         let count = 0;
 
         btn.addEventListener('click', () => {
-            if (window.parent) {
-                window.parent.postMessage('my-message-2', '*');
+            // Create some artificial work to show in the performance trace
+            let result = 0;
+            for (let i = 0; i < 10000; i++) {
+                result += Math.sqrt(i);
             }
+
+            // Send message to parent window
+            window.parent.postMessage('my-message-2', '*');
         });
 
-        window.addEventListener(
-            'message',
-            (event) => {
-                if (event.data === 'my-message-1') {
-                    count++;
-                    p.textContent = `Received ${count} messages`;
-                }
-            },
-            false
-        );
+        window.addEventListener('message', (event) => {
+            if (event.data === 'my-message-1') {
+                count++;
+                resultText.textContent = `Received ${count} messages`;
+            }
+        }, false);
     </script>
 </body>
 
