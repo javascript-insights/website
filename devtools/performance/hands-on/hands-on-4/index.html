@@ -80,25 +80,6 @@
         <li>Analyze the results using the guidance below.</li>
       </ol>
 
-      <h2>Reading the Performance Panel</h2>
-      <div class="panel-guide">
-        <h3>Main Sections:</h3>
-        <ul>
-          <li><strong>Overview:</strong> Shows CPU activity, frames per second, and network requests over time.</li>
-          <li><strong>Main Section:</strong> Displays flame chart of JavaScript execution, rendering, and painting.</li>
-          <li><strong>Call Tree:</strong> Shows which functions consumed the most CPU time (Bottom-Up view).</li>
-          <li><strong>Event Log:</strong> Chronological list of events that occurred during recording.</li>
-        </ul>
-
-        <h3>Key Patterns to Look For:</h3>
-        <ul>
-          <li><strong>Long yellow bars:</strong> JavaScript execution blocks that might cause jank.</li>
-          <li><strong>Red frames:</strong> Frames that missed the 60fps target (potential user experience issues).</li>
-          <li><strong>Deep call stacks:</strong> May indicate complex processing that could be optimized.</li>
-          <li><strong>Repeated patterns:</strong> Opportunities for caching or memoization.</li>
-        </ul>
-      </div>
-
       <h2>Hands-On Tasks</h2>
       <ol>
         <li>Compare the flamecharts between the CPU Intensive Task and Simple Task:
@@ -126,6 +107,25 @@
           </ul>
         </li>
       </ol>
+
+      <h2>Reading the Performance Panel</h2>
+      <div class="panel-guide">
+        <h3>Main Sections:</h3>
+        <ul>
+          <li><strong>Overview:</strong> Shows CPU activity, frames per second, and network requests over time.</li>
+          <li><strong>Main Section:</strong> Displays flame chart of JavaScript execution, rendering, and painting.</li>
+          <li><strong>Call Tree:</strong> Shows which functions consumed the most CPU time (Bottom-Up view).</li>
+          <li><strong>Event Log:</strong> Chronological list of events that occurred during recording.</li>
+        </ul>
+
+        <h3>Key Patterns to Look For:</h3>
+        <ul>
+          <li><strong>Long yellow bars:</strong> JavaScript execution blocks that might cause jank.</li>
+          <li><strong>Red frames:</strong> Frames that missed the 60fps target (potential user experience issues).</li>
+          <li><strong>Deep call stacks:</strong> May indicate complex processing that could be optimized.</li>
+          <li><strong>Repeated patterns:</strong> Opportunities for caching or memoization.</li>
+        </ul>
+      </div>
 
       <h2>Performance Optimization Tips</h2>
       <div class="tips">

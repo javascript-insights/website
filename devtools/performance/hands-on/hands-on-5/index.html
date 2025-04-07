@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 5 - Performance NET Feature</h1>
+  <h1>Performance Hands-On 5 - NET</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -25,146 +25,46 @@
   </div>
 
   <main>
-
     <section class="introduction">
       <h2>Understanding Network Activity in Performance Profiles</h2>
-      <p>The NET section in the Performance panel shows how network activity correlates with rendering, JavaScript
-        execution, and other
-        browser activities. Unlike the Network panel, it helps you understand <em>when</em> and <em>how</em> network
-        requests impact
-        your application's overall performance.</p>
-      <p>This hands-on exercise will teach you how to analyze network-related performance issues using the Performance
-        panel's NET feature.</p>
+      <p>The NET section in the Performance panel shows how network activity impacts your application's overall
+        performance.</p>
     </section>
 
     <section class="instructions">
-      <h2>Performance NET Feature Hands-On Instructions</h2>
-      <p>Follow these steps to learn how to use the NET feature in the Performance panel:</p>
+      <h2>Quick Instructions</h2>
       <ol>
-        <li>Open Chrome DevTools by pressing <kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd> (or <kbd>Cmd+Option+I</kbd> on
-          Mac)</li>
-        <li>Go to the <strong>Performance</strong> panel (not the Network panel)</li>
-        <li>Click the gear icon ⚙️ to open the settings and ensure:
-          <ul>
-            <li>Network is enabled (check "Network")</li>
-            <li>Screenshots are enabled for better visual correlation</li>
-          </ul>
-        </li>
-        <li>Click the <strong>Record</strong> button ⏺️ (or press <kbd>Ctrl+E</kbd>)</li>
-        <li>Interact with the page using the buttons below</li>
-        <li>Click <strong>Stop</strong> to end the recording and analyze the results</li>
-        <li>In the results, look for the <strong>Network</strong> section which shows:
-          <ul>
-            <li>Color-coded bars for network requests</li>
-            <li>How they align with rendering, JavaScript, and other browser activities</li>
-            <li>The impact of network requests on the critical rendering path</li>
-          </ul>
-        </li>
+        <li>Open DevTools (<kbd>F12</kbd>)</li>
+        <li>Go to the <strong>Performance</strong> panel</li>
+        <li>Enable Network and Screenshots in settings ⚙️</li>
+        <li>Click <strong>Record</strong> ⏺️</li>
+        <li>Use the buttons below</li>
+        <li>Click <strong>Stop</strong> and analyze the results</li>
       </ol>
     </section>
 
     <section class="practical-tasks">
-      <h2>Practical Performance NET Analysis Tasks</h2>
-
-      <div class="task">
-        <h3>Task 1: Analyze Network Impact on Performance</h3>
-        <p>Start a performance recording, then click the buttons below to make different types of network requests.
-          Stop the recording and observe how these requests impact other activities:</p>
-        <div class="controls">
-          <button id="loadData">Load Small JSON</button>
-          <button id="loadLargeData">Load Large Dataset</button>
-          <button id="loadImage">Load Image</button>
-          <button id="simulateSlowRequest">Simulate Slow API</button>
-          <button id="loadMultipleResources">Load Multiple Resources</button>
-        </div>
-        <div class="results">
-          <div id="networkInfo" class="network-info"></div>
-          <pre id="data" class="data-container"></pre>
-          <div id="imageContainer" class="image-container"></div>
-        </div>
+      <h2>Network Performance Testing</h2>
+      <div class="controls">
+        <button id="loadData">Load Small JSON</button>
+        <button id="loadImage">Load Image</button>
+        <button id="loadMultipleResources">Load Multiple Resources</button>
+        <button id="createNetworkBottleneck">Create Network Bottleneck</button>
       </div>
 
-      <div class="task">
-        <h3>Task 2: Understanding Network Bottlenecks</h3>
-        <p>Record a performance profile while clicking the "Create Network Bottleneck" button. Look for these patterns:
-        </p>
-        <ul>
-          <li>Main thread blocking due to synchronous XHR</li>
-          <li>Render-blocking resources delaying First Paint</li>
-          <li>Long request durations affecting responsiveness</li>
-          <li>Network contentions (too many parallel requests)</li>
-          <li>Resource waterfall dependencies creating cascading delays</li>
-        </ul>
-        <button id="createNetworkBottleneck">Create Network Bottleneck</button>
+      <div class="results">
+        <div id="networkInfo" class="network-info"></div>
+        <pre id="data" class="data-container"></pre>
+        <div id="imageContainer" class="image-container"></div>
       </div>
     </section>
 
     <section class="tips">
-      <h2>Pro Tips for Network Performance Analysis</h2>
+      <h2>What to Look For</h2>
       <ul>
-        <li><strong>Look for long-running tasks after network requests</strong> - These indicate heavy processing of
-          network responses</li>
-        <li><strong>Check for render-blocking patterns</strong> - Critical CSS/JS resources that delay first paint</li>
-        <li><strong>Identify idle time wastage</strong> - Periods where the main thread is free but waiting for network
-          requests</li>
-        <li><strong>Use network throttling</strong> - In the Performance panel settings, simulate slower connections
-        </li>
-        <li><strong>Analyze waterfall dependencies</strong> - Resources that can't load until others complete</li>
-        <li><strong>Correlation with frame rendering</strong> - See how network activity affects frame rate (in the FPS
-          graph)</li>
-        <li><strong>Compare multiple recordings</strong> - Try different optimization strategies and compare profiles
-        </li>
+        <li>Blue bars in the Network section</li>
+        <li>How network requests align with main thread activity</li>
       </ul>
-    </section>
-
-    <section class="analysis-guide">
-      <h2>Performance NET Feature Analysis Guide:</h2>
-
-      <div class="guide-section">
-        <h3>1. Identifying Network Impact on Performance:</h3>
-        <ul>
-          <li>Look for blue bars in the Network section of the performance recording</li>
-          <li>Notice how they align with activity in the Main thread section above</li>
-          <li>Hover over network entries to see detailed timing information</li>
-        </ul>
-      </div>
-
-      <div class="guide-section">
-        <h3>2. Key Metrics to Watch:</h3>
-        <ul>
-          <li><strong>TTFB (Time To First Byte)</strong>: How long before the server starts responding</li>
-          <li><strong>Resource Download Time</strong>: The blue bar's width in the NET section</li>
-          <li><strong>Main Thread Processing</strong>: Yellow/purple bars after network requests</li>
-          <li><strong>Request Queueing</strong>: Gray sections before download starts, indicating congestion</li>
-        </ul>
-      </div>
-
-      <div class="guide-section">
-        <h3>3. Common Performance Issues to Look For:</h3>
-        <ul>
-          <li><strong>Render-blocking Resources</strong>: CSS/JS preventing First Paint</li>
-          <li><strong>Long Task Bars</strong> following network requests (data processing cost)</li>
-          <li><strong>Waterfall Dependency Chains</strong>: Resources waiting for others to complete</li>
-          <li><strong>Connection Limits</strong>: Too many simultaneous requests to same origin</li>
-          <li><strong>Layout Thrashing</strong>: Multiple layout recalculations after resource loads</li>
-        </ul>
-      </div>
-
-      <div class="guide-section">
-        <h3>4. Optimization Opportunities:</h3>
-        <ul>
-          <li><strong>Preload Critical Resources</strong>: Use <code>&lt;link rel="preload"&gt;</code></li>
-          <li><strong>Async/Defer Scripts</strong>: Prevent render blocking</li>
-          <li><strong>Lazy Loading</strong>: Defer non-critical resources</li>
-          <li><strong>Request Prioritization</strong>: Load important resources first</li>
-          <li><strong>Reduce Payload Size</strong>: Compress, minify, optimize images</li>
-        </ul>
-      </div>
-
-      <div class="pro-tip">
-        <p>Pro Tip: Compare the Performance recording with Network panel waterfall to get a complete picture of network
-          impact on rendering and JavaScript execution.</p>
-      </div>
     </section>
   </main>
 </body>
