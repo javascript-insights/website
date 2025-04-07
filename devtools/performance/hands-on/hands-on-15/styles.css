@@ -11,5 +11,44 @@
 
 .instructions {
         text-align: left;
-        max-width: 600px;
+        max-width: 800px;
+        margin-bottom: 30px;
+        line-height: 1.5;
+}
+
+.demo-section {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+        background-color: #f9f9f9;
+}
+
+.run-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+}
+
+.run-button:hover {
+        background-color: #45a049;
+}
+
+.call-tree-info {
+        background-color: #e7f3fe;
+        border-left: 6px solid #2196F3;
+        padding: 15px;
+        margin: 20px 0;
+}
+
+code {
+        background-color: #f1f1f1;
+        padding: 2px 4px;
+        border-radius: 4px;
 }
