@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h1>Performance Hands-On 21 - Counter</h1>
+  <h1>Performance Hands-On 21 - Counter Animation</h1>
   <nav class="breadcrumb">
     <a href="../../../../../index.html">JavaScript Insights</a>
     <a href="../../../../index.html">DevTools</a>
@@ -26,33 +26,64 @@
 
   <div class="description">
     <p>
-      This example demonstrates a simple counter that increments every second. The speed of the counter can be adjusted
-      using a slider.
+      This demo helps you learn the Chrome DevTools Performance panel by analyzing a simple counter animation.
+      Adjust the speed and observe how it affects rendering performance.
     </p>
   </div>
 
   <div class="instructions">
-    <h2>Instructions</h2>
-    <ol>
-      <li>Open Chrome DevTools (F12 or Ctrl+Shift+I)</li>
-      <li>Switch to the Performance tab</li>
-      <li>Click the record button (circle icon)</li>
-      <li>Interact with the counter and slider</li>
-      <li>Stop recording</li>
-      <li>Analyze the frame timeline and performance metrics</li>
-      <li>Look for frame drops and notice how different speed settings affect frames</li>
-    </ol>
-  </div>
+    <h2>Performance Panel Features</h2>
+    <div class="feature-box">
+      <h3>Recording Performance</h3>
+      <ol>
+        <li>Open DevTools (F12) and go to the Performance tab</li>
+        <li>Click the ⚫ Record button</li>
+        <li>Interact with the counter below (increase speed)</li>
+        <li>Click Stop</li>
+      </ol>
+    </div>
 
-  <div class="body">
-    <div class="counter" id="counter">0</div>
-    <div class="controls">
-      <button id="resetButton">Reset</button>
-      <label for="speedSlider">Speed: <span id="speedValue">1</span>x</label>
-      <input type="range" id="speedSlider" min="1" max="1000000000" value="1">
+    <div class="feature-box">
+      <h3>Analyzing the Recording</h3>
+      <ol>
+        <li><strong>FPS Chart</strong>: Look at the green bar at the top - dips show frame drops</li>
+        <li><strong>CPU Chart</strong>: Shows how much CPU the browser used</li>
+        <li><strong>Main Thread</strong>: Examine the flame chart to see JavaScript execution</li>
+        <li><strong>Frames</strong>: Check individual frames and their rendering time</li>
+      </ol>
+    </div>
+
+    <div class="feature-box">
+      <h3>Identifying Performance Issues</h3>
+      <p>Try setting the counter to a high speed (100+) and observe:</p>
+      <ul>
+        <li>Red bars in the FPS chart indicating dropped frames</li>
+        <li>Long tasks in the Main section</li>
+        <li>The counter may appear to freeze or stutter</li>
+      </ul>
     </div>
   </div>
 
+  <div class="demo-container">
+    <div class="counter" id="counter">0</div>
+    <div class="controls">
+      <button id="resetButton">Reset Counter</button>
+      <div class="slider-container">
+        <label for="speedSlider">Animation Speed: <span id="speedValue">1</span>x</label>
+        <input type="range" id="speedSlider" min="1" max="200" value="1">
+      </div>
+    </div>
+  </div>
+
+  <div class="tips">
+    <h3>Pro Tips</h3>
+    <ul>
+      <li>Use the <strong>Screenshots</strong> checkbox when recording to see visual changes</li>
+      <li>Click on events in the flame chart to see details in the Summary panel</li>
+      <li>Look for red triangles ⚠️ that indicate long tasks</li>
+      <li>Try the "Web Vitals" checkbox to see Core Web Vitals metrics</li>
+    </ul>
+  </div>
 </body>
 
 </html>

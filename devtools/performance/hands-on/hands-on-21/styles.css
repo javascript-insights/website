@@ -8,17 +8,78 @@
 }
 
 .counter {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 20px;
+    text-align: center;
+    min-width: 150px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .controls {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 15px;
 }
 
 .controls>* {
-    margin: 10px 0;
-    width: 480px;
+    margin: 5px 0;
+    width: 300px;
+}
+
+.demo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+.slider-container {
+    width: 100%;
+    text-align: center;
+}
+
+#resetButton {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+#speedSlider {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.feature-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #4285f4;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 0 4px 4px 0;
+}
+
+.instructions {
+    max-width: 800px;
+    margin: 0 auto 20px;
+}
+
+.tips {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fef9e7;
+    border-left: 4px solid #f1c40f;
+    border-radius: 0 4px 4px 0;
 }
