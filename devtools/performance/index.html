@@ -26,10 +26,46 @@
     profiles showing exactly where time is spent, helping you identify slowdowns and optimize your code for better
     speed.</p>
 
+  <h1>Web Vitals</h1>
+  <p>Web Vitals is an initiative by Google to provide unified guidance for quality signals that are essential to
+    delivering a great user experience on the web.</p>
+  <p>The Web Vitals initiative aims to simplify the landscape, and help sites focus on the metrics that matter most, the
+    Core Web Vitals.</p>
+  <h2>Core Web Vitals</h2>
+  <p>Core Web Vitals are the subset of Web Vitals that apply to all web pages, should be measured by all site owners,
+    and will be surfaced across all devtools. Each of the Core Web Vitals represents a distinct facet of the user
+    experience, is measurable in the field, and reflects the real-world experience of a critical user-centric outcome.
+  </p>
+  <ul>
+    <li><strong>Largest Contentful Paint (LCP)</strong>: Measures loading performance. A good LCP should occur within
+      2.5 seconds of when the page starts loading.</li>
+    <li><strong>Interaction to Next Paint (INP)</strong>: Measures interactivity. A good INP should be 200 milliseconds
+      or less.</li>
+    <li><strong>Cumulative Layout Shift (CLS)</strong>: Measures visual stability. A good CLS should be 0.1 or less.
+    </li>
+  </ul>
+  <p>To ensure you're hitting the recommended target for these metrics for most of your users, a good threshold to
+    measure is the 75th percentile of page loads, segmented across mobile and desktop devices.</p>
+
+  <div class="cwv-metrics">
+    <img src="static/lcp.svg" alt="Largest Contentful Paint threshold recommendations" width="250" height="220">
+    <img src="static/inp.svg" alt="Interaction to Next Paint threshold recommendations" width="250" height="220">
+    <img src="static/cls.svg" alt="Cumulative Layout Shift threshold recommendations" width="250" height="220">
+  </div>
+
+  <p><a href="https://web.dev/articles/vitals">Core Web Vitals</a></p>
+
+  <ul>
+    <li><a href="https://web.dev/articles/optimize-lcp">Optimize LCP</a></li>
+    <li><a href="https://web.dev/articles/optimize-inp">Optimize INP</a></li>
+    <li><a href="https://web.dev/articles/optimize-cls">Optimize CLS</a></li>
+  </ul>
+
   <h2>Using the Performance Panel</h2>
   <p>The Performance panel helps you analyze and optimize your web application by:</p>
 
   <ul>
+    <li>🕸️ Web Vitals overview</li>
     <li>🎥 Recording performance profiles to see what's happening</li>
     <li>⚙️ Adjusting capture settings for different scenarios</li>
     <li>📈 Examining detailed performance reports</li>
@@ -63,12 +99,12 @@
 
   <div style="margin: 20px;">
     <div style="display: flex; justify-content: flex-start; max-width: 600px;">
-      <img src="static/JSEventLoop.gif" alt="Event Loop Illustration" width="100%" />
+      <img src="static/JSEventLoop.png" alt="Event Loop Illustration" width="100%" />
     </div>
   </div>
   <div style="margin: 20px;">
     <div style="display: flex; justify-content: flex-start; max-width: 600px;">
-      <img src="static/JSEventLoop.png" alt="Event Loop Illustration" width="100%" />
+      <img src="static/JSEventLoop.gif" alt="Event Loop Illustration" width="100%" />
     </div>
   </div>
 
@@ -305,42 +341,6 @@
   <p>To add a Lable to an entry, right-click on the element and select "Lable entry".</p>
   <p>To add a link to another entry, right-click on the element and selete "Link entreis".</p>
   <p>To define time range, Shift and drag the flame chart.</p>
-
-
-  <h1>Web Vitals</h1>
-  <p>Web Vitals is an initiative by Google to provide unified guidance for quality signals that are essential to
-    delivering a great user experience on the web.</p>
-  <p>The Web Vitals initiative aims to simplify the landscape, and help sites focus on the metrics that matter most, the
-    Core Web Vitals.</p>
-  <h2>Core Web Vitals</h2>
-  <p>Core Web Vitals are the subset of Web Vitals that apply to all web pages, should be measured by all site owners,
-    and will be surfaced across all devtools. Each of the Core Web Vitals represents a distinct facet of the user
-    experience, is measurable in the field, and reflects the real-world experience of a critical user-centric outcome.
-  </p>
-  <ul>
-    <li><strong>Largest Contentful Paint (LCP)</strong>: Measures loading performance. A good LCP should occur within
-      2.5 seconds of when the page starts loading.</li>
-    <li><strong>Interaction to Next Paint (INP)</strong>: Measures interactivity. A good INP should be 200 milliseconds
-      or less.</li>
-    <li><strong>Cumulative Layout Shift (CLS)</strong>: Measures visual stability. A good CLS should be 0.1 or less.
-    </li>
-  </ul>
-  <p>To ensure you're hitting the recommended target for these metrics for most of your users, a good threshold to
-    measure is the 75th percentile of page loads, segmented across mobile and desktop devices.</p>
-
-  <div class="cwv-metrics">
-    <img src="static/lcp.svg" alt="Largest Contentful Paint threshold recommendations" width="250" height="220">
-    <img src="static/inp.svg" alt="Interaction to Next Paint threshold recommendations" width="250" height="220">
-    <img src="static/cls.svg" alt="Cumulative Layout Shift threshold recommendations" width="250" height="220">
-  </div>
-
-  <p><a href="https://web.dev/articles/vitals">Core Web Vitals</a></p>
-
-  <ul>
-    <li><a href="https://web.dev/articles/optimize-lcp">Optimize LCP</a></li>
-    <li><a href="https://web.dev/articles/optimize-inp">Optimize INP</a></li>
-    <li><a href="https://web.dev/articles/optimize-cls">Optimize CLS</a></li>
-  </ul>
 
   <h2>View Timings</h2>
   <p>On the Timings track, view important markers such as:</p>

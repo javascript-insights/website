@@ -87,49 +87,58 @@
       </ul>
     </section>
 
+    <section class="explanation">
+      <h3>What Are Render-Blocking Resources?</h3>
+      <p>
+        Render-blocking resources are scripts (JavaScript) and stylesheets (CSS) that prevent
+        a web page from rendering until they are downloaded and processed, thus delaying
+        the initial display of content.
+      </p>
+    </section>
+
     <section class="network-analysis">
       <h3>Understanding Network Performance in DevTools</h3>
-      
+
       <!-- Color Coding and Markers -->
       <div class="analysis-block">
-      <h4>Visual Indicators</h4>
-      <ul>
-        <li>🔴 Red triangle - Render blocking request</li>
-        <li>🎨 Color codes next to Network track show request types</li>
-        <li>➡️ Click request to see dependency arrows</li>
-      </ul>
+        <h4>Visual Indicators</h4>
+        <ul>
+          <li>🔴 Red triangle - Render blocking request</li>
+          <li>🎨 Color codes next to Network track show request types</li>
+          <li>➡️ Click request to see dependency arrows</li>
+        </ul>
       </div>
 
       <!-- Request Information -->
       <div class="analysis-block">
-      <h4>Request Details (Hover to See)</h4>
-      <ul>
-        <li>📍 Full URL</li>
-        <li>⏱️ Total load time</li>
-        <li>⚡ Priority level</li>
-        <li>🔄 Loading stages</li>
-      </ul>
+        <h4>Request Details (Hover to See)</h4>
+        <ul>
+          <li>📍 Full URL</li>
+          <li>⏱️ Total load time</li>
+          <li>⚡ Priority level</li>
+          <li>🔄 Loading stages</li>
+        </ul>
       </div>
 
       <!-- Timeline Explanation -->
       <div class="analysis-block">
-      <h4>Timeline Components</h4>
-      <ul>
-        <li>|— Left line: Initial connection</li>
-        <li>□ Light section: Server wait time</li>
-        <li>■ Dark section: Download time</li>
-        <li>—| Right line: Processing time</li>
-      </ul>
+        <h4>Timeline Components</h4>
+        <ul>
+          <li>|— Left line: Initial connection</li>
+          <li>□ Light section: Server wait time</li>
+          <li>■ Dark section: Download time</li>
+          <li>—| Right line: Processing time</li>
+        </ul>
       </div>
 
       <!-- Quick Tips -->
       <div class="analysis-block">
-      <h4>Pro Tips</h4>
-      <ul>
-        <li>Right-click → "Reveal in Network panel" for details</li>
-        <li>Check Summary tab for priority information</li>
-        <li>Monitor render-blocking resources</li>
-      </ul>
+        <h4>Pro Tips</h4>
+        <ul>
+          <li>Right-click → "Reveal in Network panel" for details</li>
+          <li>Check Summary tab for priority information</li>
+          <li>Monitor render-blocking resources</li>
+        </ul>
       </div>
     </section>
 
