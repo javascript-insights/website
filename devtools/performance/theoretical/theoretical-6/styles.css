@@ -29,11 +29,11 @@
 
     0%,
     100% {
-        transform: translateY(0);
+        transform: translateX(0);
     }
 
     50% {
-        transform: translateY(-200px);
+        transform: translateX(-200px);
     }
 }
 
@@ -41,10 +41,10 @@
 
     0%,
     100% {
-        top: 50%;
+        left: 50%;
     }
 
     50% {
-        top: calc(50% - 200px);
+        left: calc(50% - 200px);
     }
 }
