@@ -1,4 +1,5 @@
-const CACHE_NAME = 'network-tool-cache-theoretical-2';
+const CACHE_NAME_I = 'network-tool-cache-theoretical-2-install';
+const CACHE_NAME_F = 'network-tool-cache-theoretical-2-fetch';
 const urlsToCache = [
     './index.html',
     './index.js'
@@ -7,7 +8,7 @@ const urlsToCache = [
 // Install event
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_NAME)
+        caches.open(CACHE_NAME_I)
             .then(cache => {
                 console.log('Opened cache');
                 return cache.addAll(urlsToCache);
@@ -26,12 +27,12 @@ self.addEventListener('fetch', event => {
                 return fetch(event.request)
                     .then(response => {
                         // Check if we received a valid response
-                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                        if (!response || response.status !== 200) {
                             return response;
                         }
                         // Clone the response as it can only be consumed once
                         const responseToCache = response.clone();
-                        caches.open(CACHE_NAME)
+                        caches.open(CACHE_NAME_F)
                             .then(cache => {
                                 cache.put(event.request, responseToCache);
                             });
