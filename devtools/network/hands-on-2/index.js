@@ -42,7 +42,9 @@ function sendRandomData() {
         randomNumber: Math.random() * 1000,
         funnyMessage: 'Why did the developer go broke? Because he used up all his cache!',
         timestamp: new Date().toISOString(),
-        meaningOfLife: 42
+        meaningOfLife: 42,
+        isDevToolsFun: true,
+        link: 'https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy'
     };
 
     fetch('https://httpbin.org/post', {
