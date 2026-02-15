@@ -14,7 +14,7 @@ self.addEventListener('periodicsync', event => {
 });
 
 function fetchData(message) {
-    return fetch('./index.html' + '?message=' + message)
+    return fetch('./getdata.json' + '?message=' + message)
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Fetch error:', error));

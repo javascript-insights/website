@@ -69,6 +69,11 @@
       <button onclick="caches.open('superhero-cache').then(cache => cache.add('./static/chuck-norris.png'))">Cache Hero
         Icon</button>
       <button onclick="caches.open('superhero-cache').then(cache => cache.add('/styles.css'))">Cache Styles</button>
+      <br /><br />
+      <p>Retrieve cached assets:</p>
+      <button onclick="caches.open('superhero-cache').then(cache => cache.match('./static/chuck-norris.png')).then(r => { if(r) { r.blob().then(b => { const img = document.createElement('img'); img.src = URL.createObjectURL(b); img.style.maxWidth='200px'; document.getElementById('cache-output').innerHTML=''; document.getElementById('cache-output').appendChild(img); }); } else { document.getElementById('cache-output').textContent='Hero Icon not found in cache!'; } })">Get Hero Icon from Cache</button>
+      <button onclick="caches.open('superhero-cache').then(cache => cache.match('/styles.css')).then(r => { if(r) { r.text().then(t => { document.getElementById('cache-output').textContent=t.substring(0,500)+'...'; }); } else { document.getElementById('cache-output').textContent='Styles not found in cache!'; } })">Get Styles from Cache</button>
+      <div id="cache-output" style="margin-top:10px; padding:10px; border:1px dashed #ccc; min-height:40px;"></div>
     </section>
 
     <section class="exercise">
