@@ -12,14 +12,14 @@
 </head>
 <body>
   <div class="container">
-    <div class="section"></div>
+    <div class="section">
       <h3>Set Default Cookies</h3>
       <button onclick="setDefaultCookies()">Set All Default Cookies</button>
     </div>
 
     <div class="section">
       <h3>Custom Cookie Setting</h3>
-      Name: <input type="text" id="cookieName" value="testCookie"><br></br>
+      Name: <input type="text" id="cookieName" value="testCookie"><br>
       Value: <input type="text" id="cookieValue" value="testValue"><br>
       <div>
         <input type="checkbox" id="httpOnly" checked>
@@ -60,7 +60,7 @@
   </div>
 
   <script>
-    const API_BASE = 'http://localhost:3000'; // Adjust this to your server URL
+    const API_BASE = 'https://javascript-insights-server-azf4hfbxetbnd4gy.israelcentral-01.azurewebsites.net'; // Adjust this to your server URL
 
     async function setDefaultCookies() {
       try {

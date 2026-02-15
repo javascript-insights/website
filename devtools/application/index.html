@@ -126,6 +126,51 @@ self.addEventListener('fetch', event => {
 });
   </code></pre>
 
+  <details>
+    <summary>When does the <code>install</code> event fire?</summary>
+    <div style="padding: 10px; margin-top: 5px;">
+      <p>The <code>install</code> event fires <strong>immediately after the service worker is successfully downloaded and parsed</strong> by the browser, triggered by the <code>navigator.serviceWorker.register('/sw.js')</code> call.</p>
+      <p>The sequence is:</p>
+      <ol>
+        <li><code>register()</code> is called → browser downloads <code>sw.js</code></li>
+        <li>The SW is parsed successfully → <strong><code>install</code> event fires</strong></li>
+        <li><code>event.waitUntil()</code> keeps the SW in the "installing" phase until all <code>cache.addAll()</code> promises resolve</li>
+        <li>If caching succeeds → SW moves to "waiting" (or "activated" if no previous SW exists)</li>
+        <li>If caching fails (e.g., any resource in <code>addAll</code> 404s) → installation <strong>fails</strong>, SW is discarded</li>
+      </ol>
+      <p><strong>Key points:</strong></p>
+      <ul>
+        <li><strong>First visit:</strong> <code>install</code> fires right after registration, then the SW activates (since there's no previous version).</li>
+        <li><strong>Subsequent visits:</strong> <code>install</code> fires again <strong>only if <code>sw.js</code> has changed</strong> (even a single byte difference). The new SW then waits until all tabs using the old SW are closed before activating.</li>
+        <li><strong><code>install</code> does NOT fire</strong> if the browser's byte-compared cache of <code>sw.js</code> matches the fetched version — the existing SW is reused as-is.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>When does the <code>fetch</code> event fire?</summary>
+    <div style="padding: 10px; margin-top: 5px;">
+      <p>The <code>fetch</code> event fires on <strong>every network request</strong> made by pages the service worker <strong>controls</strong> — but with an important caveat:</p>
+      <p><strong>Not immediately on first visit.</strong> Even though the SW installs and activates on the first visit, it <strong>does not control the page that registered it</strong>. The page must be <strong>navigated to again</strong> (refresh or revisit) for the SW to intercept its requests.</p>
+      <p>The timeline is:</p>
+      <ol>
+        <li><strong>First visit</strong> → SW registers, installs, activates — but <code>fetch</code> does <strong>NOT</strong> fire. All requests go straight to the network.</li>
+        <li><strong>Second visit (or refresh)</strong> → the SW now controls the page → <code>fetch</code> fires for <strong>every request</strong>: the HTML page itself, CSS, JS, images, fonts, API calls — everything.</li>
+      </ol>
+      <p>For each intercepted request, the code:</p>
+      <ol>
+        <li>Checks the cache for a match → if found, returns it (no network call)</li>
+        <li>If not cached → falls back to a normal <code>fetch()</code> from the network</li>
+      </ol>
+      <p><strong>Exceptions</strong> — the fetch event does <strong>not</strong> fire for:</p>
+      <ul>
+        <li>Requests made before the SW controls the page</li>
+        <li>Requests from other origins (cross-origin) unless explicitly handled</li>
+        <li>The SW script file itself (<code>sw.js</code>)</li>
+      </ul>
+    </div>
+  </details>
+
   <h3>Web Worker Example:</h3>
   <pre><code>
 // In your main.js

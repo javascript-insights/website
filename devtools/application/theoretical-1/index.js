@@ -71,9 +71,9 @@ function setClientCookie() {
 function getClientCookie() {
   const cookieValue = document.cookie
     .split('; ')
-    .find(row => row.startsWith('cookieData='))
+    .find(row => row.startsWith('clientCookie='))
     ?.split('=')[1];
-  alert(document.cookie);
+  alert(cookieValue ? `clientCookie=${cookieValue}` : 'No client cookie found');
 };
 
 function setServerCookie() {
