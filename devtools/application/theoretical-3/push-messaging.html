@@ -180,6 +180,17 @@
                     }
                 })
                 .catch(err => log('❌ SW registration failed: ' + err));
+
+            // Listen for push events from the service worker
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data.type === 'push-received') {
+                    log(`📨 Push message received by SW: "${event.data.title}"`);
+                    log(`   Body: ${event.data.body}`);
+                    log('   — Check Application > Background Services > Push Messaging for the event');
+                } else if (event.data.type === 'push-notification-clicked') {
+                    log(`👆 Push notification clicked: "${event.data.title}" (action: ${event.data.action})`);
+                }
+            });
         }
 
         // Subscribe

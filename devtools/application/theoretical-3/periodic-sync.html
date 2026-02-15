@@ -148,6 +148,14 @@
             navigator.serviceWorker.register('periodic-sync-service-worker.js')
                 .then(reg => log('✅ Service Worker registered'))
                 .catch(err => log('❌ SW registration failed: ' + err));
+
+            // Listen for messages from the service worker about sync completion
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data.type === 'periodic-sync-complete') {
+                    log(`✅ Periodic sync completed! Tag: "${event.data.tag}" at ${new Date(event.data.timestamp).toLocaleTimeString()}`);
+                    setStatus(`Last sync: ${new Date(event.data.timestamp).toLocaleTimeString()} (tag: ${event.data.tag})`, 'success');
+                }
+            });
         }
 
         // Register periodic sync

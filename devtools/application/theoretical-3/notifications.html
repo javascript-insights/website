@@ -138,6 +138,17 @@
             navigator.serviceWorker.register('notifications-service-worker.js')
                 .then(reg => log('✅ Service Worker registered'))
                 .catch(err => log('❌ SW registration failed: ' + err));
+
+            // Listen for notification events from the service worker
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data.type === 'notification-clicked') {
+                    log(`👆 Notification CLICKED: "${event.data.title}" (tag: ${event.data.tag || 'none'})`);
+                    log('   — Check Application > Background Services > Notifications for the event');
+                } else if (event.data.type === 'notification-closed') {
+                    log(`❎ Notification CLOSED: "${event.data.title}" (tag: ${event.data.tag || 'none'})`);
+                    log('   — Check Application > Background Services > Notifications for the event');
+                }
+            });
         }
 
         // Check initial permission

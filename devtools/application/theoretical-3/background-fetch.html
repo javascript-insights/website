@@ -108,6 +108,24 @@
             navigator.serviceWorker.register('background-fetch-service-worker.js')
                 .then(reg => log('✅ Service Worker registered'))
                 .catch(err => log('❌ Service Worker registration failed: ' + err));
+
+            // Listen for messages from service worker about fetch completion
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data.type === 'bgfetch-success') {
+                    log('✅ Service Worker reports: Background Fetch completed!');
+                    setStatus('Completed successfully!', 'success');
+                    progressEl.style.width = '100%';
+                    document.getElementById('abort-fetch').disabled = true;
+                } else if (event.data.type === 'bgfetch-fail') {
+                    log('❌ Service Worker reports: Background Fetch failed');
+                    setStatus('Failed', 'error');
+                    document.getElementById('abort-fetch').disabled = true;
+                } else if (event.data.type === 'bgfetch-abort') {
+                    log('🛑 Service Worker reports: Background Fetch was aborted');
+                    setStatus('Aborted', 'error');
+                    document.getElementById('abort-fetch').disabled = true;
+                }
+            });
         }
 
         document.getElementById('start-fetch').addEventListener('click', async () => {
@@ -139,7 +157,7 @@
                 setStatus(`Fetching... (ID: ${currentFetch.id})`, 'active');
                 document.getElementById('abort-fetch').disabled = false;
 
-                // Monitor progress
+                // Monitor progress and detect completion
                 currentFetch.addEventListener('progress', () => {
                     const downloaded = currentFetch.downloaded || 0;
                     const total = currentFetch.downloadTotal || 1;
@@ -151,13 +169,19 @@
                         log(`Downloaded: ${downloaded} bytes`);
                         progressEl.style.width = '100%';
                     }
-                });
 
-                // Wait for result
-                const result = await currentFetch.result;
-                log(`Fetch completed with result: ${result}`);
-                setStatus(`Completed — result: ${result}`, result === 'success' ? 'success' : 'error');
-                document.getElementById('abort-fetch').disabled = true;
+                    // Check if the fetch completed (result changes from '' to 'success' or 'failure')
+                    if (currentFetch.result === 'success') {
+                        log('✅ Background Fetch completed successfully!');
+                        setStatus('Completed successfully!', 'success');
+                        progressEl.style.width = '100%';
+                        document.getElementById('abort-fetch').disabled = true;
+                    } else if (currentFetch.result === 'failure') {
+                        log('❌ Background Fetch failed: ' + (currentFetch.failureReason || 'unknown reason'));
+                        setStatus('Failed: ' + (currentFetch.failureReason || 'unknown'), 'error');
+                        document.getElementById('abort-fetch').disabled = true;
+                    }
+                });
 
             } catch (error) {
                 log('❌ Background Fetch failed: ' + error.message);

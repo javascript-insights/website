@@ -171,24 +171,208 @@ function displayResult(result) {
 
 // Private State Tokens
 async function generatePrivateStateToken() {
-  // This is a placeholder as Private State Tokens are still experimental and not widely supported
-  const token = 'example-private-state-token';
-  alert(`Generated Token: ${token}`);
+  const statusEl = document.getElementById('privateTokenStatus');
+
+  // Check if the Private State Tokens API is available
+  if ('hasPrivateToken' in document) {
+    try {
+      // Attempt to check for an existing private state token
+      const hasToken = await document.hasPrivateToken('https://example.com');
+      statusEl.textContent = `✅ API available! Token check result: ${hasToken ? 'Token exists' : 'No token found'}.`;
+      statusEl.style.color = '#2e7d32';
+      alert(
+        `Private State Tokens API is available!\n\n` +
+        `Token exists for issuer: ${hasToken}\n\n` +
+        `📌 Open DevTools → Application → Private State Tokens to explore.\n\n` +
+        `Note: Full token issuance requires a configured issuer server with proper cryptographic keys.`
+      );
+    } catch (error) {
+      statusEl.textContent = `⚠️ API available but: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(
+        `Private State Tokens API is available but encountered an error:\n${error.message}\n\n` +
+        `📌 Open DevTools → Application → Private State Tokens to explore this section.\n\n` +
+        `This is expected — full issuance requires an HTTPS issuer server.`
+      );
+    }
+  } else {
+    statusEl.textContent = '❌ Private State Tokens API not supported in this browser.';
+    statusEl.style.color = '#c62828';
+    alert(
+      'Private State Tokens API is not supported in this browser.\n\n' +
+      'Try Chrome 117+ with HTTPS.\n\n' +
+      '📌 You can still view the Private State Tokens section in DevTools → Application panel.'
+    );
+  }
 }
 
-// Interest Groups
+// Interest Groups (Protected Audience API)
 async function joinInterestGroup() {
-  // This is a placeholder as Interest Groups are part of the Privacy Sandbox and not widely supported
-  const group = 'example-interest-group';
-  alert(`Joined Interest Group: ${group}`);
+  const statusEl = document.getElementById('interestGroupStatus');
+
+  if ('joinAdInterestGroup' in navigator) {
+    try {
+      const interestGroup = {
+        owner: window.location.origin,
+        name: 'devtools-demo-group',
+        lifetimeMs: 30 * 24 * 60 * 60 * 1000, // 30 days
+        ads: [
+          {
+            renderURL: window.location.origin + '/demo-ad.html',
+            metadata: { type: 'demo', category: 'web-development' }
+          }
+        ],
+        userBiddingSignals: {
+          interest: 'browser-devtools',
+          skill_level: 'expert'
+        }
+      };
+
+      await navigator.joinAdInterestGroup(interestGroup, interestGroup.lifetimeMs);
+      statusEl.textContent = '✅ Joined interest group "devtools-demo-group"!';
+      statusEl.style.color = '#2e7d32';
+      alert(
+        `Successfully joined Interest Group "devtools-demo-group"!\n\n` +
+        `📌 Open DevTools → Application → Interest Groups to see it.\n\n` +
+        `Group details:\n` +
+        `- Owner: ${interestGroup.owner}\n` +
+        `- Lifetime: 30 days\n` +
+        `- Bidding signals: ${JSON.stringify(interestGroup.userBiddingSignals)}`
+      );
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(
+        `Error joining Interest Group: ${error.message}\n\n` +
+        `📌 This API requires:\n` +
+        `- HTTPS origin\n` +
+        `- Privacy Sandbox APIs enabled\n` +
+        `- Chrome 115+\n\n` +
+        `You can still explore Application → Interest Groups in DevTools.`
+      );
+    }
+  } else {
+    statusEl.textContent = '❌ Protected Audience API not supported in this browser.';
+    statusEl.style.color = '#c62828';
+    alert(
+      'Protected Audience API (Interest Groups) is not supported.\n\n' +
+      'Try Chrome 115+ with HTTPS and Privacy Sandbox enabled.\n\n' +
+      '📌 You can still explore the Interest Groups section in DevTools → Application panel.'
+    );
+  }
+}
+
+async function leaveInterestGroup() {
+  const statusEl = document.getElementById('interestGroupStatus');
+
+  if ('leaveAdInterestGroup' in navigator) {
+    try {
+      await navigator.leaveAdInterestGroup({
+        owner: window.location.origin,
+        name: 'devtools-demo-group'
+      });
+      statusEl.textContent = '✅ Left interest group "devtools-demo-group".';
+      statusEl.style.color = '#2e7d32';
+      alert('Left the interest group "devtools-demo-group". Check DevTools → Application → Interest Groups.');
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(`Error leaving Interest Group: ${error.message}`);
+    }
+  } else {
+    statusEl.textContent = '❌ API not supported.';
+    statusEl.style.color = '#c62828';
+    alert('Protected Audience API is not supported in this browser.');
+  }
 }
 
 // Shared Storage
 async function saveToSharedStorage() {
-  // This is a placeholder as Shared Storage is still experimental and not widely supported
-  const input = 'example-shared-data';
-  const sharedStorage = 'example-shared-storage';
-  alert(`Stored in Shared Storage: ${input}`);
+  const statusEl = document.getElementById('sharedStorageStatus');
+
+  if ('sharedStorage' in window) {
+    try {
+      // Write multiple key-value pairs to shared storage
+      await window.sharedStorage.set('demo-greeting', 'Hello from Shared Storage! ' + new Date().toLocaleString());
+      await window.sharedStorage.set('user-preference', 'dark-mode');
+      await window.sharedStorage.set('visit-count', String(Math.floor(Math.random() * 100)));
+      await window.sharedStorage.set('favorite-tool', 'DevTools Application Panel');
+      await window.sharedStorage.set('course-topic', 'Browser DevTools Mastery');
+
+      // Also demonstrate append operation
+      await window.sharedStorage.append('activity-log', ` | visited at ${new Date().toLocaleTimeString()}`);
+
+      statusEl.textContent = '✅ 6 items saved to Shared Storage!';
+      statusEl.style.color = '#2e7d32';
+      alert(
+        `Data saved to Shared Storage!\n\n` +
+        `📌 Open DevTools → Application → Shared Storage to see the entries.\n\n` +
+        `Keys stored:\n` +
+        `- demo-greeting\n` +
+        `- user-preference\n` +
+        `- visit-count\n` +
+        `- favorite-tool\n` +
+        `- course-topic\n` +
+        `- activity-log (appended)\n\n` +
+        `Note: Shared Storage values can only be READ inside a worklet (privacy protection), ` +
+        `but you can see the keys in DevTools!`
+      );
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(`Error saving to Shared Storage: ${error.message}\n\nThis API requires HTTPS and Chrome 117+.`);
+    }
+  } else {
+    statusEl.textContent = '❌ Shared Storage API not supported in this browser.';
+    statusEl.style.color = '#c62828';
+    alert(
+      'Shared Storage API is not supported in this browser.\n\n' +
+      'Try Chrome 117+ with HTTPS.\n\n' +
+      '📌 You can still explore Application → Shared Storage in DevTools.'
+    );
+  }
+}
+
+async function deleteFromSharedStorage() {
+  const statusEl = document.getElementById('sharedStorageStatus');
+
+  if ('sharedStorage' in window) {
+    try {
+      await window.sharedStorage.delete('demo-greeting');
+      statusEl.textContent = '✅ Deleted "demo-greeting" from Shared Storage.';
+      statusEl.style.color = '#2e7d32';
+      alert('Deleted "demo-greeting" from Shared Storage.\n\n📌 Check DevTools → Application → Shared Storage.');
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(`Error deleting from Shared Storage: ${error.message}`);
+    }
+  } else {
+    statusEl.textContent = '❌ API not supported.';
+    statusEl.style.color = '#c62828';
+    alert('Shared Storage API is not supported in this browser.');
+  }
+}
+
+async function clearSharedStorage() {
+  const statusEl = document.getElementById('sharedStorageStatus');
+
+  if ('sharedStorage' in window) {
+    try {
+      await window.sharedStorage.clear();
+      statusEl.textContent = '✅ Cleared all Shared Storage data.';
+      statusEl.style.color = '#2e7d32';
+      alert('All Shared Storage data cleared!\n\n📌 Check DevTools → Application → Shared Storage.');
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(`Error clearing Shared Storage: ${error.message}`);
+    }
+  } else {
+    statusEl.textContent = '❌ API not supported.';
+    statusEl.style.color = '#c62828';
+    alert('Shared Storage API is not supported in this browser.');
+  }
 }
 
 //////////////////////////////////////////////////////////////
@@ -290,29 +474,151 @@ function cacheDataDemo() {
 //////////////////////////////////////////////////////////////
 
 // Storage Buckets
-let storageBuckets = {};
+async function createBucket() {
+  const statusEl = document.getElementById('bucketStatus');
 
-function createBucket() {
-  const bucketName = 'bucketName';
-  if (bucketName) {
-    storageBuckets[bucketName] = {};
-    alert(`Bucket "${bucketName}" created.`);
+  if ('storageBuckets' in navigator) {
+    try {
+      // Create a storage bucket with specific options
+      const bucket = await navigator.storageBuckets.open('demo-treasure-bucket', {
+        durability: 'strict',
+        persisted: true,
+        title: 'Demo Treasure Bucket'
+      });
+
+      // Also create a second bucket to show multiple buckets in DevTools
+      const bucket2 = await navigator.storageBuckets.open('demo-temp-bucket', {
+        durability: 'relaxed',
+        persisted: false,
+        title: 'Temporary Demo Bucket'
+      });
+
+      statusEl.textContent = '✅ Created 2 storage buckets!';
+      statusEl.style.color = '#2e7d32';
+      alert(
+        `Storage Buckets created successfully!\n\n` +
+        `📌 Open DevTools → Application → Storage Buckets to see them.\n\n` +
+        `Buckets created:\n` +
+        `1. "demo-treasure-bucket" (durable, persisted)\n` +
+        `2. "demo-temp-bucket" (relaxed, not persisted)\n\n` +
+        `Each bucket has its own isolated IndexedDB, Cache Storage, and other storage.`
+      );
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(`Error creating bucket: ${error.message}\n\nStorage Buckets API requires Chrome 122+ with HTTPS.`);
+    }
   } else {
-    alert('Please enter a bucket name.');
+    statusEl.textContent = '❌ Storage Buckets API not supported in this browser.';
+    statusEl.style.color = '#c62828';
+    alert(
+      'Storage Buckets API is not supported in this browser.\n\n' +
+      'Try Chrome 122+ with HTTPS.\n\n' +
+      '📌 You can still explore Application → Storage Buckets in DevTools.'
+    );
   }
 }
 
-function storeDataInBucket() {
-  const bucketName = 'bucketName';
-  const data = 'bucketData';
-  if (bucketName && data) {
-    if (storageBuckets[bucketName]) {
-      storageBuckets[bucketName][Date.now()] = data;
-      alert(`Data stored in bucket "${bucketName}".`);
-    } else {
-      alert(`Bucket "${bucketName}" does not exist.`);
+async function storeDataInBucket() {
+  const statusEl = document.getElementById('bucketStatus');
+
+  if ('storageBuckets' in navigator) {
+    try {
+      // Open the bucket
+      const bucket = await navigator.storageBuckets.open('demo-treasure-bucket', {
+        title: 'Demo Treasure Bucket'
+      });
+
+      // Use IndexedDB within the bucket
+      const root = bucket.indexedDB;
+      const dbRequest = root.open('treasure-db', 1);
+
+      dbRequest.onupgradeneeded = function (event) {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains('treasures')) {
+          db.createObjectStore('treasures', { keyPath: 'id', autoIncrement: true });
+        }
+      };
+
+      dbRequest.onsuccess = function (event) {
+        const db = event.target.result;
+        const tx = db.transaction('treasures', 'readwrite');
+        const store = tx.objectStore('treasures');
+
+        const treasureItems = [
+          { value: '💎 Diamond of Knowledge', discoveredAt: new Date().toLocaleString() },
+          { value: '🏆 Trophy of Debugging', discoveredAt: new Date().toLocaleString() },
+          { value: '📜 Scroll of DevTools Wisdom', discoveredAt: new Date().toLocaleString() }
+        ];
+
+        treasureItems.forEach(item => store.add(item));
+
+        tx.oncomplete = function () {
+          statusEl.textContent = '✅ 3 treasures buried in the bucket!';
+          statusEl.style.color = '#2e7d32';
+          alert(
+            `Treasures stored in bucket "demo-treasure-bucket"!\n\n` +
+            `📌 In DevTools → Application → Storage Buckets → demo-treasure-bucket → IndexedDB\n` +
+            `   you can see the "treasure-db" database with the stored items.\n\n` +
+            `Items stored:\n` +
+            treasureItems.map(t => `- ${t.value}`).join('\n')
+          );
+        };
+      };
+
+      dbRequest.onerror = function () {
+        statusEl.textContent = `⚠️ Error opening IndexedDB in bucket.`;
+        statusEl.style.color = '#e65100';
+      };
+
+      // Also store something in the bucket's cache storage
+      const cache = await bucket.caches.open('bucket-cache');
+      await cache.put(
+        new Request('/bucket-demo-data'),
+        new Response(JSON.stringify({ message: 'Cached inside a storage bucket!', time: Date.now() }), {
+          headers: { 'Content-Type': 'application/json' }
+        })
+      );
+
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(`Error storing data in bucket: ${error.message}`);
     }
   } else {
-    alert('Please enter both bucket name and data.');
+    statusEl.textContent = '❌ Storage Buckets API not supported.';
+    statusEl.style.color = '#c62828';
+    alert('Storage Buckets API is not supported. Try Chrome 122+ with HTTPS.');
+  }
+}
+
+async function listBuckets() {
+  const statusEl = document.getElementById('bucketStatus');
+
+  if ('storageBuckets' in navigator) {
+    try {
+      const buckets = await navigator.storageBuckets.keys();
+      if (buckets.length === 0) {
+        statusEl.textContent = '📭 No storage buckets found. Create one first!';
+        statusEl.style.color = '#666';
+        alert('No storage buckets found. Click "⛱️ Dig a Hole" to create one first!');
+      } else {
+        statusEl.textContent = `📋 Found ${buckets.length} bucket(s): ${buckets.join(', ')}`;
+        statusEl.style.color = '#2e7d32';
+        alert(
+          `Found ${buckets.length} Storage Bucket(s):\n\n` +
+          buckets.map((b, i) => `${i + 1}. ${b}`).join('\n') +
+          `\n\n📌 View them in DevTools → Application → Storage Buckets`
+        );
+      }
+    } catch (error) {
+      statusEl.textContent = `⚠️ Error: ${error.message}`;
+      statusEl.style.color = '#e65100';
+      alert(`Error listing buckets: ${error.message}`);
+    }
+  } else {
+    statusEl.textContent = '❌ Storage Buckets API not supported.';
+    statusEl.style.color = '#c62828';
+    alert('Storage Buckets API is not supported. Try Chrome 122+ with HTTPS.');
   }
 }
