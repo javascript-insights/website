@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Insights</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Application Hands-On 5</h1>
+  <nav class="breadcrumb">
+    <a href="../../../index.html">JavaScript Insights</a>
+    <a href="../../index.html">DevTools</a>
+    <a href="../index.html">Application</a>
+    <a href="./index.html">Hands-On 5</a>
+  </nav>
+  <div class="navbar">
+    <a href="../index.html">Back</a>
+  </div>
+
+  <main>
+    <h2>🔬 Background Services Lab</h2>
+    <p>Welcome to the Background Services lab! In this hands-on session you'll use the <strong>Application panel</strong>
+      to inspect, debug, and interact with browser background services. Each exercise gives you a specific task —
+      complete them all to master the Application panel's background services section.</p>
+
+    <div class="info-box">
+      <h3>⚙️ Setup</h3>
+      <ol>
+        <li>Open DevTools (<code>F12</code>) and go to the <strong>Application</strong> panel</li>
+        <li>In the sidebar, expand <strong>Background services</strong></li>
+        <li>Start the <strong>record button (⏺)</strong> in each section <em>before</em> interacting with the exercises</li>
+        <li>Keep the Console open in a split view so you can see logs too</li>
+      </ol>
+    </div>
+
+    <!-- ============ EXERCISE 1 ============ -->
+    <section class="exercise">
+      <h3>Exercise 1: Back/Forward Cache Detective 🔍</h3>
+      <div class="difficulty easy">Easy</div>
+      <p><strong>Goal:</strong> Understand which pages are bfcache-eligible and which aren't.</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Open Application → <strong>Back/forward cache</strong></label>
+        <label><input type="checkbox" /> Click <strong>"Test back/forward cache"</strong> on this page</label>
+        <label><input type="checkbox" /> Record the result — was it eligible? Write which reason(s) blocked it, if any</label>
+        <label><input type="checkbox" /> Navigate to <a href="bfcache-good.html" target="_blank">bfcache-good.html</a> and test again</label>
+        <label><input type="checkbox" /> Navigate to <a href="bfcache-bad.html" target="_blank">bfcache-bad.html</a> and test again</label>
+        <label><input type="checkbox" /> Compare the results — what makes a page bfcache-incompatible?</label>
+      </div>
+      <details class="hint">
+        <summary>💡 Hint</summary>
+        <p>The "bad" page uses <code>beforeunload</code> and an open WebSocket — both block bfcache. The test in DevTools lists each blocker individually.</p>
+      </details>
+      <details class="answer">
+        <summary>✅ Expected Answer</summary>
+        <p><strong>bfcache-good.html:</strong> Should be eligible (no blockers). State (counter, timer) is preserved when navigating back.</p>
+        <p><strong>bfcache-bad.html:</strong> Not eligible. Blockers include: <code>beforeunload</code> event listener, and (if toggled on) an active WebSocket connection.</p>
+      </details>
+    </section>
+
+    <!-- ============ EXERCISE 2 ============ -->
+    <section class="exercise">
+      <h3>Exercise 2: Background Sync Spy 🕵️</h3>
+      <div class="difficulty medium">Medium</div>
+      <p><strong>Goal:</strong> Register, observe, and manually trigger background sync events.</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Go to Application → Background services → <strong>Background Sync</strong></label>
+        <label><input type="checkbox" /> Start recording (⏺)</label>
+        <label><input type="checkbox" /> Type a message below and click "Queue & Sync"</label>
+        <label><input type="checkbox" /> Observe the sync event in DevTools — note the <strong>tag</strong> and <strong>timestamp</strong></label>
+        <label><input type="checkbox" /> Go to Network panel, check <strong>"Offline"</strong>, then queue another message</label>
+        <label><input type="checkbox" /> Uncheck "Offline" — does the pending sync fire automatically?</label>
+        <label><input type="checkbox" /> Go to Application → Service Workers and find the <strong>Sync</strong> input. Type a tag and trigger it manually</label>
+      </div>
+
+      <div class="demo-area">
+        <input type="text" id="syncMessage" placeholder="Type a message to sync..." />
+        <button id="syncBtn" class="btn btn-primary">Queue & Sync</button>
+        <button id="checkSyncTags" class="btn btn-secondary">Check Registered Tags</button>
+        <div id="syncLog" class="mini-log"></div>
+      </div>
+
+      <details class="hint">
+        <summary>💡 Hint</summary>
+        <p>When offline, <code>sync.register()</code> still succeeds — the browser stores the tag and fires the <code>sync</code> event as soon as connectivity returns. You can also fire it manually from the Service Workers section.</p>
+      </details>
+      <details class="answer">
+        <summary>✅ Expected Answer</summary>
+        <p>The Background Sync panel shows events with tags like <code>sync-msg-{timestamp}</code>. When offline, the sync is queued. When back online, the browser fires the <code>sync</code> event and you see the event appear in the timeline. Manual trigger from SW panel also fires the event.</p>
+      </details>
+    </section>
+
+    <!-- ============ EXERCISE 3 ============ -->
+    <section class="exercise">
+      <h3>Exercise 3: Notification Inspector 🔔</h3>
+      <div class="difficulty medium">Medium</div>
+      <p><strong>Goal:</strong> Send notifications, observe them in DevTools, and understand tags.</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Go to Application → Background services → <strong>Notifications</strong></label>
+        <label><input type="checkbox" /> Start recording (⏺)</label>
+        <label><input type="checkbox" /> Click "Grant Permission" below, then send a notification</label>
+        <label><input type="checkbox" /> In DevTools, find the notification event — what data does it show?</label>
+        <label><input type="checkbox" /> Send two notifications with the <strong>same tag</strong> — what happens?</label>
+        <label><input type="checkbox" /> Send two notifications with <strong>different tags</strong> — what happens?</label>
+        <label><input type="checkbox" /> Click on a notification and check if a <code>notificationclick</code> event appears</label>
+        <label><input type="checkbox" /> Close a notification and check for a <code>notificationclose</code> event</label>
+      </div>
+
+      <div class="demo-area">
+        <button id="requestNotifPerm" class="btn btn-warning">Grant Permission</button>
+        <span id="notifPermStatus" class="status-badge">unknown</span>
+        <br /><br />
+        <input type="text" id="notifTitle" placeholder="Notification title" value="Hello!" />
+        <input type="text" id="notifBody" placeholder="Notification body" value="This is a test notification" />
+        <select id="notifTag">
+          <option value="">No tag</option>
+          <option value="alert">tag: alert</option>
+          <option value="update">tag: update</option>
+          <option value="message">tag: message</option>
+        </select>
+        <br /><br />
+        <button id="sendNotif" class="btn btn-primary">Send Notification</button>
+        <button id="sendBatch" class="btn btn-secondary">Send 3 Notifications (different tags)</button>
+        <button id="closeAllNotifs" class="btn btn-danger">Close All</button>
+        <div id="notifLog" class="mini-log"></div>
+      </div>
+
+      <details class="hint">
+        <summary>💡 Hint</summary>
+        <p>When two notifications share the <strong>same tag</strong>, the second one <em>replaces</em> the first. Different tags stack as separate notifications.</p>
+      </details>
+      <details class="answer">
+        <summary>✅ Expected Answer</summary>
+        <p>Same-tag notifications replace each other (only the latest is visible). Different-tag notifications all appear separately. DevTools Notifications panel shows <code>notificationdisplay</code>, <code>notificationclick</code>, and <code>notificationclose</code> events with their tags, titles, and timestamps.</p>
+      </details>
+    </section>
+
+    <!-- ============ EXERCISE 4 ============ -->
+    <section class="exercise">
+      <h3>Exercise 4: Push Messaging Lab 📬</h3>
+      <div class="difficulty hard">Hard</div>
+      <p><strong>Goal:</strong> Subscribe to push, examine the subscription, and simulate push messages from DevTools.</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Go to Application → Background services → <strong>Push Messaging</strong> and start recording</label>
+        <label><input type="checkbox" /> Click "Subscribe" below to create a push subscription</label>
+        <label><input type="checkbox" /> Inspect the subscription details — find the <strong>endpoint</strong> and <strong>keys</strong></label>
+        <label><input type="checkbox" /> Go to Application → <strong>Service Workers</strong></label>
+        <label><input type="checkbox" /> Find the <strong>"Push"</strong> text input next to your service worker</label>
+        <label><input type="checkbox" /> Type <code>{"title":"Manual Push","body":"Sent from DevTools!"}</code> and click <strong>Push</strong></label>
+        <label><input type="checkbox" /> Did a notification appear? Check the Push Messaging timeline for the event</label>
+        <label><input type="checkbox" /> Unsubscribe and try pushing again — what happens?</label>
+      </div>
+
+      <div class="demo-area">
+        <button id="pushSubscribe" class="btn btn-primary">Subscribe to Push</button>
+        <button id="pushUnsubscribe" class="btn btn-danger" disabled>Unsubscribe</button>
+        <button id="pushCheck" class="btn btn-secondary">Check Subscription</button>
+        <div id="pushSubscriptionInfo" class="subscription-box">No active subscription</div>
+        <div id="pushLog" class="mini-log"></div>
+      </div>
+
+      <details class="hint">
+        <summary>💡 Hint</summary>
+        <p>The Push input in the Service Workers section sends a simulated push event to the SW. The SW's <code>push</code> event handler receives the text you typed and can show a notification. After unsubscribing, pushing still works from DevTools (the push event goes to the SW regardless of subscription state).</p>
+      </details>
+      <details class="answer">
+        <summary>✅ Expected Answer</summary>
+        <p>The subscription shows an endpoint URL (e.g., <code>https://fcm.googleapis.com/...</code>) and encryption keys (p256dh, auth). Simulating a push from DevTools Service Workers panel fires the <code>push</code> event and shows a notification. Even after unsubscribing, the DevTools push button still fires the event because it bypasses the push service.</p>
+      </details>
+    </section>
+
+    <!-- ============ EXERCISE 5 ============ -->
+    <section class="exercise">
+      <h3>Exercise 5: Speculative Loads Inspector 🔮</h3>
+      <div class="difficulty medium">Medium</div>
+      <p><strong>Goal:</strong> Add speculation rules and observe them in the Application panel.</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Go to Application → Background services → <strong>Speculative loads</strong></label>
+        <label><input type="checkbox" /> Note the current speculation rules on this page (there should be one for prefetch)</label>
+        <label><input type="checkbox" /> Click "Add Prefetch Rule" — does a new rule appear in DevTools?</label>
+        <label><input type="checkbox" /> Click "Add Prerender Rule" — how does prerender differ from prefetch in the panel?</label>
+        <label><input type="checkbox" /> Hover over the links below — do any speculation events trigger?</label>
+        <label><input type="checkbox" /> Check the <strong>Network</strong> panel — can you find prefetched resources?</label>
+        <label><input type="checkbox" /> Click "Remove Rules" and verify they disappear from the panel</label>
+      </div>
+
+      <div class="demo-area">
+        <button id="addPrefetch" class="btn btn-primary">Add Prefetch Rule</button>
+        <button id="addPrerender" class="btn btn-secondary">Add Prerender Rule</button>
+        <button id="removeSpecRules" class="btn btn-danger">Remove Dynamic Rules</button>
+        <br /><br />
+        <p>Links for speculation:</p>
+        <a href="bfcache-good.html" class="spec-link">bfcache-good.html</a>
+        <a href="bfcache-bad.html" class="spec-link">bfcache-bad.html</a>
+        <a href="../index.html" class="spec-link">Application Home</a>
+        <div id="specLog" class="mini-log"></div>
+      </div>
+
+      <details class="hint">
+        <summary>💡 Hint</summary>
+        <p>In the Speculative Loads panel, each rule shows its type (prefetch/prerender), the URLs it applies to, and the current status (Not triggered, Running, Ready, or Failure). Prefetched resources appear in the Network panel with a special <code>Purpose: prefetch</code> header.</p>
+      </details>
+      <details class="answer">
+        <summary>✅ Expected Answer</summary>
+        <p>The panel lists each speculation rule with its type and target URLs. Dynamic rules appear when added and disappear when removed. Prerender rules show a full page load in a hidden renderer, while prefetch only downloads HTML. In the Network panel, prefetched requests have the type "prefetch".</p>
+      </details>
+    </section>
+
+    <!-- ============ EXERCISE 6 ============ -->
+    <section class="exercise">
+      <h3>Exercise 6: Reporting API Observer 📊</h3>
+      <div class="difficulty easy">Easy</div>
+      <p><strong>Goal:</strong> Trigger browser reports and observe them in the Application panel.</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Open Application → Background services → <strong>Reporting API</strong></label>
+        <label><input type="checkbox" /> Click "Trigger Deprecation" below</label>
+        <label><input type="checkbox" /> Check both the Application panel and the Console — where do reports appear?</label>
+        <label><input type="checkbox" /> How many reports were generated? What type are they?</label>
+        <label><input type="checkbox" /> Click "Check Captured Reports" to see what ReportingObserver caught</label>
+      </div>
+
+      <div class="demo-area">
+        <button id="triggerDeprecation" class="btn btn-primary">Trigger Deprecation</button>
+        <button id="checkReports" class="btn btn-secondary">Check Captured Reports</button>
+        <div id="reportCount" class="status-badge">0 reports</div>
+        <div id="reportLog" class="mini-log"></div>
+      </div>
+
+      <details class="hint">
+        <summary>💡 Hint</summary>
+        <p>Deprecation reports are generated when using APIs the browser considers deprecated. <code>ReportingObserver</code> captures these in JavaScript. The Console also shows deprecation warnings separately.</p>
+      </details>
+      <details class="answer">
+        <summary>✅ Expected Answer</summary>
+        <p>Clicking "Trigger Deprecation" uses deprecated APIs (synchronous XHR, etc.) which generate deprecation reports. These appear in the Console as warnings and are captured by <code>ReportingObserver</code>. The Application panel's Reporting API section shows the collected reports with type, URL, and body details.</p>
+      </details>
+    </section>
+
+    <!-- ============ EXERCISE 7 ============ -->
+    <section class="exercise">
+      <h3>Exercise 7: Service Worker Lifecycle Master 🎓</h3>
+      <div class="difficulty hard">Hard</div>
+      <p><strong>Goal:</strong> Understand the SW lifecycle using the Application panel's Service Workers section.</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Go to Application → <strong>Service Workers</strong></label>
+        <label><input type="checkbox" /> Find the registered service worker — what is its <strong>status</strong>? (installing/waiting/activated)</label>
+        <label><input type="checkbox" /> Click <strong>"Update"</strong> — what happens to the version number and status?</label>
+        <label><input type="checkbox" /> Check <strong>"Update on reload"</strong> — how does this change the behavior?</label>
+        <label><input type="checkbox" /> Click <strong>"Unregister"</strong> — then refresh the page. Does it re-register?</label>
+        <label><input type="checkbox" /> Click <strong>"Network requests"</strong> to see what the service worker is fetching</label>
+        <label><input type="checkbox" /> Use the <strong>Push</strong>, <strong>Sync</strong>, and <strong>Periodic Sync</strong> inputs to manually trigger events</label>
+      </div>
+      <details class="hint">
+        <summary>💡 Hint</summary>
+        <p>The service worker on this page uses <code>skipWaiting()</code> and <code>clients.claim()</code>, so it activates immediately without waiting. "Update on reload" forces a SW update on every page refresh — useful for development but not for production.</p>
+      </details>
+      <details class="answer">
+        <summary>✅ Expected Answer</summary>
+        <p>Status is "activated and is running". Clicking Update installs a new version (if the file changed). skipWaiting() causes immediate activation. Unregister removes the SW but it re-registers on refresh because the page script calls <code>navigator.serviceWorker.register()</code>. Push/Sync/Periodic Sync inputs let you manually fire corresponding events on the SW.</p>
+      </details>
+    </section>
+
+    <!-- ============ BONUS ============ -->
+    <section class="exercise bonus">
+      <h3>🏆 Bonus Challenge: Full Investigation</h3>
+      <div class="difficulty hard">Hard</div>
+      <p>Combine everything you've learned! Perform a full background services investigation:</p>
+      <div class="task-list">
+        <h4>Tasks:</h4>
+        <label><input type="checkbox" /> Start recording in <strong>ALL</strong> background service panels simultaneously</label>
+        <label><input type="checkbox" /> Queue a sync, send a notification, and add speculation rules — all at once</label>
+        <label><input type="checkbox" /> Go offline (Network → Offline), try syncing, then go back online</label>
+        <label><input type="checkbox" /> Test bfcache on both the good and bad pages</label>
+        <label><input type="checkbox" /> Navigate through the speculation links — which pages load faster?</label>
+        <label><input type="checkbox" /> Take a screenshot of each panel showing recorded events</label>
+        <label><input type="checkbox" /> Write a one-paragraph summary of what you observed</label>
+      </div>
+    </section>
+
+    <div class="tips">
+      <h3>💡 Pro Tips</h3>
+      <ul>
+        <li><strong>Recording:</strong> Background service events are only captured when the record button is active</li>
+        <li><strong>Service Workers → Push/Sync/Periodic Sync inputs:</strong> The most powerful debugging tool! You can manually fire events without a real server</li>
+        <li><strong>Offline simulation:</strong> Use Network panel's "Offline" checkbox to test background sync retry behavior</li>
+        <li><strong>"Update on reload":</strong> Essential during development to force SW updates</li>
+        <li><strong>"Bypass for network":</strong> Skip the SW cache entirely — useful when debugging</li>
+        <li><strong>Clear site data:</strong> Application → Storage → "Clear site data" resets everything</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Static speculation rule for Exercise 5 -->
+  <script type="speculationrules">
+  {
+    "prefetch": [
+      {
+        "urls": ["bfcache-good.html"],
+        "eagerness": "moderate"
+      }
+    ]
+  }
+  </script>
+</body>
+
+</html>

@@ -4,37 +4,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Periodic Background Sync</title>
+    <title>Periodic Background Sync - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #20c997; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .warning { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ffc107; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
+        .status-idle { background: #e2e3e5; color: #383d41; }
+        .status-success { background: #d4edda; color: #155724; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #20c997; }
+        .btn-danger { background: #dc3545; }
+        .btn-info { background: #17a2b8; }
+        .interval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 10px 0; }
+        .interval-card { padding: 10px; border: 1px solid #ddd; border-radius: 5px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .interval-card:hover { border-color: #20c997; background: #f0fff8; }
+        .interval-card.selected { border-color: #20c997; background: #d4edda; }
+        select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
 </head>
 
 <body>
-    <h1>Periodic Background Sync</h1>
-    <p>This page demonstrates the Periodic Background Sync API.</p>
-    <button id="register-periodic-sync">Register Periodic Sync</button>
+    <h1>⏰ Periodic Background Sync</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>What is Periodic Background Sync?</h2>
+        <p>The <strong>Periodic Background Sync API</strong> allows a service worker to run tasks at 
+        <strong>periodic intervals</strong>, even when the user isn't actively using the page. Unlike regular 
+        Background Sync (which fires once when connectivity returns), periodic sync fires repeatedly on a schedule.</p>
+        <p><strong>Use cases:</strong> Syncing news feed, updating cached data, checking for new content, etc.</p>
+    </div>
+
+    <div class="warning">
+        <h2>⚠️ Browser Support & Requirements</h2>
+        <ul>
+            <li><strong>Chrome/Edge only</strong> — Not supported in Firefox or Safari</li>
+            <li>The site must be <strong>installed as a PWA</strong> or have high engagement score</li>
+            <li>The browser decides the <strong>actual interval</strong> based on site engagement (your requested 
+            interval is a <em>minimum</em>, not guaranteed)</li>
+            <li>Permission can be checked/managed at <code>chrome://settings/content/periodicBackgroundSync</code></li>
+        </ul>
+    </div>
+
+    <div class="demo-section">
+        <h2>Live Demo</h2>
+        <div id="status" class="status status-idle">Status: Ready</div>
+
+        <h3>Choose sync interval:</h3>
+        <div class="interval-grid">
+            <div class="interval-card" data-interval="60000" onclick="selectInterval(this)">
+                <strong>1 minute</strong><br><small>(testing only)</small>
+            </div>
+            <div class="interval-card selected" data-interval="3600000" onclick="selectInterval(this)">
+                <strong>1 hour</strong><br><small>(minimum practical)</small>
+            </div>
+            <div class="interval-card" data-interval="43200000" onclick="selectInterval(this)">
+                <strong>12 hours</strong><br><small>(good for news)</small>
+            </div>
+            <div class="interval-card" data-interval="86400000" onclick="selectInterval(this)">
+                <strong>24 hours</strong><br><small>(daily updates)</small>
+            </div>
+        </div>
+
+        <div style="margin-top:15px;">
+            <button class="btn btn-primary" id="register-periodic-sync">Register Periodic Sync</button>
+            <button class="btn btn-danger" id="unregister-sync">Unregister Sync</button>
+            <button class="btn btn-info" id="check-tags">Check Registered Tags</button>
+            <button class="btn btn-info" id="check-permission">Check Permission</button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting Periodic Sync</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Expand <strong>Background services</strong> → click <strong>Periodic Background Sync</strong></li>
+            <li>Click the <strong>record</strong> button (⏺) to start recording</li>
+            <li>Register a periodic sync and observe the events</li>
+            <li>You can also see the registered tags in the <strong>Service Workers</strong> section</li>
+            <li><strong>Tip:</strong> You can manually trigger a periodicsync event from the Service Workers panel 
+            by entering the tag name and clicking "Periodic Sync"</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Start recording periodic sync events in the Application panel</li>
+            <li>Register a periodic sync with a 1-minute interval</li>
+            <li>Check the registered tags — is your sync registered?</li>
+            <li>Go to Application → Service Workers and manually trigger the periodicsync event</li>
+            <li>Unregister the sync and verify the tags are cleared</li>
+            <li>Check the permission status — is periodic sync allowed for this site?</li>
+        </ol>
+    </div>
 
     <script>
-        // Register service worker first
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('periodic-sync-service-worker.js')
-                .then(registration => console.log('ServiceWorker registered'))
-                .catch(err => console.error('ServiceWorker registration failed:', err));
+        const logEl = document.getElementById('log');
+        const statusEl = document.getElementById('status');
+        let selectedInterval = 3600000;
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Periodic Sync] ${msg}`);
         }
 
-        document.getElementById('register-periodic-sync').addEventListener('click', () => {
-            if ('serviceWorker' in navigator && 'periodicSync' in navigator.serviceWorker) {
-                navigator.serviceWorker.ready.then(swRegistration => {
-                    return swRegistration.periodicSync.register('example-sync', {
-                        minInterval: 24 * 60 * 60 * 1000 // 1 day
-                    });
-                }).then(() => {
-                    console.log('Periodic Sync registered');
-                }).catch(error => {
-                    console.error('Periodic Sync registration failed:', error);
+        function setStatus(msg, type) {
+            statusEl.textContent = `Status: ${msg}`;
+            statusEl.className = `status status-${type}`;
+        }
+
+        function selectInterval(el) {
+            document.querySelectorAll('.interval-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedInterval = parseInt(el.dataset.interval);
+            const label = el.querySelector('strong').textContent;
+            log(`Selected interval: ${label} (${selectedInterval}ms)`);
+        }
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('periodic-sync-service-worker.js')
+                .then(reg => log('✅ Service Worker registered'))
+                .catch(err => log('❌ SW registration failed: ' + err));
+        }
+
+        // Register periodic sync
+        document.getElementById('register-periodic-sync').addEventListener('click', async () => {
+            try {
+                const registration = await navigator.serviceWorker.ready;
+
+                if (!('periodicSync' in registration)) {
+                    log('❌ Periodic Background Sync is NOT supported in this browser');
+                    setStatus('Not Supported — try Chrome/Edge with PWA', 'error');
+                    return;
+                }
+
+                // Check permission
+                const permStatus = await navigator.permissions.query({ name: 'periodic-background-sync' });
+                log(`Permission status: ${permStatus.state}`);
+
+                if (permStatus.state === 'denied') {
+                    log('❌ Permission denied for periodic sync');
+                    setStatus('Permission denied', 'error');
+                    return;
+                }
+
+                await registration.periodicSync.register('content-sync', {
+                    minInterval: selectedInterval
                 });
-            } else {
-                console.log('Periodic Background Sync not supported.');
+
+                log(`✅ Periodic sync registered! Tag: "content-sync", minInterval: ${selectedInterval}ms`);
+                setStatus(`Registered (interval: ${selectedInterval}ms)`, 'success');
+            } catch (error) {
+                log('❌ Registration failed: ' + error.message);
+                setStatus('Failed: ' + error.message, 'error');
             }
         });
+
+        // Unregister
+        document.getElementById('unregister-sync').addEventListener('click', async () => {
+            try {
+                const registration = await navigator.serviceWorker.ready;
+                if ('periodicSync' in registration) {
+                    await registration.periodicSync.unregister('content-sync');
+                    log('✅ Periodic sync "content-sync" unregistered');
+                    setStatus('Unregistered', 'idle');
+                }
+            } catch(e) {
+                log('Unregister error: ' + e.message);
+            }
+        });
+
+        // Check tags
+        document.getElementById('check-tags').addEventListener('click', async () => {
+            try {
+                const registration = await navigator.serviceWorker.ready;
+                if ('periodicSync' in registration) {
+                    const tags = await registration.periodicSync.getTags();
+                    if (tags.length > 0) {
+                        log(`📋 Registered periodic sync tags: ${tags.join(', ')}`);
+                    } else {
+                        log('📋 No periodic sync tags registered');
+                    }
+                } else {
+                    log('❌ periodicSync not available on registration');
+                }
+            } catch(e) {
+                log('Error getting tags: ' + e.message);
+            }
+        });
+
+        // Check permission
+        document.getElementById('check-permission').addEventListener('click', async () => {
+            try {
+                const status = await navigator.permissions.query({ name: 'periodic-background-sync' });
+                log(`🔐 Permission: ${status.state}`);
+                status.onchange = () => log(`🔐 Permission changed to: ${status.state}`);
+            } catch(e) {
+                log('Permission check error: ' + e.message);
+            }
+        });
+
+        log('Page loaded. Ready to register periodic sync!');
     </script>
 </body>
 

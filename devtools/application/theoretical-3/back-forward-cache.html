@@ -4,14 +4,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Back/Forward Cache</title>
+    <title>Back/Forward Cache - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .status-box { padding: 15px; margin: 10px 0; border-radius: 8px; font-weight: bold; }
+        .cached { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .not-cached { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #007bff; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .counter { font-size: 2em; font-weight: bold; color: #007bff; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #007bff; }
+        .btn-success { background: #28a745; }
+        .btn-danger { background: #dc3545; }
+    </style>
 </head>
 
 <body>
-    <h1>Back/Forward Cache</h1>
-    <p>This page demonstrates the Back/Forward Cache feature.</p>
-    <p>Navigate to another page and then use the browser's back button to see the cache in action.</p>
-    <a href="index.html">Go back to Home</a>
+    <h1>Back/Forward Cache (bfcache)</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>What is Back/Forward Cache?</h2>
+        <p>The <strong>Back/Forward Cache (bfcache)</strong> is a browser optimization that stores a complete snapshot 
+        of a page in memory when the user navigates away. When the user presses the <strong>Back</strong> or 
+        <strong>Forward</strong> button, the page is instantly restored from cache instead of being reloaded.</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>Live Demo: Page State Persistence</h2>
+        <p>This counter and timer demonstrate bfcache. Navigate away and come back — if bfcache works, 
+        the counter value and timer will be preserved!</p>
+
+        <p>Counter: <span class="counter" id="counter">0</span></p>
+        <button class="btn btn-primary" id="increment">Increment Counter</button>
+        <button class="btn btn-danger" id="reset">Reset</button>
+
+        <p>Time on page: <span id="timer" style="font-weight:bold;">0</span> seconds</p>
+
+        <div id="cache-status" class="status-box not-cached">
+            Page loaded normally (not from bfcache)
+        </div>
+
+        <h3>Try it!</h3>
+        <ol>
+            <li>Click "Increment Counter" a few times</li>
+            <li>Click the link below to navigate away</li>
+            <li>Press the browser's <strong>Back button</strong></li>
+            <li>Check: Is the counter value preserved? Is the timer still running?</li>
+        </ol>
+        <a href="https://example.com" class="btn btn-success" style="display:inline-block;text-decoration:none;">Navigate away to example.com</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: How to Inspect bfcache</h2>
+        <ol>
+            <li>Open DevTools (<code>F12</code>)</li>
+            <li>Go to <strong>Application</strong> panel</li>
+            <li>In the sidebar, find <strong>Background services → Back/forward cache</strong></li>
+            <li>Click <strong>"Test back/forward cache"</strong> button</li>
+            <li>DevTools will navigate away and back, then report if bfcache was used</li>
+            <li>If bfcache was blocked, DevTools shows the <strong>exact reasons</strong> why</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Open the Application panel and find "Back/forward cache"</li>
+            <li>Click "Test back/forward cache" — does this page pass?</li>
+            <li>Now open the <a href="back-forward-cache-incompatible.html">incompatible page</a> and test it — what reasons are listed?</li>
+            <li>Compare the two results to understand what blocks bfcache</li>
+        </ol>
+    </div>
+
+    <script>
+        const counterEl = document.getElementById('counter');
+        const timerEl = document.getElementById('timer');
+        const logEl = document.getElementById('log');
+        const statusEl = document.getElementById('cache-status');
+        let count = 0;
+        let seconds = 0;
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[bfcache] ${msg}`);
+        }
+
+        // Counter
+        document.getElementById('increment').addEventListener('click', () => {
+            count++;
+            counterEl.textContent = count;
+            log(`Counter incremented to ${count}`);
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            count = 0;
+            seconds = 0;
+            counterEl.textContent = count;
+            timerEl.textContent = seconds;
+            log('Counter and timer reset');
+        });
+
+        // Timer
+        setInterval(() => {
+            seconds++;
+            timerEl.textContent = seconds;
+        }, 1000);
+
+        // Detect bfcache restoration
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                statusEl.className = 'status-box cached';
+                statusEl.textContent = '✅ Page restored from Back/Forward Cache! State was preserved!';
+                log('✅ pageshow event fired — page was restored from bfcache (persisted=true)');
+            } else {
+                log('pageshow event fired — normal page load (persisted=false)');
+            }
+        });
+
+        window.addEventListener('pagehide', (event) => {
+            log(`pagehide event fired — persisted=${event.persisted} (${event.persisted ? 'eligible for bfcache' : 'not cached'})`);
+        });
+
+        log('Page loaded. Try navigating away and pressing Back!');
+    </script>
 </body>
 
 </html>

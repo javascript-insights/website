@@ -4,22 +4,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Handler</title>
+    <title>Payment Handler - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #28a745; }
+        .btn-info { background: #17a2b8; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0; }
+        .product-card { background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; text-align: center; }
+        .product-card h3 { margin: 10px 0 5px; }
+        .product-card .price { font-size: 1.5em; color: #28a745; font-weight: bold; }
+        .product-card .emoji { font-size: 3em; }
+        .cart { background: white; padding: 15px; border-radius: 8px; border: 2px solid #28a745; }
+        .cart-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; }
+        .total { font-size: 1.3em; font-weight: bold; margin-top: 10px; text-align: right; }
+        select, input[type="number"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
 </head>
 
 <body>
-    <h1>Payment Handler</h1>
-    <p>This page demonstrates the Payment Handler API.</p>
-    <button id="pay">Pay</button>
+    <h1>💰 Payment Handler API</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>What is the Payment Handler API?</h2>
+        <p>The <strong>Payment Handler API</strong> (part of the <strong>Payment Request API</strong>) allows 
+        web applications to act as payment providers. It enables a streamlined checkout experience by using a 
+        standard browser UI for payment rather than custom forms.</p>
+        <p><strong>Note:</strong> The Payment Request API requires HTTPS and a registered payment method. 
+        In this demo, we'll use the <code>basic-card</code> method (deprecated in some browsers) or demonstrate 
+        the API flow with proper error handling.</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>🛒 Mini Shop Demo</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="emoji">☕</div>
+                <h3>Coffee</h3>
+                <div class="price">$4.99</div>
+                <button class="btn btn-primary" onclick="addToCart('Coffee', 4.99)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="emoji">🍕</div>
+                <h3>Pizza</h3>
+                <div class="price">$12.99</div>
+                <button class="btn btn-primary" onclick="addToCart('Pizza', 12.99)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="emoji">📚</div>
+                <h3>DevTools Book</h3>
+                <div class="price">$29.99</div>
+                <button class="btn btn-primary" onclick="addToCart('DevTools Book', 29.99)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="emoji">🎧</div>
+                <h3>Headphones</h3>
+                <div class="price">$79.99</div>
+                <button class="btn btn-primary" onclick="addToCart('Headphones', 79.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="cart" id="cart">
+            <h3>🛒 Shopping Cart</h3>
+            <div id="cartItems"><em>Cart is empty</em></div>
+            <div class="total" id="cartTotal"></div>
+        </div>
+
+        <div style="margin-top:15px;">
+            <button class="btn btn-primary" id="pay" style="font-size:16px;padding:12px 30px;">💳 Pay Now</button>
+            <button class="btn btn-info" id="checkSupport">Check API Support</button>
+            <button class="btn" id="clearCart" style="background:#6c757d;">Clear Cart</button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting Payment Handler</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Expand <strong>Background services</strong> → click <strong>Payment Handler</strong></li>
+            <li>Click the <strong>record</strong> button (⏺) to start recording payment events</li>
+            <li>Click "Pay Now" and interact with the browser's payment UI</li>
+            <li>Watch for payment lifecycle events: request, show, response, complete</li>
+            <li>Even cancelled payments generate events you can observe!</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Start recording in the Payment Handler panel</li>
+            <li>Add items to cart and attempt a payment — observe the payment UI</li>
+            <li>Click "Check API Support" to verify which payment methods are available</li>
+            <li>Try cancelling the payment — what events appear?</li>
+            <li>Look at the Console for detailed payment request/response logs</li>
+        </ol>
+    </div>
 
     <script>
-        document.getElementById('pay').addEventListener('click', async () => {
-            if ('PaymentRequest' in window) {
-                const paymentRequest = new PaymentRequest([{
+        const logEl = document.getElementById('log');
+        const cart = [];
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Payment Handler] ${msg}`);
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            renderCart();
+            log(`Added "${name}" ($${price}) to cart`);
+        }
+
+        function renderCart() {
+            const itemsEl = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            if (cart.length === 0) {
+                itemsEl.innerHTML = '<em>Cart is empty</em>';
+                totalEl.textContent = '';
+                return;
+            }
+            itemsEl.innerHTML = cart.map((item, i) =>
+                `<div class="cart-item"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`
+            ).join('');
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            totalEl.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        document.getElementById('clearCart').addEventListener('click', () => {
+            cart.length = 0;
+            renderCart();
+            log('Cart cleared');
+        });
+
+        // Check Support
+        document.getElementById('checkSupport').addEventListener('click', async () => {
+            if (!('PaymentRequest' in window)) {
+                log('❌ PaymentRequest API is NOT supported in this browser');
+                return;
+            }
+            log('✅ PaymentRequest API is supported');
+
+            // Check if we can make a payment
+            try {
+                const methods = [{
                     supportedMethods: 'https://google.com/pay',
                     data: {
+                        environment: 'TEST',
                         apiVersion: 2,
                         apiVersionMinor: 0,
+                        merchantInfo: { merchantName: 'DevTools Demo' },
                         allowedPaymentMethods: [{
                             type: 'CARD',
                             parameters: {
@@ -28,23 +182,98 @@
                             }
                         }]
                     }
-                }], {
-                    total: {
-                        label: 'Total',
-                        amount: { currency: 'USD', value: '10.00' }
-                    }
-                });
+                }];
 
-                try {
-                    const paymentResponse = await paymentRequest.show();
-                    await paymentResponse.complete('success');
-                } catch (error) {
-                    console.error('Payment failed:', error);
-                }
-            } else {
-                console.log('Payment Request API not supported.');
+                const details = {
+                    total: { label: 'Test', amount: { currency: 'USD', value: '0.01' } }
+                };
+
+                const request = new PaymentRequest(methods, details);
+                const canMake = await request.canMakePayment();
+                log(`canMakePayment() result: ${canMake}`);
+            } catch(e) {
+                log('CanMakePayment check: ' + e.message);
             }
         });
+
+        // Pay button
+        document.getElementById('pay').addEventListener('click', async () => {
+            if (cart.length === 0) {
+                log('⚠️ Cart is empty! Add some items first.');
+                return;
+            }
+
+            if (!('PaymentRequest' in window)) {
+                log('❌ PaymentRequest API is NOT supported in this browser.');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const displayItems = cart.map(item => ({
+                label: item.name,
+                amount: { currency: 'USD', value: item.price.toFixed(2) }
+            }));
+
+            log('Creating payment request...');
+            console.log('Payment items:', displayItems);
+
+            try {
+                const paymentMethods = [{
+                    supportedMethods: 'https://google.com/pay',
+                    data: {
+                        environment: 'TEST',
+                        apiVersion: 2,
+                        apiVersionMinor: 0,
+                        merchantInfo: { merchantName: 'DevTools Course Demo Shop' },
+                        allowedPaymentMethods: [{
+                            type: 'CARD',
+                            parameters: {
+                                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                                allowedCardNetworks: ['VISA', 'MASTERCARD', 'AMEX']
+                            }
+                        }],
+                        transactionInfo: {
+                            totalPriceStatus: 'FINAL',
+                            totalPrice: total.toFixed(2),
+                            currencyCode: 'USD'
+                        }
+                    }
+                }];
+
+                const paymentDetails = {
+                    displayItems: displayItems,
+                    total: {
+                        label: 'Total',
+                        amount: { currency: 'USD', value: total.toFixed(2) }
+                    }
+                };
+
+                const request = new PaymentRequest(paymentMethods, paymentDetails);
+                log(`Payment UI showing... Total: $${total.toFixed(2)}`);
+
+                const response = await request.show();
+                log('✅ Payment response received!');
+                console.log('Payment response:', response);
+
+                await response.complete('success');
+                log('✅ Payment completed successfully!');
+                cart.length = 0;
+                renderCart();
+
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    log('🚫 Payment was cancelled by the user');
+                } else if (error.name === 'NotSupportedError') {
+                    log('❌ No payment methods available. The Payment Request API needs a supported payment app (e.g., Google Pay).');
+                    log('💡 TIP: In DevTools, you can still observe Payment Handler events in Application → Background Services');
+                } else {
+                    log('❌ Payment error: ' + error.message);
+                }
+                console.error('Payment error details:', error);
+            }
+        });
+
+        log('Mini shop loaded. Add items and try paying!');
     </script>
 </body>
 

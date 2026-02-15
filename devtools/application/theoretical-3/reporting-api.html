@@ -4,30 +4,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporting API</title>
-    <meta http-equiv="Report-To" content='{"group":"default","max_age":31536000,"endpoints":[{"url":"/reports"}]}'>
+    <title>Reporting API - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #e83e8c; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 300px; overflow-y: auto; margin: 10px 0; white-space: pre-wrap; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #e83e8c; }
+        .btn-info { background: #17a2b8; }
+        .btn-warning { background: #ffc107; color: #333; }
+        .report-card { background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin: 10px 0; }
+        .report-card h4 { margin: 0 0 5px; color: #e83e8c; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
+        .status-supported { background: #d4edda; color: #155724; }
+        .status-unsupported { background: #f8d7da; color: #721c24; }
+    </style>
 </head>
 
 <body>
-    <h1>Reporting API</h1>
-    <p>This page demonstrates the Reporting API.</p>
-    <p>Check the console for reports.</p>
+    <h1>📊 Reporting API</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>What is the Reporting API?</h2>
+        <p>The <strong>Reporting API</strong> allows browsers to report various types of issues back to developers, including:</p>
+        <ul>
+            <li><strong>Deprecation reports</strong> — When your code uses a deprecated browser feature</li>
+            <li><strong>Intervention reports</strong> — When the browser blocks an action for user experience</li>
+            <li><strong>CSP violation reports</strong> — Content Security Policy violations</li>
+            <li><strong>Crash reports</strong> — When a tab crashes</li>
+            <li><strong>Permissions policy reports</strong> — Permission policy violations</li>
+        </ul>
+        <p>The <code>ReportingObserver</code> API lets you catch these reports in JavaScript!</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>ReportingObserver Status</h2>
+        <div id="apiStatus" class="status"></div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Generate Reports</h2>
+        <p>Click the buttons below to trigger various browser reports. Watch them appear in the log below 
+        and in the DevTools Application panel.</p>
+
+        <button class="btn btn-primary" id="triggerDeprecation">Trigger Deprecation Warning</button>
+        <button class="btn btn-warning" id="triggerIntervention">Trigger Browser Intervention</button>
+        <button class="btn btn-info" id="checkReports">Check Buffered Reports</button>
+
+        <h3>Captured Reports</h3>
+        <div id="reports"><em>No reports captured yet. Click the buttons above!</em></div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Report Types Reference</h2>
+        <div class="report-card">
+            <h4>📋 Deprecation Report</h4>
+            <p>Generated when using a deprecated Web Platform feature. Contains: <code>id</code>, <code>message</code>, 
+            <code>sourceFile</code>, <code>lineNumber</code>, <code>anticipatedRemoval</code> date.</p>
+        </div>
+        <div class="report-card">
+            <h4>🛑 Intervention Report</h4>
+            <p>Generated when the browser intervenes to block something (e.g., blocking an autoplaying video, 
+            preventing heavy ads). Contains: <code>id</code>, <code>message</code>.</p>
+        </div>
+        <div class="report-card">
+            <h4>🔒 CSP Violation Report</h4>
+            <p>Generated when Content Security Policy is violated. Requires server-side <code>Report-To</code> header.</p>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting the Reporting API</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Expand <strong>Background services</strong> → click <strong>Reporting API</strong></li>
+            <li>This panel shows all reports generated by the page</li>
+            <li>You can filter by report type (deprecation, intervention, etc.)</li>
+            <li>Click on a report to see its full details</li>
+            <li>The <strong>Console</strong> will also show deprecation warnings</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Open the Reporting API section in the Application panel</li>
+            <li>Click "Trigger Deprecation Warning" — do reports appear?</li>
+            <li>Check the Console for deprecation warnings</li>
+            <li>Click "Check Buffered Reports" to see what ReportingObserver captured</li>
+            <li>Try the "Trigger Browser Intervention" button — different browser behavior applies</li>
+            <li>Compare what you see in the Application panel vs. the Console</li>
+        </ol>
+    </div>
+
     <script>
+        const logEl = document.getElementById('log');
+        const reportsEl = document.getElementById('reports');
+        const capturedReports = [];
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Reporting API] ${msg}`);
+        }
+
+        function renderReports() {
+            if (capturedReports.length === 0) {
+                reportsEl.innerHTML = '<em>No reports captured yet</em>';
+                return;
+            }
+            reportsEl.innerHTML = capturedReports.map((report, i) => `
+                <div class="report-card">
+                    <h4>#${i + 1} — ${report.type} report</h4>
+                    <p><strong>URL:</strong> ${report.url}</p>
+                    ${report.body ? `<p><strong>ID:</strong> ${report.body.id || 'N/A'}</p>
+                    <p><strong>Message:</strong> ${report.body.message || 'N/A'}</p>
+                    <p><strong>Source:</strong> ${report.body.sourceFile || 'N/A'}:${report.body.lineNumber || '?'}</p>
+                    ${report.body.anticipatedRemoval ? `<p><strong>Removal Date:</strong> ${report.body.anticipatedRemoval}</p>` : ''}` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Set up ReportingObserver
         if ('ReportingObserver' in window) {
-            const observer = new ReportingObserver((reports, observer) => {
+            document.getElementById('apiStatus').textContent = '✅ ReportingObserver is supported!';
+            document.getElementById('apiStatus').className = 'status status-supported';
+
+            const observer = new ReportingObserver((reports, obs) => {
                 reports.forEach(report => {
-                    console.log('Report:', report);
+                    log(`📊 Report captured: type="${report.type}"`);
+                    log(`   Body: ${JSON.stringify(report.body)}`);
+                    capturedReports.push(report);
+                    console.log('Full report object:', report);
                 });
-            }, { buffered: true, types: ['deprecation'] });
+                renderReports();
+            }, { buffered: true, types: ['deprecation', 'intervention'] });
 
             observer.observe();
-
-            // Generate a test report by using a deprecated feature
-            document.body.createTextRange();
+            log('✅ ReportingObserver is active and listening for reports');
         } else {
-            console.log('Reporting API not supported.');
+            document.getElementById('apiStatus').textContent = '❌ ReportingObserver is NOT supported in this browser';
+            document.getElementById('apiStatus').className = 'status status-unsupported';
+            log('❌ ReportingObserver not supported');
         }
-    </script>
+
+        // Trigger deprecation reports
+        document.getElementById('triggerDeprecation').addEventListener('click', () => {
+            log('Triggering deprecated APIs to generate deprecation reports...');
+
+            // Use deprecated APIs that generate reports
+            try {
+                // This generates a deprecation report in Chromium browsers
+                document.domain;
+                log('Called document.domain (deprecated for cross-origin access)');
+            } catch(e) { /* ignore */ }
+
+            try {
+                // WebSQL is deprecated
+                if (window.openDatabase) {
+                    window.openDatabase('test', '1.0', 'Test DB', 1024);
+                    log('Called openDatabase() (WebSQL is deprecated)');
+                }
+            } catch(e) {
+                log('openDatabase threw — this is expected as WebSQL is removed');
+            }
+
+            try {
+                // Synchronous XMLHttpRequest on the main thread is deprecated
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'getstarted.json', false); // false = synchronous
+                xhr.send();
+                log('Performed synchronous XMLHttpRequest (deprecated on main thread)');
+            } catch(e) {
+                log('Synchronous XHR: ' + e.message);
+            }
+
+            log('Check the DevTools Console and Application panel for generated reports');
+        });
+
+        // Trigger intervention
+        document.getElementById('triggerIntervention').addEventListener('click', () => {
+            log('Attempting to trigger browser intervention...');
+
+            // Try to autoplay a video with sound (browsers may intervene)
+            try {
+                const video = document.createElement('video');
+                video.src = 'data:video/mp4;base64,AAAA'; // Invalid but triggers the attempt
+                video.muted = false;
+                video.autoplay = true;
+                document.body.appendChild(video);
+                video.play().then(() => {
+                    log('Video autoplay succeeded (no intervention)');
+                }).catch(e => {
+                    log(`🛑 Browser intervened on autoplay: ${e.message}`);
+                });
+                setTimeout(() => video.remove(), 100);
+            } catch(e) {
+                log('Intervention trigger: ' + e.message);
+            }
+
+            // Try to open a popup (may be blocked)
+            try {
+                const popup = window.open('about:blank', '_blank', 'width=1,height=1');
+                if (popup) {
+                    popup.close();
+                    log('Popup opened and closed (no intervention)');
+                } else {
+                    log('🛑 Browser blocked popup — this is an intervention');
+                }
+            } catch(e) {
+                log('🛑 Popup blocked: ' + e.message);
+            }
+
+            log('Check Application → Reporting API and Console for intervention reports');
+        });
+
+        // Check buffered reports
+        document.getElementById('checkReports').addEventListener('click', () => {
+            log(`📋 Total reports captured so far: ${capturedReports.length}`);
+            capturedReports.forEach((report, i) => {
+                log(`  Report #${i + 1}: type=${report.type}, url=${report.url}`);
+            });
+            renderReports();
+        });
+
+        log('Page loaded. Ready to generate and observe reports!');
     </script>
 </body>
 

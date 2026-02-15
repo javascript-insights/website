@@ -4,35 +4,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Sync</title>
+    <title>Background Sync - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #6f42c1; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
+        .status-idle { background: #e2e3e5; color: #383d41; }
+        .status-syncing { background: #d4c5f9; color: #4a148c; }
+        .status-success { background: #d4edda; color: #155724; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #6f42c1; }
+        .btn-success { background: #28a745; }
+        .btn-info { background: #17a2b8; }
+        .queue-item { background: white; padding: 10px; margin: 5px 0; border-radius: 5px; border: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+        .queue-item .pending { color: #ffc107; }
+        .queue-item .synced { color: #28a745; }
+        input[type="text"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 300px; }
+    </style>
 </head>
 
 <body>
-    <h1>Background Sync</h1>
-    <p>This page demonstrates the Background Sync API.</p>
-    <button id="register-sync">Register Sync</button>
+    <h1>🔄 Background Sync API</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>What is Background Sync?</h2>
+        <p>The <strong>Background Sync API</strong> lets you defer actions (like sending a message or uploading data) 
+        until the user has a stable internet connection. The browser will retry the sync even if the user has 
+        left the page!</p>
+        <p><strong>Real-world use case:</strong> A messaging app queues unsent messages and syncs them when connectivity returns.</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>Live Demo: Message Queue</h2>
+        <p>Type a message and add it to the sync queue. The service worker will "sync" it in the background.</p>
+
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <input type="text" id="messageInput" placeholder="Type a message to sync..." />
+            <button class="btn btn-primary" id="addMessage">Add to Queue</button>
+        </div>
+
+        <div id="status" class="status status-idle">Status: Idle</div>
+
+        <h3>Message Queue</h3>
+        <div id="queue"><em>No messages queued yet</em></div>
+
+        <button class="btn btn-success" id="register-sync">Trigger Background Sync Now</button>
+        <button class="btn btn-info" id="check-tags">Check Registered Sync Tags</button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting Background Sync</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Expand <strong>Background services</strong> → click <strong>Background Sync</strong></li>
+            <li>Click the <strong>record</strong> button (⏺) to start recording sync events</li>
+            <li>Add messages and click "Trigger Background Sync Now"</li>
+            <li>Watch sync events appear with their tags and timestamps</li>
+            <li>You can also simulate offline mode in the <strong>Network</strong> panel to test retry behavior</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Start recording sync events in the Application panel</li>
+            <li>Add a few messages and trigger a sync — observe events in DevTools</li>
+            <li>Go to Network panel and check "Offline", then trigger another sync</li>
+            <li>Uncheck "Offline" — does the pending sync fire automatically?</li>
+            <li>Check the Service Workers section to see the registered service worker</li>
+        </ol>
+    </div>
 
     <script>
-        // Register service worker first
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('background-sync-service-worker.js')
-                .then(registration => console.log('ServiceWorker registered:', registration))
-                .catch(error => console.error('ServiceWorker registration failed:', error));
+        const logEl = document.getElementById('log');
+        const queueEl = document.getElementById('queue');
+        const statusEl = document.getElementById('status');
+        const messageQueue = [];
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Background Sync] ${msg}`);
         }
 
-        document.getElementById('register-sync').addEventListener('click', () => {
-            if ('serviceWorker' in navigator && 'SyncManager' in window) {
-                navigator.serviceWorker.ready.then(swRegistration => {
-                    return swRegistration.sync.register('myFirstSync');
-                }).then(() => {
-                    console.log('Sync registered');
-                }).catch(error => {
-                    console.error('Sync registration failed:', error);
-                });
-            } else {
-                console.log('Background Sync not supported.');
+        function setStatus(msg, type) {
+            statusEl.textContent = `Status: ${msg}`;
+            statusEl.className = `status status-${type}`;
+        }
+
+        function renderQueue() {
+            if (messageQueue.length === 0) {
+                queueEl.innerHTML = '<em>No messages queued</em>';
+                return;
+            }
+            queueEl.innerHTML = messageQueue.map((item, i) => `
+                <div class="queue-item">
+                    <span>${item.text}</span>
+                    <span class="${item.synced ? 'synced' : 'pending'}">${item.synced ? '✅ Synced' : '⏳ Pending'}</span>
+                </div>
+            `).join('');
+        }
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('background-sync-service-worker.js')
+                .then(reg => log('✅ Service Worker registered'))
+                .catch(err => log('❌ Service Worker registration failed: ' + err));
+        }
+
+        // Listen for messages from the service worker
+        navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data.type === 'sync-complete') {
+                log('✅ Service Worker reported sync complete!');
+                messageQueue.forEach(item => item.synced = true);
+                renderQueue();
+                setStatus('All messages synced!', 'success');
             }
         });
+
+        // Add message to queue
+        document.getElementById('addMessage').addEventListener('click', () => {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            messageQueue.push({ text, synced: false, timestamp: Date.now() });
+            input.value = '';
+            renderQueue();
+            log(`📝 Message added to queue: "${text}"`);
+            setStatus(`${messageQueue.filter(m => !m.synced).length} message(s) pending sync`, 'idle');
+        });
+
+        // Allow Enter key to add message
+        document.getElementById('messageInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('addMessage').click();
+        });
+
+        // Trigger sync
+        document.getElementById('register-sync').addEventListener('click', async () => {
+            if (!('serviceWorker' in navigator) || !('SyncManager' in window)) {
+                log('❌ Background Sync is not supported in this browser.');
+                setStatus('Not Supported — try Chrome/Edge', 'error');
+                return;
+            }
+
+            try {
+                const swReg = await navigator.serviceWorker.ready;
+                const syncTag = 'sync-messages-' + Date.now();
+                await swReg.sync.register(syncTag);
+                log(`🔄 Sync registered with tag: "${syncTag}"`);
+                setStatus('Sync registered — waiting for browser to execute...', 'syncing');
+            } catch (error) {
+                log('❌ Sync registration failed: ' + error.message);
+                setStatus('Sync failed: ' + error.message, 'error');
+            }
+        });
+
+        // Check registered tags
+        document.getElementById('check-tags').addEventListener('click', async () => {
+            try {
+                const swReg = await navigator.serviceWorker.ready;
+                const tags = await swReg.sync.getTags();
+                if (tags.length > 0) {
+                    log(`📋 Registered sync tags: ${tags.join(', ')}`);
+                } else {
+                    log('📋 No sync tags currently registered (all completed)');
+                }
+            } catch(e) {
+                log('Could not get tags: ' + e.message);
+            }
+        });
+
+        log('Page loaded. Add messages and trigger a sync!');
+        renderQueue();
     </script>
 </body>
 

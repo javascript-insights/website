@@ -4,16 +4,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Push Messaging</title>
+    <title>Push Messaging - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #6610f2; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .warning { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ffc107; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 250px; overflow-y: auto; margin: 10px 0; word-break: break-all; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
+        .status-idle { background: #e2e3e5; color: #383d41; }
+        .status-subscribed { background: #d4edda; color: #155724; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #6610f2; }
+        .btn-success { background: #28a745; }
+        .btn-danger { background: #dc3545; }
+        .btn-info { background: #17a2b8; }
+        .subscription-info { background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin: 10px 0; font-family: monospace; font-size: 12px; word-break: break-all; max-height: 150px; overflow-y: auto; }
+        .diagram { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; font-family: sans-serif; margin: 10px 0; }
+        .diagram .step { display: flex; align-items: center; margin: 8px 0; gap: 10px; }
+        .diagram .step .num { background: #6610f2; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .diagram .arrow { color: #6610f2; font-size: 1.5em; margin-left: 10px; }
+    </style>
 </head>
 
 <body>
-    <h1>Push Messaging Demo</h1>
-    <p>This page demonstrates the Push Messaging API.</p>
-    <button id="subscribe">Subscribe to Push Notifications</button>
-    <button id="sendNotification">Send Test Notification</button>
+    <h1>📬 Push Messaging API</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
 
-    <script src="push-messaging-app.js"></script>
+    <div class="demo-section">
+        <h2>What is Push Messaging?</h2>
+        <p>The <strong>Push API</strong> allows a server to send messages to a web app at any time — even when 
+        the app isn't open! It uses a <strong>push service</strong> (provided by the browser vendor) as an intermediary 
+        between your server and the user's browser.</p>
+
+        <div class="diagram">
+            <h3>How Push Messaging Works:</h3>
+            <div class="step"><span class="num">1</span> Web app asks browser for a <strong>push subscription</strong></div>
+            <div class="step"><span class="num">2</span> Browser contacts its <strong>push service</strong> and gets an endpoint URL</div>
+            <div class="step"><span class="num">3</span> Web app sends the subscription (endpoint + keys) to <strong>your server</strong></div>
+            <div class="step"><span class="num">4</span> Your server sends a push message to the <strong>push service endpoint</strong></div>
+            <div class="step"><span class="num">5</span> Push service delivers the message to the browser's <strong>Service Worker</strong></div>
+            <div class="step"><span class="num">6</span> Service Worker shows a <strong>notification</strong> to the user</div>
+        </div>
+    </div>
+
+    <div class="warning">
+        <h2>⚠️ Note About This Demo</h2>
+        <p>Push messaging requires a <strong>server component</strong> to send actual push messages. 
+        This demo shows the <strong>client-side subscription flow</strong> and simulates push events using 
+        the Service Worker's <code>push</code> event from DevTools.</p>
+        <p>You can trigger push events manually from <strong>Application → Service Workers → Push</strong>!</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>Push Subscription</h2>
+        <div id="status" class="status status-idle">Status: Not subscribed</div>
+
+        <button class="btn btn-primary" id="subscribe">Subscribe to Push</button>
+        <button class="btn btn-danger" id="unsubscribe" disabled>Unsubscribe</button>
+        <button class="btn btn-info" id="checkSubscription">Check Current Subscription</button>
+
+        <h3>Subscription Details:</h3>
+        <div class="subscription-info" id="subscriptionInfo">
+            <em>No active subscription</em>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Simulate Push (via Service Worker)</h2>
+        <p>Since we don't have a push server, you can simulate push events from DevTools:</p>
+        <ol>
+            <li>Go to <strong>Application → Service Workers</strong></li>
+            <li>Find the registered service worker</li>
+            <li>In the <strong>"Push"</strong> text field, type a message (e.g., <code>Hello from Push!</code>)</li>
+            <li>Click the <strong>"Push"</strong> button — a notification should appear!</li>
+        </ol>
+        <button class="btn btn-success" id="sendNotification">Show Local Notification (simulated push)</button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting Push Messaging</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Expand <strong>Background services</strong> → click <strong>Push Messaging</strong></li>
+            <li>Click the <strong>record</strong> button (⏺) to start recording push events</li>
+            <li>Subscribe to push and observe the subscription event</li>
+            <li>Go to <strong>Service Workers</strong> section → use the <strong>Push</strong> input to send test messages</li>
+            <li>Watch push events appear in the Push Messaging timeline!</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Start recording in the Push Messaging panel</li>
+            <li>Click "Subscribe to Push" — examine the subscription endpoint</li>
+            <li>Go to Service Workers and send a push message with text "Test push!"</li>
+            <li>Observe the notification and the event in the Push Messaging timeline</li>
+            <li>Unsubscribe and try sending another push — what happens?</li>
+            <li>Check the subscription details — notice the endpoint URL and encryption keys</li>
+        </ol>
+    </div>
+
+    <script>
+        const logEl = document.getElementById('log');
+        const statusEl = document.getElementById('status');
+        const subInfoEl = document.getElementById('subscriptionInfo');
+        let currentSubscription = null;
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Push Messaging] ${msg}`);
+        }
+
+        function setStatus(msg, type) {
+            statusEl.textContent = `Status: ${msg}`;
+            statusEl.className = `status status-${type}`;
+        }
+
+        function displaySubscription(sub) {
+            if (sub) {
+                const subJSON = sub.toJSON();
+                subInfoEl.innerHTML = `<strong>Endpoint:</strong>\n${subJSON.endpoint}\n\n` +
+                    `<strong>Expiration:</strong> ${subJSON.expirationTime || 'None'}\n\n` +
+                    `<strong>Keys:</strong>\n` +
+                    `  p256dh: ${subJSON.keys?.p256dh || 'N/A'}\n` +
+                    `  auth: ${subJSON.keys?.auth || 'N/A'}`;
+            } else {
+                subInfoEl.innerHTML = '<em>No active subscription</em>';
+            }
+        }
+
+        // VAPID key (this is a demo-only public key)
+        function urlB64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+            const rawData = window.atob(base64);
+            return new Uint8Array([...rawData].map(char => char.charCodeAt(0)));
+        }
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('push-messaging-service-worker.js')
+                .then(reg => {
+                    log('✅ Service Worker registered');
+                    // Check existing subscription
+                    return reg.pushManager.getSubscription();
+                })
+                .then(sub => {
+                    if (sub) {
+                        currentSubscription = sub;
+                        log('Found existing push subscription');
+                        setStatus('Already subscribed', 'subscribed');
+                        displaySubscription(sub);
+                        document.getElementById('subscribe').disabled = true;
+                        document.getElementById('unsubscribe').disabled = false;
+                    }
+                })
+                .catch(err => log('❌ SW registration failed: ' + err));
+        }
+
+        // Subscribe
+        document.getElementById('subscribe').addEventListener('click', async () => {
+            try {
+                const permission = await Notification.requestPermission();
+                if (permission !== 'granted') {
+                    log('❌ Notification permission denied — push requires notification permission');
+                    setStatus('Permission denied', 'error');
+                    return;
+                }
+
+                const registration = await navigator.serviceWorker.ready;
+
+                // Generate a VAPID key pair for demo (in production, use your server's real key)
+                const applicationServerKey = urlB64ToUint8Array(
+                    'BDd3_hVL9fZi9Ybo2UUzA284WG5FZR30_95YeZJsiApwXKpNcF1rRPF3foIiBHXRdJI2Qhumhf6_LFTeZaNndIo'
+                );
+
+                log('Requesting push subscription...');
+                const subscription = await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: applicationServerKey
+                });
+
+                currentSubscription = subscription;
+                log('✅ Push subscription created!');
+                log('Endpoint: ' + subscription.endpoint);
+                console.log('Full subscription object:', subscription.toJSON());
+
+                setStatus('Subscribed to push notifications', 'subscribed');
+                displaySubscription(subscription);
+                document.getElementById('subscribe').disabled = true;
+                document.getElementById('unsubscribe').disabled = false;
+
+            } catch (error) {
+                log('❌ Subscription failed: ' + error.message);
+                setStatus('Subscription failed', 'error');
+                console.error(error);
+            }
+        });
+
+        // Unsubscribe
+        document.getElementById('unsubscribe').addEventListener('click', async () => {
+            try {
+                if (currentSubscription) {
+                    await currentSubscription.unsubscribe();
+                    currentSubscription = null;
+                    log('✅ Unsubscribed from push notifications');
+                    setStatus('Not subscribed', 'idle');
+                    displaySubscription(null);
+                    document.getElementById('subscribe').disabled = false;
+                    document.getElementById('unsubscribe').disabled = true;
+                }
+            } catch(e) {
+                log('Unsubscribe error: ' + e.message);
+            }
+        });
+
+        // Check subscription
+        document.getElementById('checkSubscription').addEventListener('click', async () => {
+            try {
+                const registration = await navigator.serviceWorker.ready;
+                const sub = await registration.pushManager.getSubscription();
+                if (sub) {
+                    log('📋 Active subscription found');
+                    displaySubscription(sub);
+                    console.log('Subscription:', sub.toJSON());
+                } else {
+                    log('📋 No active subscription');
+                    displaySubscription(null);
+                }
+            } catch(e) {
+                log('Error checking subscription: ' + e.message);
+            }
+        });
+
+        // Simulate push notification locally
+        document.getElementById('sendNotification').addEventListener('click', async () => {
+            if (Notification.permission !== 'granted') {
+                const perm = await Notification.requestPermission();
+                if (perm !== 'granted') {
+                    log('❌ Notification permission required');
+                    return;
+                }
+            }
+
+            try {
+                const registration = await navigator.serviceWorker.ready;
+                await registration.showNotification('📬 Simulated Push Message', {
+                    body: 'This simulates a push notification. In production, this would come from your server!',
+                    tag: 'push-demo',
+                    data: { url: window.location.href }
+                });
+                log('✅ Simulated push notification sent via Service Worker');
+            } catch(e) {
+                log('Notification error: ' + e.message);
+            }
+        });
+
+        log('Page loaded. Subscribe to push notifications to start!');
+    </script>
 </body>
 
 </html>

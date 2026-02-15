@@ -4,44 +4,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Back/Forward Cache Incompatible</title>
+    <title>Back/Forward Cache - Incompatible</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #dc3545; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .warning { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ffc107; }
+        .blocker { background: #f8d7da; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #f5c6cb; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-danger { background: #dc3545; }
+        .btn-warning { background: #ffc107; color: #333; }
+        .btn-success { background: #28a745; }
+        label { display: block; margin: 5px 0; }
+    </style>
 </head>
 
 <body>
-    <h1>Back/Forward Cache Incompatible Example</h1>
-    <p>This page demonstrates a scenario where the Back/Forward Cache won't work.</p>
-    <p>Using the `beforeunload` event listener makes this page incompatible with the Back/Forward Cache.</p>
-    <a href="index.html">Go back to Home</a>
+    <h1>🚫 Back/Forward Cache — Incompatible Page</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>Why This Page is bfcache-Incompatible</h2>
+        <p>This page intentionally uses features that <strong>prevent</strong> the browser from caching it 
+        in the Back/Forward Cache. When you test this page in DevTools, you'll see the specific blocking reasons.</p>
+    </div>
+
+    <div class="warning">
+        <h2>⚠️ Active bfcache Blockers on This Page</h2>
+
+        <div class="blocker">
+            <strong>1. <code>beforeunload</code> event listener</strong>
+            <p>This event handler prevents the browser from caching the page, as it signals the page wants to 
+            confirm before the user leaves.</p>
+        </div>
+
+        <div class="blocker">
+            <strong>2. Active <code>WebSocket</code> connection</strong>
+            <p>Open WebSocket connections prevent bfcache because they maintain live server connections 
+            that can't be frozen/restored.</p>
+        </div>
+
+        <div class="blocker">
+            <strong>3. <code>Cache-Control: no-store</code> header (if served with it)</strong>
+            <p>Pages with this header hint they shouldn't be cached.</p>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Interactive Form (triggers beforeunload)</h2>
+        <form id="myForm">
+            <label>Name: <input type="text" id="name" placeholder="Type something..."></label>
+            <label>Email: <input type="email" id="email" placeholder="your@email.com"></label>
+            <label>Notes: <textarea id="notes" rows="3" placeholder="Edit this to trigger data change tracking..."></textarea></label>
+            <button type="button" class="btn btn-warning" id="toggleBeforeUnload">Toggle beforeunload (Currently: ON)</button>
+        </form>
+        <p><small>Modify the form fields, then try navigating away. The <code>beforeunload</code> dialog will appear, 
+        AND this page will be blocked from bfcache.</small></p>
+    </div>
+
+    <div class="demo-section">
+        <h2>WebSocket Connection (another blocker)</h2>
+        <button class="btn btn-danger" id="openWs">Open WebSocket</button>
+        <button class="btn btn-success" id="closeWs" disabled>Close WebSocket</button>
+        <p id="wsStatus">WebSocket: <strong>Disconnected</strong></p>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Compare with the Compatible Page</h2>
+        <a href="back-forward-cache.html" class="btn btn-success" style="text-decoration:none;display:inline-block;">Open bfcache-Compatible Page</a>
+        <a href="https://example.com" class="btn btn-danger" style="text-decoration:none;display:inline-block;">Navigate Away (test Back button)</a>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Diagnosing bfcache Issues</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Click <strong>Back/forward cache</strong> in the sidebar</li>
+            <li>Click <strong>"Test back/forward cache"</strong></li>
+            <li>You should see multiple <strong>blocking reasons</strong> listed</li>
+            <li>Each reason links to the exact API or event causing the issue</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Test this page with DevTools — how many blockers are reported?</li>
+            <li>Click "Toggle beforeunload" to remove that blocker, then test again</li>
+            <li>Close the WebSocket, then test again — are there fewer blockers?</li>
+            <li>Compare results with the <a href="back-forward-cache.html">compatible page</a></li>
+        </ol>
+    </div>
 
     <script>
-        window.addEventListener('beforeunload', (event) => {
-            // This event listener makes the page incompatible with the Back/Forward Cache
-            event.returnValue = 'Are you sure you want to leave?';
-        });
-
-        // Assume there's a form or something similar on your page:
-        const myForm = document.getElementById('myForm');
-        let hasUserInteracted = false;
+        const logEl = document.getElementById('log');
+        const form = document.getElementById('myForm');
+        let beforeUnloadActive = true;
         let dataChanged = false;
+        let ws = null;
 
-        // Listen for any user interaction to set the boolean
-        document.addEventListener('click', () => {
-            hasUserInteracted = true;
-        });
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[bfcache-incompatible] ${msg}`);
+        }
 
-        // Simulate that some data was changed in the form
-        myForm.addEventListener('change', () => {
-            dataChanged = true;
-        });
-
-        // Now, the beforeunload should only trigger if there's interaction
-        window.onbeforeunload = (event) => {
-            if (hasUserInteracted && dataChanged) {
+        // --- Blocker 1: beforeunload ---
+        function beforeUnloadHandler(event) {
+            if (dataChanged) {
                 event.preventDefault();
-                event.returnValue = ''; // Standard for most browsers
-                return ''; // For some older browsers
+                event.returnValue = '';
+                return '';
             }
-        };
+        }
+
+        window.addEventListener('beforeunload', beforeUnloadHandler);
+        log('⛔ beforeunload listener added — this blocks bfcache');
+
+        // Track form changes
+        form.addEventListener('input', () => {
+            dataChanged = true;
+            log('Form data changed — beforeunload will now prompt on navigation');
+        });
+
+        // Toggle beforeunload
+        document.getElementById('toggleBeforeUnload').addEventListener('click', () => {
+            beforeUnloadActive = !beforeUnloadActive;
+            const btn = document.getElementById('toggleBeforeUnload');
+            if (beforeUnloadActive) {
+                window.addEventListener('beforeunload', beforeUnloadHandler);
+                btn.textContent = 'Toggle beforeunload (Currently: ON)';
+                log('⛔ beforeunload listener RE-ADDED — bfcache blocked');
+            } else {
+                window.removeEventListener('beforeunload', beforeUnloadHandler);
+                btn.textContent = 'Toggle beforeunload (Currently: OFF)';
+                log('✅ beforeunload listener REMOVED — one less blocker');
+            }
+        });
+
+        // --- Blocker 2: WebSocket ---
+        document.getElementById('openWs').addEventListener('click', () => {
+            try {
+                // Use wss://echo.websocket.org or a public echo server
+                ws = new WebSocket('wss://echo.websocket.events');
+                ws.onopen = () => {
+                    log('⛔ WebSocket OPENED — this blocks bfcache');
+                    document.getElementById('wsStatus').innerHTML = 'WebSocket: <strong style="color:red;">Connected</strong>';
+                    document.getElementById('openWs').disabled = true;
+                    document.getElementById('closeWs').disabled = false;
+                };
+                ws.onclose = () => {
+                    log('✅ WebSocket CLOSED — one less blocker');
+                    document.getElementById('wsStatus').innerHTML = 'WebSocket: <strong>Disconnected</strong>';
+                    document.getElementById('openWs').disabled = false;
+                    document.getElementById('closeWs').disabled = true;
+                };
+                ws.onerror = () => {
+                    log('WebSocket connection error (server may be unavailable, but the attempt still blocks bfcache)');
+                    document.getElementById('openWs').disabled = false;
+                };
+            } catch(e) {
+                log('WebSocket failed to create: ' + e.message);
+            }
+        });
+
+        document.getElementById('closeWs').addEventListener('click', () => {
+            if (ws) {
+                ws.close();
+                ws = null;
+            }
+        });
+
+        // --- Detect bfcache ---
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                log('✅ Surprise! Page was restored from bfcache despite blockers');
+            } else {
+                log('pageshow: Normal load (not from bfcache, as expected)');
+            }
+        });
+
+        log('Page loaded with bfcache blockers active. Use DevTools to diagnose!');
     </script>
 </body>
 

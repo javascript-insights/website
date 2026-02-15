@@ -11,7 +11,7 @@ if ('serviceWorker' in navigator) {
 
 async function initializePushMessaging(registration) {
     const subscribeButton = document.getElementById('subscribe');
-    const notificationButton = document.getElementById('notificationclick');
+    const notificationButton = document.getElementById('sendNotification');
 
     subscribeButton.addEventListener('click', async () => {
         try {

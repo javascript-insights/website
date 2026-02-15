@@ -4,39 +4,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications</title>
+    <title>Notifications - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #fd7e14; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
+        .status-unknown { background: #e2e3e5; color: #383d41; }
+        .status-granted { background: #d4edda; color: #155724; }
+        .status-denied { background: #f8d7da; color: #721c24; }
+        .status-default { background: #fff3cd; color: #856404; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #fd7e14; }
+        .btn-success { background: #28a745; }
+        .btn-info { background: #17a2b8; }
+        .btn-danger { background: #dc3545; }
+        .notification-form { display: grid; gap: 10px; max-width: 400px; }
+        .notification-form input, .notification-form select, .notification-form textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .notification-form label { font-weight: bold; }
+    </style>
 </head>
 
 <body>
-    <h1>Notifications</h1>
-    <p>This page demonstrates the Notifications API.</p>
-    <button id="show-notification">Show Notification</button>
+    <h1>🔔 Notifications API</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
+    </div>
+
+    <div class="demo-section">
+        <h2>What are Web Notifications?</h2>
+        <p>The <strong>Notifications API</strong> allows web pages to send notifications to the user's system 
+        notification center. Combined with a <strong>Service Worker</strong>, notifications can be shown even when 
+        the page is closed!</p>
+        <p><strong>Key difference:</strong> Regular notifications (<code>new Notification()</code>) only work while the page is open. 
+        Service Worker notifications (<code>registration.showNotification()</code>) persist and can respond to push events.</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>Permission Status</h2>
+        <div id="permissionStatus" class="status status-unknown">Checking notification permission...</div>
+        <button class="btn btn-primary" id="requestPermission">Request Permission</button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Send Custom Notification</h2>
+        <div class="notification-form">
+            <label>Title: <input type="text" id="notifTitle" value="Hello from DevTools Course!" /></label>
+            <label>Body: <textarea id="notifBody" rows="2">This notification was triggered from the Application panel demo.</textarea></label>
+            <label>Tag (groups similar notifications):
+                <select id="notifTag">
+                    <option value="">No tag</option>
+                    <option value="demo">demo</option>
+                    <option value="alert">alert</option>
+                    <option value="update">update</option>
+                </select>
+            </label>
+            <label>
+                <input type="checkbox" id="notifRequireInteraction" /> Require user interaction to dismiss
+            </label>
+        </div>
+
+        <div style="margin-top:15px;">
+            <button class="btn btn-success" id="show-notification">Show via Service Worker</button>
+            <button class="btn btn-info" id="show-basic-notification">Show Basic Notification</button>
+            <button class="btn btn-danger" id="close-notifications">Close All Notifications</button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Batch Notifications (for DevTools testing)</h2>
+        <p>Send multiple notifications at once to see them stack up in the DevTools panel:</p>
+        <button class="btn btn-primary" id="send-batch">Send 5 Notifications (different tags)</button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting Notifications</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Expand <strong>Background services</strong> → click <strong>Notifications</strong></li>
+            <li>Click the <strong>record</strong> button (⏺) to start recording</li>
+            <li>Send notifications from this page and watch events appear</li>
+            <li>You'll see: notification displayed, clicked, closed events</li>
+            <li>Each event shows the notification's <strong>tag</strong>, <strong>title</strong>, and <strong>origin</strong></li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Start recording notification events in the Application panel</li>
+            <li>Send notifications with different tags — how are they grouped?</li>
+            <li>Send two notifications with the <em>same</em> tag — what happens?</li>
+            <li>Click on a notification — does a "notificationclick" event appear?</li>
+            <li>Close a notification — does a "notificationclose" event appear?</li>
+            <li>Send the batch of 5 notifications and observe the events timeline</li>
+        </ol>
+    </div>
 
     <script>
-        // Register service worker first
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('notifications-service-worker.js')
-                .then(registration => console.log('ServiceWorker registered'))
-                .catch(err => console.error('ServiceWorker registration failed:', err));
+        const logEl = document.getElementById('log');
+        const permissionEl = document.getElementById('permissionStatus');
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Notifications] ${msg}`);
         }
 
+        function updatePermissionUI() {
+            const perm = Notification.permission;
+            permissionEl.textContent = `Notification Permission: ${perm.toUpperCase()}`;
+            permissionEl.className = `status status-${perm}`;
+            log(`Permission status: ${perm}`);
+        }
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('notifications-service-worker.js')
+                .then(reg => log('✅ Service Worker registered'))
+                .catch(err => log('❌ SW registration failed: ' + err));
+        }
+
+        // Check initial permission
+        if ('Notification' in window) {
+            updatePermissionUI();
+        } else {
+            permissionEl.textContent = 'Notifications API not supported in this browser';
+            permissionEl.className = 'status status-denied';
+        }
+
+        // Request permission
+        document.getElementById('requestPermission').addEventListener('click', async () => {
+            const perm = await Notification.requestPermission();
+            updatePermissionUI();
+        });
+
+        // Show Service Worker notification
         document.getElementById('show-notification').addEventListener('click', async () => {
-            if ('Notification' in window) {
-                const permission = await Notification.requestPermission();
-                if (permission === 'granted') {
-                    // Use the service worker to show the notification
-                    const registration = await navigator.serviceWorker.ready;
-                    registration.showNotification('Hello!', {
-                        body: 'This is a notification example.',
-                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="blue"/></svg>'
-                    });
-                } else if (permission === 'denied') {
-                    console.log('Notification permission denied');
-                }
-            } else {
-                console.log('Notifications API not supported.');
+            if (Notification.permission !== 'granted') {
+                log('⚠️ Permission not granted. Requesting...');
+                const perm = await Notification.requestPermission();
+                updatePermissionUI();
+                if (perm !== 'granted') return;
+            }
+
+            try {
+                const reg = await navigator.serviceWorker.ready;
+                const options = {
+                    body: document.getElementById('notifBody').value,
+                    tag: document.getElementById('notifTag').value || undefined,
+                    requireInteraction: document.getElementById('notifRequireInteraction').checked,
+                    icon: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#fd7e14"/><text x="50" y="65" text-anchor="middle" fill="white" font-size="40">🔔</text></svg>'),
+                    data: { url: window.location.href, timestamp: Date.now() }
+                };
+
+                await reg.showNotification(document.getElementById('notifTitle').value, options);
+                log(`✅ SW Notification sent: "${document.getElementById('notifTitle').value}" (tag: ${options.tag || 'none'})`);
+            } catch(e) {
+                log('❌ Failed: ' + e.message);
             }
         });
+
+        // Show basic notification
+        document.getElementById('show-basic-notification').addEventListener('click', async () => {
+            if (Notification.permission !== 'granted') {
+                const perm = await Notification.requestPermission();
+                updatePermissionUI();
+                if (perm !== 'granted') return;
+            }
+
+            const n = new Notification(document.getElementById('notifTitle').value, {
+                body: document.getElementById('notifBody').value,
+                tag: document.getElementById('notifTag').value || undefined
+            });
+            n.onclick = () => log('👆 Basic notification clicked');
+            n.onclose = () => log('❎ Basic notification closed');
+            log('✅ Basic Notification sent (no SW - won\'t appear in Application panel)');
+        });
+
+        // Close all
+        document.getElementById('close-notifications').addEventListener('click', async () => {
+            try {
+                const reg = await navigator.serviceWorker.ready;
+                const notifications = await reg.getNotifications();
+                notifications.forEach(n => n.close());
+                log(`Closed ${notifications.length} notification(s)`);
+            } catch(e) {
+                log('Could not close notifications: ' + e.message);
+            }
+        });
+
+        // Batch send
+        document.getElementById('send-batch').addEventListener('click', async () => {
+            if (Notification.permission !== 'granted') {
+                const perm = await Notification.requestPermission();
+                updatePermissionUI();
+                if (perm !== 'granted') return;
+            }
+
+            const reg = await navigator.serviceWorker.ready;
+            const types = ['info', 'success', 'warning', 'error', 'update'];
+            const emojis = ['ℹ️', '✅', '⚠️', '❌', '🔄'];
+
+            for (let i = 0; i < 5; i++) {
+                await reg.showNotification(`${emojis[i]} Notification #${i + 1}`, {
+                    body: `This is a ${types[i]} notification`,
+                    tag: `batch-${types[i]}`,
+                    data: { index: i }
+                });
+                log(`Sent batch notification #${i + 1} (tag: batch-${types[i]})`);
+            }
+            log('📦 Batch of 5 notifications sent!');
+        });
+
+        log('Page loaded. Ready to send notifications!');
     </script>
 </body>
 

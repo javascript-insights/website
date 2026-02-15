@@ -4,41 +4,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporting API</title>
-    <meta http-equiv="Report-To" content='{"group":"default","max_age":31536000,"endpoints":[{"url":"/reports"}]}'>
+    <title>Speculative Loads - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #fd7e14; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 250px; overflow-y: auto; margin: 10px 0; white-space: pre-wrap; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        .btn-primary { background: #fd7e14; }
+        .btn-info { background: #17a2b8; }
+        .btn-success { background: #28a745; }
+        .btn-danger { background: #dc3545; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0; }
+        .link-card { padding: 15px; border-radius: 8px; border: 2px solid #ddd; text-align: center; transition: all 0.3s; }
+        .link-card:hover { border-color: #fd7e14; box-shadow: 0 4px 12px rgba(253, 126, 20, 0.3); }
+        .link-card h3 { margin: 10px 0 5px; }
+        .link-card a { display: inline-block; padding: 8px 16px; background: #fd7e14; color: white; border-radius: 5px; text-decoration: none; margin: 5px 0; }
+        .link-card .type { font-size: 0.85em; padding: 3px 8px; border-radius: 3px; display: inline-block; margin-bottom: 10px; }
+        .link-card .prefetch { background: #cce5ff; color: #004085; }
+        .link-card .prerender { background: #d4edda; color: #155724; }
+        .code-block { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 8px; font-family: monospace; overflow-x: auto; margin: 10px 0; font-size: 13px; }
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 10px 0; }
+        .comparison > div { padding: 15px; border-radius: 8px; }
+        .comparison .prefetch-col { background: #cce5ff; border: 1px solid #b8daff; }
+        .comparison .prerender-col { background: #d4edda; border: 1px solid #c3e6cb; }
+    </style>
 </head>
 
 <body>
-    <h1>Speculative Loads Example</h1>
-    <div id="links">
-        <a href="https://example.com/page1">Link 1 - Hover me!</a><br>
-        <a href="https://example.com/page2">Link 2 - Hover me!</a>
+    <h1>🔮 Speculative Loads (Speculation Rules)</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
     </div>
 
+    <div class="demo-section">
+        <h2>What are Speculative Loads?</h2>
+        <p><strong>Speculation Rules</strong> tell the browser to <strong>prefetch</strong> or <strong>prerender</strong> 
+        pages that the user is likely to navigate to next. This makes page transitions feel <strong>instant</strong>!</p>
+
+        <div class="comparison">
+            <div class="prefetch-col">
+                <h3>📥 Prefetch</h3>
+                <p>Downloads the page's <strong>HTML</strong> in advance. When the user clicks, parsing and rendering 
+                still need to happen, but the network delay is eliminated.</p>
+                <p><strong>Cost:</strong> Low (just the HTML)</p>
+            </div>
+            <div class="prerender-col">
+                <h3>🖼️ Prerender</h3>
+                <p>Fully <strong>loads and renders</strong> the page in a hidden tab. When the user clicks, the page 
+                swaps in <strong>instantly</strong> — no loading at all!</p>
+                <p><strong>Cost:</strong> Higher (full page load)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Active Speculation Rules</h2>
+        <p>This page includes speculation rules that tell the browser to speculatively load the pages below. 
+        Hover or observe which ones get prefetched/prerendered.</p>
+
+        <div class="link-grid">
+            <div class="link-card">
+                <h3>🏠 Home Page</h3>
+                <span class="type prefetch">Prefetch</span>
+                <br>
+                <a href="../index.html">Application Home</a>
+                <p><small>Prefetched — HTML downloaded in advance</small></p>
+            </div>
+            <div class="link-card">
+                <h3>🔄 bfcache Demo</h3>
+                <span class="type prerender">Prerender</span>
+                <br>
+                <a href="back-forward-cache.html">Back/Forward Cache</a>
+                <p><small>Prerendered — fully loaded in background</small></p>
+            </div>
+            <div class="link-card">
+                <h3>🔔 Notifications</h3>
+                <span class="type prefetch">Prefetch</span>
+                <br>
+                <a href="notifications.html">Notifications Demo</a>
+                <p><small>Prefetched on link hover</small></p>
+            </div>
+            <div class="link-card">
+                <h3>🌐 External Page</h3>
+                <span class="type prefetch">Prefetch</span>
+                <br>
+                <a href="https://example.com" id="external-link">example.com</a>
+                <p><small>Cross-origin prefetch demonstration</small></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Speculation Rules on This Page</h2>
+        <p>Here's the actual speculation rules JSON embedded in this page:</p>
+        <div class="code-block" id="rulesDisplay"></div>
+
+        <h3>Dynamic Speculation Rules</h3>
+        <p>You can also add speculation rules dynamically via JavaScript:</p>
+        <button class="btn btn-primary" id="addPrefetchRule">Add Prefetch Rule</button>
+        <button class="btn btn-success" id="addPrerenderRule">Add Prerender Rule</button>
+        <button class="btn btn-danger" id="removeRules">Remove Dynamic Rules</button>
+        <button class="btn btn-info" id="addHoverRules">Add Hover-based Rules</button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Event Log</h2>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting Speculative Loads</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Expand <strong>Background services</strong> → click <strong>Speculative loads</strong></li>
+            <li>You'll see a list of all speculation rules on the page</li>
+            <li>Each rule shows: <strong>type</strong> (prefetch/prerender), <strong>URL</strong>, <strong>status</strong></li>
+            <li>Status can be: <em>Not triggered</em>, <em>Running</em>, <em>Ready</em>, <em>Failure</em></li>
+            <li>Click on a rule to see why it succeeded or failed</li>
+            <li><strong>Network panel:</strong> Prefetched resources appear with type "prefetch"</li>
+        </ol>
+    </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Open the Speculative Loads section in the Application panel</li>
+            <li>Check which speculation rules are active on this page</li>
+            <li>What is their status? Are any triggered automatically?</li>
+            <li>Hover over "Notifications Demo" — does the status change in DevTools?</li>
+            <li>Click "Add Prefetch Rule" — does a new rule appear in DevTools?</li>
+            <li>Check the Network panel — can you see resources loaded with "speculative" priority?</li>
+            <li>Navigate to a prefetched page — was the transition faster?</li>
+        </ol>
+    </div>
+
+    <!-- Static Speculation Rules -->
+    <script type="speculationrules">
+    {
+        "prefetch": [
+            {
+                "urls": ["../index.html", "notifications.html"],
+                "eagerness": "moderate"
+            }
+        ],
+        "prerender": [
+            {
+                "urls": ["back-forward-cache.html"],
+                "eagerness": "moderate"
+            }
+        ]
+    }
+    </script>
+
     <script>
-        // Get all links
-        const links = document.querySelectorAll('#links a');
+        const logEl = document.getElementById('log');
+        let dynamicRuleElements = [];
 
-        // Add mouseover listener to each link
-        links.forEach(link => {
-            link.addEventListener('mouseover', () => {
-                // Create speculation rules
-                const hints = {
-                    prerender: [{
-                        source: 'mouseover',
-                        where: { href: link.href },
-                        requires: ['anonymous-client-ip']
-                    }]
-                };
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Speculative Loads] ${msg}`);
+        }
 
-                // Apply speculation rules
-                document.querySelector('script[type="speculationrules"]')?.remove();
-                const script = document.createElement('script');
-                script.type = 'speculationrules';
-                script.textContent = JSON.stringify(hints);
-                document.head.appendChild(script);
+        // Display the current speculation rules
+        function displayRules() {
+            const rulesEl = document.querySelector('script[type="speculationrules"]');
+            if (rulesEl) {
+                try {
+                    const rules = JSON.parse(rulesEl.textContent);
+                    document.getElementById('rulesDisplay').textContent = JSON.stringify(rules, null, 2);
+                    log('Static speculation rules found on page');
+                } catch(e) {
+                    document.getElementById('rulesDisplay').textContent = rulesEl.textContent;
+                }
+            } else {
+                document.getElementById('rulesDisplay').textContent = 'No speculation rules found';
+            }
+        }
+
+        // Add dynamic prefetch rule
+        document.getElementById('addPrefetchRule').addEventListener('click', () => {
+            const rules = {
+                prefetch: [{
+                    urls: ['background-sync.html', 'bounce-tracking.html'],
+                    eagerness: 'immediate'
+                }]
+            };
+
+            const script = document.createElement('script');
+            script.type = 'speculationrules';
+            script.textContent = JSON.stringify(rules);
+            document.head.appendChild(script);
+            dynamicRuleElements.push(script);
+
+            log('✅ Dynamic PREFETCH rules added for: background-sync.html, bounce-tracking.html');
+            log('   Eagerness: immediate — browser will fetch right away');
+            log('📋 Check Application → Speculative Loads to see the new rules!');
+        });
+
+        // Add dynamic prerender rule
+        document.getElementById('addPrerenderRule').addEventListener('click', () => {
+            const rules = {
+                prerender: [{
+                    urls: ['payment-handler.html'],
+                    eagerness: 'moderate'
+                }]
+            };
+
+            const script = document.createElement('script');
+            script.type = 'speculationrules';
+            script.textContent = JSON.stringify(rules);
+            document.head.appendChild(script);
+            dynamicRuleElements.push(script);
+
+            log('✅ Dynamic PRERENDER rule added for: payment-handler.html');
+            log('   Eagerness: moderate — browser will prerender based on user engagement');
+            log('📋 Check Application → Speculative Loads to see the new rule!');
+        });
+
+        // Add hover-based rules
+        document.getElementById('addHoverRules').addEventListener('click', () => {
+            const rules = {
+                prefetch: [{
+                    where: { href_matches: "*.html" },
+                    eagerness: "conservative"
+                }]
+            };
+
+            const script = document.createElement('script');
+            script.type = 'speculationrules';
+            script.textContent = JSON.stringify(rules);
+            document.head.appendChild(script);
+            dynamicRuleElements.push(script);
+
+            log('✅ Hover-based prefetch rules added');
+            log('   This will prefetch ANY .html link when the user hovers over it');
+            log('   Eagerness: conservative — only on hover/pointerdown');
+        });
+
+        // Remove dynamic rules
+        document.getElementById('removeRules').addEventListener('click', () => {
+            dynamicRuleElements.forEach(el => el.remove());
+            const count = dynamicRuleElements.length;
+            dynamicRuleElements = [];
+            log(`🗑️ Removed ${count} dynamic speculation rule(s)`);
+            log('📋 Check Application panel — rules should be gone');
+        });
+
+        // Monitor link hovers to show speculative loading in action
+        document.querySelectorAll('.link-card a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                log(`👆 Hovering over: ${link.textContent.trim()} (${link.href})`);
+                log('   If hover-based rules are active, this may trigger a prefetch');
             });
         });
+
+        displayRules();
+        log('Page loaded with static speculation rules. Add dynamic rules to experiment!');
     </script>
 </body>
 

@@ -1,0 +1,24 @@
+{
+    "foods": [
+        {
+            "name": "Pizza",
+            "calories": 266,
+            "type": "Fast Food"
+        },
+        {
+            "name": "Salad",
+            "calories": 120,
+            "type": "Healthy"
+        },
+        {
+            "name": "Sushi",
+            "calories": 200,
+            "type": "Japanese"
+        },
+        {
+            "name": "Pasta",
+            "calories": 350,
+            "type": "Italian"
+        }
+    ]
+}

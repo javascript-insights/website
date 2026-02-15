@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BFCache Good Page</title>
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; background: #f8faf8; color: #333; }
+        h1 { color: #2e7d32; margin-bottom: 10px; }
+        .badge { display: inline-block; background: #4caf50; color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 20px; }
+        .info { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 16px; border-radius: 6px; margin-bottom: 20px; }
+        .counter-box { background: #fff; border: 2px solid #c8e6c9; border-radius: 10px; padding: 24px; text-align: center; margin: 20px 0; }
+        .counter { font-size: 3rem; font-weight: bold; color: #2e7d32; }
+        .timer { font-size: 1.2rem; color: #666; margin-top: 8px; }
+        button { background: #4caf50; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 1rem; margin: 5px; }
+        button:hover { background: #388e3c; }
+        .log { background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; max-height: 200px; overflow-y: auto; margin-top: 20px; white-space: pre-wrap; }
+        .back-link { display: inline-block; margin-top: 20px; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>✅ BFCache-Eligible Page</h1>
+    <span class="badge">Should be cached</span>
+
+    <div class="info">
+        <strong>This page is designed to be eligible for the back/forward cache.</strong><br>
+        It has no <code>beforeunload</code> listener, no <code>unload</code> listener, no WebSockets, and no active locks.
+    </div>
+
+    <div class="counter-box">
+        <div>Click counter:</div>
+        <div class="counter" id="counter">0</div>
+        <div class="timer" id="timer">Timer: 0s</div>
+        <button id="incrementBtn">Count +1</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+
+    <p><strong>Exercise:</strong> Click the counter a few times, then navigate away using the link below. Press the browser Back button to return here. If bfcache works, you should see your <strong>counter value preserved</strong> and the timer continue from where it was.</p>
+
+    <a href="./index.html" class="back-link">← Back to Hands-On 5</a>
+    <br>
+    <a href="./bfcache-bad.html" class="back-link">Go to BFCache-BAD page →</a>
+
+    <div class="log" id="log"></div>
+
+    <script>
+        let count = 0;
+        let seconds = 0;
+        let timerInterval;
+        const counterEl = document.getElementById('counter');
+        const timerEl = document.getElementById('timer');
+        const logEl = document.getElementById('log');
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.textContent += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        document.getElementById('incrementBtn').addEventListener('click', () => {
+            count++;
+            counterEl.textContent = count;
+            log('Counter: ' + count);
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            count = 0;
+            counterEl.textContent = 0;
+            log('Counter reset');
+        });
+
+        // Start timer
+        timerInterval = setInterval(() => {
+            seconds++;
+            timerEl.textContent = 'Timer: ' + seconds + 's';
+        }, 1000);
+
+        // pageshow event — detect bfcache restore
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                log('🎉 PAGE RESTORED FROM BFCACHE! Counter=' + count + ', Timer=' + seconds + 's');
+            } else {
+                log('Page loaded normally (fresh load)');
+            }
+        });
+
+        // pagehide event
+        window.addEventListener('pagehide', (event) => {
+            // Note: this runs but the page may still be cached
+            console.log('[bfcache-good] pagehide, persisted:', event.persisted);
+        });
+
+        log('Page initialized. Click counter and navigate away, then press Back.');
+    </script>
+</body>
+</html>

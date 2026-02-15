@@ -1,17 +1,28 @@
 
 self.addEventListener('periodicsync', (event) => {
-    if (event.tag === 'example-sync') {
+    console.log('Periodic sync event fired with tag:', event.tag);
+
+    if (event.tag === 'content-sync' || event.tag === 'example-sync') {
         event.waitUntil(
             (async () => {
                 try {
-                    // Perform your background sync operation here
-                    console.log('Periodic background sync executed');
+                    console.log('Performing periodic background sync...');
 
-                    // Example: fetch some data
-                    const response = await fetch('https://api.example.com/data');
-                    const data = await response.json();
+                    // Simulate a periodic content update
+                    // In production, you'd fetch new articles, sync data, etc.
+                    await new Promise(resolve => setTimeout(resolve, 300));
 
-                    // Process the data...
+                    console.log('Periodic background sync completed successfully!');
+
+                    // Notify clients about the sync
+                    const allClients = await self.clients.matchAll();
+                    allClients.forEach(client => {
+                        client.postMessage({
+                            type: 'periodic-sync-complete',
+                            tag: event.tag,
+                            timestamp: Date.now()
+                        });
+                    });
                 } catch (error) {
                     console.error('Periodic background sync failed:', error);
                 }
@@ -21,15 +32,11 @@ self.addEventListener('periodicsync', (event) => {
 });
 
 self.addEventListener('install', (event) => {
+    console.log('Periodic Sync Service Worker installed');
     self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
+    console.log('Periodic Sync Service Worker activated');
     event.waitUntil(self.clients.claim());
-});
-self.addEventListener('notificationclick', (event) => {
-    event.notification.close();
-    event.waitUntil(
-        clients.openWindow('https://example.com')
-    );
 });

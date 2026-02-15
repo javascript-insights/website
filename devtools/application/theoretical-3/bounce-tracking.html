@@ -4,41 +4,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bounce Tracking Mitigations</title>
+    <title>Bounce Tracking Mitigations - Application Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <style>
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #e83e8c; }
+        .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
+        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        .tracking-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 15px 0; }
+        .track-card { padding: 15px; border-radius: 8px; border: 2px solid #ddd; }
+        .track-card.bad { border-color: #dc3545; background: #fff5f5; }
+        .track-card.good { border-color: #28a745; background: #f0fff0; }
+        .track-card.neutral { border-color: #ffc107; background: #fffef0; }
+        .track-card h3 { margin-top: 0; }
+        .track-card a { display: inline-block; padding: 8px 16px; border-radius: 5px; text-decoration: none; color: white; margin: 5px 0; }
+        .track-card.bad a { background: #dc3545; }
+        .track-card.good a { background: #28a745; }
+        .track-card.neutral a { background: #ffc107; color: #333; }
+        .diagram { background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; font-family: monospace; text-align: center; margin: 10px 0; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; background: #e83e8c; }
+    </style>
 </head>
 
 <body>
-    <h1>Bounce Tracking Mitigations</h1>
-    <p>This page demonstrates the Bounce Tracking Mitigations.</p>
-
-    <h2>Practice Exercise</h2>
-    <p>Click these links and observe the Application panel in DevTools:</p>
-
-    <div class="demo">
-        <h3>Standard Link (Potentially Tracked)</h3>
-        <a href="https://example.com">Unprotected Link</a>
+    <h1>🦘 Bounce Tracking Mitigations</h1>
+    <nav class="breadcrumb">
+        <a href="../../../index.html">JavaScript Insights</a>
+        <a href="../../index.html">DevTools</a>
+        <a href="../index.html">Application</a>
+        <a href="./index.html">Theoretical 3</a>
+    </nav>
+    <div class="navbar">
+        <a href="./index.html">Back</a>
     </div>
 
-    <div class="demo">
-        <h3>Protected Link</h3>
-        <a href="https://example.com" referrerpolicy="no-referrer">With Referrer Policy</a>
+    <div class="demo-section">
+        <h2>What is Bounce Tracking?</h2>
+        <p><strong>Bounce tracking</strong> is a technique where a tracker site acts as an intermediary redirect. 
+        Instead of linking directly to a destination, the link goes through a tracking domain that sets cookies 
+        before redirecting the user to the final destination.</p>
+
+        <div class="diagram">
+            <p><strong>Normal navigation:</strong></p>
+            <p>User → site-a.com → site-b.com</p>
+            <br>
+            <p><strong>Bounce tracking:</strong></p>
+            <p>User → site-a.com → <span style="color:red;">tracker.com (sets cookie!)</span> → site-b.com</p>
+        </div>
+
+        <p>Modern browsers detect this pattern and can <strong>delete the tracker's storage</strong> 
+        (cookies, localStorage, etc.) to protect user privacy.</p>
     </div>
 
-    <div class="demo">
-        <h3>Fully Protected Link</h3>
-        <a href="https://example.org" referrerpolicy="no-referrer" rel="noopener">With State Partitioning</a>
-    </div>
+    <div class="demo-section">
+        <h2>Link Types Comparison</h2>
+        <div class="tracking-demo">
+            <div class="track-card bad">
+                <h3>❌ Potentially Tracked Link</h3>
+                <p>No referrer policy, no <code>rel</code> attributes. The destination site and any redirect 
+                intermediaries can see where you came from.</p>
+                <a href="https://example.com">Unprotected Link</a>
+            </div>
+
+            <div class="track-card neutral">
+                <h3>⚠️ Partially Protected</h3>
+                <p>Uses <code>referrerpolicy="no-referrer"</code> to hide the origin, but doesn't prevent 
+                opener access.</p>
+                <a href="https://example.com" referrerpolicy="no-referrer">With Referrer Policy</a>
+            </div>
+
+            <div class="track-card good">
+                <h3>✅ Fully Protected Link</h3>
+                <p>Uses both <code>referrerpolicy="no-referrer"</code> and <code>rel="noopener noreferrer"</code> 
+                for maximum privacy protection.</p>
+                <a href="https://example.org" referrerpolicy="no-referrer" rel="noopener noreferrer">Fully Protected</a>
+            </div>
+        </div>
     </div>
 
-    <div class="tips">
-        <h2>Key Points</h2>
+    <div class="demo-section">
+        <h2>Simulate Tracking Cookie</h2>
+        <p>This section simulates what a bounce tracker would do — set cookies and storage during a brief redirect. 
+        Use DevTools to observe the storage being created.</p>
+        <button class="btn" id="simulateTracker">Simulate Tracker Setting Data</button>
+        <button class="btn" id="clearTracking" style="background:#6c757d;">Clear Simulated Data</button>
+        <div class="log-area" id="log"></div>
+    </div>
+
+    <div class="tip">
+        <h2>🔧 DevTools: Inspecting Bounce Tracking</h2>
+        <ol>
+            <li>Open DevTools → <strong>Application</strong> panel</li>
+            <li>Look for <strong>Background services → Bounce Tracking Mitigations</strong></li>
+            <li>This section shows domains identified as potential bounce trackers</li>
+            <li>You can also check <strong>Cookies</strong> and <strong>Local Storage</strong> to see what trackers store</li>
+            <li>Use the <strong>Network</strong> panel to observe redirect chains (3xx status codes)</li>
+        </ol>
+        <p><strong>Chrome flags to explore:</strong></p>
         <ul>
-            <li>Bounce tracking uses intermediate redirects to track user navigation</li>
-            <li>Modern browsers implement protective measures</li>
-            <li>Use DevTools to verify tracking protection status</li>
-            <li>Implement referrer policies and state partitioning for better privacy</li>
+            <li><code>chrome://flags/#bounce-tracking-mitigations</code> — Enable/disable the feature</li>
+            <li><code>chrome://settings/cookies</code> — Third-party cookie settings</li>
         </ul>
     </div>
+
+    <div class="tip">
+        <h2>📝 Practice Exercise</h2>
+        <ol>
+            <li>Click "Simulate Tracker Setting Data" and observe Cookies & Local Storage in the Application panel</li>
+            <li>Click "Clear Simulated Data" — what happens to the stored data?</li>
+            <li>Click the different links and use the Network panel to observe referrer headers</li>
+            <li>Check <code>chrome://flags/#bounce-tracking-mitigations</code> to see the feature status</li>
+            <li>Open the Application panel → Cookies to examine what data each domain stores</li>
+        </ol>
+    </div>
+
+    <script>
+        const logEl = document.getElementById('log');
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${time}] ${msg}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[Bounce Tracking] ${msg}`);
+        }
+
+        document.getElementById('simulateTracker').addEventListener('click', () => {
+            // Simulate what a bounce tracker does
+            document.cookie = `tracker_id=${Math.random().toString(36).slice(2)}; path=/; max-age=31536000`;
+            document.cookie = `session_ref=${document.referrer || 'direct'}; path=/; max-age=31536000`;
+            document.cookie = `visit_time=${new Date().toISOString()}; path=/; max-age=31536000`;
+
+            localStorage.setItem('bounce_tracker_fingerprint', JSON.stringify({
+                screen: `${screen.width}x${screen.height}`,
+                language: navigator.language,
+                platform: navigator.platform,
+                timestamp: Date.now()
+            }));
+
+            sessionStorage.setItem('bounce_session', JSON.stringify({
+                referrer: document.referrer,
+                entry: window.location.href,
+                time: Date.now()
+            }));
+
+            log('🍪 Tracking cookies set (check Application → Cookies)');
+            log('📦 localStorage fingerprint set (check Application → Local Storage)');
+            log('📦 sessionStorage data set (check Application → Session Storage)');
+            log('⚠️ In a real bounce tracker, this would all happen during a quick redirect!');
+        });
+
+        document.getElementById('clearTracking').addEventListener('click', () => {
+            document.cookie = 'tracker_id=; max-age=0; path=/';
+            document.cookie = 'session_ref=; max-age=0; path=/';
+            document.cookie = 'visit_time=; max-age=0; path=/';
+            localStorage.removeItem('bounce_tracker_fingerprint');
+            sessionStorage.removeItem('bounce_session');
+            log('🧹 All simulated tracking data cleared!');
+        });
+
+        log('Page loaded. Simulate bounce tracking to see it in DevTools!');
+    </script>
 </body>
 
 </html>

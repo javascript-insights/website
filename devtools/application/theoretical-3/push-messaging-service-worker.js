@@ -12,7 +12,18 @@ self.addEventListener('push', function (event) {
 
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
+    const urlToOpen = event.notification.data?.url || self.location.origin;
     event.waitUntil(
-        clients.openWindow('https://your-website-url.com') // Replace with your desired URL
+        clients.openWindow(urlToOpen)
     );
+});
+
+self.addEventListener('install', (event) => {
+    console.log('Push Messaging Service Worker installed');
+    self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+    console.log('Push Messaging Service Worker activated');
+    event.waitUntil(self.clients.claim());
 });

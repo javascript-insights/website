@@ -1,9 +1,11 @@
 self.addEventListener('install', event => {
-    console.log('Service Worker installing.');
+    console.log('Background Fetch Service Worker installing.');
+    self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
-    console.log('Service Worker activated.');
+    console.log('Background Fetch Service Worker activated.');
+    event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('backgroundfetchsuccess', event => {
