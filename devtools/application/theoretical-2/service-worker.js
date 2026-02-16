@@ -64,3 +64,9 @@ self.addEventListener('sync', event => {
         );
     }
 });
+
+self.addEventListener('push', event => {
+    const message = event.data ? event.data.text() : '🍕 No payload? Fine, I'll just push my own agenda.';
+    console.log('Push received:', message);
+    console.log('📬 Knock knock! Who\'s there? A push notification. Push notification who? Push notification you didn\'t ask for!');
+});
