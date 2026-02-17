@@ -82,10 +82,10 @@ window.addEventListener("load", function foo() {
 
   ///////////////////////////////
   // Retained Size - "🏋️ Show True Weight"
+  let retainedSizeObject = {};
   document.getElementById('retainedSizeButton').addEventListener('click', function () {
     console.log('Retained Size button clicked');
     // Logic to demonstrate Retained Size in the memory tool
-    let retainedSizeObject = {};
     for (let i = 0; i < 1000; i++) {
       retainedSizeObject['key' + i] = new Array(1000).fill('data' + i); // This will create a large object in memory
     }
@@ -94,10 +94,10 @@ window.addEventListener("load", function foo() {
 
   ///////////////////////////////
   // Distance - "🚀 Space Between Things"
+  let root = { child: null };
   document.getElementById('distanceButton').addEventListener('click', function () {
     console.log('Distance button clicked');
     // Logic to demonstrate Distance in the memory tool
-    let root = { child: null };
     let current = root;
     for (let i = 0; i < 1000; i++) {
       current.child = { child: null };  // Create a chain of objects
