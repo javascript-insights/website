@@ -164,8 +164,7 @@
         // --- Blocker 2: WebSocket ---
         document.getElementById('openWs').addEventListener('click', () => {
             try {
-                // Use wss://echo.websocket.org or a public echo server
-                ws = new WebSocket('wss://echo.websocket.events');
+                ws = new WebSocket('wss://echo.websocket.org');
                 ws.onopen = () => {
                     log('⛔ WebSocket OPENED — this blocks bfcache');
                     document.getElementById('wsStatus').innerHTML = 'WebSocket: <strong style="color:red;">Connected</strong>';
@@ -177,10 +176,13 @@
                     document.getElementById('wsStatus').innerHTML = 'WebSocket: <strong>Disconnected</strong>';
                     document.getElementById('openWs').disabled = false;
                     document.getElementById('closeWs').disabled = true;
+                    ws = null;
                 };
                 ws.onerror = () => {
-                    log('WebSocket connection error (server may be unavailable, but the attempt still blocks bfcache)');
-                    document.getElementById('openWs').disabled = false;
+                    log('⛔ WebSocket connection failed — but the pending WebSocket still blocks bfcache');
+                    document.getElementById('wsStatus').innerHTML = 'WebSocket: <strong style="color:orange;">Failed (still blocks bfcache)</strong>';
+                    document.getElementById('openWs').disabled = true;
+                    document.getElementById('closeWs').disabled = false;
                 };
             } catch(e) {
                 log('WebSocket failed to create: ' + e.message);
