@@ -122,8 +122,9 @@ window.addEventListener("load", function foo() {
     /////////////////////////////////////////////////////////////////
 
     // Exercise 5: DOM Family Tree
+    let tree = document.getElementById('familyTree');
+
     document.getElementById('growTree').addEventListener('click', () => {
-        const tree = document.getElementById('familyTree');
         function createNode(depth) {
             if (depth > 20) return null;
 
@@ -148,7 +149,6 @@ window.addEventListener("load", function foo() {
     });
 
     document.getElementById('pruneTree').addEventListener('click', () => {
-        const tree = document.getElementById('familyTree');
         tree.innerHTML = '';
         treeNodes = [];
     });
