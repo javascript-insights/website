@@ -1,3 +1,5 @@
+let GLOBAL_OBJECT = 'This is a silly global variable for absolutely no reason whatsoever!';
+
 window.addEventListener("load", function foo() {
 
   ///////////////////////////////
