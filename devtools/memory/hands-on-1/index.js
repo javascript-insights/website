@@ -58,14 +58,14 @@ window.addEventListener("load", function foo() {
     // Exercise 3: The Infinity Loop
 
     document.getElementById('createLoop').addEventListener('click', () => {
-        loopObjects.a = { ["❌_name_❌"]: '🤪 CircularObjectA is going in circles! Weeeee!', ["❌_data_❌"]: new Array(1000).fill('❇️') };
-        loopObjects.b = { ["❌_name_❌"]: '🤪 CircularObjectB is going in circles! Weeeee!', ["❌_data_❌"]: new Array(1000).fill('❇️') };
-        loopObjects.a["❌_ref_❌"] = loopObjects.b;
-        loopObjects.b["❌_ref_❌"] = loopObjects.a;
+        loopObjects["❇️_a_❇️"] = { ["⛔_CircularObjectA_⛔"]: 1, ["❌_name_❌"]: '🤪 CircularObjectA is going in circles! Weeeee!', ["❌_data_❌"]: new Array(1000).fill('❇️') };
+        loopObjects["❇️_b_❇️"] = { ["⛔_CircularObjectB_⛔"]: 1, ["❌_name_❌"]: '🤪 CircularObjectB is going in circles! Weeeee!', ["❌_data_❌"]: new Array(1000).fill('❇️') };
+        loopObjects["❇️_a_❇️"]["❌_ref_❌"] = loopObjects["❇️_b_❇️"];
+        loopObjects["❇️_b_❇️"]["❌_ref_❌"] = loopObjects["❇️_a_❇️"];
     });
 
     document.getElementById('breakLoop').addEventListener('click', () => {
-        loopObjects = { a: { ["❌_name_❌"]: '🤔 NewObjectA' }, b: { ["❌_name_❌"]: '🤔 NewObjectB' } };
+        loopObjects = { ["❇️_a_❇️"]: { ["❌_name_❌"]: '🤔 NewObjectA' }, ["❇️_b_❇️"]: { ["❌_name_❌"]: '🤔 NewObjectB' } };
     });
 
     /////////////////////////////////////////////////////////////////
