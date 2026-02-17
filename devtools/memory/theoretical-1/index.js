@@ -75,7 +75,7 @@ window.addEventListener("load", function foo() {
     console.log('Shallow Size button clicked');
     // Logic to demonstrate Shallow Size in the memory tool
     for (let i = 0; i < 1000; i++) {
-      shallowSizeArray.push({ index: i, data: new Array(1000).fill('data' + i); }); // This will create many objects in memory
+      shallowSizeArray.push({ index: i, data: new Array(1000).fill('data' + i) }); // This will create many objects in memory
     }
     console.log('Shallow Size array created:', shallowSizeArray);
   });
