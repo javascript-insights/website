@@ -150,7 +150,6 @@ window.addEventListener("load", function foo() {
 
     document.getElementById('pruneTree').addEventListener('click', () => {
         tree.innerHTML = '';
-        treeNodes = [];
     });
 
     document.addEventListener('DOMContentLoaded', () => {
