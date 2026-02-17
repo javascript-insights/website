@@ -123,6 +123,7 @@ window.addEventListener("load", function foo() {
 
     // Exercise 5: DOM Family Tree
     let tree = document.getElementById('familyTree');
+    let jsTreeRoot = null;
 
     document.getElementById('growTree').addEventListener('click', () => {
         function createNode(depth) {
@@ -146,10 +147,24 @@ window.addEventListener("load", function foo() {
         if (root) {
             tree.appendChild(root);
         }
+
+        // Mirror the DOM tree as a plain JS object chain
+        // so users can compare Distance values in heap snapshots
+        function createJSNode(depth) {
+            if (depth > 20) return null;
+            const obj = {
+                ["📏_jsTreeNode_📏"]: 'depth-' + depth,
+                ["❌_data_❌"]: new Array(1000).fill('🌲'),
+                ["❌_child_❌"]: createJSNode(depth + 1)
+            };
+            return obj;
+        }
+        jsTreeRoot = createJSNode(0);
     });
 
     document.getElementById('pruneTree').addEventListener('click', () => {
         tree.innerHTML = '';
+        jsTreeRoot = null;
     });
 
     document.addEventListener('DOMContentLoaded', () => {
