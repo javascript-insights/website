@@ -3,7 +3,7 @@ window.A_GLOBAL_OBJECT = 'This is a silly global variable for absolutely no reas
 window.addEventListener("load", function foo() {
 
   ///////////////////////////////
-  // Memory Leak Simulation
+  // Memory Leak Simulation - "🚰 Create Memory Leak (Oops!)"
   let leaks = [];
 
   document.getElementById('leakButton').addEventListener('click', () => {
@@ -16,7 +16,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // Memory Leak Cleanup
+  // Memory Leak Cleanup - "🧹 Clean Up This Mess!"
   document.getElementById('clearButton').addEventListener('click', () => {
     // Clear the memory leak
     leaks = [];
@@ -24,7 +24,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // Memory Growth Simulation
+  // Memory Growth Simulation - "🎈 Make Memory Go Brrrr!"
   let grow = [];
 
   document.getElementById('growButton').addEventListener('click', () => {
@@ -34,7 +34,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // Detached elements
+  // Detached elements - "👻 Create Ghost Elements"
   let detachedElements = [];
   document.getElementById('detachButton').addEventListener('click', () => {
     // Create detached elements
@@ -47,7 +47,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // duplicated strings
+  // duplicated strings - "🐑 Clone String Army"
   let duplicatedStrings = [];
   document.getElementById('duplicateStringsButton').addEventListener('click', () => {
     // Create duplicated strings
@@ -57,6 +57,7 @@ window.addEventListener("load", function foo() {
     console.log('Duplicated strings created');
   });
 
+  // "🐏🐑 Clone String Army 2"
   let duplicatedStrings2 = [];
   document.getElementById('duplicateStringsButton2').addEventListener('click', () => {
     // Create String objects with identical content for better visibility in memory tools
@@ -68,7 +69,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // Shallow Size
+  // Shallow Size - "📏 How Big?"
   let shallowSizeArray = [];
   document.getElementById('shallowSizeButton').addEventListener('click', function () {
     console.log('Shallow Size button clicked');
@@ -80,7 +81,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // Retained Size
+  // Retained Size - "🏋️ Show True Weight"
   document.getElementById('retainedSizeButton').addEventListener('click', function () {
     console.log('Retained Size button clicked');
     // Logic to demonstrate Retained Size in the memory tool
@@ -92,7 +93,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // Distance
+  // Distance - "🚀 Space Between Things"
   document.getElementById('distanceButton').addEventListener('click', function () {
     console.log('Distance button clicked');
     // Logic to demonstrate Distance in the memory tool
@@ -106,7 +107,7 @@ window.addEventListener("load", function foo() {
   });
 
   ///////////////////////////////
-  // Object Creation and Garbage Collection Simulation
+  // Object Creation and Garbage Collection Simulation - "🎭 Create Objects & Thanos Snap Half"
   let objects = [];
   document.getElementById('createObjectsBtn').addEventListener('click', () => {
     // Create many objects
