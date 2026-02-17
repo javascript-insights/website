@@ -1,4 +1,4 @@
-let GLOBAL_OBJECT = 'This is a silly global variable for absolutely no reason whatsoever!';
+window.GLOBAL_OBJECT = 'This is a silly global variable for absolutely no reason whatsoever!';
 
 window.addEventListener("load", function foo() {
 
@@ -12,6 +12,7 @@ window.addEventListener("load", function foo() {
       leaks.push(new Array(1000).fill('leak')); // This will create a large array in memory
     }
     console.log('Memory leak created');
+    window.GOBAL_OBJECT_2 = 'This is a silly global variable for absolutely no reason whatsoever 2!';
   });
 
   ///////////////////////////////
