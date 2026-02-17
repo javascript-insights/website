@@ -121,9 +121,11 @@
 
         function log(msg) {
             const time = new Date().toLocaleTimeString();
-            logEl.innerHTML += `[${time}] ${msg}\n`;
+            const entry = document.createElement('div');
+            entry.textContent = `[${time}] ${msg}`;
+            logEl.appendChild(entry);
             logEl.scrollTop = logEl.scrollHeight;
-            console.log(`[bfcache-incompatible] ${msg}`);
+            console.log(`[bfcache-incompatible] [${time}] ${msg}`);
         }
 
         // --- Blocker 1: beforeunload ---

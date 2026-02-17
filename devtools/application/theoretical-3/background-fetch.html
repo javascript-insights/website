@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" type="image/png" href="/static/favicon.png" />
     <style>
-        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8; }
+        .demo { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8; }
         .tip { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #0056b3; }
-        .log-area { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
-        .status { padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
-        .status-idle { background: #e2e3e5; color: #383d41; }
-        .status-active { background: #cce5ff; color: #004085; }
-        .status-success { background: #d4edda; color: #155724; }
-        .status-error { background: #f8d7da; color: #721c24; }
-        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
-        .btn-primary { background: #17a2b8; }
-        .btn-danger { background: #dc3545; }
-        .progress-bar { width: 100%; height: 20px; background: #e9ecef; border-radius: 10px; overflow: hidden; margin: 10px 0; }
-        .progress-fill { height: 100%; background: #17a2b8; transition: width 0.3s; width: 0%; }
+        #log { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+        #status { padding: 10px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
+        .idle { background: #e2e3e5; color: #383d41; }
+        .active { background: #cce5ff; color: #004085; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        button { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: white; }
+        #startBtn { background: #17a2b8; }
+        #abortBtn { background: #dc3545; }
+        #progressBar { width: 100%; height: 20px; background: #e9ecef; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+        #progress { height: 100%; background: #17a2b8; transition: width 0.3s; width: 0%; }
     </style>
 </head>
 
@@ -37,172 +37,157 @@
         <a href="./index.html">Back</a>
     </div>
 
-    <div class="demo-section">
+    <div class="demo">
         <h2>What is Background Fetch?</h2>
-        <p>The <strong>Background Fetch API</strong> allows you to download large files or multiple resources 
-        even if the user navigates away from the page or closes the tab. Unlike a regular <code>fetch()</code>, 
-        Background Fetch is managed by the browser and continues in the background.</p>
+        <p>The <strong>Background Fetch API</strong> lets you download large files even if the user
+        navigates away or closes the tab. Unlike <code>fetch()</code>, it continues in the background.</p>
         <p><strong>Use cases:</strong> Downloading movies, podcasts, large datasets, game assets, etc.</p>
     </div>
 
-    <div class="demo-section">
+    <div class="demo">
         <h2>Live Demo</h2>
-        <div id="status" class="status status-idle">Status: Idle — Ready to start a background fetch</div>
-        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+        <div id="status" class="idle">Status: Idle</div>
+        <div id="progressBar"><div id="progress"></div></div>
 
-        <button class="btn btn-primary" id="start-fetch">Start Background Fetch</button>
-        <button class="btn btn-danger" id="abort-fetch" disabled>Abort Fetch</button>
+        <button id="startBtn">Start Background Fetch</button>
+        <button id="abortBtn" disabled>Abort Fetch</button>
 
-        <p><small>This will fetch the current page's HTML as a demo resource. 
-        In a real app, you'd fetch large files like videos or datasets.</small></p>
+        <p><small>Fetches local files (including a 5 MB dummy file) to simulate a larger download.</small></p>
     </div>
 
-    <div class="demo-section">
+    <div class="demo">
         <h2>Event Log</h2>
-        <div class="log-area" id="log"></div>
+        <div id="log"></div>
     </div>
 
     <div class="tip">
         <h2>🔧 DevTools: Inspecting Background Fetch</h2>
         <ol>
-            <li>Open DevTools → <strong>Application</strong> panel</li>
-            <li>In the sidebar, expand <strong>Background services</strong></li>
-            <li>Click <strong>Background Fetch</strong></li>
-            <li>Click the <strong>record</strong> button (⏺) to start recording events</li>
-            <li>Now click "Start Background Fetch" — watch events appear in DevTools!</li>
-            <li>You'll see the fetch ID, status, and timeline of events</li>
+            <li>Open DevTools → <strong>Application</strong> → <strong>Background services</strong> → <strong>Background Fetch</strong></li>
+            <li>Click the <strong>record</strong> button (⏺) to start recording</li>
+            <li>Click "Start Background Fetch" — watch events appear in DevTools!</li>
         </ol>
     </div>
 
     <div class="tip">
-        <h2>📝 Practice Exercise</h2>
+        <h2>📝 Practice Exercises (separate scenarios!)</h2>
         <ol>
-            <li>Start recording in the Background Fetch panel</li>
-            <li>Click "Start Background Fetch" and observe the events</li>
-            <li>Try aborting a fetch — what events appear?</li>
-            <li>Start a fetch, then navigate away and come back — did it complete?</li>
-            <li>Check the Service Worker section — which service worker handled the fetch?</li>
+            <li><strong>Observe:</strong> Start recording → click "Start Background Fetch" → watch events in DevTools</li>
+            <li><strong>Abort:</strong> Start a new fetch → click "Abort" → see the abort event (fetch is now cancelled!)</li>
+            <li><strong>Navigate away:</strong> Start a new fetch (don't abort!) → go to another page → come back → check the status message at the top</li>
         </ol>
+        <p><strong>⚠️ Important:</strong> Abort and navigate-away are <em>separate</em> experiments. If you abort, the fetch is permanently cancelled — it will NOT continue.</p>
     </div>
 
     <script>
         const logEl = document.getElementById('log');
-        const statusEl = document.getElementById('status');
-        const progressEl = document.getElementById('progress');
+        const progress = document.getElementById('progress');
+        const abortBtn = document.getElementById('abortBtn');
         let currentFetch = null;
 
+        // Helper: append a timestamped message to the log
         function log(msg) {
             const time = new Date().toLocaleTimeString();
-            logEl.innerHTML += `[${time}] ${msg}\n`;
+            const entry = document.createElement('div');
+            entry.textContent = `[${time}] ${msg}`;
+            logEl.appendChild(entry);
             logEl.scrollTop = logEl.scrollHeight;
-            console.log(`[Background Fetch] ${msg}`);
+            console.log(`[Background Fetch] [${time}] ${msg}`);
         }
 
-        function setStatus(msg, type) {
-            statusEl.textContent = `Status: ${msg}`;
-            statusEl.className = `status status-${type}`;
+        // Helper: update the status bar
+        function setStatus(msg, cls) {
+            const el = document.getElementById('status');
+            el.textContent = 'Status: ' + msg;
+            el.className = cls;
         }
 
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('background-fetch-service-worker.js')
-                .then(reg => log('✅ Service Worker registered'))
-                .catch(err => log('❌ Service Worker registration failed: ' + err));
+        // 1) Register the service worker
+        navigator.serviceWorker.register('background-fetch-service-worker.js')
+            .then(() => log('✅ Service Worker registered'))
+            .catch(err => log('❌ SW registration failed: ' + err));
 
-            // Listen for messages from service worker about fetch completion
-            navigator.serviceWorker.addEventListener('message', (event) => {
-                if (event.data.type === 'bgfetch-success') {
-                    log('✅ Service Worker reports: Background Fetch completed!');
-                    setStatus('Completed successfully!', 'success');
-                    progressEl.style.width = '100%';
-                    document.getElementById('abort-fetch').disabled = true;
-                } else if (event.data.type === 'bgfetch-fail') {
-                    log('❌ Service Worker reports: Background Fetch failed');
-                    setStatus('Failed', 'error');
-                    document.getElementById('abort-fetch').disabled = true;
-                } else if (event.data.type === 'bgfetch-abort') {
-                    log('🛑 Service Worker reports: Background Fetch was aborted');
-                    setStatus('Aborted', 'error');
-                    document.getElementById('abort-fetch').disabled = true;
-                }
-            });
-        }
+        // 2) Listen for messages from the service worker
+        navigator.serviceWorker.addEventListener('message', ({ data }) => {
+            if (data.type === 'bgfetch-success') {
+                log('✅ Fetch completed!');   setStatus('Completed!', 'success');
+            } else if (data.type === 'bgfetch-fail') {
+                log('❌ Fetch failed');        setStatus('Failed', 'error');
+            } else if (data.type === 'bgfetch-abort') {
+                log('🛑 Fetch aborted');       setStatus('Aborted', 'error');
+            }
+            abortBtn.disabled = true;
+            progress.style.width = data.type === 'bgfetch-success' ? '100%' : '0%';
+        });
 
-        document.getElementById('start-fetch').addEventListener('click', async () => {
+        // 3) Start a background fetch
+        document.getElementById('startBtn').addEventListener('click', async () => {
             if (!('BackgroundFetchManager' in self)) {
-                log('❌ Background Fetch API is not supported in this browser.');
-                setStatus('Not Supported — try Chrome/Edge', 'error');
-                return;
+                return log('❌ Background Fetch not supported — try Chrome/Edge');
             }
-
             try {
-                const swReg = await navigator.serviceWorker.ready;
-                const fetchId = 'demo-fetch-' + Date.now();
+                const sw = await navigator.serviceWorker.ready;
+                const id = 'demo-fetch-' + Date.now();
 
-                log(`Starting background fetch with ID: ${fetchId}`);
-                setStatus('Starting fetch...', 'active');
+                // Fetch local files (the 5 MB file makes it take a moment)
+                currentFetch = await sw.backgroundFetch.fetch(id, [
+                    'index.html', 'styles.css', 'getstarted.json', 'large-demo-file.bin'
+                ], { title: 'Demo Background Fetch', downloadTotal: 0 });
 
-                // Fetch the current page and a JSON file as demo resources
-                currentFetch = await swReg.backgroundFetch.fetch(fetchId, [
-                    new Request('index.html'),
-                    new Request('styles.css'),
-                    new Request('getstarted.json')
-                ], {
-                    title: 'Demo Background Fetch',
-                    icons: [],
-                    downloadTotal: 0
-                });
+                log('✅ Fetch started — ID: ' + id);
+                setStatus('Fetching...', 'active');
+                abortBtn.disabled = false;
 
-                log(`✅ Background Fetch started! ID: ${currentFetch.id}`);
-                setStatus(`Fetching... (ID: ${currentFetch.id})`, 'active');
-                document.getElementById('abort-fetch').disabled = false;
-
-                // Monitor progress and detect completion
+                // Monitor progress
                 currentFetch.addEventListener('progress', () => {
-                    const downloaded = currentFetch.downloaded || 0;
-                    const total = currentFetch.downloadTotal || 1;
-                    if (total > 0) {
-                        const pct = Math.round((downloaded / total) * 100);
-                        progressEl.style.width = pct + '%';
-                        log(`Progress: ${downloaded}/${total} bytes (${pct}%)`);
-                    } else {
-                        log(`Downloaded: ${downloaded} bytes`);
-                        progressEl.style.width = '100%';
-                    }
+                    const { downloaded, downloadTotal, result, failureReason } = currentFetch;
+                    const pct = downloadTotal ? Math.round(downloaded / downloadTotal * 100) : 100;
+                    progress.style.width = pct + '%';
+                    log(`Progress: ${downloaded} bytes (${pct}%)`);
 
-                    // Check if the fetch completed (result changes from '' to 'success' or 'failure')
-                    if (currentFetch.result === 'success') {
-                        log('✅ Background Fetch completed successfully!');
-                        setStatus('Completed successfully!', 'success');
-                        progressEl.style.width = '100%';
-                        document.getElementById('abort-fetch').disabled = true;
-                    } else if (currentFetch.result === 'failure') {
-                        log('❌ Background Fetch failed: ' + (currentFetch.failureReason || 'unknown reason'));
-                        setStatus('Failed: ' + (currentFetch.failureReason || 'unknown'), 'error');
-                        document.getElementById('abort-fetch').disabled = true;
+                    if (result === 'success') {
+                        log('✅ Completed!'); setStatus('Completed!', 'success'); abortBtn.disabled = true;
+                    } else if (result === 'failure') {
+                        log('❌ Failed: ' + failureReason); setStatus('Failed', 'error'); abortBtn.disabled = true;
                     }
                 });
-
-            } catch (error) {
-                log('❌ Background Fetch failed: ' + error.message);
-                setStatus('Failed: ' + error.message, 'error');
+            } catch (err) {
+                log('❌ Error: ' + err.message);
+                setStatus('Failed: ' + err.message, 'error');
             }
         });
 
-        document.getElementById('abort-fetch').addEventListener('click', async () => {
-            if (currentFetch) {
-                try {
-                    await currentFetch.abort();
-                    log('🛑 Background Fetch aborted');
-                    setStatus('Aborted by user', 'error');
-                } catch(e) {
-                    log('Abort failed: ' + e.message);
+        // 4) Abort the current fetch
+        abortBtn.addEventListener('click', async () => {
+            if (!currentFetch) return;
+            try { await currentFetch.abort(); } catch (e) { log('Abort error: ' + e.message); }
+            log('🛑 Aborted'); setStatus('Aborted', 'error'); abortBtn.disabled = true;
+        });
+
+        // 5) On page load, check if a previous background fetch completed while we were away
+        (async () => {
+            if (!('BackgroundFetchManager' in self)) return;
+            const sw = await navigator.serviceWorker.ready;
+            const ids = await sw.backgroundFetch.getIds();
+            if (ids.length > 0) {
+                log('📋 Found previous background fetches: ' + ids.join(', '));
+                for (const id of ids) {
+                    const bgFetch = await sw.backgroundFetch.get(id);
+                    log(`  → ${id}: result=${bgFetch.result || 'still running'}, downloaded=${bgFetch.downloaded} bytes`);
+                    if (bgFetch.result === 'success') {
+                        setStatus('Previous fetch completed while you were away!', 'success');
+                    } else if (bgFetch.result === '') {
+                        setStatus('Previous fetch is still running!', 'active');
+                        progress.style.width = bgFetch.downloadTotal
+                            ? Math.round(bgFetch.downloaded / bgFetch.downloadTotal * 100) + '%' : '50%';
+                    }
                 }
-                document.getElementById('abort-fetch').disabled = true;
+            } else {
+                log('No previous background fetches found.');
             }
-        });
+        })();
 
-        log('Page loaded. Ready to start a Background Fetch demo.');
+        log('Page loaded. Ready to fetch!');
     </script>
 </body>
 

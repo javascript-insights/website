@@ -130,9 +130,11 @@
 
         function log(msg) {
             const time = new Date().toLocaleTimeString();
-            logEl.innerHTML += `[${time}] ${msg}\n`;
+            const entry = document.createElement('div');
+            entry.textContent = `[${time}] ${msg}`;
+            logEl.appendChild(entry);
             logEl.scrollTop = logEl.scrollHeight;
-            console.log(`[Push Messaging] ${msg}`);
+            console.log(`[Push Messaging] [${time}] ${msg}`);
         }
 
         function setStatus(msg, type) {

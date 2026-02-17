@@ -1,37 +1,20 @@
-self.addEventListener('sync', function (event) {
-    console.log('Sync event fired with tag:', event.tag);
+// 1. Handle sync events from the browser
+self.addEventListener('sync', event => {
+    console.log('Sync fired:', event.tag);
 
-    if (event.tag.startsWith('sync-messages') || event.tag === 'myFirstSync') {
-        event.waitUntil(
-            (async () => {
-                try {
-                    // Simulate a background data sync (use a real endpoint in production)
-                    console.log('Performing background sync...');
-
-                    // Simulate network request with a small delay
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    console.log('Background sync completed successfully!');
-
-                    // Notify the client that sync is complete
-                    const clients = await self.clients.matchAll();
-                    clients.forEach(client => {
-                        client.postMessage({ type: 'sync-complete', tag: event.tag });
-                    });
-                } catch (error) {
-                    console.error('Sync failed:', error);
-                    throw error; // This will cause the browser to retry the sync
-                }
-            })()
-        );
-    }
+    event.waitUntil(
+        // Simulate a network request (replace with real fetch in production)
+        new Promise(resolve => setTimeout(resolve, 500))
+            .then(() => self.clients.matchAll())
+            .then(clients => {
+                // Notify all open tabs that sync is done
+                clients.forEach(c => c.postMessage({ type: 'sync-complete', tag: event.tag }));
+                console.log('Sync complete!');
+            })
+        // If this promise rejects, the browser will retry the sync automatically
+    );
 });
 
-self.addEventListener('install', (event) => {
-    console.log('Background Sync Service Worker installed');
-    self.skipWaiting();
-});
-
-self.addEventListener('activate', (event) => {
-    console.log('Background Sync Service Worker activated');
-    event.waitUntil(self.clients.claim());
-});
+// 2. Install & activate immediately
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
