@@ -160,23 +160,36 @@
     experience, is measurable in the field, and reflects the real-world experience of a critical user-centric outcome.
   </p>
   <ul>
-    <li><strong>Largest Contentful Paint (LCP)</strong>: Measures loading performance. A good LCP should occur within
-      2.5 seconds of when the page starts loading.</li>
-    <li><strong>Interaction to Next Paint (INP)</strong>: Measures interactivity. A good INP should be 200 milliseconds
-      or less.</li>
-    <li><strong>Cumulative Layout Shift (CLS)</strong>: Measures visual stability. A good CLS should be 0.1 or less.
-    </li>
-    <li><strong>First Contentful Paint (FCP)</strong>: Measures loading performance. A good FCP should occur within 1
-      second of when the page starts loading.</li>
-    <li><strong>First Meaningful Paint (FMP)</strong>: Measures loading performance. A good FMP should occur within 1
-      second of when the page starts loading.</li>
-    <li><strong>Speed Index (SI)</strong>: Measures loading performance. A good SI should be 3.4 seconds or less.</li>
-    <li><strong>Time to Interactive (TTI)</strong>: Measures interactivity. A good TTI should be 5 seconds or less.</li>
-    <li><strong>First Paint (FP)</strong>: Measures loading performance. A good FP should occur within 1 second of when
-      the page starts loading.</li>
-    <li><strong>First Interactive (FI)</strong>: Measures interactivity. A good FI should be 5 seconds or less.</li>
-    <li><strong>Total Blocking Time</strong>: Measures the total amount of time that a user is blocked from interacting
-      with the page. A good TBT should be 300 milliseconds or less.</li>
+    <li><strong>Largest Contentful Paint (LCP)</strong>: Marks the time when the largest visible content element (image,
+      video, or block of text) finishes rendering in the viewport. Measures loading performance. A good LCP should
+      occur within 2.5 seconds of when the page starts loading.</li>
+    <li><strong>Interaction to Next Paint (INP)</strong>: Tracks the latency of all user interactions (clicks, taps,
+      keyboard input) throughout the page's lifecycle and reports the worst-case delay. Measures interactivity. A good
+      INP should be 200 milliseconds or less.</li>
+    <li><strong>Cumulative Layout Shift (CLS)</strong>: Quantifies how much visible page content shifts unexpectedly
+      during the entire lifespan of the page, capturing jarring movements caused by late-loading resources or dynamic
+      content. Measures visual stability. A good CLS should be 0.1 or less.</li>
+    <li><strong>First Contentful Paint (FCP)</strong>: Records the time from navigation start until the browser renders
+      the first piece of DOM content (text, image, SVG, or non-white canvas). Measures loading performance. A good FCP
+      should occur within 1 second of when the page starts loading.</li>
+    <li><strong>First Meaningful Paint (FMP)</strong>: Captures when the page's primary above-the-fold content has
+      finished rendering, signaling the moment the page appears useful to the user. Measures loading performance. A
+      good FMP should occur within 1 second of when the page starts loading.</li>
+    <li><strong>Speed Index (SI)</strong>: Measures how quickly the visible area of the page is populated with content,
+      calculated by analyzing video frames of the page load to determine visual completeness over time. A good SI
+      should be 3.4 seconds or less.</li>
+    <li><strong>Time to Interactive (TTI)</strong>: Identifies the point at which the page is fully loaded and the main
+      thread is idle enough to reliably respond to user input within 50 ms. Measures interactivity. A good TTI should
+      be 5 seconds or less.</li>
+    <li><strong>First Paint (FP)</strong>: Records the moment the browser renders the first pixel that is visually
+      different from the previous screen (e.g. a background color change), even before any meaningful content appears.
+      Measures loading performance. A good FP should occur within 1 second of when the page starts loading.</li>
+    <li><strong>First Interactive (FI)</strong>: Indicates when the page has loaded enough resources and the main thread
+      is sufficiently idle for a user to begin interacting with minimal delay. Measures interactivity. A good FI should
+      be 5 seconds or less.</li>
+    <li><strong>Total Blocking Time (TBT)</strong>: Sums the blocking portions of all long tasks (those exceeding
+      50 ms) between FCP and TTI, reflecting how much the main thread was unavailable for user input. A good TBT should
+      be 300 milliseconds or less.</li>
   </ul>
   <p>To ensure you're hitting the recommended target for these metrics for most of your users, a good threshold to
     measure is the 75th percentile of page loads, segmented across mobile and desktop devices.</p>
