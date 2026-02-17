@@ -70,6 +70,15 @@
     </div>
 
     <div class="tip">
+        <h2>⚠️ "Offline" in DevTools Won't Stop This!</h2>
+        <p>The DevTools <strong>Network → Offline</strong> checkbox only emulates offline for the <em>page's</em> own requests
+        (<code>fetch()</code>, <code>XMLHttpRequest</code>, etc.). Background Fetch is handled by the <strong>browser process itself</strong>,
+        so it bypasses DevTools network emulation entirely.</p>
+        <p>To test a failed background fetch, <strong>disconnect your actual network</strong> (disable Wi-Fi / unplug Ethernet).
+        This is by design — it's what makes Background Fetch resilient!</p>
+    </div>
+
+    <div class="tip">
         <h2>📝 Practice Exercises (separate scenarios!)</h2>
         <ol>
             <li><strong>Observe:</strong> Start recording → click "Start Background Fetch" → watch events in DevTools</li>
