@@ -25,7 +25,7 @@
 
   <div class="instructions">
     <ul>
-      <li>Open Chrome DevTools (Press F12 or Right Click > Inspect)</li>
+      <li>Open Browser DevTools (Press F12 or Right Click > Inspect)</li>
       <li>Click on the "Memory" tab in DevTools</li>
       <li>Make sure you have a clean start - reload the page if needed or use incognito</li>
     </ul>
@@ -202,9 +202,9 @@
     </div>
     <div id="treeHintText" hidden style="border-left: 4px solid #f0db4f; padding: 12px 16px; margin: 10px 0; border-radius: 4px;">
       <p><strong>Why do all DOM nodes show the same Distance?</strong></p>
-      <p>In Chrome's heap snapshot, <em>Distance</em> is the shortest retaining path from any GC root to the object.</p>
+      <p>In Browser's heap snapshot, <em>Distance</em> is the shortest retaining path from any GC root to the object.</p>
       <p>All DOM nodes show the same distance because the browser engine internally maintains <strong>direct references to every attached DOM node</strong> through internal data structures (e.g., the document's node table/registry). This means every node — whether at depth 0 or depth 20 — has an equally short path from the GC root through these internal structures.</p>
-      <p>The distance is <strong>not</strong> calculated by walking the parent→child DOM hierarchy. Even though <code>tree-node-20</code> is 20 levels deep in the DOM tree, Chrome's internals provide a shortcut that makes it just as reachable as <code>tree-node-0</code>.</p>
+      <p>The distance is <strong>not</strong> calculated by walking the parent→child DOM hierarchy. Even though <code>tree-node-20</code> is 20 levels deep in the DOM tree, Browser's internals provide a shortcut that makes it just as reachable as <code>tree-node-0</code>.</p>
       <p>Compare this with <strong>Exercise 4 (Linked List)</strong>: plain JavaScript objects don't get this internal shortcut, so their Distance values increase along the chain.</p>
       <p>To see this in action, the "Grow Family Tree" button also creates a <strong>mirrored JS object chain</strong> (<code>📏_jsTreeNode_📏</code>) with the same depth. Search for <code>jsTreeNode</code> in the heap snapshot — you'll see Distance values <em>increasing</em> from depth 0 to depth 20, unlike the DOM nodes which all share the same Distance.</p>
     </div>
