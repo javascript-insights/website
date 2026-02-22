@@ -27,8 +27,6 @@
   <div class="container">
     <div class="introduction">
       <h2>Understanding CPU Performance in the Browser</h2>
-      <p>The Performance panel in DevTools allows you to analyze what's happening when your JavaScript code executes,
-        helping you identify and fix performance bottlenecks that affect user experience.</p>
       <p>In this hands-on exercise, you'll learn how to:</p>
       <ul>
         <li>Record and analyze CPU performance</li>
@@ -43,20 +41,29 @@
       <div class="demo-controls">
         <div class="demo-group">
           <h3>Basic CPU Tasks</h3>
-          <button onclick="cpuIntensiveTask()" class="primary-btn">Run CPU Intensive Task</button>
           <button onclick="simpleTask()" class="secondary-btn">Run Simple Task</button>
+          <button onclick="cpuIntensiveTask()" class="primary-btn">Run CPU Intensive Task</button>
+          <div class="inline-instructions">
+            <p><strong>Task:</strong> Start recording, click <em>Simple Task</em> first, then click <em>CPU Intensive Task</em>, then stop recording. Compare both in the flamechart — find the bottleneck in the intensive task.</p>
+          </div>
         </div>
 
         <div class="demo-group">
           <h3>Function Call Patterns</h3>
           <button id="atgo" onclick="go()" class="primary-btn">Run Sequential Tasks</button>
           <button onclick="runRecursive()" class="secondary-btn">Run Recursive Task</button>
+          <div class="inline-instructions">
+            <p><strong>Task:</strong> Record <em>Sequential Tasks</em> — spot functions a(), b(), c() in the flamechart. Then record <em>Recursive Task</em> — notice the deep call stack from Fibonacci. How do the flamechart shapes differ? Use the <strong>Bottom-Up</strong> and <strong>Call Tree</strong> views to see which functions use the most CPU.</p>
+          </div>
         </div>
 
         <div class="demo-group">
           <h3>UI Blocking Demonstration</h3>
           <button onclick="animationTest()" class="primary-btn">Test Animation + CPU Load</button>
           <button onclick="asyncVsSync()" class="secondary-btn">Compare Async vs Sync</button>
+          <div class="inline-instructions">
+            <p><strong>Task:</strong> Record <em>Animation + CPU Load</em> — watch the FPS meter and notice dropped frames caused by JS blocking. Then record <em>Async vs Sync</em> — compare the continuous sync block vs the async gaps that keep the main thread responsive.</p>
+          </div>
         </div>
       </div>
 
@@ -78,48 +85,6 @@
         <li>Click any of the demo buttons above to perform an action.</li>
         <li>Click <strong>Stop</strong> to end the recording.</li>
         <li>Analyze the results using the guidance below.</li>
-      </ol>
-
-      <h2>Hands-On Tasks</h2>
-      <ol>
-        <li>Compare the flamecharts between the CPU Intensive Task and Simple Task:
-          <ul>
-            <li>What's the difference in execution time?</li>
-            <li>Can you identify which part of the code is causing the performance bottleneck?</li>
-          </ul>
-        </li>
-        <li>Examine the "Run Sequential Tasks" button performance:
-          <ul>
-            <li>Notice how functions a(), b(), and c() appear in the flamechart.</li>
-            <li>Consider how these could be optimized (hint: think about asynchronous patterns).</li>
-          </ul>
-        </li>
-        <li>Use the "Bottom-Up" and "Call Tree" views to identify:
-          <ul>
-            <li>Which functions consume the most CPU time?</li>
-            <li>What's the relationship between parent and child functions?</li>
-          </ul>
-        </li>
-        <li>Run the "Run Recursive Task" button and inspect the flamechart:
-          <ul>
-            <li>Notice the deep call stack created by the recursive Fibonacci calculation.</li>
-            <li>How does the flamechart shape differ from the sequential tasks in task 2?</li>
-            <li>Consider why naive recursion is expensive and how memoization could help.</li>
-          </ul>
-        </li>
-        <li>During the "Animation + CPU Load" test:
-          <ul>
-            <li>Observe the impact on frame rate (FPS meter at the top).</li>
-            <li>Notice how JavaScript execution affects visual updates.</li>
-          </ul>
-        </li>
-        <li>Click "Compare Async vs Sync" and record the entire operation:
-          <ul>
-            <li>Compare the sync portion (three blocking waits) vs the async portion (three setTimeout-based delays).</li>
-            <li>Notice how the sync operations appear as one continuous block on the main thread, while the async operations leave gaps where the browser can do other work.</li>
-            <li>What does this tell you about keeping the main thread responsive?</li>
-          </ul>
-        </li>
       </ol>
 
       <h2>Reading the Performance Panel</h2>
