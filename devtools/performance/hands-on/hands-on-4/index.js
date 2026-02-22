@@ -190,6 +190,37 @@ function asyncVsSync() {
     }, 100);
 }
 
+// --- INP Demo ---
+let inpClickCount = 0;
+
+function heavyClick() {
+    inpClickCount++;
+
+    // Each click blocks the main thread longer than the last,
+    // making INP progressively worse.
+    const blockTime = 150 + inpClickCount * 100; // ms
+    const start = Date.now();
+    while (Date.now() - start < blockTime) {
+        // Busy-wait — intentionally blocking the main thread
+    }
+
+    const counter = document.getElementById('inp-counter');
+    if (counter) {
+        counter.textContent = `Clicks: ${inpClickCount}  |  Last blocking time: ${blockTime} ms`;
+    }
+}
+
+// --- CLS Demo ---
+// Inject a block after the page loads to cause a visible layout shift
+function triggerLayoutShift() {
+    const area = document.getElementById('cls-inject-area');
+    if (!area) return;
+    const block = document.createElement('div');
+    block.className = 'cls-injected-block';
+    block.textContent = 'This block was injected after load — it pushed content down and caused a layout shift!';
+    area.prepend(block);
+}
+
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
     // Ensure the animation element is hidden initially
@@ -197,4 +228,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if (element) {
         element.style.display = 'none';
     }
+
+    // Trigger a layout shift after a short delay so the browser
+    // has already painted the initial layout (making the shift visible to CLS).
+    setTimeout(triggerLayoutShift, 1500);
 });

@@ -36,6 +36,31 @@
       </ul>
     </div>
 
+    <div class="cwv-section">
+      <h2>Core Web Vitals — Before You Record</h2>
+      <ol>
+        <li>Open DevTools (<kbd>F12</kbd>) → <strong>Performance</strong> tab.</li>
+        <li>Enable <strong>"Core Web Vitals"</strong> in the settings (gear icon).</li>
+        <li>Press <kbd>Ctrl+Shift+E</kbd> to reload-profile the page.</li>
+        <li>Check the timeline for <strong>LCP</strong>, <strong>CLS</strong>, and <strong>INP</strong> markers.</li>
+      </ol>
+
+      <div class="cwv-demos">
+        <div class="cwv-demo">
+          <h3>INP Demo</h3>
+          <p>Each click blocks the main thread longer, increasing <strong>INP</strong>. Check the <strong>Interactions</strong> lane.</p>
+          <button id="inp-btn" onclick="heavyClick()" class="inp-btn">Click Me — Increase INP!</button>
+          <div id="inp-counter" class="inp-counter">Clicks: 0 &nbsp;|&nbsp; Last blocking time: — ms</div>
+        </div>
+
+        <div class="cwv-demo">
+          <h3>CLS Demo</h3>
+          <p>This page intentionally injects a block after load, causing a <strong>layout shift</strong>. Look for it in the <strong>Experience</strong> lane.</p>
+          <div id="cls-inject-area"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="demo-section">
       <h2>Interactive Demos</h2>
       <div class="demo-controls">
