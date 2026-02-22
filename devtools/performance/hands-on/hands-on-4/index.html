@@ -100,10 +100,24 @@
             <li>What's the relationship between parent and child functions?</li>
           </ul>
         </li>
+        <li>Run the "Run Recursive Task" button and inspect the flamechart:
+          <ul>
+            <li>Notice the deep call stack created by the recursive Fibonacci calculation.</li>
+            <li>How does the flamechart shape differ from the sequential tasks in task 2?</li>
+            <li>Consider why naive recursion is expensive and how memoization could help.</li>
+          </ul>
+        </li>
         <li>During the "Animation + CPU Load" test:
           <ul>
             <li>Observe the impact on frame rate (FPS meter at the top).</li>
             <li>Notice how JavaScript execution affects visual updates.</li>
+          </ul>
+        </li>
+        <li>Click "Compare Async vs Sync" and record the entire operation:
+          <ul>
+            <li>Compare the sync portion (three blocking waits) vs the async portion (three setTimeout-based delays).</li>
+            <li>Notice how the sync operations appear as one continuous block on the main thread, while the async operations leave gaps where the browser can do other work.</li>
+            <li>What does this tell you about keeping the main thread responsive?</li>
           </ul>
         </li>
       </ol>
