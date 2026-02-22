@@ -146,51 +146,47 @@ function asyncVsSync() {
         </div>
     `;
 
-    // First do it synchronously
+    // Helper: do a chunk of CPU work (~300ms of busy computation)
+    function cpuWork() {
+        const start = Date.now();
+        while (Date.now() - start < 300) {
+            // busy work
+        }
+    }
+
+    // First do it synchronously — three chunks back-to-back, blocking the thread
     setTimeout(() => {
         const syncStart = performance.now();
-        for (let i = 0; i < 3; i++) {
-            wait(300);  // Block for 300ms each time
-        }
+        cpuWork();
+        cpuWork();
+        cpuWork();
         const syncDuration = (performance.now() - syncStart).toFixed(2);
 
         document.getElementById('result').innerHTML += `
-            <p>Sync operations completed in ${syncDuration}ms</p>
-            <p>Now running the same operations asynchronously...</p>
+            <p>Sync operations completed in ${syncDuration}ms (one continuous block on the main thread).</p>
+            <p>Now running the same work asynchronously...</p>
         `;
 
-        // Then do it asynchronously
+        // Then do the same work asynchronously — same CPU work, but yielding between chunks
         const asyncStart = performance.now();
 
-        Promise.resolve()
-            .then(() => {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        resolve();
-                    }, 300);
-                });
-            })
-            .then(() => {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        resolve();
-                    }, 300);
-                });
-            })
-            .then(() => {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        resolve();
-                    }, 300);
-                });
-            })
-            .then(() => {
+        function runChunk(remaining) {
+            if (remaining <= 0) {
                 const asyncDuration = (performance.now() - asyncStart).toFixed(2);
                 document.getElementById('result').innerHTML += `
-                    <p>Async operations completed in ${asyncDuration}ms</p>
-                    <p>Notice in the Performance panel how async operations allow the main thread to remain responsive.</p>
+                    <p>Async operations completed in ${asyncDuration}ms (three separate blocks with idle gaps).</p>
+                    <p>Both versions did the same CPU work, but the async version yielded between chunks, keeping the main thread responsive.</p>
                 `;
-            });
+                return;
+            }
+            // Yield to the event loop before the next chunk
+            setTimeout(() => {
+                cpuWork();
+                runChunk(remaining - 1);
+            }, 0);
+        }
+
+        runChunk(3);
     }, 100);
 }
 
