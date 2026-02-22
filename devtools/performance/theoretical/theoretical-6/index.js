@@ -30,6 +30,28 @@ function simulatePartialFrames() {
     }, 500);
 }
 
+// Heavy animation toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const heavyAnimationCheckbox = document.getElementById('heavy-animation');
+    const heavyElement = document.querySelector('.heavy-element');
+
+    heavyAnimationCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+            heavyElement.style.background = 'radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 25%, rgba(70,252,167,1) 50%, rgba(252,186,70,1) 75%, rgba(63,94,251,1) 100%)';
+            heavyElement.style.animation = 'background-shift 1s linear infinite';
+            heavyElement.style.boxShadow = '0 0 10px rgba(255,0,0,0.7), 0 0 20px rgba(0,255,0,0.7), 0 0 30px rgba(0,0,255,0.7), 0 0 40px rgba(255,255,0,0.7), 0 0 50px rgba(255,0,255,0.7)';
+            heavyElement.style.filter = 'blur(2px) contrast(150%) brightness(120%) saturate(200%)';
+            heavyElement.style.transform = 'perspective(500px) rotateY(10deg)';
+        } else {
+            heavyElement.style.background = 'none';
+            heavyElement.style.animation = 'none';
+            heavyElement.style.boxShadow = 'none';
+            heavyElement.style.filter = 'none';
+            heavyElement.style.transform = 'none';
+        }
+    });
+});
+
 // spinningSquare animation
 document.addEventListener('DOMContentLoaded', () => {
     let rotation = 0;

@@ -88,7 +88,41 @@ window.addEventListener("load", function () {
         requestAnimationFrame(updateFPS);
     }
 
+    // Detect the display's actual refresh rate and update the instructions
+    function detectRefreshRate() {
+        const timestamps = [];
+
+        function collectFrame(time) {
+            timestamps.push(time);
+            if (timestamps.length < 60) {
+                requestAnimationFrame(collectFrame);
+            } else {
+                // Compute intervals between consecutive frames
+                const intervals = [];
+                for (let i = 1; i < timestamps.length; i++) {
+                    intervals.push(timestamps[i] - timestamps[i - 1]);
+                }
+                // Use the median interval for stability
+                intervals.sort((a, b) => a - b);
+                const medianInterval = intervals[Math.floor(intervals.length / 2)];
+                // Round to the nearest known refresh rate
+                const commonRates = [24, 25, 30, 32, 48, 50, 60, 72, 75, 90, 100, 120, 144, 165, 240, 360];
+                const rawFps = Math.round(1000 / medianInterval);
+                const detectedFps = commonRates.reduce((best, rate) =>
+                    Math.abs(rate - rawFps) < Math.abs(best - rawFps) ? rate : best
+                );
+                const budget = (1000 / detectedFps).toFixed(1);
+                const targetEl = document.getElementById('target-fps');
+                const budgetEl = document.getElementById('frame-budget');
+                if (targetEl) targetEl.textContent = detectedFps;
+                if (budgetEl) budgetEl.textContent = budget;
+            }
+        }
+        requestAnimationFrame(collectFrame);
+    }
+
     // Initialize
     updateAnimation();
     requestAnimationFrame(updateFPS);
+    detectRefreshRate();
 });

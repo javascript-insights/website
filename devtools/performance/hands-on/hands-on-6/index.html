@@ -50,27 +50,47 @@
 
     <div class="instructions">
       <h2>Frame Performance Testing</h2>
-      <p>Use this demo to learn how different operations affect frame rate.</p>
+      <p>Learn how different operations affect frame rate. A smooth animation matches your display's refresh rate
+        — currently <strong><span id="target-fps">detecting…</span> FPS</strong>
+        (<strong><span id="frame-budget">…</span> ms</strong> per frame).
+        When work exceeds that budget, the browser drops frames and the UI janks.</p>
 
-      <h3>Quick Start:</h3>
+      <h3>Step 1 — Setup</h3>
       <ol>
-        <li>Open DevTools (F12) and go to the Performance tab</li>
-        <li>Click Record and try these operations:
+        <li>Open DevTools (<strong>F12</strong>) → <strong>Performance</strong> tab.</li>
+        <li>Enable the <strong>"Screenshots"</strong> checkbox at the top.</li>
+        <li>Enable <strong>CPU throttling</strong> (⚙️ gear → <strong>4× slowdown</strong>) to make bottlenecks more
+          visible.</li>
+      </ol>
+
+      <h3>Step 2 — Record &amp; Interact</h3>
+      <ol>
+        <li>Click <strong>Record</strong>, then try each action one at a time:
           <ul>
-            <li>Change the animation speed</li>
-            <li>Start the stress test (Use the CPU throttling option so every execution takes more than 50 ms)</li>
-            <li>Enable the heavy animation</li>
+            <li><strong>Animation Speed slider</strong> — drag from low to high.</li>
+            <li><strong>Start Stress Test</strong> — let it run ~5 seconds, then stop it.</li>
+            <li><strong>Enable Heavy Animation</strong> — toggle on for ~3 seconds, then off.</li>
           </ul>
         </li>
-        <li>Stop recording and analyze the results:</li>
-        <ul>
-          <li>Check the flame graph for long tasks</li>
-          <li>Identify any dropped frames</li>
-          <li>Use the "Screenshots" view to see how the UI was affected during the recording</li>
-          <li>Use the "Call Tree" view to see how much time was spent in each function</li>
-          <li>Analyze the impact of different animation speeds on performance</li>
-        </ul>
+        <li>Click <strong>Stop</strong> to end the recording.</li>
       </ol>
+
+      <h3>Step 3 — Analyze</h3>
+      <p>In the recorded timeline, look for:</p>
+      <ul>
+        <li><strong>Frames row</strong> — red triangles = dropped frames; even green bars = healthy.</li>
+        <li><strong>Flame chart</strong> — long yellow blocks are Long Tasks blocking the main thread.</li>
+        <li><strong>Screenshots filmstrip</strong> — see how the UI looked at each moment.</li>
+        <li><strong>Call Tree tab</strong> (bottom panel) — sort by Total Time to find the costliest functions.</li>
+        <li><strong>Summary tab</strong> — see the time split between Scripting, Rendering, and Painting.</li>
+      </ul>
+
+      <h3>Step 4 — Reflect</h3>
+      <ul>
+        <li>Which action caused the biggest FPS drop?</li>
+        <li>What's the difference between a <strong>scripting bottleneck</strong> (stress test) and a
+          <strong>rendering bottleneck</strong> (heavy animation)?</li>
+      </ul>
     </div>
   </div>
 </body>
