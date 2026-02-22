@@ -8,10 +8,14 @@ function simulateFrames(s) {
 }
 
 function simulateDroppedFrames() {
-    // Simulate heavy computation causing dropped frames
-    for (let i = 0; i < 100000; i++) {
+    // Block the main thread for ~2 seconds straight
+    // This guarantees fully dropped frames (not just partial)
+    const end = Date.now() + 2000;
+    while (Date.now() < end) {
         const div = document.createElement('div');
         div.innerHTML = 'test';
+        document.body.appendChild(div);
+        void div.offsetHeight; // force layout
         div.remove();
     }
 }
@@ -39,22 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function betterFrameDropSimulation() {
-    // Add elements to the DOM to force reflows/repaints
+    // Continuously block the main thread across many frame deadlines
+    // This creates sustained dropped frames visible in DevTools
     const container = document.createElement('div');
     document.body.appendChild(container);
 
-    // Force layout recalculations in a loop
-    for (let i = 0; i < 1000; i++) {
-        const div = document.createElement('div');
-        div.textContent = `Item ${i}`;
-        div.style.backgroundColor = i % 2 === 0 ? 'red' : 'blue';
-        container.appendChild(div);
+    let frame = 0;
+    function heavyFrame() {
+        // Block for ~200ms per rAF callback — guarantees dropped frames
+        const end = Date.now() + 200;
+        while (Date.now() < end) {
+            const div = document.createElement('div');
+            div.textContent = `Item ${Math.random()}`;
+            div.style.backgroundColor = Math.random() > 0.5 ? 'red' : 'blue';
+            div.style.width = Math.random() * 100 + 'px';
+            container.appendChild(div);
+            void div.offsetHeight; // force synchronous layout
+            void div.offsetWidth;
+        }
 
-        // Force layout calculation
-        console.log(div.offsetHeight);
-
-        // Change styles to force more work
-        div.style.width = (50 + (i % 10)) + 'px';
-        console.log(div.offsetWidth); // Force another layout
+        frame++;
+        if (frame < 30) {
+            requestAnimationFrame(heavyFrame);
+        } else {
+            container.remove();
+        }
     }
+    requestAnimationFrame(heavyFrame);
 }
