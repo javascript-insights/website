@@ -250,13 +250,32 @@ kbd {
         background-color: #fff3e0;
         border: 2px solid #e37400;
         border-radius: 6px;
-        font-weight: 500;
-        animation: cls-flash 0.4s ease;
+        font-weight: 600;
+        font-size: 1.05rem;
+        animation: cls-flash 0.6s ease;
+}
+
+.cls-injected-img {
+        display: block;
+        width: 100%;
+        border-radius: 6px;
+        /* No fixed height — intentional CLS trigger */
+}
+
+.cls-victim {
+        margin-top: 10px;
+        padding: 8px 12px;
+        background-color: #fce4ec;
+        border-left: 4px solid #c62828;
+        border-radius: 3px;
+        font-size: 0.95rem;
+        color: #b71c1c;
 }
 
 @keyframes cls-flash {
-        0% { background-color: #ffe0b2; }
-        100% { background-color: #fff3e0; }
+        0% { background-color: #ffe0b2; transform: scaleY(0.7); }
+        50% { background-color: #ffcc80; }
+        100% { background-color: #fff3e0; transform: scaleY(1); }
 }
 
 @media (max-width: 768px) {

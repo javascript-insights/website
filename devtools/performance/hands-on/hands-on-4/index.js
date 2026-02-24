@@ -211,14 +211,44 @@ function heavyClick() {
 }
 
 // --- CLS Demo ---
-// Inject a block after the page loads to cause a visible layout shift
+// Inject large blocks after the page loads to cause highly-visible layout shifts
+function createClsBlock(text, height) {
+    const block = document.createElement('div');
+    block.className = 'cls-injected-block';
+    block.style.minHeight = height + 'px';
+    block.textContent = text;
+    return block;
+}
+
 function triggerLayoutShift() {
     const area = document.getElementById('cls-inject-area');
     if (!area) return;
-    const block = document.createElement('div');
-    block.className = 'cls-injected-block';
-    block.textContent = 'This block was injected after load — it pushed content down and caused a layout shift!';
-    area.prepend(block);
+
+    // 1st shift — tall banner
+    const block1 = createClsBlock(
+        '⚠️ SHIFT 1 — This tall banner was injected after load, pushing everything below it down!',
+        120
+    );
+    area.prepend(block1);
+
+    // 2nd shift — delayed image without reserved dimensions (classic CLS offender)
+    setTimeout(() => {
+        const img = document.createElement('img');
+        img.src = 'https://picsum.photos/seed/cls-demo/600/180';
+        img.alt = 'Late-loaded image causing layout shift';
+        img.className = 'cls-injected-block cls-injected-img';
+        // Intentionally NO width/height attributes — that's what causes CLS
+        area.appendChild(img);
+    }, 800);
+
+    // 3rd shift — another large block after the image
+    setTimeout(() => {
+        const block2 = createClsBlock(
+            '⚠️ SHIFT 3 — Yet another block injected even later. The Experience lane should now show multiple CLS entries!',
+            100
+        );
+        area.appendChild(block2);
+    }, 2000);
 }
 
 // Initialize on page load
@@ -229,7 +259,7 @@ window.addEventListener('DOMContentLoaded', () => {
         element.style.display = 'none';
     }
 
-    // Trigger a layout shift after a short delay so the browser
-    // has already painted the initial layout (making the shift visible to CLS).
-    setTimeout(triggerLayoutShift, 1500);
+    // Trigger the first layout shift after a short delay so the browser
+    // has already painted the initial layout (making the shifts visible to CLS).
+    setTimeout(triggerLayoutShift, 1000);
 });
