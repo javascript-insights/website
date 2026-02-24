@@ -200,7 +200,11 @@
         return result;
       }
 
+      console.time('mineBitcoin - 0');
+      // Your code block
       mineBitcoin(); // 👈 First call (~500ms) - V8 interprets + JIT compiles
+      console.timeEnd('mineBitcoin - 0');
+      
     </script>
 
     <script>
