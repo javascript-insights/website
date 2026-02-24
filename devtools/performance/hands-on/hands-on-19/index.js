@@ -33,14 +33,51 @@ function startHeavyAnimation() {
 // Loads multiple large images
 function loadManyImages() {
   const container = document.getElementById('imageContainer');
-  const imageUrls = Array(5).fill('https://picsum.photos/800/800');
+  const imageUrls = [
+    'https://picsum.photos/800/800?random=1',
+    'https://picsum.photos/800/800?random=2',
+    'https://picsum.photos/800/800?random=3',
+    'https://picsum.photos/800/800?random=4',
+    'https://picsum.photos/800/800?random=5'
+  ];
 
   imageUrls.forEach(url => {
     const img = new Image();
     img.src = url;
     container.appendChild(img);
   });
+
+  
+// Schedule sequential image loading after 0.5 minutes
+  setTimeout(() => {
+    loadImagesSequentially();
+  }, 1000);
 }
+
+// Loads 5 images sequentially with fetch, one after another
+async function loadImagesSequentially() {
+  const container = document.getElementById('imageContainer');
+  const imageUrls = [
+    'https://picsum.photos/800/800?random=6',
+    'https://picsum.photos/800/800?random=7',
+    'https://picsum.photos/800/800?random=8',
+    'https://picsum.photos/800/800?random=9',
+    'https://picsum.photos/800/800?random=10'
+  ];
+
+  for (const url of imageUrls) {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(blob);
+      container.appendChild(img);
+    } catch (error) {
+      console.error(`Failed to load image from ${url}:`, error);
+    }
+  }
+}
+
 
 // Demonstrates a memory leak
 function startMemoryLeak() {
