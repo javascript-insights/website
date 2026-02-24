@@ -200,7 +200,7 @@
         return result;
       }
 
-      mineBitcoin();
+      mineBitcoin(); // 👈 First call (~500ms) - V8 interprets + JIT compiles
     </script>
 
     <script>
@@ -231,7 +231,7 @@
       <script>
         console.time('mineBitcoin - 1');
         // Your code block
-        mineBitcoin();
+        mineBitcoin(); // 👈 Second call (~94ms) - runs optimized TurboFan code
         console.timeEnd('mineBitcoin - 1');
       </script>
 
@@ -316,6 +316,25 @@
 
     </script>
   </ol>
+
+  <div class="code-example">
+    <h3>🤔 Why does the second <code>mineBitcoin()</code> call run ~5x faster?</h3>
+    <p>This is due to <strong>V8's JIT (Just-In-Time) compiler</strong> optimization:</p>
+    <ul>
+      <li><strong>First call (~500ms):</strong> V8 starts executing in its <strong>interpreter (Ignition)</strong>. As the hot loop runs 100 million iterations, V8's profiler detects it's a "hot" function and triggers the <strong>optimizing compiler (TurboFan)</strong> mid-execution. So the first call pays the cost of interpreted execution + JIT compilation.</li>
+      <li><strong>Second call (~94ms):</strong> TurboFan has already compiled optimized machine code for both <code>mineBitcoin</code> and <code>calculateSum</code>. The code runs as highly optimized native code from the start.</li>
+    </ul>
+    <h4>Why does <code>calculateSum</code> appear only once in the flame chart?</h4>
+    <p>TurboFan <strong>inlines</strong> <code>calculateSum</code> directly into <code>mineBitcoin</code>'s loop body. Instead of making 100 million separate function calls, the addition (<code>currentResult + currentValue</code>) is placed directly inside the loop. That's why the flame chart shows <code>calculateSum</code> only once rather than as millions of individual calls — the function call overhead is completely eliminated.</p>
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; margin: 10px 0;">
+      <tr><th></th><th>First call</th><th>Second call</th></tr>
+      <tr><td><strong>Engine</strong></td><td>Ignition (interpreter) → TurboFan compiles mid-run</td><td>TurboFan (optimized) from start</td></tr>
+      <tr><td><strong>Inlining</strong></td><td>Not yet applied</td><td><code>calculateSum</code> inlined into loop</td></tr>
+      <tr><td><strong>Time</strong></td><td>~500ms</td><td>~94ms</td></tr>
+    </table>
+    <p>💡 This is why benchmarking in JavaScript requires "warm-up" runs — the first execution profiles and compiles, subsequent ones benefit from the optimized code.</p>
+  </div>
+
   <h2>Navigation Controls</h2>
 
   <h3>Keyboard Navigation:</h3>
